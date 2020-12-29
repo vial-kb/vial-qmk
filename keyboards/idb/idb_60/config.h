@@ -27,6 +27,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT         idb 60
 #define DESCRIPTION     QMK keyboard firmware for idb 60
 
+#define VIAL_KEYBOARD_UID {0x7F, 0x0D, 0x87, 0x47, 0x88, 0xEF, 0x8E, 0xD7}
+
 /* key matrix size */
 #define MATRIX_ROWS 10
 #define MATRIX_COLS 8
