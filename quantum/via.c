@@ -51,6 +51,10 @@
 #include "vial.h"
 #endif
 
+#ifdef REMOTE_ENABLE
+#include "remote.h"
+#endif
+
 // Forward declare some helpers.
 #if defined(VIA_QMK_BACKLIGHT_ENABLE)
 void via_qmk_backlight_set_value(uint8_t *data);
@@ -434,6 +438,14 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
             break;
         }
 #endif
+
+#ifdef REMOTE_ENABLE
+        case id_remote_prefix: {
+            remote_handle_cmd(data, length);
+            break;
+        }
+#endif
+
         default: {
             // The command ID is not known
             // Return the unhandled state
