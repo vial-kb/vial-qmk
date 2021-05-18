@@ -51,10 +51,6 @@
 #include "vial.h"
 #endif
 
-#ifdef REMOTE_ENABLE
-#include "remote.h"
-#endif
-
 // Forward declare some helpers.
 #if defined(VIA_QMK_BACKLIGHT_ENABLE)
 void via_qmk_backlight_set_value(uint8_t *data);
