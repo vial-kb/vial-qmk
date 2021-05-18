@@ -1,3 +1,2 @@
 VIA_ENABLE 		= yes
 VIAL_ENABLE		= yes
-REMOTE_ENABLE 	= yes

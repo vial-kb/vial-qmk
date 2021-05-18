@@ -468,11 +468,6 @@ ifeq ($(strip $(VIAL_ENCODERS_ENABLE)), yes)
     OPT_DEFS += -DVIAL_ENCODERS_ENABLE
 endif
 
-ifeq ($(strip $(REMOTE_ENABLE)), yes)
-    SRC += $(QUANTUM_DIR)/remote.c
-    OPT_DEFS += -DREMOTE_ENABLE
-endif
-
 ifeq ($(strip $(DYNAMIC_KEYMAP_ENABLE)), yes)
     OPT_DEFS += -DDYNAMIC_KEYMAP_ENABLE
     SRC += $(QUANTUM_DIR)/dynamic_keymap.c

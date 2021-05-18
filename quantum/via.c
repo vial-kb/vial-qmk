@@ -439,17 +439,9 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
         }
 #endif
 
-#ifdef REMOTE_ENABLE
-        case id_remote_prefix: {
-            remote_handle_cmd(data, length);
-            break;
-        }
-#endif
-
         default: {
-            // The command ID is not known
-            // Return the unhandled state
-            *command_id = id_unhandled;
+            // The command ID is not known let the keyboard implement it
+            raw_hid_receive_kb(data, length);
             break;
         }
     }
