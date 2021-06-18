@@ -19,6 +19,7 @@ MIDI_ENABLE = no            # MIDI support
 BLUETOOTH_ENABLE = no       # Enable Bluetooth with the Adafruit EZ-Key HID
 AUDIO_ENABLE = no           # Audio output on port C6
 ENCODER_ENABLE = yes
+VIAL_ENCODERS_ENABLE = yes  # Enable VIAL Encoder
 RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_DRIVER = WS2812
 
