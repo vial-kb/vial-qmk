@@ -22,12 +22,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT(
              MO(1),
     KC_1,    KC_2,    KC_3,
-	KC_4,    KC_5,    KC_6
+    KC_4,    KC_5,    KC_6
   ),
   [1] = LAYOUT(
              _______,
     RGB_MOD, KC_UP,   RESET,
-	KC_LEFT, KC_DOWN, KC_RGHT
+    KC_LEFT, KC_DOWN, KC_RGHT
   ),
 };
 
