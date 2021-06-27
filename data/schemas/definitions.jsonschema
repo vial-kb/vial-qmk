@@ -90,6 +90,10 @@
                 "pattern": "^LINE_PIN\\d{1,2}$"
             },
             {
+                "type": "string",
+                "pattern": "^\\d{1,2}$"
+            },
+            {
                 "type": "number",
                 "multipleOf": 1
             },

@@ -207,6 +207,8 @@ else
         COMMON_VPATH += $(DRIVER_PATH)/eeprom
         SRC += eeprom_driver.c eeprom_transient.c
       endif
+	else ifeq ($(PLATFORM),PICO_SDK)
+      SRC += $(PLATFORM_COMMON_DIR)/eeprom.c
     else ifeq ($(PLATFORM),ARM_ATSAM)
       # arm_atsam EEPROM
       OPT_DEFS += -DEEPROM_SAMD

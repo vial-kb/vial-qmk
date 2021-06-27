@@ -33,6 +33,18 @@ interrupt_setting_t store_and_clear_interrupt(void) {
 void restore_interrupt_setting(interrupt_setting_t setting) {
     SREG = setting;
 }
+
+#elif defined(PROTOCOL_PICO)
+#    include "atomic_util.h"
+
+interrupt_setting_t store_and_clear_interrupt(void) {
+    return __interrupt_disable__();
+}
+
+void restore_interrupt_setting(interrupt_setting_t setting) {
+    __interrupt_enable__(setting);
+}
+
 #elif defined(__arm__)
 #    include <ch.h>
 

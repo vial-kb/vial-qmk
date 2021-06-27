@@ -177,6 +177,18 @@ ifeq ($(strip $(CONVERT_TO_PROTON_C)), yes)
     include platforms/chibios/boards/QMK_PROTON_C/convert_to_proton_c.mk
 endif
 
+ifeq ($(strip $(CTPIM)), yes)
+  CONVERT_TO_PICO_MICRO=yes
+endif
+
+ifeq ($(strip $(CONVERT_TO_PICO_MICRO)), yes)
+    include platforms/pico/convert_to_pico_micro.mk
+endif
+
+ifneq ($(FORCE_LAYOUT),)
+    TARGET := $(TARGET)_$(FORCE_LAYOUT)
+endif
+
 include $(BUILDDEFS_PATH)/mcu_selection.mk
 
 # Find all the C source files to be compiled in subfolders.
@@ -261,6 +273,12 @@ ifdef MCU_FAMILY
     PLATFORM_KEY=chibios
     FIRMWARE_FORMAT?=bin
     OPT_DEFS += -DMCU_$(MCU_FAMILY)
+    ifeq ($(MCU_FAMILY),PICO)
+        $(info "PLATFORM RP2040")
+        PLATFORM=PICO_SDK
+        PLATFORM_KEY=pico
+        FIRMWARE_FORMAT=elf
+    endif
 else ifdef ARM_ATSAM
     PLATFORM=ARM_ATSAM
     PLATFORM_KEY=arm_atsam

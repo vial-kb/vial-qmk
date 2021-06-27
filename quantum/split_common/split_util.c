@@ -23,6 +23,10 @@
 #include "wait.h"
 #include "usb_util.h"
 
+#ifdef PROTOCOL_PICO
+#    include "tusb.h"
+#endif
+
 #ifdef EE_HANDS
 #    include "eeconfig.h"
 #endif
@@ -57,7 +61,39 @@ static uint8_t connection_errors = 0;
 volatile bool isLeftHand = true;
 
 #if defined(SPLIT_USB_DETECT)
-static bool usbIsActive(void) {
+#    if defined(PROTOCOL_LUFA)
+static inline bool usbHasActiveConnection(void) {
+    return USB_Device_IsAddressSet();
+}
+static inline void usbDisable(void) {
+    USB_Disable();
+    USB_DeviceState = DEVICE_STATE_Unattached;
+}
+#    elif defined(PROTOCOL_CHIBIOS)
+static inline bool usbHasActiveConnection(void) {
+    return usbGetDriverStateI(&USBD1) == USB_ACTIVE;
+}
+static inline void usbDisable(void) { usbStop(&USBD1); }
+#    elif defined(PROTOCOL_VUSB)
+static inline bool usbHasActiveConnection(void) {
+    usbPoll();
+    return usbConfiguration;
+}
+static inline void usbDisable(void) { usbDeviceDisconnect(); }
+#    elif defined(PROTOCOL_PICO)
+static inline bool usbHasActiveConnection(void) {
+    tud_task();
+    return tud_connected();
+}
+static inline void usbDisable(void) {
+#        warning "No implementation" //TODO implement
+}
+#    else
+static inline bool usbHasActiveConnection(void) { return true; }
+static inline void usbDisable(void) {}
+#    endif
+
+bool usbIsActive(void) {
     for (uint8_t i = 0; i < (SPLIT_USB_TIMEOUT / SPLIT_USB_TIMEOUT_POLL); i++) {
         // This will return true if a USB connection has been established
         if (usb_connected_state()) {
@@ -139,7 +175,8 @@ void split_pre_init(void) {
     if (isLeftHand) {
         rgblight_set_clipping_range(0, num_rgb_leds_split[0]);
     } else {
-        rgblight_set_clipping_range(num_rgb_leds_split[0], num_rgb_leds_split[1]);
+        rgblight_set_clipping_range(num_rgb_leds_split[0],
+                                    num_rgb_leds_split[1]);
     }
 #endif
 

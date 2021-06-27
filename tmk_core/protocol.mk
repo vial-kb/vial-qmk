@@ -1,8 +1,10 @@
+PROTOCOL_COMMON_DIR = protocol
+
 TMK_COMMON_SRC +=	\
-	$(PROTOCOL_DIR)/host.c \
-	$(PROTOCOL_DIR)/report.c \
-	$(PROTOCOL_DIR)/usb_device_state.c \
-	$(PROTOCOL_DIR)/usb_util.c \
+	$(PROTOCOL_COMMON_DIR)/host.c \
+	$(PROTOCOL_COMMON_DIR)/report.c \
+	$(PROTOCOL_COMMON_DIR)/usb_device_state.c \
+	$(PROTOCOL_COMMON_DIR)/usb_util.c \
 
 SHARED_EP_ENABLE = no
 MOUSE_SHARED_EP ?= yes

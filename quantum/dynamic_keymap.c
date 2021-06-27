@@ -421,6 +421,7 @@ void dynamic_keymap_set_buffer(uint16_t offset, uint16_t size, uint8_t *data) {
 extern uint16_t g_vial_magic_keycode_override;
 
 // This overrides the one in quantum/keymap_common.c
+#ifndef OVERRIDE_KEYMAP_KEY_TO_KEYCODE
 uint16_t keymap_key_to_keycode(uint8_t layer, keypos_t key) {
 #ifdef VIAL_ENABLE
     /* Disable any keycode processing while unlocking */
@@ -437,6 +438,7 @@ uint16_t keymap_key_to_keycode(uint8_t layer, keypos_t key) {
         return KC_NO;
     }
 }
+#endif
 
 uint8_t dynamic_keymap_macro_get_count(void) {
     return DYNAMIC_KEYMAP_MACRO_COUNT;
