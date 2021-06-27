@@ -153,6 +153,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define BOOTMAGIC_LITE_COLUMN 0
 // for via
 #define DYNAMIC_KEYMAP_LAYER_COUNT 7
-#define VIAL_KEYBOARD_UID {0xB3, 0x2C, 0x4D, 0xB9, 0x5D, 0x3D, 0x27, 0xD3}
+
+#define VIAL_KEYBOARD_UID {0xD6, 0x68, 0xF2, 0x55, 0x9B, 0x48, 0x07, 0x6E}
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 4 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 0 }
