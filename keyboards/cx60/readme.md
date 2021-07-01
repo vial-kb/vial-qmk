@@ -1,6 +1,6 @@
 # CX60-VIA
 
-64-key 60% with dedicated arrow keys, single-layout, VIA-enabled.
+64-key 60% with dedicated arrow keys, single-layout, VIA/VIAL-enabled.
 
 ![Top View of a pair of CX60 Keyboard](https://i.imgur.com/Q2YVuhd.jpg)
 
