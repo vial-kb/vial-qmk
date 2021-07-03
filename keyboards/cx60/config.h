@@ -55,6 +55,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_SAT_STEP 17
 #define RGBLIGHT_VAL_STEP 17
 
+#define LED_CAPS_LOCK_PIN B5
+
 /* Vial setup */
 #ifdef VIAL_ENABLE
 #define VIAL_KEYBOARD_UID {0xB2, 0x57, 0x48, 0xED, 0x67, 0x80, 0x12, 0x18}
