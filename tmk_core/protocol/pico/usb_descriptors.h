@@ -56,3 +56,5 @@ enum {
         HID_REPORT_SIZE(0x08), \
         HID_OUTPUT(HID_DATA | HID_VARIABLE | HID_ABSOLUTE | HID_NON_VOLATILE), \
     HID_COLLECTION_END
+
+uint8_t get_keyboard_led_status(void);
