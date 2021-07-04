@@ -54,6 +54,16 @@ _Static_assert(sizeof(vial_unlock_combo_rows) == sizeof(vial_unlock_combo_cols),
 #include "qmk_settings.h"
 #endif
 
+#ifdef VIAL_TAP_DANCE_ENABLE
+static void reload_tap_dance(void);
+#endif
+
+void vial_init(void) {
+#ifdef VIAL_TAP_DANCE_ENABLE
+    reload_tap_dance();
+#endif
+}
+
 void vial_handle_cmd(uint8_t *msg, uint8_t length) {
     /* All packets must be fixed 32 bytes */
     if (length != VIAL_RAW_EPSIZE)
@@ -185,40 +195,80 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
             qmk_settings_reset();
             break;
         }
+        case vial_dynamic_entry_op: {
+            switch (msg[2]) {
+            case dynamic_vial_get_number_of_entries: {
+                memset(msg, 0, length);
+                msg[0] = VIAL_TAP_DANCE_ENTRIES;
+                break;
+            }
+            case dynamic_vial_tap_dance_get: {
+                uint8_t idx = msg[3];
+                vial_tap_dance_entry_t td = { 0 };
+                msg[0] = dynamic_keymap_get_tap_dance(idx, &td);
+                memcpy(&msg[1], &td, sizeof(td));
+                break;
+            }
+            case dynamic_vial_tap_dance_set: {
+                uint8_t idx = msg[3];
+                vial_tap_dance_entry_t td;
+                memcpy(&td, &msg[4], sizeof(td));
+                msg[0] = dynamic_keymap_set_tap_dance(idx, &td);
+                reload_tap_dance();
+                break;
+            }
+            }
+
+            break;
+        }
     }
 }
 
-#ifdef VIAL_ENCODERS_ENABLE
 uint16_t g_vial_magic_keycode_override;
 
-static void exec_keycode(uint16_t keycode) {
-#ifdef VIAL_ENCODER_SIMPLE_TAP
-    register_code16(keycode);
-#if VIAL_ENCODER_KEYCODE_DELAY > 0
-    wait_ms(VIAL_ENCODER_KEYCODE_DELAY);
-#endif
-    unregister_code16(keycode);
-#else
+static void vial_keycode_down(uint16_t keycode) {
     g_vial_magic_keycode_override = keycode;
 
-    keyrecord_t record = {.event = (keyevent_t){.key = { VIAL_ENCODER_MATRIX_MAGIC, VIAL_ENCODER_MATRIX_MAGIC }, .pressed = true, .time = (timer_read() | 1)}};
-
-    if (keycode <= QK_MODS_MAX)
+    if (keycode <= QK_MODS_MAX) {
         register_code16(keycode);
-    else
-        process_record_quantum_helper(keycode, &record);
+    } else {
+        action_exec((keyevent_t){
+            .key = (keypos_t){.row = VIAL_MATRIX_MAGIC, .col = VIAL_MATRIX_MAGIC}, .pressed = 1, .time = (timer_read() | 1) /* time should not be 0 */
+        });
+    }
+}
+
+static void vial_keycode_up(uint16_t keycode) {
+    g_vial_magic_keycode_override = keycode;
+
+    if (keycode <= QK_MODS_MAX) {
+        unregister_code16(keycode);
+    } else {
+        action_exec((keyevent_t){
+            .key = (keypos_t){.row = VIAL_MATRIX_MAGIC, .col = VIAL_MATRIX_MAGIC}, .pressed = 0, .time = (timer_read() | 1) /* time should not be 0 */
+        });
+    }
+}
+
+static void vial_keycode_tap(uint16_t keycode) {
+    vial_keycode_down(keycode);
+
+#if TAP_CODE_DELAY > 0
+    wait_ms(TAP_CODE_DELAY);
+#endif
+
+    vial_keycode_up(keycode);
+}
+
+#ifdef VIAL_ENCODERS_ENABLE
+static void exec_keycode(uint16_t keycode) {
+    vial_keycode_down(keycode);
 
 #if VIAL_ENCODER_KEYCODE_DELAY > 0
     wait_ms(VIAL_ENCODER_KEYCODE_DELAY);
 #endif
-    record.event.time = timer_read() | 1;
-    record.event.pressed = false;
 
-    if (keycode <= QK_MODS_MAX)
-        unregister_code16(keycode);
-    else
-        process_record_quantum_helper(keycode, &record);
-#endif
+    vial_keycode_up(keycode);
 }
 
 bool vial_encoder_update(uint8_t index, bool clockwise) {
@@ -240,5 +290,172 @@ bool vial_encoder_update(uint8_t index, bool clockwise) {
     exec_keycode(code);
 
     return true;
+}
+#endif
+
+#ifdef VIAL_TAP_DANCE_ENABLE
+#include "process_tap_dance.h"
+
+/* based on ZSA configurator generated code */
+
+enum {
+    SINGLE_TAP = 1,
+    SINGLE_HOLD,
+    DOUBLE_TAP,
+    DOUBLE_HOLD,
+    DOUBLE_SINGLE_TAP,
+    MORE_TAPS
+};
+
+static uint8_t dance_state[VIAL_TAP_DANCE_ENTRIES];
+static vial_tap_dance_entry_t td_entry;
+
+static uint8_t dance_step(qk_tap_dance_state_t *state) {
+    if (state->count == 1) {
+        if (state->interrupted || !state->pressed) return SINGLE_TAP;
+        else return SINGLE_HOLD;
+    } else if (state->count == 2) {
+        if (state->interrupted) return DOUBLE_SINGLE_TAP;
+        else if (state->pressed) return DOUBLE_HOLD;
+        else return DOUBLE_TAP;
+    }
+    return MORE_TAPS;
+}
+
+static void on_dance(qk_tap_dance_state_t *state, void *user_data) {
+    uint8_t index = (uintptr_t)user_data;
+    if (dynamic_keymap_get_tap_dance(index, &td_entry) != 0)
+        return;
+    uint16_t kc = td_entry.on_tap;
+    if (kc) {
+        if (state->count == 3) {
+            vial_keycode_tap(kc);
+            vial_keycode_tap(kc);
+            vial_keycode_tap(kc);
+        } else if (state->count > 3) {
+            vial_keycode_tap(kc);
+        }
+    }
+}
+
+static void on_dance_finished(qk_tap_dance_state_t *state, void *user_data) {
+    uint8_t index = (uintptr_t)user_data;
+    if (dynamic_keymap_get_tap_dance(index, &td_entry) != 0)
+        return;
+    dance_state[index] = dance_step(state);
+    switch (dance_state[index]) {
+        case SINGLE_TAP: {
+            if (td_entry.on_tap)
+                vial_keycode_down(td_entry.on_tap);
+            break;
+        }
+        case SINGLE_HOLD: {
+            if (td_entry.on_hold)
+                vial_keycode_down(td_entry.on_hold);
+            else if (td_entry.on_tap)
+                vial_keycode_down(td_entry.on_tap);
+            break;
+        }
+        case DOUBLE_TAP: {
+            if (td_entry.on_double_tap) {
+                vial_keycode_down(td_entry.on_double_tap);
+            } else if (td_entry.on_tap) {
+                vial_keycode_tap(td_entry.on_tap);
+                vial_keycode_down(td_entry.on_tap);
+            }
+            break;
+        }
+        case DOUBLE_HOLD: {
+            if (td_entry.on_tap_hold) {
+                vial_keycode_down(td_entry.on_tap_hold);
+            } else {
+                if (td_entry.on_tap) {
+                    vial_keycode_tap(td_entry.on_tap);
+                    if (td_entry.on_hold)
+                        vial_keycode_down(td_entry.on_hold);
+                    else
+                        vial_keycode_down(td_entry.on_tap);
+                } else if (td_entry.on_hold) {
+                    vial_keycode_down(td_entry.on_hold);
+                }
+            }
+            break;
+        }
+        case DOUBLE_SINGLE_TAP: {
+            if (td_entry.on_tap) {
+                vial_keycode_tap(td_entry.on_tap);
+                vial_keycode_down(td_entry.on_tap);
+            }
+            break;
+        }
+    }
+}
+
+static void on_dance_reset(qk_tap_dance_state_t *state, void *user_data) {
+    uint8_t index = (uintptr_t)user_data;
+    if (dynamic_keymap_get_tap_dance(index, &td_entry) != 0)
+        return;
+    uint8_t st = dance_state[index];
+    state->count = 0;
+    dance_state[index] = 0;
+    switch (st) {
+        case SINGLE_TAP: {
+            if (td_entry.on_tap)
+                vial_keycode_up(td_entry.on_tap);
+            break;
+        }
+        case SINGLE_HOLD: {
+            if (td_entry.on_hold)
+                vial_keycode_up(td_entry.on_hold);
+            else if (td_entry.on_tap)
+                vial_keycode_up(td_entry.on_tap);
+            break;
+        }
+        case DOUBLE_TAP: {
+            if (td_entry.on_double_tap) {
+                vial_keycode_up(td_entry.on_double_tap);
+            } else if (td_entry.on_tap) {
+                vial_keycode_up(td_entry.on_tap);
+            }
+            break;
+        }
+        case DOUBLE_HOLD: {
+            if (td_entry.on_tap_hold) {
+                vial_keycode_up(td_entry.on_tap_hold);
+            } else {
+                if (td_entry.on_tap) {
+                    if (td_entry.on_hold)
+                        vial_keycode_up(td_entry.on_hold);
+                    else
+                        vial_keycode_up(td_entry.on_tap);
+                } else if (td_entry.on_hold) {
+                    vial_keycode_up(td_entry.on_hold);
+                }
+            }
+            break;
+        }
+        case DOUBLE_SINGLE_TAP: {
+            if (td_entry.on_tap) {
+                vial_keycode_up(td_entry.on_tap);
+            }
+            break;
+        }
+    }
+}
+
+qk_tap_dance_action_t tap_dance_actions[VIAL_TAP_DANCE_ENTRIES];
+
+/* Load timings from eeprom into custom_tapping_term */
+static void reload_tap_dance(void) {
+    for (size_t i = 0; i < VIAL_TAP_DANCE_ENTRIES; ++i) {
+        vial_tap_dance_entry_t td;
+        tap_dance_actions[i].fn.on_each_tap = on_dance;
+        tap_dance_actions[i].fn.on_dance_finished = on_dance_finished;
+        tap_dance_actions[i].fn.on_reset = on_dance_reset;
+        tap_dance_actions[i].user_data = (void*)i;
+        if (dynamic_keymap_get_tap_dance(i, &td) == 0) {
+            tap_dance_actions[i].custom_tapping_term = td.custom_tapping_term;
+        }
+    }
 }
 #endif
