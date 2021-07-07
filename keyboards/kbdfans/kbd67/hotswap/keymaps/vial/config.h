@@ -20,3 +20,4 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 #define VIAL_KEYBOARD_UID {0x8A, 0x03, 0x40, 0xCB, 0x27, 0x8F, 0xA3, 0x5F}
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 1 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 1 }
+
