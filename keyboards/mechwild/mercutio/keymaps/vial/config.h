@@ -14,8 +14,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
+/* Define custom font */
+#define OLED_FONT_H "keyboards/mechwild/mercutio/lib/mercutiofont.c"
+
 /* VIAL Specific definitions */
-#define VIAL_KEYBOARD_UID {0xD1, 0x5C, 0x58, 0xBE, 0xC2, 0x90, 0x5E, 0xD6}
-#define VIAL_UNLOCK_COMBO_ROWS { 5, 5 }
-#define VIAL_UNLOCK_COMBO_COLS { 4, 3 }
+#define VIAL_KEYBOARD_UID {0xAA, 0xF4, 0xE4, 0x5D, 0xDA, 0x2E, 0x52, 0x2F}
+#define VIAL_UNLOCK_COMBO_ROWS { 1, 5 }
+#define VIAL_UNLOCK_COMBO_COLS { 0, 3 }
 #define VIAL_ENCODER_DEFAULT { KC_VOLD, KC_VOLU, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS }
