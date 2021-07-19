@@ -175,3 +175,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //RGB Underglow
 #define RGB_DI_PIN B6
 #define RGBLED_NUM 17
+#define RGBLIGHT_SPLIT
+#define RGBLIGHT_EFFECT_KNIGHT
+
+//EE Handness
+#define EE_HANDS
