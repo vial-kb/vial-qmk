@@ -27,4 +27,9 @@ SPLIT_KEYBOARD = yes
 #Encoder
 ENCODER_ENABLE = yes
 
+#Disable some features to save space
+QMK_SETTINGS = no
+TAP_DANCE_ENABLE = no
+COMBO_ENABLE = no
+
 LAYOUTS = split_3x5_3

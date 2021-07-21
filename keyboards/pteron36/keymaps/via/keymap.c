@@ -28,10 +28,7 @@ enum custom_keycodes {
   _DELTA,
   _ECHO,
   _FOX,
-  _GOLF,
-  _HOTEL,
-  _INDIA,
-  _JULIET
+  _GOLF
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -77,28 +74,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                           KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS,  KC_TRNS,  KC_TRNS
   ),
 
-  [_HOTEL] = LAYOUT_split_3x5_3_encoder(
-   KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                               KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
-   KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                               KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
-   KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
-                                          KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS,  KC_TRNS,  KC_TRNS
-  ),
-
-  [_INDIA] = LAYOUT_split_3x5_3_encoder(
-   KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                               KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
-   KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                               KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
-   KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
-                                          KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS,  KC_TRNS,  KC_TRNS
-  ),
-
-  [_JULIET] = LAYOUT_split_3x5_3_encoder(
+  [_GOLF] = LAYOUT_split_3x5_3_encoder(
    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                               KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,                               KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,
                                           KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS,  KC_TRNS,  KC_TRNS
   )
-
-
 };
 
 #ifdef OLED_DRIVER_ENABLE
@@ -137,15 +118,7 @@ static void render_status(void){
         case _GOLF:
             oled_write_P(PSTR("Golf\n"), false);
             break; 
-        case _HOTEL:
-            oled_write_P(PSTR("Hotel\n"), false);
-            break;
-        case _INDIA:
-            oled_write_P(PSTR("India\n"), false);
-            break;
-        case _JULIET:
-            oled_write_P(PSTR("Juliet\n"), false);
-            break;
+      
         default:
             // Or use the write_ln shortcut over adding '\n' to the end of your string
             oled_write_ln_P(PSTR("Undefined"), false);
