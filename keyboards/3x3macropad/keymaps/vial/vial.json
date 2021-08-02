@@ -1,0 +1,34 @@
+{
+    "name": "3x3_Macropad",
+    "vendorId": "0x4B44",
+    "productId": "0x6D70",
+    "lighting": "none",
+    "matrix": {
+        "rows": 3,
+        "cols": 3
+    },
+    "layouts": {
+        "keymap":
+
+
+[
+  [
+    "0,0",
+    "0,1",
+    "0,2"
+  ],
+  [
+    "1,0",
+    "1,1",
+    "1,2"
+  ],
+  [
+    "2,0",
+    "2,1",
+    "2,2"
+  ]
+]
+
+
+    }
+}
