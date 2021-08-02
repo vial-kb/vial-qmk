@@ -20,23 +20,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "config_common.h"
 
-/* USB Device descriptor parameter */
 #define VENDOR_ID       0x4B44
 #define PRODUCT_ID      0x6D70
-#define DEVICE_VER 		0x0001
+#define DEVICE_VER 	0x0001
 #define MANUFACTURER    Kiser Designs
 #define PRODUCT         3x3_Macropad
 
-/* key matrix size */
 #define MATRIX_ROWS 3
 #define MATRIX_COLS 3
 
-/* 9Key PCB default pin-out */
 #define MATRIX_ROW_PINS { F4, F5, F7 }
 #define MATRIX_COL_PINS { F6, D6, D7 }
 #define UNUSED_PINS
 
-/* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW
 
 #define TAPPING_TERM 200

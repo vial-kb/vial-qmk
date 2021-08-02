@@ -8,4 +8,4 @@ Copy this folder named "3x3macropad" into your "qmk_firmware/keyboards/" directo
 (this file will be "~/qmk_firmware/keyboards/3x3macropad/readme.md")
 
 Compile QMK for this keyboard:
-    qmk -build -kb 3x3macropad -km default
+    qmk compile -kb 3x3macropad -km default
