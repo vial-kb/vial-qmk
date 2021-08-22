@@ -171,6 +171,11 @@ else
         OPT_DEFS += -DEEPROM_DRIVER
         COMMON_VPATH += $(DRIVER_PATH)/eeprom
         SRC += eeprom_driver.c eeprom_stm32_L0_L1.c
+      else ifeq ($(MCU_SERIES), STM32F4xx)
+        SRC += $(PLATFORM_COMMON_DIR)/eeprom_stm32.c
+        SRC += $(PLATFORM_COMMON_DIR)/flash_stm32.c
+        OPT_DEFS += -DEEPROM_EMU_STM32F411xC
+        OPT_DEFS += -DSTM32_EEPROM_ENABLE
       else
         # This will effectively work the same as "transient" if not supported by the chip
         SRC += $(PLATFORM_COMMON_DIR)/eeprom_teensy.c
@@ -223,14 +228,17 @@ VALID_LED_MATRIX_TYPES := IS31FL3731 custom
 
 ifeq ($(strip $(LED_MATRIX_ENABLE)), yes)
     ifeq ($(filter $(LED_MATRIX_DRIVER),$(VALID_LED_MATRIX_TYPES)),)
-        $(error LED_MATRIX_DRIVER="$(LED_MATRIX_DRIVER)" is not a valid matrix type)
-    else
-        BACKLIGHT_ENABLE = yes
-        BACKLIGHT_DRIVER = custom
-        OPT_DEFS += -DLED_MATRIX_ENABLE
-        SRC += $(QUANTUM_DIR)/led_matrix.c
-        SRC += $(QUANTUM_DIR)/led_matrix_drivers.c
+        $(error "$(LED_MATRIX_DRIVER)" is not a valid matrix type)
     endif
+    OPT_DEFS += -DLED_MATRIX_ENABLE
+ifneq (,$(filter $(MCU), atmega16u2 atmega32u2 at90usb162))
+    # ATmegaxxU2 does not have hardware MUL instruction - lib8tion must be told to use software multiplication routines
+    OPT_DEFS += -DLIB8_ATTINY
+endif
+    SRC += $(QUANTUM_DIR)/process_keycode/process_backlight.c
+    SRC += $(QUANTUM_DIR)/led_matrix.c
+    SRC += $(QUANTUM_DIR)/led_matrix_drivers.c
+    CIE1931_CURVE := yes
 
     ifeq ($(strip $(LED_MATRIX_DRIVER)), IS31FL3731)
         OPT_DEFS += -DIS31FL3731 -DSTM32_I2C -DHAL_USE_I2C=TRUE
@@ -347,7 +355,11 @@ endif
 VALID_BACKLIGHT_TYPES := pwm timer software custom
 
 BACKLIGHT_ENABLE ?= no
-BACKLIGHT_DRIVER ?= pwm
+ifeq ($(strip $(CONVERT_TO_PROTON_C)), yes)
+    BACKLIGHT_DRIVER ?= software
+else
+    BACKLIGHT_DRIVER ?= pwm
+endif
 ifeq ($(strip $(BACKLIGHT_ENABLE)), yes)
     ifeq ($(filter $(BACKLIGHT_DRIVER),$(VALID_BACKLIGHT_TYPES)),)
         $(error BACKLIGHT_DRIVER="$(BACKLIGHT_DRIVER)" is not a valid backlight type)
@@ -422,10 +434,6 @@ ifeq ($(strip $(TERMINAL_ENABLE)), yes)
     OPT_DEFS += -DUSER_PRINT
 endif
 
-ifeq ($(strip $(USB_HID_ENABLE)), yes)
-    include $(TMK_DIR)/protocol/usb_hid.mk
-endif
-
 ifeq ($(strip $(WPM_ENABLE)), yes)
     SRC += $(QUANTUM_DIR)/wpm.c
     OPT_DEFS += -DWPM_ENABLE
@@ -450,6 +458,9 @@ ifeq ($(strip $(VIA_ENABLE)), yes)
 endif
 
 ifeq ($(strip $(VIAL_ENABLE)), yes)
+    QMK_SETTINGS ?= yes
+    TAP_DANCE_ENABLE ?= yes
+    COMBO_ENABLE ?= yes
     SRC += $(QUANTUM_DIR)/vial.c
     EXTRAINCDIRS += $(KEYMAP_OUTPUT)
     OPT_DEFS += -DVIAL_ENABLE -DNO_DEBUG
@@ -468,15 +479,46 @@ ifeq ($(strip $(VIAL_ENCODERS_ENABLE)), yes)
     OPT_DEFS += -DVIAL_ENCODERS_ENABLE
 endif
 
+ifeq ($(strip $(VIALRGB_ENABLE)), yes)
+    SRC += $(QUANTUM_DIR)/vialrgb.c
+    OPT_DEFS += -DVIALRGB_ENABLE
+endif
+
 ifeq ($(strip $(DYNAMIC_KEYMAP_ENABLE)), yes)
     OPT_DEFS += -DDYNAMIC_KEYMAP_ENABLE
     SRC += $(QUANTUM_DIR)/dynamic_keymap.c
+endif
+
+ifeq ($(strip $(QMK_SETTINGS)), yes)
+    ifeq ($(strip $(MOUSEKEY_ENABLE)), no)
+        $(error QMK_SETTINGS requires MOUSEKEY_ENABLE, either disable QMK_SETTINGS explicitly or enable MOUSEKEY_ENABLE)
+    endif
+    AUTO_SHIFT_ENABLE := yes
+    SRC += $(QUANTUM_DIR)/qmk_settings.c
+    OPT_DEFS += -DQMK_SETTINGS -DAUTO_SHIFT_NO_SETUP -DTAPPING_TERM_PER_KEY -DPERMISSIVE_HOLD_PER_KEY -DIGNORE_MOD_TAP_INTERRUPT_PER_KEY -DTAPPING_FORCE_HOLD_PER_KEY -DRETRO_TAPPING_PER_KEY
 endif
 
 ifeq ($(strip $(DIP_SWITCH_ENABLE)), yes)
     OPT_DEFS += -DDIP_SWITCH_ENABLE
     SRC += $(QUANTUM_DIR)/dip_switch.c
 endif
+
+VALID_MAGIC_TYPES := yes full lite
+BOOTMAGIC_ENABLE ?= no
+ifneq ($(strip $(BOOTMAGIC_ENABLE)), no)
+  ifeq ($(filter $(BOOTMAGIC_ENABLE),$(VALID_MAGIC_TYPES)),)
+    $(error BOOTMAGIC_ENABLE="$(BOOTMAGIC_ENABLE)" is not a valid type of magic)
+  endif
+  ifneq ($(strip $(BOOTMAGIC_ENABLE)), full)
+      OPT_DEFS += -DBOOTMAGIC_LITE
+      QUANTUM_SRC += $(QUANTUM_DIR)/bootmagic/bootmagic_lite.c
+  else
+    OPT_DEFS += -DBOOTMAGIC_ENABLE
+    QUANTUM_SRC += $(QUANTUM_DIR)/bootmagic/bootmagic_full.c
+  endif
+endif
+COMMON_VPATH += $(QUANTUM_DIR)/bootmagic
+QUANTUM_SRC += $(QUANTUM_DIR)/bootmagic/magic.c
 
 VALID_CUSTOM_MATRIX_TYPES:= yes lite no
 

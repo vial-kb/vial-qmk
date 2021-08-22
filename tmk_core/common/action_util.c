@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "action_layer.h"
 #include "timer.h"
 #include "keycode_config.h"
+#include "qmk_settings.h"
 
 extern keymap_config_t keymap_config;
 
@@ -62,12 +63,8 @@ void clear_oneshot_locked_mods(void) {
         oneshot_locked_mods_changed_kb(oneshot_locked_mods);
     }
 }
-#    if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
 static uint16_t oneshot_time = 0;
-bool            has_oneshot_mods_timed_out(void) { return TIMER_DIFF_16(timer_read(), oneshot_time) >= ONESHOT_TIMEOUT; }
-#    else
-bool has_oneshot_mods_timed_out(void) { return false; }
-#    endif
+bool            has_oneshot_mods_timed_out(void) { return QS_oneshot_timeout > 0 && TIMER_DIFF_16(timer_read(), oneshot_time) >= QS_oneshot_timeout; }
 #endif
 
 /* oneshot layer */
@@ -92,26 +89,22 @@ enum {
 } swap_hands_oneshot = SHO_OFF;
 #    endif
 
-#    if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
 static uint16_t oneshot_layer_time = 0;
-inline bool     has_oneshot_layer_timed_out() { return TIMER_DIFF_16(timer_read(), oneshot_layer_time) >= ONESHOT_TIMEOUT && !(get_oneshot_layer_state() & ONESHOT_TOGGLED); }
+inline bool     has_oneshot_layer_timed_out() { return TIMER_DIFF_16(timer_read(), oneshot_layer_time) >= QS_oneshot_timeout && !(get_oneshot_layer_state() & ONESHOT_TOGGLED); }
 #        ifdef SWAP_HANDS_ENABLE
 static uint16_t oneshot_swaphands_time = 0;
-inline bool     has_oneshot_swaphands_timed_out() { return TIMER_DIFF_16(timer_read(), oneshot_swaphands_time) >= ONESHOT_TIMEOUT && (swap_hands_oneshot == SHO_ACTIVE); }
+inline bool     has_oneshot_swaphands_timed_out() { return TIMER_DIFF_16(timer_read(), oneshot_swaphands_time) >= QS_oneshot_timeout && (swap_hands_oneshot == SHO_ACTIVE); }
 #        endif
-#    endif
 
 #    ifdef SWAP_HANDS_ENABLE
 
 void set_oneshot_swaphands(void) {
     swap_hands_oneshot = SHO_PRESSED;
     swap_hands         = true;
-#        if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
     oneshot_swaphands_time = timer_read();
     if (oneshot_layer_time != 0) {
         oneshot_layer_time = oneshot_swaphands_time;
     }
-#        endif
 }
 
 void release_oneshot_swaphands(void) {
@@ -135,9 +128,7 @@ void use_oneshot_swaphands(void) {
 void clear_oneshot_swaphands(void) {
     swap_hands_oneshot = SHO_OFF;
     swap_hands         = false;
-#        if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
     oneshot_swaphands_time = 0;
-#        endif
 }
 
 #    endif
@@ -147,12 +138,14 @@ void clear_oneshot_swaphands(void) {
  * FIXME: needs doc
  */
 void set_oneshot_layer(uint8_t layer, uint8_t state) {
-    oneshot_layer_data = layer << 3 | state;
-    layer_on(layer);
-#    if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
-    oneshot_layer_time = timer_read();
-#    endif
-    oneshot_layer_changed_kb(get_oneshot_layer());
+    if (!keymap_config.oneshot_disable) {
+        oneshot_layer_data = layer << 3 | state;
+        layer_on(layer);
+        oneshot_layer_time = timer_read();
+        oneshot_layer_changed_kb(get_oneshot_layer());
+    } else {
+        layer_on(layer);
+    }
 }
 /** \brief Reset oneshot layer
  *
@@ -160,9 +153,7 @@ void set_oneshot_layer(uint8_t layer, uint8_t state) {
  */
 void reset_oneshot_layer(void) {
     oneshot_layer_data = 0;
-#    if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
     oneshot_layer_time = 0;
-#    endif
     oneshot_layer_changed_kb(get_oneshot_layer());
 }
 /** \brief Clear oneshot layer
@@ -172,7 +163,7 @@ void reset_oneshot_layer(void) {
 void clear_oneshot_layer_state(oneshot_fullfillment_t state) {
     uint8_t start_state = oneshot_layer_data;
     oneshot_layer_data &= ~state;
-    if (!get_oneshot_layer_state() && start_state != oneshot_layer_data) {
+    if ((!get_oneshot_layer_state() && start_state != oneshot_layer_data) || keymap_config.oneshot_disable) {
         layer_off(get_oneshot_layer());
         reset_oneshot_layer();
     }
@@ -182,6 +173,39 @@ void clear_oneshot_layer_state(oneshot_fullfillment_t state) {
  * FIXME: needs doc
  */
 bool is_oneshot_layer_active(void) { return get_oneshot_layer_state(); }
+
+/** \brief set oneshot
+ *
+ * FIXME: needs doc
+ */
+void oneshot_set(bool active) {
+    if (keymap_config.oneshot_disable != active) {
+        keymap_config.oneshot_disable = active;
+        eeconfig_update_keymap(keymap_config.raw);
+        dprintf("Oneshot: active: %d\n", active);
+    }
+}
+
+/** \brief toggle oneshot
+ *
+ * FIXME: needs doc
+ */
+void oneshot_toggle(void) { oneshot_set(!keymap_config.oneshot_disable); }
+
+/** \brief enable oneshot
+ *
+ * FIXME: needs doc
+ */
+void oneshot_enable(void) { oneshot_set(true); }
+
+/** \brief disable oneshot
+ *
+ * FIXME: needs doc
+ */
+void oneshot_disable(void) { oneshot_set(false); }
+
+bool is_oneshot_enabled(void) { return keymap_config.oneshot_disable; }
+
 #endif
 
 /** \brief Send keyboard report
@@ -194,12 +218,10 @@ void send_keyboard_report(void) {
     keyboard_report->mods |= macro_mods;
 #ifndef NO_ACTION_ONESHOT
     if (oneshot_mods) {
-#    if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
-        if (has_oneshot_mods_timed_out()) {
+        if (QS_oneshot_timeout > 0 && has_oneshot_mods_timed_out()) {
             dprintf("Oneshot: timeout\n");
             clear_oneshot_mods();
         }
-#    endif
         keyboard_report->mods |= oneshot_mods;
         if (has_anykey(keyboard_report)) {
             clear_oneshot_mods();
@@ -298,9 +320,7 @@ uint8_t get_oneshot_mods(void) { return oneshot_mods; }
 
 void add_oneshot_mods(uint8_t mods) {
     if ((oneshot_mods & mods) != mods) {
-#    if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
         oneshot_time = timer_read();
-#    endif
         oneshot_mods |= mods;
         oneshot_mods_changed_kb(mods);
     }
@@ -309,9 +329,7 @@ void add_oneshot_mods(uint8_t mods) {
 void del_oneshot_mods(uint8_t mods) {
     if (oneshot_mods & mods) {
         oneshot_mods &= ~mods;
-#    if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
         oneshot_time = oneshot_mods ? timer_read() : 0;
-#    endif
         oneshot_mods_changed_kb(oneshot_mods);
     }
 }
@@ -321,14 +339,15 @@ void del_oneshot_mods(uint8_t mods) {
  * FIXME: needs doc
  */
 void set_oneshot_mods(uint8_t mods) {
-    if (oneshot_mods != mods) {
-#    if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
-        oneshot_time = timer_read();
-#    endif
-        oneshot_mods = mods;
-        oneshot_mods_changed_kb(mods);
+    if (!keymap_config.oneshot_disable) {
+        if (oneshot_mods != mods) {
+            oneshot_time = timer_read();
+            oneshot_mods = mods;
+            oneshot_mods_changed_kb(mods);
+        }
     }
 }
+
 /** \brief clear oneshot mods
  *
  * FIXME: needs doc
@@ -336,9 +355,7 @@ void set_oneshot_mods(uint8_t mods) {
 void clear_oneshot_mods(void) {
     if (oneshot_mods) {
         oneshot_mods = 0;
-#    if (defined(ONESHOT_TIMEOUT) && (ONESHOT_TIMEOUT > 0))
         oneshot_time = 0;
-#    endif
         oneshot_mods_changed_kb(oneshot_mods);
     }
 }
