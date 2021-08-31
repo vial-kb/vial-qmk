@@ -22,7 +22,11 @@
           "Bottom Mods"
        ],
        "keymap":[
-          [
+         ["0,0\n\n\n\n\n\n\n\n\ne",
+            "0,1\n\n\n\n\n\n\n\n\ne"],
+         ["1,0\n\n\n\n\n\n\n\n\ne",
+         "1,1\n\n\n\n\n\n\n\n\ne"],
+         [
              {
                 "c":"#aaaaaa"
              },
