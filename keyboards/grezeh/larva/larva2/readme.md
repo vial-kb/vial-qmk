@@ -1,4 +1,4 @@
-# larva2
+# larva mk.2
 
 ![larva](https://user-images.githubusercontent.com/61553650/132993572-15b619b2-919a-49bb-8439-0263a30d82ef.png)
 
@@ -20,7 +20,7 @@ Current software-side implementation consists of QMK+custom Windows keymap.
 
 
 * Keyboard Maintainer: [grezeh](https://github.com/grezeh)
-* Hardware Supported: *Larva mk2 pcb (atmega32u4)*
+* Hardware Supported: *Larva mk.2 pcb (atmega32u4)*
 * Hardware Availability: *discord, occasionally, maybe*
 
 QMK hex file compilation for this keyboard (after setting up your build environment,in QMK SYS for Qmk Toolbox):
