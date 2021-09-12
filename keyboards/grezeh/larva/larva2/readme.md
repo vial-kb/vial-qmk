@@ -1,6 +1,6 @@
 # larva2
 
-![larva2] (https://imgur.com/a/SVSGSyZ)
+![larva](https://user-images.githubusercontent.com/61553650/132993572-15b619b2-919a-49bb-8439-0263a30d82ef.png)
 
  Larva keyboard is designed as part of a personal platform for research 
 of combined, adaptable, extended latin+cyrillic keymap and layout with better ergonomics for day-to-day use.
@@ -9,8 +9,9 @@ of combined, adaptable, extended latin+cyrillic keymap and layout with better er
 I name the whole research project "mnemoNИk|Kombine". 
 
  Larva PCB+custom plate fits in "daisy40% hhkb" keyboard case by Kprepublic.
-Larva mk1 has 4 through-hole LED positions, no rgb. Mk2 has in addition 2 rgb smd LED slots for up-facing SK6812MINI-E LEDs
+Larva mk1 has 4 through-hole LED positions, no rgb. Mk2 has in addition 2 rgb smd LED slots for up-facing SK6812MINI-E LEDs 
 and 2 pre-assembled mono-color smd LEDs as alternative to 2 lower through-hole LEDs(facedown, was an experimental feature)
+and a few small QoL improvements.
 Current software-side implementation consists of QMK+custom Windows keymap.
  For activating the bootloader: press the RST button on the back of the pcb.
 
