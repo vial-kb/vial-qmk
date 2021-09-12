@@ -1,6 +1,6 @@
 # larva2
 
-![larva2](https://imgur.com/a/SVSGSyZ)
+![larva2] (https://imgur.com/a/SVSGSyZ)
 
  Larva keyboard is designed as part of a personal platform for research 
 of combined, adaptable, extended latin+cyrillic keymap and layout with better ergonomics for day-to-day use.
