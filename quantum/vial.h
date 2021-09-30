@@ -59,14 +59,16 @@ enum {
     dynamic_vial_tap_dance_set = 0x02,
     dynamic_vial_combo_get = 0x03,
     dynamic_vial_combo_set = 0x04,
+    dynamic_vial_key_override_get = 0x05,
+    dynamic_vial_key_override_set = 0x06,
 };
 
 /* Fake position in keyboard matrix, can't use 255 as that is immediately rejected by IS_NOEVENT
    used to send arbitrary keycodes thru process_record_quantum_helper */
 #define VIAL_MATRIX_MAGIC 254
 
-#ifdef TAP_DANCE_ENABLE
 
+#ifdef TAP_DANCE_ENABLE
 #define VIAL_TAP_DANCE_ENABLE
 
 #ifndef VIAL_TAP_DANCE_ENTRIES
@@ -94,6 +96,7 @@ _Static_assert(sizeof(vial_tap_dance_entry_t) == 10, "Unexpected size of the via
 #undef VIAL_TAP_DANCE_ENTRIES
 #define VIAL_TAP_DANCE_ENTRIES 0
 #endif
+
 
 #ifdef COMBO_ENABLE
 #define VIAL_COMBO_ENABLE
@@ -126,4 +129,50 @@ _Static_assert(sizeof(vial_combo_entry_t) == 10, "Unexpected size of the vial_co
 #else
 #undef VIAL_COMBO_ENTRIES
 #define VIAL_COMBO_ENTRIES 0
+#endif
+
+
+#ifdef KEY_OVERRIDE_ENABLE
+#define VIAL_KEY_OVERRIDE_ENABLE
+
+#include "process_key_override.h"
+
+#ifndef VIAL_KEY_OVERRIDE_ENTRIES
+    #if DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 4000
+        #define VIAL_KEY_OVERRIDE_ENTRIES 32
+    #elif DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 2000
+        #define VIAL_KEY_OVERRIDE_ENTRIES 16
+    #elif DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 1000
+        #define VIAL_KEY_OVERRIDE_ENTRIES 8
+    #else
+        #define VIAL_KEY_OVERRIDE_ENTRIES 4
+    #endif
+#endif
+
+/* the key override structure as it is stored in eeprom and transferred to vial-gui;
+   it is deserialized into key_override_t by vial_get_key_override */
+typedef struct {
+    uint16_t trigger;
+    uint16_t replacement;
+    uint16_t layers;
+    uint8_t trigger_mods;
+    uint8_t negative_mod_mask;
+    uint8_t suppressed_mods;
+    uint8_t options;
+} vial_key_override_entry_t;
+_Static_assert(sizeof(vial_key_override_entry_t) == 10, "Unexpected size of the vial_key_override_entry_t structure");
+
+enum {
+    vial_ko_option_activation_trigger_down = (1 << 0),
+    vial_ko_option_activation_required_mod_down = (1 << 1),
+    vial_ko_option_activation_negative_mod_up = (1 << 2),
+    vial_ko_option_one_mod = (1 << 3),
+    vial_ko_option_no_reregister_trigger = (1 << 4),
+    vial_ko_option_no_unregister_on_other_key_down = (1 << 5),
+    vial_ko_enabled = (1 << 7),
+};
+
+#else
+#undef VIAL_KEY_OVERRIDE_ENTRIES
+#define VIAL_KEY_OVERRIDE_ENTRIES 0
 #endif
