@@ -21,17 +21,13 @@
 #define DIRECT_PINS {   \
     { D7, C6, B3, B2, E6, D2, D3} \
 }
-/*    {E6, F7, B1, B3, B2} \*/ 
-/*led layout indication*/ 
+
 #define LED_PIN_ON_STATE 0
 #define GREEN_LED B6
 #define BLUE_LED B5
 #define RED_LED D0 
 
 #define UNUSED_PINS
-/*
-#define VIAL_ENCODER_DEFAULT { KC_VOLU, KC_VOLD, KC_MS_WH_UP, KC_MS_WH_DOWN, KC_PGUP, KC_PGDN, KC_LEFT, KC_RIGHT }
-	{ C6, D7, D1, D4, E6, D2, D3} \*/
 
 /* encoder */
 #define ENCODERS_PAD_A { D3 }
