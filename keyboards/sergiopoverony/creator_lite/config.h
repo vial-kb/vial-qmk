@@ -10,11 +10,6 @@
 
 #define VIAL_KEYBOARD_UID {0x1D, 0x91, 0xC3, 0x9B, 0x4D, 0xEF, 0x8B, 0x58}
 
-#define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
-#define VIAL_UNLOCK_COMBO_COLS { 0, 3 }
-
-/* #define DYNAMIC_KEYMAP_LAYER_COUNT 10 */
-
 /* key matrix size */
 #define MATRIX_ROWS 1
 #define MATRIX_COLS 7
