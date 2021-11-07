@@ -1,5 +1,4 @@
-#include "creator_pro.h"
-
+#include "creator_lite.h"
 void matrix_init_kb(void)
 {
     matrix_init_user();
