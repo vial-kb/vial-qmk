@@ -2,18 +2,20 @@
   "keyboard_name": "Creator Pro",
   "url": "https://github.com/sergiopoverony",
   "maintainer": "SergioPoverony",
+  "width": 1,
+  "height": 9,
   "layouts": {
     "LAYOUT": {
       "layout": [
-        {"x":0, "y":0},
-        {"x":1, "y":0},
-        {"x":2, "y":0},
-        {"x":3, "y":0},
-        {"x":4.5, "y":0.5},
-        {"x":0, "y":1},
-        {"x":1, "y":1},
-        {"x":2, "y":1},
-        {"x":3, "y":1}
+        {"label": "K01", "x":0, "y":0}, 
+        {"label": "K02", "x":1, "y":0},
+        {"label": "K03", "x":2, "y":0},
+        {"label": "K04", "x":3, "y":0},
+        {"label": "K05", "x":4, "y":0},
+        {"label": "K06", "x":5, "y":0},
+        {"label": "K07", "x":6, "y":0},
+        {"label": "K08", "x":7, "y":0},
+        {"label": "K09", "x":8, "y":0}
       ]
     }
   }
