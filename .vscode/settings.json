@@ -34,7 +34,10 @@
                 "MSYSTEM": "MINGW64",
                 "CHERE_INVOKING": "1"
             },
-            "args": ["--login"]
+            "args": ["--login"],
+            "overrideName": true,
+            "icon": "keyboard",
+            "color": "terminal.ansiCyan"
         }
     },
     "terminal.integrated.cursorStyle": "line"
