@@ -2,7 +2,7 @@
   "name": "reviung34",
   "vendorId": "0xFEED",
   "productId": "0x4E03",
-  "lighting": "none",
+  "lighting": "qmk_rgblight",
   "matrix": {
     "rows": 4,
     "cols": 9
