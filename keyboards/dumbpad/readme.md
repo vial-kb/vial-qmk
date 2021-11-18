@@ -2,7 +2,7 @@
 
 Added vial support for v1x, left, single encoder pcb & RGB underglow
 
-    make kikoslab/kl90:default
+    make dumbpad:impreza_vial
 
 
 ![dumbpad](https://i.imgur.com/1T7ciLZl.jpg)
