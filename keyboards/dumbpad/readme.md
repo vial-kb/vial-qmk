@@ -1,5 +1,10 @@
 # dumbpad
 
+Added vial support for v1x, left, single encoder pcb & RGB underglow
+
+    make dumbpad:impreza_vial
+
+
 ![dumbpad](https://i.imgur.com/1T7ciLZl.jpg)
 
 dumbpad is a num/macro pad available in two major form factors - single- and dual-rotary encoder.
