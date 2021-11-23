@@ -1,8 +1,12 @@
 # dumbpad
 
-Added vial support for v1x, left, single encoder pcb & RGB underglow
+Added vial support & RGB underglow for v1x PCB's
 
-    make dumbpad:impreza_vial
+V1X:
+
+    make dumbpad/v1x:vial
+    make dumbpad/v1x_right:vial
+    make dumbpad/v1x_dualencoder:vial
 
 
 ![dumbpad](https://i.imgur.com/1T7ciLZl.jpg)

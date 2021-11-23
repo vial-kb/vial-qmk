@@ -19,22 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0xFEED
-#define PRODUCT_ID      0x0913
-#define MANUFACTURER    imchipwood
-#define PRODUCT         dumbpad
-
-/* Column/Row IO definitions */
-#define DIODE_DIRECTION COL2ROW
-
-/* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
-#define DEBOUNCE 5
-
-/* Reduce tapdance required taps from 5 to 2 */
-#define TAPPING_TOGGLE 2
-
-/* USB Device descriptor parameter */
-#define DEVICE_VER      0x0010
+#define DEVICE_VER      0x0007
 
 /* Column/Row IO definitions */
 #define MATRIX_ROWS 4
@@ -43,29 +28,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_COL_PINS { C6, D7, E6, B4, B5 }
 #define UNUSED_PINS
 
+/* Single rotary encoder */
+#define ENCODERS_PAD_A { D0 }
+#define ENCODERS_PAD_B { D4 }
 
-
-/* Rotary encoder */
-#define ENCODERS_PAD_A { B2, D0 }
-#define ENCODERS_PAD_B { D4, D1 }
-
-
-/* LED layer indicators */
-#define LAYER_INDICATOR_LED_0 B6
-#define LAYER_INDICATOR_LED_1 B1
-#define LED_NUM_LOCK_PIN B3
+/* Onboard LEDs */
+#define LED_00 B3
+#define LED_01 B1
 
 /* Bootmagic - hold down rotary encoder pushbutton while plugging in to enter bootloader */
 #define BOOTMAGIC_LITE_ROW 3
 #define BOOTMAGIC_LITE_COLUMN 0
-
-#define RGB_DI_PIN D3
-#ifdef RGB_DI_PIN
-    #define RGBLED_NUM 8
-    #define RGBLIGHT_HUE_STEP 8
-    #define RGBLIGHT_SAT_STEP 8
-    #define RGBLIGHT_VAL_STEP 8
-    #define RGBLIGHT_LIMIT_VAL 255 /* The maximum brightness level */
-    #define RGBLIGHT_ANIMATIONS
-
-#endif

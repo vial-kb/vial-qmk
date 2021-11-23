@@ -13,7 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "dumbpad.h"
+#include "v1x_dualencoder.h"
 
 void keyboard_pre_init_kb(void) {
   // Set the layer LED IO as outputs
