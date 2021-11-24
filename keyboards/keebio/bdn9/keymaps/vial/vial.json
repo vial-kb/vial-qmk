@@ -2,7 +2,7 @@
     "name": "BDN9",
     "vendorId": "0xXXXX",
     "productId": "0xXXXX",
-    "lighting": "RGB",
+    "lighting": "vialrgb",
     "matrix": {
         "rows": 3,
         "cols": 3
