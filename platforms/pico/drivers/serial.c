@@ -46,16 +46,24 @@
 #    error invalid SELECT_SOFT_SERIAL_SPEED value
 #endif
 
+#if SOFT_SERIAL_PIN == 15
+#    error GPIO15 cannot be used as SOFT_SERIAL_PIN
+#endif
+
 inline static void serial_delay(void) { wait_us(SERIAL_DELAY); }
 inline static void serial_delay_half(void) { wait_us(SERIAL_DELAY / 2); }
 inline static void serial_delay_blip(void) { wait_us(1); }
 inline static void serial_output(void) {
+    gpio_set_function(SOFT_SERIAL_PIN, GPIO_FUNC_SIO);
     setPinOutput(SOFT_SERIAL_PIN);
 
     gpio_set_slew_rate(SOFT_SERIAL_PIN, GPIO_SLEW_RATE_FAST);
     gpio_set_drive_strength(SOFT_SERIAL_PIN, GPIO_DRIVE_STRENGTH_12MA);
 }
-inline static void serial_input(void) { setPinInputHigh(SOFT_SERIAL_PIN); }
+inline static void serial_input(void) {
+    gpio_set_function(SOFT_SERIAL_PIN, GPIO_FUNC_SIO);
+    setPinInputHigh(SOFT_SERIAL_PIN);
+}
 inline static bool serial_read_pin(void) { return readPin(SOFT_SERIAL_PIN); }
 inline static void serial_low(void) { writePinLow(SOFT_SERIAL_PIN); }
 inline static void serial_high(void) { writePinHigh(SOFT_SERIAL_PIN); }
@@ -71,7 +79,7 @@ inline static void soft_serial_disable_rx(void) {
 }
 
 inline static void soft_serial_enable_rx(void) {
-    setPinInputHigh(SOFT_SERIAL_PIN);
+    serial_input();
     // pio_gpio_init is not needed
     pio_sm_clear_fifos(pio, sm_rx);
     pio_sm_set_enabled(pio, sm_rx, true);
@@ -84,9 +92,7 @@ inline static void soft_serial_disable_tx(void) {
 
 static void soft_serial_enable_tx(void) {
     writePinHigh(SOFT_SERIAL_PIN);
-    setPinOutput(SOFT_SERIAL_PIN);
-    gpio_set_slew_rate(SOFT_SERIAL_PIN, GPIO_SLEW_RATE_FAST);
-    gpio_set_drive_strength(SOFT_SERIAL_PIN, GPIO_DRIVE_STRENGTH_12MA);
+    serial_output();
     pio_sm_clear_fifos(pio, sm_tx);
     pio_gpio_init(pio, SOFT_SERIAL_PIN);
     pio_sm_set_enabled(pio, sm_tx, true);
@@ -131,7 +137,7 @@ void soft_serial_initiator_init(void) {
 void soft_serial_target_init(void) {
     soft_serial_pio_init();
 
-    setPinInputHigh(SOFT_SERIAL_PIN);
+    serial_input();
     gpio_set_irq_enabled_with_callback(SOFT_SERIAL_PIN, GPIO_IRQ_EDGE_FALL,
                                        true, interrupt_handler);
     irq_set_priority(IO_IRQ_BANK0, PICO_HIGHEST_IRQ_PRIORITY);

@@ -20,10 +20,10 @@
 
 typedef uint8_t pin_t;
 
-#define setPinInput(pin) (gpio_set_dir(pin, GPIO_IN), gpio_set_function(pin, GPIO_FUNC_SIO))
-#define setPinInputHigh(pin) (gpio_set_dir(pin, GPIO_IN), gpio_pull_up(pin), gpio_set_function(pin, GPIO_FUNC_SIO))
-#define setPinInputLow(pin) (gpio_init(pin), gpio_set_dir(pin, GPIO_IN), gpio_pull_down(pin), gpio_set_function(pin, GPIO_FUNC_SIO))
-#define setPinOutput(pin) (gpio_set_function(pin, GPIO_FUNC_SIO), gpio_set_dir(pin, GPIO_OUT))
+#define setPinInput(pin) (gpio_set_dir(pin, GPIO_IN))
+#define setPinInputHigh(pin) (gpio_set_dir(pin, GPIO_IN), gpio_pull_up(pin))
+#define setPinInputLow(pin) (gpio_init(pin), gpio_set_dir(pin, GPIO_IN), gpio_pull_down(pin))
+#define setPinOutput(pin) (gpio_set_dir(pin, GPIO_OUT))
 
 #define writePinHigh(pin) (gpio_put(pin, 1))
 #define writePinLow(pin) (gpio_put(pin, 0))
