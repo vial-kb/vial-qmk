@@ -2,9 +2,11 @@
 
 #pragma once
 
-
 //Vial Keyboard UID
 #define VIAL_KEYBOARD_UID {0x49, 0x5F, 0x9C, 0xB8, 0x0F, 0x67, 0x4D, 0xE6}
+
+#define VIAL_UNLOCK_ROWS { 0,2 }
+#define VIAL_UNLOCK_COLS { 0,13 }
 
 /* key matrix pins */
 #define MATRIX_ROW_PINS { D3, D2, B3, B2, B1, B0 }
@@ -18,6 +20,3 @@
 //enable RGB Matrix Effects for Vial
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
-
-#define VIAL_UNLOCK_ROWS { 0,2 }
-#define VIAL_UNLOCK_COLS { 0,13 }
