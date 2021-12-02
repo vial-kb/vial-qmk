@@ -1,6 +1,8 @@
 VIA_ENABLE = yes
 VIAL_ENABLE = yes
 
+VIALRGB_ENABLE = yes
+
 MOUSEKEY_ENABLE = no
 
 #define VIAL_UNLOCK_ROWS { 0,2 }
