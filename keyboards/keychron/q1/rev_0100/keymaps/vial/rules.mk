@@ -1,2 +1,3 @@
 VIA_ENABLE = yes
 MOUSEKEY_ENABLE = no
+VIAL_ENABLE = yes
