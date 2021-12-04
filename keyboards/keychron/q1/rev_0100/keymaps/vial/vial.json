@@ -2,7 +2,7 @@
     "name": "Keychron Q1",
     "vendorId": "0x3434",
     "productId": "0x0100",
-    "lighting": "vialrgb",
+    "lighting": "none",
     "matrix": {"rows": 6, "cols": 15},
     "layouts": {
       "keymap":[
