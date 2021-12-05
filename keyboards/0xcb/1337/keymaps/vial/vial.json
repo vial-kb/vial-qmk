@@ -1,0 +1,15 @@
+{
+    "name": "0xCB 1337",
+    "vendorId": "0xCB00",
+    "productId": "0x1337",
+    "lighting": "qmk_backlight_rgblight",
+    "matrix": { "rows": 3, "cols": 3 },
+    "layouts": {
+      "keymap": [
+        ["0,0","0,1","0,2","0,0\n\n\n\n\n\n\n\n\ne","0,1\n\n\n\n\n\n\n\n\ne"],
+        ["1,0","1,1","1,2"],
+        ["2,0","2,1","2,2"]
+      ]
+    }
+  }
+  

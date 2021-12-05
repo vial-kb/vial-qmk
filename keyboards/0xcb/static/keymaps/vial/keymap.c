@@ -59,37 +59,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 state = update_tri_layer_state(state, _FN2, _FN3, _FN4);
 return state;
 }
-/* rotary encoder (MX12) - add different functions for layers here */
-#ifdef ENCODER_ENABLE
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (IS_LAYER_ON(_FN4)) {
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
-        }
-    } else if (IS_LAYER_ON(_FN3)) {
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
-        }
-    } else if (IS_LAYER_ON(_FN2)) {
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
-        }
-    } else {
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
-        }
-    }
-    return true;
-}
-#endif
+/* encoder handled by VIAL */
 
 /* oled stuff :) */
 #ifdef OLED_ENABLE
@@ -175,7 +145,7 @@ static void render_layer(void) {
     oled_write_P(logo[3][2], false);
 }
 
-bool oled_task_user(void) {
+void oled_task_user(void) {
     static bool finished_timer = false;
     if (!finished_timer && (timer_elapsed(startup_timer) < 3000)) {
         render_logo();
@@ -186,6 +156,5 @@ bool oled_task_user(void) {
         }
         render_layer();
     }
-    return false;
 }
 #endif
