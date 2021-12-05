@@ -37,7 +37,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
     { E6, B4, B2 } \
 }
 #define TAP_CODE_DELAY 10
-#define ENCODER_DIRECTION_FLIP
 #define ENCODER_RESOLUTION 4
 #define ENCODERS_PAD_A { F5 }
 #define ENCODERS_PAD_B { F6 }
