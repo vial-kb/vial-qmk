@@ -229,12 +229,12 @@ static void render_luna_status(void) {
 #endif
 
 	void animate_luna(void) {
-		oled_set_cursor(0,3);
+		oled_set_cursor(0,4);
  
 		/* Print current layer */
 		oled_write("Layer", false);
  
-		oled_set_cursor(0,5);
+		oled_set_cursor(0,6);
  
 		switch (get_highest_layer(layer_state)) {
 			case _QWERTY:
@@ -253,7 +253,7 @@ static void render_luna_status(void) {
 				oled_write("SUPER", false);
 				break;
 		}
-		oled_set_cursor(0,8);
+		oled_set_cursor(0,10);
 		if (get_mods() & MOD_MASK_SHIFT || host_keyboard_led_state().caps_lock) { luna_action(bark); }
 		else if (get_mods() & MOD_MASK_CAG) { luna_action(sneak); }
 		else if (timer_elapsed32(tap_timer) < LUNA_FRAME_DURATION*2) { luna_action(run); }

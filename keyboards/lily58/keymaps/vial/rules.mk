@@ -8,6 +8,7 @@ EXTRAKEY_ENABLE = yes
 WPM_ENABLE = yes
 TAP_DANCE_ENABLE = yes
 SRC += oled-luna.c
+
 LTO_ENABLE = yes
 COMBO_ENABLE = no
 GRAVE_ESC_ENABLE = no 
