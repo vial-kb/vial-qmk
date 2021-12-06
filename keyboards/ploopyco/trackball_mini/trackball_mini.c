@@ -37,8 +37,10 @@
 #    define OPT_SCALE 1  // Multiplier for wheel
 #endif
 
-#define PLOOPY_DPI_OPTIONS { CPI375, CPI750, CPI1375 }
-#define PLOOPY_DPI_DEFAULT 2
+//DPI Settings
+#define PLOOPY_DPI_OPTIONS { CPI500, CPI750, CPI1000, CPI1375 }
+#define PLOOPY_DPI_PREC_OPTIONS { CPI250, CPI375, CPI500, CPI625 }
+#define PLOOPY_DPI_DEFAULT 3
 
 #ifndef PLOOPY_DRAGSCROLL_DPI
 #    define PLOOPY_DRAGSCROLL_DPI CPI375 // Fixed-DPI Drag Scroll
@@ -53,6 +55,7 @@ const static float ADNS_Y_TRANSFORM = 1.0;
 
 keyboard_config_t keyboard_config;
 uint16_t dpi_array[] = PLOOPY_DPI_OPTIONS;
+uint16_t dpi_prec_array[] = PLOOPY_DPI_PREC_OPTIONS;
 #define DPI_OPTION_SIZE (sizeof(dpi_array) / sizeof(uint16_t))
 
 // TODO: Implement libinput profiles

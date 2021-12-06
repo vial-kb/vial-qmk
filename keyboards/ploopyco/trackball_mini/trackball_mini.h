@@ -38,6 +38,9 @@ void process_wheel_user(report_mouse_t* mouse_report, int16_t h, int16_t v);
 
 #define LAYOUT(BL, BM, BR, BF, BB) \
     { {BL, BM, BR, BF, BB}, }
+	
+extern uint16_t dpi_array[];
+extern uint16_t dpi_prec_array[];
 
 typedef union {
   uint32_t raw;
@@ -49,13 +52,13 @@ typedef union {
 extern keyboard_config_t keyboard_config;
 
 enum ploopy_keycodes {
-#ifdef VIA_ENABLE
+#ifdef VIAL_ENABLE
     DPI_CONFIG = USER00,
 #else
     DPI_CONFIG = SAFE_RANGE,
 #endif
     DRAG_SCROLL,
-#ifdef VIA_ENABLE
+#ifdef VIAL_ENABLE
     PLOOPY_SAFE_RANGE = SAFE_RANGE,
 #else
     PLOOPY_SAFE_RANGE,

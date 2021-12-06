@@ -1,0 +1,42 @@
+{
+    "name": "Ploopy Trackball Mini",
+    "vendorId": "0x5043",
+    "productId": "0x1EAB",
+    "lighting": "none",
+	"matrix": {
+		"rows": 1,
+		"cols": 5
+	},
+    "layouts": {
+        "keymap": [
+					  [
+						{
+						  "h": 2
+						},
+						"0,0",
+						{
+						  "x": 1,
+						  "h": 2
+						},
+						"0,2",
+						{
+						  "x": 0.5,
+						  "h": 2
+						},
+						"0,3",
+						{
+						  "h": 2
+						},
+						"0,4"
+					  ],
+					  [
+						{
+						  "y": -0.75,
+						  "x": 1,
+						  "h": 1.5
+						},
+						"0,1"
+					  ]
+				  ]
+        }
+}

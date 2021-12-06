@@ -11,6 +11,8 @@ BOOTLOADER = atmel-dfu
 #   change yes to no to disable
 #
 BOOTMAGIC_ENABLE = lite     # Enable Bootmagic Lite
+TAP_DANCE_ENABLE = yes		# Tap dance keys
+MOUSEKEY_ENABLE = no        # Mouse keys
 EXTRAKEY_ENABLE = yes       # Audio control and System control
 CONSOLE_ENABLE = yes         # Console for debug
 COMMAND_ENABLE = no        # Commands for debug and configuration
@@ -23,7 +25,7 @@ RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 UNICODE_ENABLE = no         # Unicode
 AUDIO_ENABLE = no           # Audio output
 POINTING_DEVICE_ENABLE = yes
-MOUSEKEY_ENABLE = no        # Mouse keys
+
 
 QUANTUM_LIB_SRC += analog.c
 SRC += drivers/sensors/adns5050.c opt_encoder.c
