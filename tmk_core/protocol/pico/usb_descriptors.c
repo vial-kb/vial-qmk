@@ -146,7 +146,7 @@ uint8_t const desc_fs_configuration[] = {
                        CFG_TUD_HID_EP_BUFSIZE, 10),
     TUD_HID_INOUT_DESCRIPTOR(ITF_NUM_HID_RAW, 2, HID_ITF_PROTOCOL_NONE,
                              sizeof(desc_raw), EPNUM_HID_RAW_OUT,
-                             EPNUM_HID_RAW_IN, CFG_TUD_HID_EP_BUFSIZE, 10),
+                             EPNUM_HID_RAW_IN, CFG_TUD_HID_EP_BUFSIZE, 1),
     TUD_HID_DESCRIPTOR(ITF_NUM_HID_MOUSE, 2, HID_ITF_PROTOCOL_NONE,
                        sizeof(desc_mouse), EPNUM_HID_MOUSE_IN,
                        CFG_TUD_HID_EP_BUFSIZE, 1),
