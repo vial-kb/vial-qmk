@@ -14,7 +14,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#define VIAL_KEYBOARD_UID {0x13, 0xBB, 0x91, 0xC2, 0x05, 0x96, 0xF0, 0x30}
 
 #pragma once
 
@@ -94,8 +93,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define NO_ACTION_ONESHOT
 //#define NO_ACTION_MACRO
 //#define NO_ACTION_FUNCTION
-#define DYNAMIC_KEYMAP_LAYER_COUNT 3
-
-// Unlock Combo
-#define VIAL_UNLOCK_COMBO_ROWS { 9, 1 }
-#define VIAL_UNLOCK_COMBO_COLS { 6, 1 }

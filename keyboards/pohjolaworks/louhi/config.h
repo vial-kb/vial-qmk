@@ -26,11 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MANUFACTURER Pohjola Works
 #define PRODUCT      Louhi
 
-/* Vial */
-#define VIAL_KEYBOARD_UID {0x7F, 0xD7, 0x1E, 0x05, 0xFC, 0x51, 0x44, 0xAE}
-#define VIAL_UNLOCK_COMBO_ROWS { 2, 0 }
-#define VIAL_UNLOCK_COMBO_COLS { 0, 6 }
-
 /* key matrix size */
 #define MATRIX_ROWS 8
 #define MATRIX_COLS 7
