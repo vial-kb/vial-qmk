@@ -185,3 +185,26 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
 uint16_t get_combo_term(uint16_t index, combo_t *combo) {
     return QS.combo_term;
 }
+
+bool get_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case AUTO_SHIFT_ALPHA:
+            if (!QS_auto_shift_no_auto_shift_alpha) return true;
+            break;
+        case AUTO_SHIFT_NUMERIC:
+            if (!QS_auto_shift_no_auto_shift_numeric) return true;
+            break;
+        case AUTO_SHIFT_SPECIAL:
+            if (!QS_auto_shift_no_auto_shift_special) return true;
+            break;
+    }
+    return false;
+}
+
+bool get_auto_shift_repeat(uint16_t keycode, keyrecord_t *record) {
+    return QS_auto_shift_repeat;
+}
+
+bool get_auto_shift_no_auto_repeat(uint16_t keycode, keyrecord_t *record) {
+    return QS_auto_shift_no_auto_repeat;
+}
