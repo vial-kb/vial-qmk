@@ -1,7 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "quantum.h"
 
-#define _______ KC_TRNS
 #define NUMPAD  TO(_NUMPAD)
 enum layers {
     _NUMPAD = 0,

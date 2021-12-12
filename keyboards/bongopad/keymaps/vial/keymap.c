@@ -165,11 +165,12 @@ static void render_anim(void) {
     }
 }
 
-void oled_task_user(void) {
+bool oled_task_user(void) {
 	render_anim();
 	 oled_set_cursor(0,0);
      sprintf(wpm_str, "WPM:%03d", get_current_wpm());
      oled_write(wpm_str, false);
+     return false;
 }
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; };
