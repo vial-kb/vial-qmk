@@ -1,22 +1,22 @@
 # MCU name
 MCU = atmega32u4
 
-# bootloader
+# Bootloader selection
 BOOTLOADER = atmel-dfu
 
 # Build Options
-# comment out to disable the options.
-BOOTMAGIC_ENABLE = yes	
-MOUSEKEY_ENABLE = no	
-EXTRAKEY_ENABLE = yes	
-CONSOLE_ENABLE = no	
-COMMAND_ENABLE = no    
-SLEEP_LED_ENABLE = no  
-NKRO_ENABLE = yes
-BACKLIGHT_ENABLE = no  
-AUDIO_ENABLE = no
+#   change yes to no to disable
+#
+BOOTMAGIC_ENABLE = yes      # Enable Bootmagic Lite
+MOUSEKEY_ENABLE = no        # Mouse keys
+EXTRAKEY_ENABLE = yes       # Audio control and System control
+CONSOLE_ENABLE = no         # Console for debug
+COMMAND_ENABLE = no         # Commands for debug and configuration
+NKRO_ENABLE = yes           # Enable N-Key Rollover
+BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
+RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
+AUDIO_ENABLE = no           # Audio output
 ENCODER_ENABLE = yes
 OLED_ENABLE = yes
 OLED_DRIVER = SSD1306
 WPM_ENABLE = yes
-RGBLIGHT_ENABLE = no

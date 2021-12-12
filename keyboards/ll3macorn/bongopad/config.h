@@ -1,24 +1,15 @@
 // Copyright 2021 Ll3macorn (@ll3macorn)
 // SPDX-License-Identifier: GPL-2.0-or-later
 #pragma once
-#define CONFIG_H
 
 #include "config_common.h"
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0x1234
+#define VENDOR_ID       0x3728
 #define PRODUCT_ID      0x2949
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    Ll3macorn
 #define PRODUCT         BongoPad
-#define DESCRIPTION     BongoPad
-
-/* vial tings */
-#define VIAL_KEYBOARD_UID {0x08, 0xDB, 0x6F, 0x28, 0x40, 0xFD, 0x6F, 0x58}
-#define VIAL_UNLOCK_COMBO_ROWS { 1, 1 }
-#define VIAL_UNLOCK_COMBO_COLS { 0, 2 }
-#define VIAL_TAP_DANCE_ENTRIES 4
-#define DYNAMIC_KEYMAP_LAYER_COUNT 4
 
 /* bootmagic */
 #define BOOTMAGIC_LITE_ROW 1
