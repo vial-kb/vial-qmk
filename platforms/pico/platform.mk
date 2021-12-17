@@ -381,6 +381,7 @@ BOOT2INC_DIR += -I$(PICO_SDK_PATH)/src/rp2_common/boot_stage2/include
 BOOT2INC_DIR += -I$(PICO_SDK_PATH)/src/rp2_common/boot_stage2/asminclude
 
 $(KEYBOARD_OUTPUT)/src/bs2_default.o: $(PICO_SDK_PATH)/src/rp2_common/boot_stage2/compile_time_choice.S $(KEYBOARD_OUTPUT)/cflags.txt
+	@mkdir -p $(KEYBOARD_OUTPUT)/src
 	$(CC) $(CFLAGS) $(BOOT2INC_DIR) -c -o $@ $^
 
 $(KEYBOARD_OUTPUT)/src/bs2_default.elf: $(KEYBOARD_OUTPUT)/src/bs2_default.o
