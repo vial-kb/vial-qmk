@@ -185,7 +185,11 @@ char const* string_desc_arr[] = {
     (const char[]){0x09, 0x04},  // 0: is supported language is English (0x0409)
     STR(MANUFACTURER),          // 1: Manufacturer
     STR(PRODUCT),               // 2: Product
+#ifdef VIAL_ENABLE
+    SERIAL_NUMBER,
+#else
     "123456",                    // 3: Serials, should use chip ID
+#endif
 };
 
 static uint16_t _desc_str[32];
