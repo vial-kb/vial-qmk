@@ -339,3 +339,10 @@ _Static_assert(MACRO12 == 0x5F1E, "");
 _Static_assert(MACRO13 == 0x5F1F, "");
 _Static_assert(MACRO14 == 0x5F20, "");
 _Static_assert(MACRO15 == 0x5F21, "");
+
+/* KEYCODES_DYNAMIC_MACRO */
+_Static_assert(DYN_REC_START1 == 0x5D03, "");
+_Static_assert(DYN_REC_START2 == 0x5D04, "");
+_Static_assert(DYN_REC_STOP == 0x5D05, "");
+_Static_assert(DYN_MACRO_PLAY1 == 0x5D06, "");
+_Static_assert(DYN_MACRO_PLAY2 == 0x5D07, "");
