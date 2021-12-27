@@ -213,6 +213,10 @@ else
       # arm_atsam EEPROM
       OPT_DEFS += -DEEPROM_SAMD
       SRC += $(PLATFORM_COMMON_DIR)/eeprom_samd.c
+      SRC += $(PLATFORM_COMMON_DIR)/eeprom.c
+    else ifeq ($(PLATFORM),PICO_SDK)
+      SRC += $(PLATFORM_COMMON_DIR)/eeprom.c
+      SRC += $(PLATFORM_COMMON_DIR)/flash_pico.c
     else ifeq ($(PLATFORM),TEST)
       # Test harness "EEPROM"
       OPT_DEFS += -DEEPROM_TEST_HARNESS

@@ -31,7 +31,7 @@
 #include "bootloader.h"
 #include "debug.h"
 
-#include "pico_eeprom.h"
+#include "eeprom_pico.h"
 #include "usb_descriptors.h"
 
 #include "pico/stdio/driver.h"
@@ -135,7 +135,7 @@ void protocol_pre_init(void) {
     watchdog_enable(8000, 1);
     watchdog_hw->scratch[0] = 0x2040dead;
     pico_cdc_enable_printf();
-    pico_eepemu_init();
+    EEPROM_Init();
 }
 
 void protocol_post_init(void) { host_set_driver(&driver); }
@@ -145,7 +145,6 @@ void protocol_pre_task(void) {
 }
 
 void protocol_post_task(void) {
-    pico_eepemu_lazy_write_back();
 #ifdef CONSOLE_ENABLE
     console_task();
 #endif
@@ -207,16 +206,15 @@ __attribute__((weak)) void pico_cdc_receive_cb(uint8_t const* buf, uint32_t cnt)
     tud_cdc_write(buf, cnt);
     tud_cdc_write_flush();
 
-    if (buf[0] == 's') {
-        printf("save keymap to eeprom\n");
-        pico_eepemu_flash_dynamic_keymap();
-        printf("complete\n");
-        printf("save eeconfig to eeprom\n");
-        pico_eepemu_flash_eeconfig();
-        printf("complete\n");
+    if (buf[0] == 'b') {
+        bootloader_jump();
     } else if (buf[0] == 'l') {
         printf("init eeprom emulation\n");
-        pico_eepemu_init();
+        EEPROM_Init();
+        printf("complete\n");
+    } else if (buf[0] == 'c') {
+        printf("clear eeprom emulation\n");
+        EEPROM_Erase();
         printf("complete\n");
     } else if (buf[0] == 'd') {
         printf("debug print ");
