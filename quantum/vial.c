@@ -284,7 +284,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
 
 uint16_t g_vial_magic_keycode_override;
 
-static void vial_keycode_down(uint16_t keycode) {
+void vial_keycode_down(uint16_t keycode) {
     g_vial_magic_keycode_override = keycode;
 
     if (keycode <= QK_MODS_MAX) {
@@ -296,7 +296,7 @@ static void vial_keycode_down(uint16_t keycode) {
     }
 }
 
-static void vial_keycode_up(uint16_t keycode) {
+void vial_keycode_up(uint16_t keycode) {
     g_vial_magic_keycode_override = keycode;
 
     if (keycode <= QK_MODS_MAX) {
@@ -308,9 +308,7 @@ static void vial_keycode_up(uint16_t keycode) {
     }
 }
 
-static void vial_keycode_tap(uint16_t keycode) __attribute__((unused));
-
-static void vial_keycode_tap(uint16_t keycode) {
+void vial_keycode_tap(uint16_t keycode) {
     vial_keycode_down(keycode);
     qs_wait_ms(QS_tap_code_delay);
     vial_keycode_up(keycode);

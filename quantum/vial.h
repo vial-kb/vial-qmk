@@ -63,6 +63,14 @@ enum {
     dynamic_vial_key_override_set = 0x06,
 };
 
+#define VIAL_MACRO_EXT_TAP 5
+#define VIAL_MACRO_EXT_DOWN 6
+#define VIAL_MACRO_EXT_UP 7
+
+void vial_keycode_down(uint16_t keycode);
+void vial_keycode_up(uint16_t keycode);
+void vial_keycode_tap(uint16_t keycode);
+
 /* Fake position in keyboard matrix, can't use 255 as that is immediately rejected by IS_NOEVENT
    used to send arbitrary keycodes thru process_record_quantum_helper */
 #define VIAL_MATRIX_MAGIC 254
