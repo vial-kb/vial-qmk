@@ -25,10 +25,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MANUFACTURER    CapsUnlocked
 #define PRODUCT         CU7
 
-#define VIAL_KEYBOARD_UID {0x19, 0xFF, 0xE1, 0x15, 0x74, 0x04, 0x69, 0x00}
-#define VIAL_UNLOCK_COMBO_ROWS { 1, 1 }
-#define VIAL_UNLOCK_COMBO_COLS { 0, 2 }
-
 /* key matrix size */
 #define MATRIX_ROWS 3
 #define MATRIX_COLS 3
@@ -49,8 +45,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ENCODERS_PAD_A { D6 }
 #define ENCODERS_PAD_B { D4 }
 
-#define MATRIX_ROW_PINS { D7, F0, F6,  }
-#define MATRIX_COL_PINS { F5, F7, F4,  }
+#define MATRIX_ROW_PINS { D7, F0, F6 }
+#define MATRIX_COL_PINS { F5, F7, F4 }
 #define UNUSED_PINS
 
 /* COL2ROW, ROW2COL, or CUSTOM_MATRIX */
@@ -63,10 +59,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LOCKING_SUPPORT_ENABLE
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
-
-#define IS_COMMAND() ( \
-    keyboard_report->mods == (MOD_BIT(KC_LSHIFT) | MOD_BIT(KC_RSHIFT)) \
-)
 
 #define RGB_DI_PIN F1
 #ifdef RGB_DI_PIN
