@@ -16,7 +16,7 @@ Current software-side implementation consists of QMK+custom Windows keymap.
  For activating the bootloader: press the RST button on the back of the pcb.
 
  (The keyboard design line is constantly evolving, can differ in shapes and sizes, but all serve the same ultimate goal.
- Current line consists of: Larva mk1; Larva mk2; Katerpillar; Katerpillar Infiltrator; Wodka; Dragonfly; Butterfly; Mothra; Stargate)
+ Current line consists of: Larva mk1; Larva mk2; Katerpillar; Katerpillar Infiltrator; Wodka; Wolof; Dragonfly; Butterfly; Mothra; Stargate)
 
 
 * Keyboard Maintainer: [grezeh](https://github.com/grezeh)
