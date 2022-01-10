@@ -20,7 +20,7 @@
 
 typedef uint8_t pin_t;
 
-#define setPinInput(pin) (gpio_set_dir(pin, GPIO_IN))
+#define setPinInput(pin) (gpio_disable_pulls(pin), gpio_set_dir(pin, GPIO_IN))
 #define setPinInputHigh(pin) (gpio_set_dir(pin, GPIO_IN), gpio_pull_up(pin))
 #define setPinInputLow(pin) (gpio_init(pin), gpio_set_dir(pin, GPIO_IN), gpio_pull_down(pin))
 #define setPinOutput(pin) (gpio_set_dir(pin, GPIO_OUT))
