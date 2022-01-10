@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  *
+ * Modifications for QMK and RP2040 by sekigon-gonnoc
  */
 
 #include "tusb.h"
