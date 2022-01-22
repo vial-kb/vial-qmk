@@ -68,7 +68,7 @@ inline static bool serial_read_pin(void) { return readPin(SOFT_SERIAL_PIN); }
 inline static void serial_low(void) { writePinLow(SOFT_SERIAL_PIN); }
 inline static void serial_high(void) { writePinHigh(SOFT_SERIAL_PIN); }
 
-void interrupt_handler(uint gpio, uint32_t events);
+static void interrupt_handler(uint gpio, uint32_t events);
 
 static PIO  pio = pio0;
 static uint sm_tx, sm_rx;
@@ -144,7 +144,7 @@ void soft_serial_target_init(void) {
 }
 
 // Used by the master to synchronize timing with the slave.
-static int __attribute__((noinline)) sync_recv(void) {
+static int __no_inline_not_in_flash_func(sync_recv)(void) {
     serial_input();
 
     volatile uint64_t timeout = time_us_64() + 10000;
@@ -180,7 +180,7 @@ static int __attribute__((noinline)) sync_recv(void) {
 }
 
 // Used by the slave to send a synchronization signal to the master.
-static void __attribute__((noinline)) sync_send(void) {
+static void __no_inline_not_in_flash_func(sync_send)(void) {
     serial_output();
 
     serial_low();
@@ -220,7 +220,7 @@ static void serial_wait_send_complete(void) {
 }
 
 // interrupt handle to be used by the slave device
-void interrupt_handler(uint gpio, uint32_t events) {
+static void __no_inline_not_in_flash_func(interrupt_handler)(uint gpio, uint32_t events) {
     if (gpio != SOFT_SERIAL_PIN || events != GPIO_IRQ_EDGE_FALL) {
         return;
     }
@@ -339,7 +339,7 @@ void interrupt_handler(uint gpio, uint32_t events) {
 //    TRANSACTION_NO_RESPONSE
 //    TRANSACTION_DATA_ERROR
 // this code is very time dependent, so we need to disable interrupts
-int soft_serial_transaction(int sstd_index) {
+int __no_inline_not_in_flash_func(soft_serial_transaction)(int sstd_index) {
     if (sstd_index > NUM_TOTAL_TRANSACTIONS) return TRANSACTION_TYPE_ERROR;
     split_transaction_desc_t *trans = &split_transaction_table[sstd_index];
     if (!trans->status) return TRANSACTION_TYPE_ERROR;  // not registered
