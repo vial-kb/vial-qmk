@@ -1,12 +1,6 @@
 # MCU name
 MCU = atmega32u4
-
-# Bootloader selection
 BOOTLOADER = atmel-dfu
-
-# Build Options
-#   change yes to no to disable
-#
 BOOTMAGIC_ENABLE		= yes      # Virtual DIP switch configuration
 MOUSEKEY_ENABLE			= yes      # Mouse keys
 EXTRAKEY_ENABLE			= yes      # Audio control and System control
@@ -26,3 +20,4 @@ OLED_ENABLE     		= yes
 OLED_DRIVER     		= SSD1306
 LTO_ENABLE      		= yes
 ENCODER_ENABLE 			= yes  
+
