@@ -14,6 +14,7 @@ OPT_DEFS += -DPROTOCOL_PICO
 OPT_DEFS += -DSPLIT_USB_DETECT
 PICOTOOL ?= picotool
 RP2BOOT_ID ?= "2e8a:0003"
+LSUSB ?= lsusb
 
 PICO_SDK_PATH = lib/pico-sdk
 
@@ -396,7 +397,7 @@ $(KEYBOARD_OUTPUT)/src/bs2_default_padded_checksummed.S: $(KEYBOARD_OUTPUT)/src/
 
 
 flash: $(BUILD_DIR)/$(TRAGET).elf cpfirmware sizeafter
-	until lsusb | grep -q $(RP2BOOT_ID); do\
+	until $(LSUSB) | grep -q $(RP2BOOT_ID); do\
 		printf "$(MSG_BOOTLOADER_NOT_FOUND)" ;\
 		sleep 5 ;\
 	done
