@@ -33,6 +33,10 @@ uint8_t keyboard_leds(void) {
 }
 
 void send_keyboard(report_keyboard_t *report) {
+    if (tud_ready() && tud_suspended()){
+        tud_remote_wakeup();
+    }
+
     while (!tud_hid_n_ready(ITF_NUM_HID_KEYBOARD)) {
         tud_task();
         if (!tud_ready()) {
@@ -44,6 +48,10 @@ void send_keyboard(report_keyboard_t *report) {
 }
 
 void send_mouse(report_mouse_t *report) {
+    if (tud_ready() && tud_suspended()){
+        tud_remote_wakeup();
+    }
+
     while (!tud_hid_n_ready(ITF_NUM_HID_MOUSE)) {
         tud_task();
         if (!tud_ready()) {
