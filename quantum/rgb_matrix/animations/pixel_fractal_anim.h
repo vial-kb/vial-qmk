@@ -17,6 +17,7 @@
 // Inspired from 4x12 fractal created by @schwarzgrau
 
 #ifdef ENABLE_RGB_MATRIX_PIXEL_FRACTAL
+#define RGB_MATRIX_EFFECT_PIXEL_FRACTAL
 RGB_MATRIX_EFFECT(PIXEL_FRACTAL)
 #    ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
