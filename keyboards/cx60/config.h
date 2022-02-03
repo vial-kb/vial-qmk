@@ -56,10 +56,3 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 #define LED_CAPS_LOCK_PIN B5
 #define LED_PIN_ON_STATE 0
-
-/* Vial setup */
-#ifdef VIAL_ENABLE
-#define VIAL_KEYBOARD_UID {0xB2, 0x57, 0x48, 0xED, 0x67, 0x80, 0x12, 0x18}
-#define VIAL_UNLOCK_COMBO_ROWS { 0, 1 }
-#define VIAL_UNLOCK_COMBO_COLS { 0, 1 }
-#endif

@@ -19,3 +19,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 /* this is for rgb underglow capslock indicator */
 #define RGBLIGHT_LAYERS
 #define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
+
+/* Vial setup */
+#define VIAL_KEYBOARD_UID {0xB2, 0x57, 0x48, 0xED, 0x67, 0x80, 0x12, 0x18}
+#define VIAL_UNLOCK_COMBO_ROWS { 0, 1 }
+#define VIAL_UNLOCK_COMBO_COLS { 0, 1 }
