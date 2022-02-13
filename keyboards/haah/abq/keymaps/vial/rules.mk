@@ -1,0 +1,5 @@
+VIA_ENABLE = yes
+VIAL_ENABLE = yes
+LTO_ENABLE = yes
+MIDI_ENABLE = no
+EXTRAKEY_ENABLE = yes
