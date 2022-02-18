@@ -2,14 +2,17 @@
 MCU = atmega32u4
 
 # Bootloader selection
-BOOTLOADER = caterina
+BOOTLOADER = atmel-dfu
 
 # Build Options
 #   change yes to no to disable
 
 VIA_ENABLE = yes
+VIAL_ENABLE = yes
+VIAL_INSECURE = yes
+VIAL_ENCODERS_ENABLE = yes
 BOOTMAGIC_ENABLE = no       # Enable Bootmagic Lite
-MOUSEKEY_ENABLE = no       # Mouse keys
+MOUSEKEY_ENABLE = yes       # Mouse keys
 EXTRAKEY_ENABLE = yes       # Audio control and System control
 CONSOLE_ENABLE = no         # Console for debug
 COMMAND_ENABLE = no         # Commands for debug and configuration
@@ -18,8 +21,8 @@ BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = no       # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output
 SPLIT_KEYBOARD = yes
-OLED_ENABLE = yes
+OLED_ENABLE = no
 OLED_DRIVER = SSD1306
-WPM_ENABLE = yes
+WPM_ENABLE = no
 ENCODER_ENABLE = yes
 LTO_ENABLE = yes
