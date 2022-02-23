@@ -44,8 +44,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 
-#define ENCODERS_PAD_A {B2 , B4}
-#define ENCODERS_PAD_B {B6 , B5}
+#define ENCODERS_PAD_A {B6 , B4}
+#define ENCODERS_PAD_B {B2 , B5}
 
 #define ENCODER_RESOLUTIONS { 4, 4, 4, 1}
 #define UNUSED_PINS
