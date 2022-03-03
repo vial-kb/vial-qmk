@@ -1,4 +1,5 @@
-/* SPDX-License-Identifier: GPL-2.0-or-later */
+// Copyright 2022 xia0 (@xia0)
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
 
