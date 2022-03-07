@@ -19,7 +19,7 @@
 #include <inttypes.h>
 #include <stdbool.h>
 
-#include "dynamic_keymap_eeprom.h"
+#include "eeprom.h"
 #include "action.h"
 
 #define VIAL_PROTOCOL_VERSION ((uint32_t)0x00000004)
@@ -70,11 +70,11 @@ enum {
 #define VIAL_TAP_DANCE_ENABLE
 
 #ifndef VIAL_TAP_DANCE_ENTRIES
-    #if DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 4000
+    #if TOTAL_EEPROM_BYTE_COUNT > 4000
         #define VIAL_TAP_DANCE_ENTRIES 32
-    #elif DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 2000
+    #elif TOTAL_EEPROM_BYTE_COUNT > 2000
         #define VIAL_TAP_DANCE_ENTRIES 16
-    #elif DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 1000
+    #elif TOTAL_EEPROM_BYTE_COUNT > 1000
         #define VIAL_TAP_DANCE_ENTRIES 8
     #else
         #define VIAL_TAP_DANCE_ENTRIES 4
@@ -99,11 +99,11 @@ _Static_assert(sizeof(vial_tap_dance_entry_t) == 10, "Unexpected size of the via
 #define VIAL_COMBO_ENABLE
 
 #ifndef VIAL_COMBO_ENTRIES
-    #if DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 4000
+    #if TOTAL_EEPROM_BYTE_COUNT > 4000
         #define VIAL_COMBO_ENTRIES 32
-    #elif DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 2000
+    #elif TOTAL_EEPROM_BYTE_COUNT > 2000
         #define VIAL_COMBO_ENTRIES 16
-    #elif DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 1000
+    #elif TOTAL_EEPROM_BYTE_COUNT > 1000
         #define VIAL_COMBO_ENTRIES 8
     #else
         #define VIAL_COMBO_ENTRIES 4

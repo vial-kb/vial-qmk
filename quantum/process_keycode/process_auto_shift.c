@@ -63,7 +63,9 @@ static struct {
 // clang-format on
 
 /** \brief Called on physical press, returns whether key should be added to Auto Shift */
-__attribute__((weak)) bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) { return false; }
+__attribute__((weak)) bool get_custom_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
+    return false;
+}
 
 /** \brief Called on physical press, returns whether is Auto Shift key */
 __attribute__((weak)) bool get_auto_shifted_key(uint16_t keycode, keyrecord_t *record) {
@@ -83,8 +85,12 @@ __attribute__((weak)) bool get_auto_shifted_key(uint16_t keycode, keyrecord_t *r
 }
 
 /** \brief Called to check whether defines should apply if PER_KEY is set for it */
-__attribute__((weak)) bool get_auto_shift_repeat(uint16_t keycode, keyrecord_t *record) { return true; }
-__attribute__((weak)) bool get_auto_shift_no_auto_repeat(uint16_t keycode, keyrecord_t *record) { return true; }
+__attribute__((weak)) bool get_auto_shift_repeat(uint16_t keycode, keyrecord_t *record) {
+    return true;
+}
+__attribute__((weak)) bool get_auto_shift_no_auto_repeat(uint16_t keycode, keyrecord_t *record) {
+    return true;
+}
 
 /** \brief Called when an Auto Shift key needs to be pressed */
 __attribute__((weak)) void autoshift_press_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
@@ -95,7 +101,9 @@ __attribute__((weak)) void autoshift_press_user(uint16_t keycode, bool shifted, 
 }
 
 /** \brief Called when an Auto Shift key needs to be released */
-__attribute__((weak)) void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record) { unregister_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode); }
+__attribute__((weak)) void autoshift_release_user(uint16_t keycode, bool shifted, keyrecord_t *record) {
+    unregister_code16((IS_RETRO(keycode)) ? keycode & 0xFF : keycode);
+}
 
 /** \brief Sets the shift state to use when keyrepeating, required by custom shifts */
 void set_autoshift_shift_state(uint16_t keycode, bool shifted) {
@@ -312,7 +320,9 @@ void autoshift_toggle(void) {
     autoshift_flush_shift();
 }
 
-void autoshift_enable(void) { autoshift_flags.enabled = true; }
+void autoshift_enable(void) {
+    autoshift_flags.enabled = true;
+}
 
 void autoshift_disable(void) {
     autoshift_flags.enabled = false;
@@ -329,12 +339,20 @@ void autoshift_timer_report(void) {
 }
 #    endif
 
-bool get_autoshift_state(void) { return autoshift_flags.enabled; }
+bool get_autoshift_state(void) {
+    return autoshift_flags.enabled;
+}
 
-uint16_t                       get_generic_autoshift_timeout() { return autoshift_timeout; }
-__attribute__((weak)) uint16_t get_autoshift_timeout(uint16_t keycode, keyrecord_t *record) { return autoshift_timeout; }
+uint16_t get_generic_autoshift_timeout() {
+    return autoshift_timeout;
+}
+__attribute__((weak)) uint16_t get_autoshift_timeout(uint16_t keycode, keyrecord_t *record) {
+    return autoshift_timeout;
+}
 
-void set_autoshift_timeout(uint16_t timeout) { autoshift_timeout = timeout; }
+void set_autoshift_timeout(uint16_t timeout) {
+    autoshift_timeout = timeout;
+}
 
 bool process_auto_shift(uint16_t keycode, keyrecord_t *record) {
     if (!QS_auto_shift_enable) return true;
