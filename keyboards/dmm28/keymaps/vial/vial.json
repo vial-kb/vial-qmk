@@ -1,7 +1,7 @@
 {
     "name": "Dweebs Macro Mini",
-    "vendorId": "0xFEEQ",
-    "productId": "0x1K1D",
+    "vendorId": "0xFEED",
+    "productId": "0x6060",
     "lighting": "none",
     "matrix": {
         "rows": 5,
