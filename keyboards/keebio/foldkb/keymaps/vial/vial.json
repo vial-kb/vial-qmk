@@ -3,6 +3,7 @@
   "vendorId": "0xCB10",
   "productId": "0x1258",
   "firmwareVersion": 0,
+  "lighting": "qmk_rgblight",
   "matrix": {
     "rows": 10,
     "cols": 8
