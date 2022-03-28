@@ -146,11 +146,11 @@ _Static_assert(sizeof(vial_combo_entry_t) == 10, "Unexpected size of the vial_co
 #include "process_key_override.h"
 
 #ifndef VIAL_KEY_OVERRIDE_ENTRIES
-    #if DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 4000
+    #if TOTAL_EEPROM_BYTE_COUNT > 4000
         #define VIAL_KEY_OVERRIDE_ENTRIES 32
-    #elif DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 2000
+    #elif TOTAL_EEPROM_BYTE_COUNT > 2000
         #define VIAL_KEY_OVERRIDE_ENTRIES 16
-    #elif DYNAMIC_KEYMAP_EEPROM_MAX_ADDR > 1000
+    #elif TOTAL_EEPROM_BYTE_COUNT > 1000
         #define VIAL_KEY_OVERRIDE_ENTRIES 8
     #else
         #define VIAL_KEY_OVERRIDE_ENTRIES 4
