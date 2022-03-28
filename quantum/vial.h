@@ -22,7 +22,7 @@
 #include "eeprom.h"
 #include "action.h"
 
-#define VIAL_PROTOCOL_VERSION ((uint32_t)0x00000004)
+#define VIAL_PROTOCOL_VERSION ((uint32_t)0x00000005)
 #define VIAL_RAW_EPSIZE 32
 
 void vial_init(void);
