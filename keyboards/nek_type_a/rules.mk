@@ -7,6 +7,9 @@ F_CPU = 8000000
 # Bootloader selection
 BOOTLOADER = caterina
 
+# Build Options
+#   change yes to no to disable
+#
 BOOTMAGIC_ENABLE = no       # Enable Bootmagic Lite
 MOUSEKEY_ENABLE = no       # Mouse keys
 EXTRAKEY_ENABLE = yes       # Audio control and System control
@@ -19,6 +22,6 @@ AUDIO_ENABLE = no           # Audio output
 CUSTOM_MATRIX = yes
 DEBUG_ENABLE = yes
 BLUETOOTH_ENABLE = yes
-BLUETOOTH_DRIVER = AdafruitBLE
+BLUETOOTH_DRIVER = BluefruitLE
 
 SRC += matrix.c mcp23017.c
