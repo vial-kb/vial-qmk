@@ -47,14 +47,14 @@
 tusb_desc_device_t const desc_device = {
     .bLength         = sizeof(tusb_desc_device_t),
     .bDescriptorType = TUSB_DESC_DEVICE,
-    .bcdUSB          = 0x0110,
+    .bcdUSB          = 0x0200,
 
     // Use Interface Association Descriptor (IAD) for CDC
     // As required by USB Specs IAD's subclass must be common class (2) and
     // protocol must be IAD (1)
-    .bDeviceClass    = 0,
-    .bDeviceSubClass = 0,
-    .bDeviceProtocol = 0,
+    .bDeviceClass    = TUSB_CLASS_MISC,
+    .bDeviceSubClass = MISC_SUBCLASS_COMMON,
+    .bDeviceProtocol = MISC_PROTOCOL_IAD,
 
     .bMaxPacketSize0 = CFG_TUD_ENDPOINT0_SIZE,
 
