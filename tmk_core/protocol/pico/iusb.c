@@ -25,6 +25,7 @@
 #include "device/usbd.h"
 #include "hid_device.h"
 #include "class/midi/midi_device.h"
+#include "device/dcd.h"
 
 /* declarations */
 uint8_t keyboard_leds(void) {
@@ -35,6 +36,9 @@ uint8_t keyboard_leds(void) {
 void send_keyboard(report_keyboard_t *report) {
     if (tud_suspended()) {
         tud_remote_wakeup();
+        busy_wait_ms(15);
+        dcd_event_bus_signal(0, DCD_EVENT_RESUME, true);
+        return;
     }
 
     while (!tud_hid_n_ready(ITF_NUM_HID_KEYBOARD)) {
@@ -50,6 +54,9 @@ void send_keyboard(report_keyboard_t *report) {
 void send_mouse(report_mouse_t *report) {
     if (tud_suspended()) {
         tud_remote_wakeup();
+        busy_wait_ms(15);
+        dcd_event_bus_signal(0, DCD_EVENT_RESUME, true);
+        return;
     }
 
     while (!tud_hid_n_ready(ITF_NUM_HID_MOUSE)) {
