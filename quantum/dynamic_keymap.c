@@ -20,6 +20,7 @@
 #include "quantum.h" // for send_string()
 #include "dynamic_keymap.h"
 #include "via.h" // for default VIA_EEPROM_ADDR_END
+#include <string.h>
 
 #ifdef VIAL_ENABLE
 #include "vial.h"
