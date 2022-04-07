@@ -2,7 +2,7 @@
   "name": "KPrepublic BM16a",
   "vendorId": "0x4B50",
   "productId": "0x016A",
-  "lighting": "qmk_rgblight",
+  "lighting": "qmk_backlight_rgblight",
   "matrix": { "rows": 4, "cols": 4 },
   "layouts": {
     "keymap": [
