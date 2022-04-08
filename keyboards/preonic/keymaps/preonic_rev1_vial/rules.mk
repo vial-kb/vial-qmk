@@ -2,6 +2,5 @@ SRC += muse.c
 
 VIA_ENABLE = yes
 VIAL_ENABLE = yes
-VIAL_INSECURE = yes
 AUDIO_ENABLE = no
 LTO_ENABLE = yes
