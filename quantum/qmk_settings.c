@@ -54,6 +54,7 @@ static const qmk_settings_proto_t protos[] PROGMEM = {
 #endif
    DECLARE_SETTING(18, tap_code_delay),
    DECLARE_SETTING(19, tap_hold_caps_delay),
+   DECLARE_SETTING(20, tapping_toggle),
 };
 
 static const qmk_settings_proto_t *find_setting(uint16_t qsid) {
@@ -116,6 +117,7 @@ void qmk_settings_reset(void) {
     QS.tapping = 0;
     QS.tap_code_delay = TAP_CODE_DELAY;
     QS.tap_hold_caps_delay = TAP_HOLD_CAPS_DELAY;
+    QS.tapping_toggle = TAPPING_TOGGLE;
 
     save_settings();
     /* to trigger all callbacks */

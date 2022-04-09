@@ -58,12 +58,19 @@ static void reload_tap_dance(void);
 static void reload_combo(void);
 #endif
 
+#ifdef VIAL_KEY_OVERRIDE_ENABLE
+static void reload_key_override(void);
+#endif
+
 void vial_init(void) {
 #ifdef VIAL_TAP_DANCE_ENABLE
     reload_tap_dance();
 #endif
 #ifdef VIAL_COMBO_ENABLE
     reload_combo();
+#endif
+#ifdef VIAL_KEY_OVERRIDE_ENABLE
+    reload_key_override();
 #endif
 }
 
@@ -214,6 +221,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 memset(msg, 0, length);
                 msg[0] = VIAL_TAP_DANCE_ENTRIES;
                 msg[1] = VIAL_COMBO_ENTRIES;
+                msg[2] = VIAL_KEY_OVERRIDE_ENTRIES;
                 break;
             }
 #ifdef VIAL_TAP_DANCE_ENABLE
@@ -250,6 +258,23 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 break;
             }
 #endif
+#ifdef VIAL_KEY_OVERRIDE_ENABLE
+            case dynamic_vial_key_override_get: {
+                uint8_t idx = msg[3];
+                vial_key_override_entry_t entry = { 0 };
+                msg[0] = dynamic_keymap_get_key_override(idx, &entry);
+                memcpy(&msg[1], &entry, sizeof(entry));
+                break;
+            }
+            case dynamic_vial_key_override_set: {
+                uint8_t idx = msg[3];
+                vial_key_override_entry_t entry;
+                memcpy(&entry, &msg[4], sizeof(entry));
+                msg[0] = dynamic_keymap_set_key_override(idx, &entry);
+                reload_key_override();
+                break;
+            }
+#endif
             }
 
             break;
@@ -259,7 +284,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
 
 uint16_t g_vial_magic_keycode_override;
 
-static void vial_keycode_down(uint16_t keycode) {
+void vial_keycode_down(uint16_t keycode) {
     g_vial_magic_keycode_override = keycode;
 
     if (keycode <= QK_MODS_MAX) {
@@ -271,7 +296,7 @@ static void vial_keycode_down(uint16_t keycode) {
     }
 }
 
-static void vial_keycode_up(uint16_t keycode) {
+void vial_keycode_up(uint16_t keycode) {
     g_vial_magic_keycode_override = keycode;
 
     if (keycode <= QK_MODS_MAX) {
@@ -283,9 +308,7 @@ static void vial_keycode_up(uint16_t keycode) {
     }
 }
 
-static void vial_keycode_tap(uint16_t keycode) __attribute__((unused));
-
-static void vial_keycode_tap(uint16_t keycode) {
+void vial_keycode_tap(uint16_t keycode) {
     vial_keycode_down(keycode);
     qs_wait_ms(QS_tap_code_delay);
     vial_keycode_up(keycode);
@@ -544,3 +567,48 @@ bool process_record_vial(uint16_t keycode, keyrecord_t *record) {
 
     return true;
 }
+
+#ifdef VIAL_KEY_OVERRIDE_ENABLE
+static bool vial_key_override_disabled = 0;
+static key_override_t overrides[VIAL_KEY_OVERRIDE_ENTRIES] = { 0 };
+static key_override_t *override_ptrs[VIAL_KEY_OVERRIDE_ENTRIES + 1] = { 0 };
+const key_override_t **key_overrides = (const key_override_t**)override_ptrs;
+
+static int vial_get_key_override(uint8_t index, key_override_t *out) {
+    vial_key_override_entry_t entry;
+    int ret;
+    if ((ret = dynamic_keymap_get_key_override(index, &entry)) != 0)
+        return ret;
+
+    memset(out, 0, sizeof(*out));
+    out->trigger = entry.trigger;
+    out->trigger_mods = entry.trigger_mods;
+    out->layers = entry.layers;
+    out->negative_mod_mask = entry.negative_mod_mask;
+    out->suppressed_mods = entry.suppressed_mods;
+    out->replacement = entry.replacement;
+    out->options = 0;
+    uint8_t opt = entry.options;
+    if (opt & vial_ko_enabled)
+        out->enabled = NULL;
+    else
+        out->enabled = &vial_key_override_disabled;
+    /* right now these options match one-to-one so this isn't strictly necessary,
+       nevertheless future-proof the code by parsing them out to ensure "stable" abi */
+    if (opt & vial_ko_option_activation_trigger_down) out->options |= ko_option_activation_trigger_down;
+    if (opt & vial_ko_option_activation_required_mod_down) out->options |= ko_option_activation_required_mod_down;
+    if (opt & vial_ko_option_activation_negative_mod_up) out->options |= ko_option_activation_negative_mod_up;
+    if (opt & vial_ko_option_one_mod) out->options |= ko_option_one_mod;
+    if (opt & vial_ko_option_no_reregister_trigger) out->options |= ko_option_no_reregister_trigger;
+    if (opt & vial_ko_option_no_unregister_on_other_key_down) out->options |= ko_option_no_unregister_on_other_key_down;
+
+    return 0;
+}
+
+static void reload_key_override(void) {
+    for (size_t i = 0; i < VIAL_KEY_OVERRIDE_ENTRIES; ++i) {
+        override_ptrs[i] = &overrides[i];
+        vial_get_key_override(i, &overrides[i]);
+    }
+}
+#endif
