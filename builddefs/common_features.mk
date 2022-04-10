@@ -213,6 +213,7 @@ else
       SRC += $(PLATFORM_COMMON_DIR)/eeprom_samd.c
       SRC += $(PLATFORM_COMMON_DIR)/eeprom.c
     else ifeq ($(PLATFORM),PICO_SDK)
+      OPT_DEFS += -DEEPROM_PICO
       SRC += $(PLATFORM_COMMON_DIR)/eeprom.c
       SRC += $(PLATFORM_COMMON_DIR)/flash_pico.c
     else ifeq ($(PLATFORM),TEST)

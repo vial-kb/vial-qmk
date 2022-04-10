@@ -213,6 +213,10 @@ ifeq ($(strip $(BOOTLOADER)), md-boot)
     OPT_DEFS += -DBOOTLOADER_MD_BOOT
     BOOTLOADER_TYPE = md_boot
 endif
+ifeq ($(strip $(BOOTLOADER)), RP2040)
+    OPT_DEFS += -DBOOTLOADER_RP2040
+    BOOTLOADER_TYPE = RP2040
+endif
 
 ifeq ($(strip $(BOOTLOADER_TYPE)),)
     $(call CATASTROPHIC_ERROR,Invalid BOOTLOADER,No bootloader specified. Please set an appropriate 'BOOTLOADER' in your keyboard's 'rules.mk' file.)

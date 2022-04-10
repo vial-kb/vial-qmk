@@ -1,6 +1,7 @@
 # MCU name
 MCU_FAMILY = PICO
 MCU_SERIES = RP2040
+BOOTLOADER = RP2040
 MCU = cortex-m0plus
 
 # Build Options

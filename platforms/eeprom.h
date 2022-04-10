@@ -48,6 +48,9 @@ void     eeprom_update_block(const void *__src, void *__dst, size_t __n);
 #elif defined(EEPROM_SAMD)
 #    include "eeprom_samd.h"
 #    define TOTAL_EEPROM_BYTE_COUNT (EEPROM_SIZE)
+#elif defined(EEPROM_PICO)
+#    include "eeprom_pico_defs.h"
+#    define TOTAL_EEPROM_BYTE_COUNT (FEE_DENSITY_BYTES)
 #elif defined(__AVR_ATmega16U2__) || defined(__AVR_ATmega16U4__) || defined(__AVR_AT90USB162__) || defined(__AVR_ATtiny85__)
 #    define TOTAL_EEPROM_BYTE_COUNT 512
 #elif defined(__AVR_ATmega32U2__) || defined(__AVR_ATmega32U4__) || defined(__AVR_ATmega328P__) || defined(__AVR_ATmega32A__)
