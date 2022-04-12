@@ -10,8 +10,11 @@ MCU_LDSCRIPT = noah_boot
 #  or <this_dir>/boards
 BOARD = ST_NUCLEO64_F411RE
 
+# Bootloader selection
+BOOTLOADER = custom
+
 # Build Options
-#   comment out to disable the options.
+#   change yes to no to disable
 #
 BOOTMAGIC_ENABLE = yes      # Enable Bootmagic Lite
 MOUSEKEY_ENABLE = yes       # Mouse keys

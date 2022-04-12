@@ -1,0 +1,5 @@
+VIA_ENABLE = yes
+VIAL_ENABLE = yes
+AUDIO_ENABLE = yes
+AUDIO_DRIVER = pwm_software
+VIAL_ENCODERS_ENABLE = yes

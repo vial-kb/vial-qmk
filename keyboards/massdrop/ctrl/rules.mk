@@ -5,8 +5,11 @@ SRC += config_led.c
 ARM_ATSAM = SAMD51J18A
 MCU = cortex-m4
 
+# Bootloader selection
+BOOTLOADER = md-boot
+
 # Build Options
-#   comment out to disable the options.
+#   change yes to no to disable
 #
 BOOTMAGIC_ENABLE = no       # Enable Bootmagic Lite
 MOUSEKEY_ENABLE = no        # Mouse keys
