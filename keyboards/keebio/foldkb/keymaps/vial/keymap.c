@@ -16,28 +16,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-// Ctrl + Backspace = Delete
-const key_override_t delete_key_override = ko_make_basic(MOD_MASK_CTRL, KC_BSPC, KC_DEL);
-
-// Ctrl + h = left_arrow
-const key_override_t ctrl_h_key_override = ko_make_basic(MOD_MASK_CTRL, KC_H, KC_LEFT);
-// Ctrl + l = right_arrow
-const key_override_t ctrl_l_key_override = ko_make_basic(MOD_MASK_CTRL, KC_L, KC_RIGHT);
-// Ctrl + j = down_arrow
-const key_override_t ctrl_j_key_override = ko_make_basic(MOD_MASK_CTRL, KC_J, KC_DOWN);
-// Ctrl + k = up_arrow
-const key_override_t ctrl_k_key_override = ko_make_basic(MOD_MASK_CTRL, KC_K, KC_UP);
-
-// This globally defines all key overrides to be used
-const key_override_t **key_overrides = (const key_override_t *[]){
-	&delete_key_override,
-	&ctrl_h_key_override,
-	&ctrl_l_key_override,
-	&ctrl_j_key_override,
-	&ctrl_k_key_override,
-	NULL // Null terminate the array of overrides!
-};
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT(
     KC_MUTE, KC_ESC,  KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC,
