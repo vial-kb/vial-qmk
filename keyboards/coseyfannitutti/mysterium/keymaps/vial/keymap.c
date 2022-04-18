@@ -13,6 +13,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#define VIAL_KEYBOARD_UID {0xD0, 0x4B, 0x12, 0x74, 0xB9, 0xD9, 0x74, 0x36}
 #include QMK_KEYBOARD_H
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
