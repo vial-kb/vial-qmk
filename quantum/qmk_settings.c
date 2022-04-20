@@ -12,6 +12,8 @@
 
 static int eeprom_settings_get(const qmk_settings_proto_t *proto, void *setting, size_t maxsz);
 static int eeprom_settings_set(const qmk_settings_proto_t *proto, const void *setting, size_t maxsz);
+static int magic_settings_get(const qmk_settings_proto_t *proto, void *setting, size_t maxsz);
+static int magic_settings_set(const qmk_settings_proto_t *proto, const void *setting, size_t maxsz);
 
 qmk_settings_t QS;
 
@@ -60,6 +62,7 @@ static const qmk_settings_proto_t protos[] PROGMEM = {
    DECLARE_STATIC_SETTING(18, tap_code_delay),
    DECLARE_STATIC_SETTING(19, tap_hold_caps_delay),
    DECLARE_STATIC_SETTING(20, tapping_toggle),
+   DECLARE_SETTING(21, magic_settings_get, magic_settings_set),
 };
 
 static void eeprom_settings_load(void) {
@@ -94,6 +97,54 @@ static int eeprom_settings_set(const qmk_settings_proto_t *proto, const void *se
         return -1;
     memcpy(pgm_read_ptr(&proto->ptr), setting, sz);
     eeprom_settings_save();
+    return 0;
+}
+
+static int magic_settings_get(const qmk_settings_proto_t *proto, void *setting, size_t maxsz) {
+    uint32_t flags;
+
+    if (maxsz < sizeof(flags))
+        return -1;
+
+    flags = \
+        (keymap_config.swap_control_capslock << 0) |
+        (keymap_config.capslock_to_control << 1) |
+        (keymap_config.swap_lalt_lgui << 2) |
+        (keymap_config.swap_ralt_rgui << 3) |
+        (keymap_config.no_gui << 4) |
+        (keymap_config.swap_grave_esc << 5) |
+        (keymap_config.swap_backslash_backspace << 6) |
+        (keymap_config.nkro << 7) |
+        (keymap_config.swap_lctl_lgui << 8) |
+        (keymap_config.swap_rctl_rgui << 9) |
+        0;
+
+    memcpy(setting, &flags, sizeof(flags));
+    return 0;
+}
+
+static int magic_settings_set(const qmk_settings_proto_t *proto, const void *setting, size_t maxsz) {
+    uint32_t flags;
+
+    if (maxsz < sizeof(flags))
+        return -1;
+
+    memcpy(&flags, setting, sizeof(flags));
+
+    /* must call clear_keyboard for the NKRO setting to not cause stuck keys */
+    clear_keyboard();
+    keymap_config.swap_control_capslock = !!(flags & (1 << 0));
+    keymap_config.capslock_to_control = !!(flags & (1 << 1));
+    keymap_config.swap_lalt_lgui = !!(flags & (1 << 2));
+    keymap_config.swap_ralt_rgui = !!(flags & (1 << 3));
+    keymap_config.no_gui = !!(flags & (1 << 4));
+    keymap_config.swap_grave_esc = !!(flags & (1 << 5));
+    keymap_config.swap_backslash_backspace = !!(flags & (1 << 6));
+    keymap_config.nkro = !!(flags & (1 << 7));
+    keymap_config.swap_lctl_lgui = !!(flags & (1 << 8));
+    keymap_config.swap_rctl_rgui = !!(flags & (1 << 9));
+    eeconfig_update_keymap(keymap_config.raw);
+
     return 0;
 }
 
@@ -135,6 +186,12 @@ void qmk_settings_reset(void) {
     QS.tapping_toggle = TAPPING_TOGGLE;
 
     eeprom_settings_save();
+
+    /* must call clear_keyboard for the NKRO setting to not cause stuck keys */
+    clear_keyboard();
+    keymap_config.raw = 0;
+    eeconfig_update_keymap(keymap_config.raw);
+
     /* to trigger all callbacks */
     qmk_settings_init();
 }
