@@ -277,7 +277,8 @@ ifdef MCU_FAMILY
         $(info "PLATFORM RP2040")
         PLATFORM=PICO_SDK
         PLATFORM_KEY=pico
-        FIRMWARE_FORMAT=elf
+        FIRMWARE_FORMAT=uf2
+        UF2_FAMILY=RP2040
     endif
 else ifdef ARM_ATSAM
     PLATFORM=ARM_ATSAM
