@@ -1,14 +1,22 @@
 # Keymap for a standard ANSI configuration of the Phantom
 
-A basic keymap intended for a Phantom using the standard ANSI layout with Vial support.
+Keymap for Phantom keyboard with Vial support. Standard TKL ANSI layout with several options:
 
-See [keymap.c](keymap.c) for details.
+- split backspace
+- ISO Enter
+- split left shift
+- split right shift
+- 7U spacebar with symmetrical modifiers, 1.5U - 1U - 1.5U
+- 7U spacebar with _winkeyless_ 1.5U modifiers
+
+Several options have been disabled to reduce the size of the firmware and make it fit in the Phantom MCU.
 
 ## Layers
 
 The keymap have two layers. To access the functions on the second layer, hold down `Fn` and press the corresponding key.
 
 ### Layer 1: Default Layer
+
      ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
      |Esc|   |F1 |F2 |F3 |F4 | |F5 |F6 |F7 |F8 | |F9 |F10|F11|F12| |PrS|ScL|Pau|
      `---'   `---------------' `---------------' `---------------' `-----------'
@@ -25,6 +33,7 @@ The keymap have two layers. To access the functions on the second layer, hold do
      `-----------------------------------------------------------' `-----------'
 
 ### Layer 2: Function Layer
+
      ,---.   ,---------------. ,---------------. ,---------------. ,-----------.
      |RST|   |   |   |   |   | |   |   |   |   | |   |   |   |   | |   |   |   |
      `---'   `---------------' `---------------' `---------------' `-----------'
