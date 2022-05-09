@@ -3,7 +3,8 @@
   "vendorId": "0x0483",
   "productId": "0xA372",
   "customKeycodes": [
-    {"name": "Super Alt Tab", "title": "Super Alt Tab", "shortName": "AltTab"}
+    {"name": "Alt Tab", "title": "Alt Tab", "shortName": "AltTab"},
+    {"name": "Reverse Alt Tab", "title": "Reverse Alt Tab", "shortName": "ShiftAltTab"}
   ],
   "lighting": "vialrgb",
   "matrix": { "rows": 2, "cols": 4 },
