@@ -2,7 +2,9 @@
 
 ![Imgur](https://imgur.com/msHriYY.jpg)
 
-This keymap is a vial port of the default Redox keymap. 
+This is the default Redox keymap with Vial enabled.
+
+I have disabled several features to reduce the firmware size, including mousekey and rgblight - see rules.mk
 
 I suggest reading the following links for advice on reducing firmware size.
 
