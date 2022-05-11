@@ -42,33 +42,34 @@ static bool starting_up = false;
 #define ENCODER_MATRIX_ROW 5
 #define ENCODER_MATRIX_COL 6
 
-// #define ENC_SPLASH 0
-#define ENC_BONGO 0
+#define ENC_SPLASH 0
 #define ENC_VOLUME 1
 #define ENC_RGB_MODE 2
 #define ENC_RGB_COLOR 3
 #define ENC_RGB_BRIGHT 4
 #define ENC_BL_BRIGHT 5
 #define ENC_CUSTOM 6
+#define ENC_BONGO 7
 
 extern matrix_row_t matrix[MATRIX_ROWS];
 
 char* enc_mode_str[] = {
-    /* Bongo Cat */ "", \
+    /* Splash */ "", \
     "Volume", \
     "Underglow Mode", \
     "Underglow Color", \
     "Underglow Brightness", \
     "Backlight Brightness", \
-    "Custom"
+    "Custom",
+    /* Bongo Cat */ "", \
 };
 
-uint16_t enc_cw[] =  { 0, KC_VOLU, 0, 0, 0, 0, 0 };
-uint16_t enc_ccw[] = { 0, KC_VOLD, 0, 0, 0, 0, 0 };
+uint16_t enc_cw[] =  { 0, KC_VOLU, 0, 0, 0, 0, 0, 0 };
+uint16_t enc_ccw[] = { 0, KC_VOLD, 0, 0, 0, 0, 0, 0 };
 
-uint8_t num_enc_modes = 7;
+uint8_t num_enc_modes = 8;
 
-uint8_t enc_mode_str_startpos[] = {31, 49, 25, 22, 7, 7, 49};
+uint8_t enc_mode_str_startpos[] = {0, 49, 25, 22, 7, 7, 49, 31};
 
 uint8_t prev_layer = 255;
 uint8_t prev_capslock = 255;
@@ -550,11 +551,6 @@ void draw_media_arrow(uint8_t x, uint8_t y, bool fwd) {
 
 void draw_enc_mode(void){
     write_chars_at_pixel_xy(enc_mode_str_startpos[user_config.enc_mode], ENC_DISPLAY_Y + 2, enc_mode_str[user_config.enc_mode], false);
-
-    // if (user_config.enc_mode == ENC_MEDIA) {
-    //     draw_media_arrow(enc_mode_str_startpos[user_config.enc_mode] - 16, ENC_DISPLAY_Y + 2, false);
-    //     draw_media_arrow(enc_mode_str_startpos[user_config.enc_mode] + 88, ENC_DISPLAY_Y + 2, true);
-    // }
 }
 
 void draw_keyboard_locks(void) {
@@ -584,7 +580,7 @@ void matrix_init_kb(void) {
     }
 
     startup_delay = true;
-    set_custom_encoder_mode_user(user_config.enc_mode == ENC_BONGO || user_config.enc_mode == ENC_CUSTOM);
+    set_custom_encoder_mode_user(user_config.enc_mode == ENC_CUSTOM || user_config.enc_mode == ENC_SPLASH || user_config.enc_mode == ENC_BONGO);
     matrix_init_user();
 }
 
@@ -613,7 +609,7 @@ void handle_encoder_switch_process_record(keyrecord_t *record) {
                 }
 
                 OLED_redraw = true;
-                set_custom_encoder_mode_user(user_config.enc_mode == ENC_BONGO || user_config.enc_mode == ENC_CUSTOM);
+                set_custom_encoder_mode_user(user_config.enc_mode == ENC_CUSTOM || user_config.enc_mode == ENC_SPLASH || user_config.enc_mode == ENC_BONGO);
                 update_kb_eeprom();
             } else {
                 OLED_redraw = false;
@@ -633,37 +629,6 @@ bool process_record_kb(uint16_t keycode, keyrecord_t *record) {
 
     return process_record_user(keycode, record);
 }
-
-// void update_breathing(void) {
-//     if (user_config.breathingperiod == 1) {
-//         breathing_disable();
-//     }
-//     else {
-//         breathing_period_set(user_config.breathingperiod);
-//         breathing_enable();
-//     }
-//     update_kb_eeprom();
-// }
-
-
-// void backlight_breath_change(bool increase) { //increase period or decrease period
-//     if ((increase) && (user_config.breathingperiod < 15)) {
-//         user_config.breathingperiod++;
-//         update_breathing();
-//     }
-//     if (!increase) {
-//         if (user_config.breathingperiod > 2) {
-//             user_config.breathingperiod--;
-//             update_breathing();
-//         }
-//         else {
-//             user_config.breathingperiod = 1;
-//             update_breathing();
-
-
-//         }
-//     }
-// }
 
 bool encoder_update_kb(uint8_t index, bool clockwise) {
     if (!encoder_update_user(index, clockwise)) return false;
@@ -738,7 +703,11 @@ void matrix_scan_kb(void) {
     }
 
     if (startup_complete) {
-        if (user_config.enc_mode == ENC_BONGO) {
+        if (user_config.enc_mode == ENC_SPLASH) {
+            if (user_config.oled_is_on && OLED_redraw) {
+                draw_splash();
+            }
+        } else if (user_config.enc_mode == ENC_BONGO) {
             if (user_config.oled_is_on) {
                 if (OLED_redraw) {
                     oled_clear();
