@@ -20,6 +20,7 @@
 #include "quantum.h" // for send_string()
 #include "dynamic_keymap.h"
 #include "via.h" // for default VIA_EEPROM_ADDR_END
+#include <string.h>
 
 #ifdef VIAL_ENABLE
 #include "vial.h"
@@ -101,9 +102,18 @@ static pin_t encoders_pad_a[] = ENCODERS_PAD_A;
 #define VIAL_COMBO_SIZE 0
 #endif
 
+// Key overrides
+#define VIAL_KEY_OVERRIDE_EEPROM_ADDR (VIAL_COMBO_EEPROM_ADDR + VIAL_COMBO_SIZE)
+
+#ifdef VIAL_KEY_OVERRIDE_ENABLE
+#define VIAL_KEY_OVERRIDE_SIZE (sizeof(vial_key_override_entry_t) * VIAL_KEY_OVERRIDE_ENTRIES)
+#else
+#define VIAL_KEY_OVERRIDE_SIZE 0
+#endif
+
 // Dynamic macro
 #ifndef DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
-#    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (VIAL_COMBO_EEPROM_ADDR + VIAL_COMBO_SIZE)
+#    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (VIAL_KEY_OVERRIDE_EEPROM_ADDR + VIAL_KEY_OVERRIDE_SIZE)
 #endif
 
 // Sanity check that dynamic keymaps fit in available EEPROM
@@ -246,6 +256,28 @@ int dynamic_keymap_set_combo(uint8_t index, const vial_combo_entry_t *entry) {
 }
 #endif
 
+#ifdef VIAL_KEY_OVERRIDE_ENABLE
+int dynamic_keymap_get_key_override(uint8_t index, vial_key_override_entry_t *entry) {
+    if (index >= VIAL_KEY_OVERRIDE_ENTRIES)
+        return -1;
+
+    void *address = (void*)(VIAL_KEY_OVERRIDE_EEPROM_ADDR + index * sizeof(vial_key_override_entry_t));
+    eeprom_read_block(entry, address, sizeof(vial_key_override_entry_t));
+
+    return 0;
+}
+
+int dynamic_keymap_set_key_override(uint8_t index, const vial_key_override_entry_t *entry) {
+    if (index >= VIAL_KEY_OVERRIDE_ENTRIES)
+        return -1;
+
+    void *address = (void*)(VIAL_KEY_OVERRIDE_EEPROM_ADDR + index * sizeof(vial_key_override_entry_t));
+    eeprom_write_block(entry, address, sizeof(vial_key_override_entry_t));
+
+    return 0;
+}
+#endif
+
 #if defined(VIAL_ENCODERS_ENABLE) && defined(VIAL_ENCODER_DEFAULT)
 static const uint16_t PROGMEM vial_encoder_default[] = VIAL_ENCODER_DEFAULT;
 _Static_assert(sizeof(vial_encoder_default)/sizeof(*vial_encoder_default) == 2 * DYNAMIC_KEYMAP_LAYER_COUNT * NUMBER_OF_ENCODERS,
@@ -297,6 +329,14 @@ void dynamic_keymap_reset(void) {
     vial_combo_entry_t combo = { 0 };
     for (size_t i = 0; i < VIAL_COMBO_ENTRIES; ++i)
         dynamic_keymap_set_combo(i, &combo);
+#endif
+
+#ifdef VIAL_KEY_OVERRIDE_ENABLE
+    vial_key_override_entry_t ko = { 0 };
+    ko.layers = ~0;
+    ko.options = vial_ko_option_activation_negative_mod_up | vial_ko_option_activation_required_mod_down | vial_ko_option_activation_trigger_down;
+    for (size_t i = 0; i < VIAL_KEY_OVERRIDE_ENTRIES; ++i)
+        dynamic_keymap_set_key_override(i, &ko);
 #endif
 
 #ifdef VIAL_ENABLE
@@ -441,6 +481,13 @@ void dynamic_keymap_macro_reset(void) {
     }
 }
 
+static uint16_t decode_keycode(uint16_t kc) {
+    /* map 0xFF01 => 0x0100; 0xFF02 => 0x0200, etc */
+    if (kc > 0xFF00)
+        return (kc & 0xFF) << 8;
+    return kc;
+}
+
 void dynamic_keymap_macro_send(uint8_t id) {
     if (id >= DYNAMIC_KEYMAP_MACRO_COUNT) {
         return;
@@ -495,6 +542,27 @@ void dynamic_keymap_macro_send(uint8_t id) {
                 data[2] = eeprom_read_byte(p++);
                 if (data[2] != 0)
                     send_string(data);
+            } else if (data[1] == VIAL_MACRO_EXT_TAP || data[1] == VIAL_MACRO_EXT_DOWN || data[1] == VIAL_MACRO_EXT_UP) {
+                data[2] = eeprom_read_byte(p++);
+                if (data[2] != 0) {
+                    data[3] = eeprom_read_byte(p++);
+                    if (data[3] != 0) {
+                        uint16_t kc;
+                        memcpy(&kc, &data[2], sizeof(kc));
+                        kc = decode_keycode(kc);
+                        switch (data[1]) {
+                        case VIAL_MACRO_EXT_TAP:
+                            vial_keycode_tap(kc);
+                            break;
+                        case VIAL_MACRO_EXT_DOWN:
+                            vial_keycode_down(kc);
+                            break;
+                        case VIAL_MACRO_EXT_UP:
+                            vial_keycode_up(kc);
+                            break;
+                        }
+                    }
+                }
             } else if (data[1] == SS_DELAY_CODE) {
                 // For delay, decode the delay and wait_ms for that amount
                 uint8_t d0 = eeprom_read_byte(p++);

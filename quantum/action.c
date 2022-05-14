@@ -392,11 +392,11 @@ if (QS_oneshot_tap_toggle > 1) {
 #    endif
                 case MODS_TAP_TOGGLE:
                     if (event.pressed) {
-                        if (tap_count <= TAPPING_TOGGLE) {
+                        if (tap_count <= QS_tapping_toggle) {
                             register_mods(mods);
                         }
                     } else {
-                        if (tap_count < TAPPING_TOGGLE) {
+                        if (tap_count < QS_tapping_toggle) {
                             unregister_mods(mods);
                         }
                     }
@@ -549,11 +549,11 @@ if (QS_oneshot_tap_toggle > 1) {
                 case OP_TAP_TOGGLE:
                     /* tap toggle */
                     if (event.pressed) {
-                        if (tap_count < TAPPING_TOGGLE) {
+                        if (tap_count < QS_tapping_toggle) {
                             layer_invert(action.layer_tap.val);
                         }
                     } else {
-                        if (tap_count <= TAPPING_TOGGLE) {
+                        if (tap_count <= QS_tapping_toggle) {
                             layer_invert(action.layer_tap.val);
                         }
                     }
@@ -688,7 +688,7 @@ if (QS_oneshot_tap_toggle > 1) {
                             swap_hands = !swap_hands;
                         }
                     } else {
-                        if (tap_count < TAPPING_TOGGLE) {
+                        if (tap_count < QS_tapping_toggle) {
                             swap_hands = !swap_hands;
                         }
                     }
