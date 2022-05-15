@@ -8,7 +8,7 @@
         "cols": 12
     },
     "layouts": {
-        "labels": ["2U spacebar"],
+        "labels": ["No 2U spacebar"],
         "keymap": [
             {
                 "name": "KPRepublic JJ40"
