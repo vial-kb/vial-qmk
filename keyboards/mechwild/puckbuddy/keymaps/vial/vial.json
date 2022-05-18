@@ -1,0 +1,60 @@
+{
+  "name": "MechWild PuckBuddy",
+  "vendorId": "0x6D77",
+  "productId": "0x170F",
+  "lighting": "qmk_rgblight",
+  "matrix": { "rows": 4, "cols": 4 },
+  "customKeycodes": [
+  {
+    "name": "DPI+",
+    "title": "Increase the DPI of the touchpad.",
+    "shortName": "DPI_UP"
+  },
+  {
+    "name": "DPI-",
+    "title": "Decrease the DPI of the touchpad.",
+    "shortName": "DPI_DN"
+  },
+  {
+    "name": "FINE",
+    "title": "Temporarily lower the DPI to minimum while held.",
+    "shortName": "DPI_FINE"
+  },
+  {
+    "name": "TAP+",
+    "title": "Increase the tapping term.",
+    "shortname": "TAP_UP"
+  },
+  {
+    "name": "TAP-",
+    "title": "Decrease the tapping term.",
+    "shortname": "TAP_DN"
+  },
+  {
+    "name": "TAP_ON",
+    "title": "Tap clicking on.",
+    "shortname": "TAP_ON"
+  },
+  {
+    "name": "TP_OFF",
+    "title": "Tap clicking off.",
+    "shortname": "TAP_OFF"
+  },
+  {
+    "name": "TP_TG",
+    "title": "Toggle tap clicking being on or off.",
+    "shortname": "TAP_TOG"
+  }
+  ],
+  "layouts": {
+    "keymap": [
+		["0,1\n\n\n\n\n\n\n\n\ne",{"x":6.5},"1,1\n\n\n\n\n\n\n\n\ne"],
+        [{"y":-0.5,"x":1.25},"0,0",{"x":0.5},"0,1","1,1","2,1",{"x":0.5},"0,2"],
+        [{"y":-0.5},"0,0\n\n\n\n\n\n\n\n\ne",{"x":6.5},"1,0\n\n\n\n\n\n\n\n\ne"],
+        [{"y":-0.25,"x":1.25},"1,0",{"x":4},"1,2"],
+        [{"x":1.25},"2,0",{"x":4},"2,2"],
+        [{"x":1.25},"3,0",{"x":4},"3,2"],
+        [{"y":0.25,"x":2.25},"0,3","1,3","2,3","3,3"]
+    ]
+  }
+}
