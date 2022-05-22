@@ -183,11 +183,6 @@ void dynamic_keymap_set_encoder(uint8_t layer, uint8_t idx, uint8_t dir, uint16_
     if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || idx >= NUMBER_OF_ENCODERS || dir > 1)
         return;
 
-#ifdef VIAL_ENABLE
-    if (keycode == RESET && !vial_unlocked)
-        return;
-#endif
-
     void *address = dynamic_keymap_encoder_to_eeprom_address(layer, idx, dir);
     eeprom_update_byte(address, (uint8_t)(keycode >> 8));
     eeprom_update_byte(address + 1, (uint8_t)(keycode & 0xFF));
