@@ -74,6 +74,12 @@ void vial_init(void) {
 #endif
 }
 
+__attribute__((unused)) static uint16_t vial_keycode_firewall(uint16_t in) {
+    if (in == RESET && !vial_unlocked)
+        return 0;
+    return in;
+}
+
 void vial_handle_cmd(uint8_t *msg, uint8_t length) {
     /* All packets must be fixed 32 bytes */
     if (length != VIAL_RAW_EPSIZE)
@@ -130,7 +136,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
             break;
         }
         case vial_set_encoder: {
-            dynamic_keymap_set_encoder(msg[2], msg[3], msg[4], (msg[5] << 8) | msg[6]);
+            dynamic_keymap_set_encoder(msg[2], msg[3], msg[4], vial_keycode_firewall((msg[5] << 8) | msg[6]));
             break;
         }
 #endif
@@ -236,6 +242,10 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 uint8_t idx = msg[3];
                 vial_tap_dance_entry_t td;
                 memcpy(&td, &msg[4], sizeof(td));
+                td.on_tap = vial_keycode_firewall(td.on_tap);
+                td.on_hold = vial_keycode_firewall(td.on_hold);
+                td.on_double_tap = vial_keycode_firewall(td.on_double_tap);
+                td.on_tap_hold = vial_keycode_firewall(td.on_tap_hold);
                 msg[0] = dynamic_keymap_set_tap_dance(idx, &td);
                 reload_tap_dance();
                 break;
@@ -253,6 +263,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 uint8_t idx = msg[3];
                 vial_combo_entry_t entry;
                 memcpy(&entry, &msg[4], sizeof(entry));
+                entry.output = vial_keycode_firewall(entry.output);
                 msg[0] = dynamic_keymap_set_combo(idx, &entry);
                 reload_combo();
                 break;
@@ -270,6 +281,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 uint8_t idx = msg[3];
                 vial_key_override_entry_t entry;
                 memcpy(&entry, &msg[4], sizeof(entry));
+                entry.replacement = vial_keycode_firewall(entry.replacement);
                 msg[0] = dynamic_keymap_set_key_override(idx, &entry);
                 reload_key_override();
                 break;
