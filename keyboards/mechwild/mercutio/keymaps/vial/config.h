@@ -22,3 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VIAL_UNLOCK_COMBO_ROWS { 1, 5 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 3 }
 #define VIAL_ENCODER_DEFAULT { KC_VOLD, KC_VOLU, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS }
+
+/* Space-saving measures */
+#define LAYER_STATE_8BIT
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
