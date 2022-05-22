@@ -22,6 +22,10 @@
 #    error "DYNAMIC_KEYMAP_ENABLE is not enabled"
 #endif
 
+#ifndef VIAL_ENABLE
+#error Compiling VIA keymaps is not supported with the vial-qmk repo, please use qmk_firmware instead, or set VIAL_ENABLE=yes
+#endif
+
 // If VIA_CUSTOM_LIGHTING_ENABLE is not defined, then VIA_QMK_BACKLIGHT_ENABLE is set
 // if BACKLIGHT_ENABLE is set, so handling of QMK Backlight values happens here by default.
 // if VIA_CUSTOM_LIGHTING_ENABLE is defined, then VIA_QMK_BACKLIGHT_ENABLE must be explicitly
