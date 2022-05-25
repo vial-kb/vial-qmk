@@ -2,7 +2,9 @@
 
 enum layers{
   _BASE,
-  _FN
+  _FN,
+  _MAC,
+  _GAME
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -17,7 +19,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
            KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS, KC_EQL, KC_DEL,                      KC_PGDN, KC_PGUP,
            KC_GRV, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12,
            KC_F12, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,        KC_TRNS,
-           KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, RESET, RESET,            KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, 
+           KC_TRNS, KC_TRNS, KC_TRNS,      RESET, RESET, RESET,            KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, 
+  ),
+  
+  [_MAC] = LAYOUT(
+           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                      KC_TRNS, KC_TRNS,
+           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,        KC_TRNS,
+           KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS,            KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, 
+  ),
+  
+  [_GAME] = LAYOUT(
+           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                      KC_TRNS, KC_TRNS,
+           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,        KC_TRNS,
+           KC_TRNS, KC_TRNS, KC_TRNS,      KC_TRNS, KC_TRNS, KC_TRNS,            KC_TRNS, KC_TRNS, KC_TRNS,             KC_TRNS, KC_TRNS, KC_TRNS, 
   )
 };
 
@@ -31,12 +47,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #ifdef OLED_ENABLE
 // WPM-responsive animation stuff here
 #    define IDLE_FRAMES 5
-#    define IDLE_SPEED 20  // below this wpm value your animation will idle
+#    define IDLE_SPEED 10  // below this wpm value your animation will idle
 
-#    define PREP_FRAMES 1 // uncomment if >1
+//#    define PREP_FRAMES 1 // uncomment if >1
 
 #    define TAP_FRAMES 2
-#    define TAP_SPEED 10  // above this wpm value typing animation to trigger
+#    define TAP_SPEED 20  // above this wpm value typing animation to trigger
 
 #    define ANIM_FRAME_DURATION 200  // how long each frame lasts in ms
 // #define SLEEP_TIMER 60000 // should sleep after this period of 0 wpm, needs fixing
@@ -140,6 +156,12 @@ bool oled_task_user(void) {
             break;
         case _FN:
             oled_write_P(PSTR("FN"), false);
+            break;
+        case _MAC:
+            oled_write_P(PSTR("MAC"), false);
+            break;
+        case _GAME:
+            oled_write_P(PSTR("GAME"), false);
             break;
         default:
             // Or use the write_ln shortcut over adding '\n' to the end of your string

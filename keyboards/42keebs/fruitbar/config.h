@@ -18,7 +18,7 @@
 
 #include "config_common.h"
 
-#define DYNAMIC_KEYMAP_LAYER_COUNT 2
+#define DYNAMIC_KEYMAP_LAYER_COUNT 4
 
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x666B // fk
