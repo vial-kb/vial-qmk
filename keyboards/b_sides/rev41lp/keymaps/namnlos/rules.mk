@@ -1,0 +1,17 @@
+MOUSEKEY_ENABLE = no        # Mouse keys
+BACKLIGHT_ENABLE = yes      # Enable keyboard backlight functionality
+UNICODE_ENABLE = no
+UNICODEMAP_ENABLE = yes
+CONSOLE_ENABLE = no
+DEBOUNCE_TYPE = sym_defer_pk
+TAP_DANCE_ENABLE = yes
+COMBO_ENABLE = no
+GRAVE_ESC_ENABLE = no
+SPACE_CADET_ENABLE = no
+VERBOSE = no
+RGBLIGHT_ENABLE = no
+AUDIO_ENABLE = no
+
+VIA_ENABLE = yes
+VIAL_ENABLE = yes
+LTO_ENABLE  = yes
