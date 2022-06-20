@@ -1,0 +1,17 @@
+// Copyright 2022 Kyle McCreery (@kylemccreery)
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+#pragma once
+
+#define VIAL_KEYBOARD_UID {0xF8, 0x72, 0x90, 0x0C, 0x29, 0xFB, 0x15, 0x46}
+
+#define VIAL_UNLOCK_COMBO_ROWS { 0, 4 }
+#define VIAL_UNLOCK_COMBO_COLS { 0, 0 }
+
+#define VIAL_ENCODER_DEFAULT { KC_VOLD, KC_VOLU, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_PGUP, KC_PGDN,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS }
+
+#undef SPLIT_MODS_ENABLE
+
+#define NO_ACTION_ONESHOT
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
