@@ -528,7 +528,7 @@ ifeq ($(strip $(BACKLIGHT_ENABLE)), yes)
     endif
 endif
 
-VALID_WS2812_DRIVER_TYPES := bitbang pwm spi i2c
+VALID_WS2812_DRIVER_TYPES := bitbang pwm spi i2c vendor
 
 WS2812_DRIVER ?= bitbang
 ifeq ($(strip $(WS2812_DRIVER_REQUIRED)), yes)
@@ -664,6 +664,13 @@ endif
 DEBOUNCE_TYPE ?= sym_defer_g
 ifneq ($(strip $(DEBOUNCE_TYPE)), custom)
     QUANTUM_SRC += $(QUANTUM_DIR)/debounce/$(strip $(DEBOUNCE_TYPE)).c
+endif
+
+VALID_SERIAL_DRIVER_TYPES := bitbang usart vendor
+
+SERIAL_DRIVER ?= bitbang
+ifeq ($(filter $(SERIAL_DRIVER),$(VALID_SERIAL_DRIVER_TYPES)),)
+    $(call CATASTROPHIC_ERROR,Invalid SERIAL_DRIVER,SERIAL_DRIVER="$(SERIAL_DRIVER)" is not a valid SERIAL driver)
 endif
 
 ifeq ($(strip $(SPLIT_KEYBOARD)), yes)

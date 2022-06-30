@@ -103,8 +103,12 @@
                 "pattern": "^LINE_PIN\\d{1,2}$"
             },
             {
-                "type": "number",
+                "type": "integer"
                 "multipleOf": 1
+            },
+            {
+                "type": "string",
+                "pattern": "^GP\\d{1,2}$"
             },
             {
                 "type": "null"
