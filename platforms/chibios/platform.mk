@@ -350,8 +350,11 @@ SHARED_CFLAGS = -fomit-frame-pointer \
                 -fno-common \
                 -fshort-wchar
 
+LDSCRIPT_PATH := $(shell dirname "$(LDSCRIPT)")
+
 # Shared Linker flags for all toolchains
 SHARED_LDFLAGS = -T $(LDSCRIPT) \
+                 -L $(LDSCRIPT_PATH) \
                  -Wl,--gc-sections \
                  -nostartfiles
 
