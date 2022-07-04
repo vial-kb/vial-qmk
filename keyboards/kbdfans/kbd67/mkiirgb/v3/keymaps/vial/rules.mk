@@ -13,3 +13,4 @@ COMBO_ENABLE = no # ~2408 bytes
 
 #SPACE_CADET_ENABLE = no # ~324 bytes
 #MAGIC_ENABLE = no # ~584 bytes
+KEY_OVERRIDE_ENABLE = no

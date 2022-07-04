@@ -4,3 +4,4 @@ LTO_ENABLE = yes
 # to reduce firmware size
 QMK_SETTINGS = no
 TAP_DANCE_ENABLE = no
+KEY_OVERRIDE_ENABLE = no

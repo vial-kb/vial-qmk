@@ -490,3 +490,13 @@ _Static_assert(MI_MODSD == 0x5CB7, "");
 _Static_assert(MI_MODSU == 0x5CB8, "");
 _Static_assert(MI_BENDD == 0x5CB9, "");
 _Static_assert(MI_BENDU == 0x5CBA, "");
+
+_Static_assert(KC_ASUP == 0x5C17, "");
+_Static_assert(KC_ASDN == 0x5C18, "");
+_Static_assert(KC_ASRP == 0x5C19, "");
+_Static_assert(KC_ASTG == 0x5C1A, "");
+_Static_assert(KC_ASON == 0x5C1B, "");
+_Static_assert(KC_ASOFF == 0x5C1C, "");
+_Static_assert(CMB_ON == 0x5CF7, "");
+_Static_assert(CMB_OFF == 0x5CF8, "");
+_Static_assert(CMB_TOG == 0x5CF9, "");

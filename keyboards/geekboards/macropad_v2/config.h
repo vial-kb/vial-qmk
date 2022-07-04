@@ -19,7 +19,7 @@
 #define VENDOR_ID       0x0483
 #define PRODUCT_ID      0xA372
 #define DEVICE_VER      0x0002
-#define MANUFACTURER    GeekBoards
+#define MANUFACTURER    Geekboards
 #define PRODUCT         Macropad v2
 
 /* key matrix size */
@@ -100,7 +100,6 @@
 
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 #define WAIT_FOR_USB
-#define USB_POLLING_INTERVAL_MS 1
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 3

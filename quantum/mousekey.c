@@ -520,4 +520,6 @@ static void mousekey_debug(void) {
     print(")\n");
 }
 
-report_mouse_t mousekey_get_report(void) { return mouse_report; }
+report_mouse_t mousekey_get_report(void) {
+    return mouse_report;
+}

@@ -1,5 +1,6 @@
 # MCU name
 MCU = STM32F072
+BOOTLOADER = stm32-dfu
 
 # Build Options
 #   change yes to no to disable

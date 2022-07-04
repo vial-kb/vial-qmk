@@ -120,17 +120,25 @@ typedef struct {
     uint8_t tapping;
     uint16_t tap_code_delay;
     uint16_t tap_hold_caps_delay;
+    uint8_t tapping_toggle;
+    uint8_t unused;
 } qmk_settings_t;
-_Static_assert(sizeof(qmk_settings_t) == 34, "unexpected size of the qmk_settings_t structure");
+_Static_assert(sizeof(qmk_settings_t) == 36, "unexpected size of the qmk_settings_t structure");
 
-typedef void (*qmk_setting_callback_t)(void);
+struct qmk_settings_proto_t;
 
-/* setting prototype - describes how to get/set settings, stored in flash */
-typedef struct {
+typedef void (*qmk_settings_notify_t)(void);
+typedef int (*qmk_settings_get_t)(const struct qmk_settings_proto_t *proto, void *setting, size_t maxsz);
+typedef int (*qmk_settings_set_t)(const struct qmk_settings_proto_t *proto, const void *setting, size_t maxsz);
+
+/* setting prototype - describes how to get/set settings; this structure is stored in flash */
+typedef struct qmk_settings_proto_t {
     uint16_t qsid;
     uint16_t sz;
     void *ptr;
-    qmk_setting_callback_t cb;
+    qmk_settings_get_t get;
+    qmk_settings_set_t set;
+    qmk_settings_notify_t notify;
 } qmk_settings_proto_t;
 
 void qmk_settings_init(void);
@@ -170,6 +178,9 @@ extern qmk_settings_t QS;
 #define QS_tap_code_delay (QS.tap_code_delay)
 #define QS_tap_hold_caps_delay (QS.tap_hold_caps_delay)
 
+/* Tapping Toggle */
+#define QS_tapping_toggle (QS.tapping_toggle)
+
 #else
 /* dynamic settings framework is disabled => hardcode the settings and let the compiler optimize extra branches out */
 
@@ -201,6 +212,9 @@ extern qmk_settings_t QS;
 /* Tap delays */
 #define QS_tap_code_delay TAP_CODE_DELAY
 #define QS_tap_hold_caps_delay TAP_HOLD_CAPS_DELAY
+
+/* Tapping Toggle */
+#define QS_tapping_toggle TAPPING_TOGGLE
 
 #endif
 
