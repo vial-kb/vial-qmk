@@ -1,6 +1,6 @@
 {
     "name": "ut47.2",
-    "lighting": "none",
+    "lighting": "qmk_rgblight",
     "matrix": {
         "rows": 4,
         "cols": 12
