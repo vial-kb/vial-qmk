@@ -1,0 +1,2106 @@
+[33mcommit ecf986cd0f6caee844f73192f5c6db26f7bebd00[m[33m ([m[1;36mHEAD[m[33m)[m
+Author: Ardent Handsaw <github@invisiblebirds.com>
+Date:   Tue Jul 5 22:44:26 2022 -0500
+
+    Add VIAL support for Rama Works M10-A macropad
+
+[33mcommit 191ee79cb8f0662fdd72576d44fadec197fd95c7[m
+Author: Ardent Handsaw <github@invisiblebirds.com>
+Date:   Tue Jul 5 16:27:31 2022 -0500
+
+    Added VIAL support for Rama Works M10-A macropad
+
+[33mcommit 76fcf6da8a48d7a367b68194a11fc985ac7abc9b[m
+Author: WrinkleKrinkles <100941474+WrinkleKrinkles@users.noreply.github.com>
+Date:   Sat Jul 2 20:42:49 2022 +0000
+
+    Added Vial support for CherryBStudio87 RGB TKL PCB (#191)
+    
+    * VIAL ported to Vega
+    
+    Readme.md for changes
+    
+    * Adding support for StudioKestra Galatea TKL
+    
+    No RGB underglow version; tested using StudioKestra Galatea x GeonWorks TKL PCB.
+    
+    Built and tested in 7U, WKL, F12 layout.
+    
+    * Add VIAL support for Ninjin TKL
+    
+    Build file 49502 bytes.
+    
+    No features were removed; firmware was tested on ANSI, F12, WK layout.
+    
+    * Added support for CherryBStudio87 RGB TKL.
+    
+    Added Vial support for CherryBStudio87 RGB TKL PCB.
+    
+    Static RGB LED is still functional (saturation, hue, and brightness control), however RGB preset animations were removed to preserve EEPROM space.
+    
+    List of removed features:
+    Several in-built RGB animations were removed (build the firmware again with several choices of RGB animations if you want to enable them)
+    Tap dance, space cadet, combo, key override, mousekey, extrakey, and grave escape were disabled.
+    Dynamic keycap layer count were set into 2.
+    
+    Total firmware size after build: 23810/28672 (83%, 4862 bytes free)
+    
+    Possible issues:
+    In the VIAL GUI, the keyboard is still listing about 4 layers even with the maximum layer set into two.
+    From the .json file from May 22th, 2022 (latest update from CherryB Discord server), there were some issues on F13 stopped working and the left arrow key stopped working when using WKL layout; built and tested the firmware using the newest .json file that fixes the issue. Further testing might be required.
+    
+    Only tested on ANSI, F13 WK, 6.25u space layout.
+    
+    * Updated config.h
+    
+    Dynamic keymap layer count was properly inserted.
+    
+    Fixed typo on fractal RGB animation disable.
+    
+    * Removed layer 2 and 3
+    
+    Removed layer 2 and 3, saved about 2% of the total capacity in the build (at least on my end).
+    
+    * Tweaking features and revised
+    
+    Keymap layer moved to the appropriate file.
+    
+    **Mousekey and extrakeys enabled**
+    
+    * Moved to the correct folder
+    
+    Uploaded the Vial changes to the WRONG folder... (supposed to be 'cb87rgb' instead of 'cb87'
+    
+    Will delete all the additions related to cb87 later. Was tested using cb87rgb folder.
+    
+    * Delete vial.json
+    
+    * Delete rules.mk
+    
+    * Delete keymap.c
+    
+    * Delete config.h
+
+[33mcommit cfe274e43a111a24dce3880763f3657a38a3b01b[m
+Author: WrinkleKrinkles <100941474+WrinkleKrinkles@users.noreply.github.com>
+Date:   Fri Jul 1 04:28:17 2022 +0000
+
+    Adding support for StudioKestra Galatea TKL (No RGB) + Xelus Ninjin (#190)
+    
+    * VIAL ported to Vega
+    
+    Readme.md for changes
+    
+    * Adding support for StudioKestra Galatea TKL
+    
+    No RGB underglow version; tested using StudioKestra Galatea x GeonWorks TKL PCB.
+    
+    Built and tested in 7U, WKL, F12 layout.
+    
+    * Add VIAL support for Ninjin TKL
+    
+    Build file 49502 bytes.
+    
+    No features were removed; firmware was tested on ANSI, F12, WK layout.
+
+[33mcommit 80a533b07a7c9d752722588b96057555d11d1a94[m
+Author: Less/Rikki <86894501+lesshonor@users.noreply.github.com>
+Date:   Mon Jun 27 01:33:30 2022 -0400
+
+    OLED_ENABLE fix & dynamic key override exclusion (#188)
+
+[33mcommit 87c35a9511d89ccac24953aa195d5c2adbe44217[m
+Author: rachmansyahbs <rachmansyahbs@gmail.com>
+Date:   Sun Jun 26 08:39:48 2022 +0800
+
+    Add vial support for Iron165 R2 (#187)
+    
+    * add iron165r2 + vial keymap
+    
+    * remove VIAL_INSECURE
+    
+    * fix typo in product name
+
+[33mcommit 9956e193da12659f4483480d5cc9296a05ce2ce5[m
+Author: Farhan Rob <73175556+farhandsome@users.noreply.github.com>
+Date:   Fri Jun 24 23:59:58 2022 -0500
+
+    Adding VIAL specific files to via-enabled Han60 (#185)
+
+[33mcommit 4ecb0b26d8bb69bdf5edf4e4152433a093d806d6[m
+Author: ardent-handsaw <102997168+ardent-handsaw@users.noreply.github.com>
+Date:   Fri Jul 1 15:46:28 2022 -0500
+
+    initial M10a attempt
+    
+    Building VIAL support for Rama M10-A based on VIA build. Not working
+
+[33mcommit cf0f48a6dd22820dd3db878ce14f5bed73ab945f[m
+Author: Less/Rikki <86894501+lesshonor@users.noreply.github.com>
+Date:   Tue Jun 21 19:21:30 2022 -0400
+
+    fix line endings (#184)
+
+[33mcommit 471dfa1c376f41ba24dcf500ca623f90c3a0e44a[m
+Author: eason <98533237+EasonQian1@users.noreply.github.com>
+Date:   Mon Jun 20 21:27:58 2022 +0800
+
+    add angler2 (#182)
+    
+    Add vial support for Angler2
+
+[33mcommit fb23713d3c0f7ad2b5c135f38119c5c227e42849[m
+Author: Daniel Cox <danielcox959@gmail.com>
+Date:   Mon Jun 20 15:13:27 2022 +1200
+
+    Added support for dz60rgb_ansi v2 (#178)
+    
+    * add support for dz60rgb_ansi v2
+    
+    Added vial support to dz60rgb_ansi v2.
+    
+    Other variants not tested/supported
+    
+    * Updated readme to reflect vial support
+    
+    Updated readme to show v2 has vial support, have outlined that vial is only supported on the v2 board
+    
+    * Remove vial keymap from main keymaps directory
+    
+    * Add keymaps containing vial under v2 directory
+    
+    * Revert "Updated readme to reflect vial support"
+    
+    This reverts commit e476b0b524bad920a07a9093f1004f1398e5e660.
+
+[33mcommit f8ef832b4317898340f4083f29c6d63c8bb4c74e[m
+Author: TJ <tom.campie@gmail.com>
+Date:   Sun Jun 12 13:34:25 2022 -0500
+
+    lflx initial (#179)
+
+[33mcommit 1bd7503b9de4fdabd20ce4c60dd6d28f96fb6755[m
+Author: passing-comet <5461413+passing-comet@users.noreply.github.com>
+Date:   Mon Jun 6 20:06:32 2022 -0400
+
+    implement vial for nk87 (#177)
+
+[33mcommit 5e87b903e0122a8a5c771240b828dab8a5e19c13[m
+Author: zh ol <97376918+zhol0777@users.noreply.github.com>
+Date:   Sun Jun 5 13:13:48 2022 -0700
+
+    Add model_v support to vial (#176)
+    
+    Co-authored-by: zhol internet <bigman@zholworld.gov>
+
+[33mcommit 547e47647c3c7c1d1efa10c56f612e0b98ba6c8d[m
+Author: zh ol <97376918+zhol0777@users.noreply.github.com>
+Date:   Sun Jun 5 00:18:38 2022 -0700
+
+    Add g_idb60 support to vial (#175)
+    
+    Co-authored-by: zhol internet <bigman@zholworld.gov>
+
+[33mcommit adb4208e5e197f4ae1cf3dc9a6cba9bb2c56fed4[m
+Author: Gerardo Nevarez <10030580+GerardoNevarez@users.noreply.github.com>
+Date:   Fri Jun 3 12:50:55 2022 -0400
+
+    Add vial support for reviung41lp (#174)
+    
+    * Add vial support for Reviung41 Low Profile (https://github.com/cyril279/keyboards/tree/main/revlp/41_1350)
+    
+    * Update readme.md
+    
+    * yet another readme.md fix...
+    
+    Co-authored-by: GerardoNevarez <GerardoNevarez@users.noreply.github.com>
+
+[33mcommit bdbfe655257c63fc86208fbea5435d3585356f2b[m
+Author: cdd2 <christopher.d.douglass@gmail.com>
+Date:   Mon May 30 23:34:18 2022 -0700
+
+    added vial support for kkatano/bakeneko60 (#173)
+
+[33mcommit c06c66ebb853d373be29751d1c1d9863f37249ff[m
+Merge: 35fcb57e7b fb9d1d3772
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Mon May 30 22:36:52 2022 -0600
+
+    Merge branch 'fix-ci2' into vial
+
+[33mcommit fb9d1d37723a5083acc0bceec46b256ddc12c1a7[m[33m ([m[1;31morigin/fix-ci2[m[33m)[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Mon May 30 22:15:15 2022 -0600
+
+    workflows: update container name
+
+[33mcommit 35fcb57e7b9744da8ecb5c3fa8aa9d357a6e4def[m
+Author: Kavya <40858144+properlypurple@users.noreply.github.com>
+Date:   Fri May 27 10:23:41 2022 +0530
+
+    Add support for ai03 Soyuz numpad (#171)
+    
+    * Add support for ai03 Soyuz numpad
+    
+    * Remove "VIAL_INSECURE = no" from rules.mk
+
+[33mcommit 08ae88121011b0b5a3a71d44044a702b8fe13576[m
+Merge: f2c521edfa 6f239148fb
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sun May 22 01:25:31 2022 -0600
+
+    Merge branch 'kc-firewall' into vial
+
+[33mcommit 6f239148fb5e0ac9bf0415c2c7893b8634bb4c9f[m[33m ([m[1;31morigin/kc-firewall[m[33m)[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sun May 22 01:05:24 2022 -0600
+
+    keyboards: disable features to fit firmware
+
+[33mcommit c2d388ca064a24e3691d9a98a5c70ebe61cf3d00[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sun May 22 00:22:37 2022 -0600
+
+    vial: implement keycode firewall for dynamic features
+
+[33mcommit f2c521edfa1898da7a5d5b7d515e1ece6d440ce3[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sun May 22 00:27:47 2022 -0600
+
+    add an error message when compiling with VIA_ENABLE=yes and VIAL_ENABLE=no
+
+[33mcommit 8127831f97171b7deb61dec8464a0df6b5a31b69[m
+Merge: b8c1cf446d 0ab7d9f1db
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sun May 22 00:02:57 2022 -0600
+
+    Merge branch 'magic-qmk-settings' into vial
+
+[33mcommit 0ab7d9f1dbccc22d23ad189e7b98c79e1c394880[m[33m ([m[1;31morigin/magic-qmk-settings[m[33m)[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sat May 21 23:34:59 2022 -0600
+
+    reduce size of several boards failing to build
+
+[33mcommit 0f357e6a156a8f21e5a9e1ddfd185621bc14d6ef[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Wed Apr 20 02:55:18 2022 -0600
+
+    qmk_settings: add magic
+
+[33mcommit ab0bff831f957dedc72228eb142a53d55a60f7b0[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Wed Apr 20 00:33:08 2022 -0600
+
+    qmk_settings: allow arbitrary getters and setters
+
+[33mcommit b8c1cf446d95752ffca1662a2110e93f9b653575[m
+Author: dktpham <dav.pha95@googlemail.com>
+Date:   Sat May 21 02:24:44 2022 +0200
+
+    Add vial support for the kb_elmo sesame (#169)
+    
+    * sesame vial config
+    
+    * reduce firmware size
+    
+    * reduce firmware size
+    
+    * vial security
+    
+    * revert readme change
+    
+    * removed fourth layer
+
+[33mcommit 601fc4b20a62dc00c6ef696cc2b4e36fc7e16c6e[m
+Author: juanlufont <juanlufont@gmail.com>
+Date:   Sun May 15 22:14:08 2022 +0200
+
+    Add Vial support for KPRepublic JJ40 (#168)
+    
+    * Add Vial support for KPRepublic JJ40
+    
+    * Fix label
+
+[33mcommit 7d39799668e032a630e96d0401f9a15b503dab39[m
+Author: juanlufont <juanlufont@gmail.com>
+Date:   Fri May 13 03:06:02 2022 +0200
+
+    Add support for GH60 Satan (#167)
+    
+    * Add Vial support for GH60 Satan
+    
+    * Enable Vial
+    
+    * Disable options to reduce firmware size
+    
+    * Remove unnecessary comma
+    
+    * Enable backlight
+
+[33mcommit 7753dbdab43a225c15b5dcce72e8e594782ef7bf[m
+Author: passing-comet <5461413+passing-comet@users.noreply.github.com>
+Date:   Thu May 12 20:28:14 2022 -0400
+
+    Enable Vial for the customMK EVO70 (#166)
+    
+    * add vial support for evo70
+    
+    * add default config for evo70
+    
+    * add alternate tap dance build for evo70
+    
+    * revert backlight_avr.c
+    
+    * set unlock keys for evo70
+    
+    * add unlock keys to evo70 tap dance build
+
+[33mcommit dae0e36ed4df140888a303e8326832f8765ebfe1[m
+Author: Marcel Maltry <49197539+marcelmaltry@users.noreply.github.com>
+Date:   Wed May 11 06:21:14 2022 +0200
+
+    Set `KEY_OVERRIDE_ENABLE = no` for chickenman/ciel. (#165)
+
+[33mcommit 6a97438a059438eb9fba5de09f9ed6d3233302ba[m
+Author: rufusw <rufusw@users.noreply.github.com>
+Date:   Tue May 10 18:56:19 2022 +0100
+
+    Add Redox Vial-enabled keymap (#163)
+    
+    * Add Redox Vial support
+    
+    * Firmware size reduction
+
+[33mcommit b85ba01a05293bc504c7b9693edf7e7c148b1e33[m
+Author: Marcel Maltry <49197539+marcelmaltry@users.noreply.github.com>
+Date:   Tue May 10 19:35:55 2022 +0200
+
+    Add support for chickenman/ciel. (#164)
+
+[33mcommit 60c5f1ea606974fc9be8bb174910d6877384b7ab[m
+Author: Christopher Kochan <5183896+crkochan@users.noreply.github.com>
+Date:   Sun May 8 23:02:53 2022 -0700
+
+    Adds support for Geekboards Macropad v2. (#162)
+    
+    * Corrected manufaturer name.
+    
+    * Support for Geekboards Macropad v2
+    
+    * Add Super-Tab functions from Via.
+    
+    * Added a shift+alt+tab function
+    
+    * Name change on custome key code
+
+[33mcommit 40c61b2cd433d5a522c551baa483c99e7e142fc9[m
+Author: Thorben <hi@pngu.io>
+Date:   Sun May 8 20:50:33 2022 +0100
+
+    add lz erghost (#161)
+
+[33mcommit 60f3d3f6b2f9cfd08189c2abe600972aa2f9e641[m
+Author: Eugene-Yuan Kou <r02323025@ntu.edu.tw>
+Date:   Sun May 8 05:52:30 2022 +0800
+
+    Adding AKIRA-60 (#158)
+    
+    * akira-60 initial commit
+    
+    * update vial-configs
+    
+    * config FEE_PAGE_COUNT 2
+    
+    * config FEE_PAGE_COUNT 2
+    
+    * resolve conflicts
+
+[33mcommit 1714bdd84c1853eee7f91c5b44035849206cfe98[m
+Author: juanlufont <juanlufont@gmail.com>
+Date:   Fri Apr 29 02:13:53 2022 +0200
+
+    Add keymap with Vial support for Phantom TKL (#156)
+
+[33mcommit 62e175224f9d558c5c28b0d02834361e19dbe0f1[m
+Author: juanlufont <juanlufont@gmail.com>
+Date:   Fri Apr 29 02:13:37 2022 +0200
+
+    Add Vial keymap for GH60 RevC keyboard (#155)
+    
+    Some options have been disabled to reduce the size of the firmware. See
+    rules.mk file.
+
+[33mcommit 83263746436350749097fa9aba9251aa808c743f[m
+Author: Gerrit Plehn <52218643+GerritPlehn@users.noreply.github.com>
+Date:   Thu Apr 28 23:51:02 2022 +0200
+
+    Support for 42keebs MYSTERIUM (#154)
+    
+    * Add support for 42keebs Mysterium
+    
+    * More VIAL setting entries
+    
+    * remove superficial comments
+
+[33mcommit 71e0e87d708689cac2dda7ed1227ed85157520f9[m
+Author: Gerrit Plehn <52218643+GerritPlehn@users.noreply.github.com>
+Date:   Thu Apr 28 23:26:00 2022 +0200
+
+    Basketweave-S additions (#153)
+    
+    * VIAL support for basketweave
+    
+    * fix: bootmagic from lite to yes
+    
+    * readme corrections
+    
+    * more sensible encoder defaults
+    
+    * enable 2 additional layers
+
+[33mcommit d744074de2e8303479fcc5e164867cd6909311c9[m
+Author: Gerrit Plehn <52218643+GerritPlehn@users.noreply.github.com>
+Date:   Tue Apr 26 10:25:22 2022 +0200
+
+    VIAL support for basketweave (#149)
+    
+    * VIAL support for basketweave
+    
+    * fix: bootmagic from lite to yes
+
+[33mcommit f831807ba2fd00312ceeb41c146d4a8bfa0e7db0[m
+Author: juanlufont <juanlufont@gmail.com>
+Date:   Tue Apr 26 04:35:47 2022 +0200
+
+    Add Vial support for KBDFans kbd8x (#150)
+
+[33mcommit 12950db4d8ec1f294b1285e9b554a8fdc0a4bc6d[m
+Author: Gerardo Nevarez <10030580+GerardoNevarez@users.noreply.github.com>
+Date:   Sun Apr 24 16:55:25 2022 -0400
+
+    Add VIAL support for Ferris Sweep (#148)
+    
+    Co-authored-by: gerardo_nevarez <GerardoNevarez@users.noreply.github.com>
+
+[33mcommit 84baff51c2a37d40be24e6c170022c3e1cfd37a9[m
+Author: Zach Liu <zachliu@users.noreply.github.com>
+Date:   Fri Apr 15 00:05:03 2022 -0400
+
+    Port foldkb to vial (#146)
+    
+    * add vial support
+    
+    * choose light over combo
+    
+    * secure the hell of it
+    
+    * left space: 1u-2u, right space: 2.75u
+    
+    split backspace: 2x1u backslash: 1.5u, right shift: 1.75u + 1u
+    
+    * typo
+    
+    * key setups update
+    
+    * get ready for vial 0.5 dynamic key overrides
+
+[33mcommit 33a3b2dabaa70757ae7eb99d25ea1b4f3fa3aee1[m
+Author: chance <chance@trashcat.xyz>
+Date:   Mon Apr 11 23:52:23 2022 -0400
+
+    Adding the Waffling60 to VIAL (#144)
+    
+    * Create keymap.c
+    
+    * Add files via upload
+
+[33mcommit 61a5e82243f1780dd910e422f2ef3ceacebfb522[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sat Apr 9 17:47:32 2022 -0600
+
+    disable more key overrides to fit firmware
+
+[33mcommit bb68f50872ab8b67032ffa7aa6ad9dc46135bbb8[m
+Author: Andrew Christiansen <andrewtaylorchristiansen@gmail.com>
+Date:   Sat Apr 9 16:40:36 2022 -0700
+
+    Vial Support for Cantor (#141)
+    
+    * Porting Cantor
+    
+    * Fixed unlock combo coordinates
+    
+    * Removed extra rules file
+    
+    * Added default keymap
+    
+    * Fixed rules.mk
+
+[33mcommit 7bda0967f360e48c6ff247953dd8c492208c7670[m
+Merge: bdad48e003 681ace9b5d
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sat Apr 9 17:16:59 2022 -0600
+
+    Merge branch 'next-0.5' into vial
+
+[33mcommit bdad48e0038a699175989b19c5294afeda0678f8[m
+Author: zhol0777 <97376918+zhol0777@users.noreply.github.com>
+Date:   Sat Apr 9 15:02:45 2022 -0700
+
+    Arisu, prime_e, ymd75 vial support (#142)
+    
+    * Arisu, prime_e, ymd75 vial support
+    
+    * looks better like this
+    
+    Co-authored-by: Zhol Internet <zhol@internet.keyboard>
+
+[33mcommit f5749dd690457293bbfc7fb6bed14ba184874dc1[m
+Author: Jim Erickson <jimerickso@gmail.com>
+Date:   Sat Apr 9 01:45:18 2022 -0500
+
+    Preonic rev1 vial (#140)
+    
+    * Preonic default keymap with vial.json for porting to vial
+    
+    * fixed VIAL_INSECURE in rules.mk
+    
+    * fixed config.h define VIAL_UNLOCK
+    
+    * moved to keyboards/preonic/rev1/keymaps/vial
+    
+    * Please enter the commit message for your changes. Lines starting
+    moved files to keyboards/preonic/rev1/keymaps/vial
+
+[33mcommit bc02bb864f80e24eda28162402e7bc7a54f202c0[m
+Author: IFo Hancroft <contact@ifohancroft.com>
+Date:   Fri Apr 8 08:20:39 2022 +0300
+
+    Ported ErgoDox EZ to Vial (#139)
+
+[33mcommit 681ace9b5d4bbfd7ba0f03fffd0c0c93e6ac6c18[m
+Author: B. G. Kendall <69401250+bgkendall@users.noreply.github.com>
+Date:   Thu Apr 7 02:10:22 2022 -0400
+
+    Add Vial setup for KPrepublic BM16a (#138)
+    
+    * Add Vial setup for KPrepublic BM16a
+    
+    * Correct BM16a lighting setting
+
+[33mcommit eb9b8121d3d8d1f2f054171f9ae330587c94d014[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Mon Apr 4 23:52:16 2022 -0600
+
+    disable key override for several keyboards to fix build
+
+[33mcommit 37c6b41dbc2f2d4f52c2795daaf6e131a48f1ca8[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Mon Apr 4 00:05:34 2022 -0600
+
+    dynamic_keymap: fix implicit function declaration
+
+[33mcommit e1fbf6f13dce7e7c9e6cb5b95b25c6a9e140727e[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sat Apr 2 16:39:12 2022 -0600
+
+    qmk_settings: wrap TAPPING_TOGGLE
+
+[33mcommit 829e88eb03f813b1e927b92d5d4a0088485c9b01[m
+Author: GoLWD <59450915+GoLWD@users.noreply.github.com>
+Date:   Thu Mar 31 01:00:30 2022 +0200
+
+    Fix conflicting typ error for oled_task_user. (#136)
+
+[33mcommit 67e10a43cb044472ec0bf997a5fcf09193ddcc1d[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sun Mar 27 22:42:36 2022 -0600
+
+    vial: fix typo for VIAL_KEY_OVERRIDE_ENTRIES auto sizing
+
+[33mcommit 2ba865ecbe47dbda4be5613a430147d856b42bef[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sun Mar 27 20:09:08 2022 -0600
+
+    vial: bump protocol version
+
+[33mcommit e9745af305c3d1e6e1e32ba0c93bd158e7f0467d[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sun Mar 27 19:03:42 2022 -0600
+
+    Add autoshift and combo keys
+
+[33mcommit 2cc23b30213c6d9ce5839d785b7cb0a5e5f1b5a7[m
+Merge: 336c5a9d75 54b14e8a7f
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sun Mar 27 18:24:37 2022 -0600
+
+    Merge branch 'advanced-macros' into next-0.5
+
+[33mcommit 336c5a9d750468dce0a99109b064ab4e555634f3[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Thu Sep 30 13:16:41 2021 -0400
+
+    Add dynamic key overrides support
+
+[33mcommit ddfe214e764a0dcc0dc6b9dac89c24a0d0785bf6[m
+Author: somepin <79652090+somepin@users.noreply.github.com>
+Date:   Sat Mar 26 01:30:05 2022 -0400
+
+    Add duckboard with RGB Matrix/VialRGB  (#134)
+    
+    * enable vial with rgb matrix for duckboard
+    
+    * move rgb matrix config to vial keymap
+
+[33mcommit 30c04f92bd93287d73c6518d150db4420a9128ab[m
+Author: tipsycod3r <68339225+tipsycod3r@users.noreply.github.com>
+Date:   Mon Mar 14 15:05:53 2022 +0800
+
+    added tipsytypist-vial keymap to Reviung39 (#133)
+
+[33mcommit a8e7880c82bc683b885b9e11064012a8e2ca6780[m
+Author: xiao <307671+xia0@users.noreply.github.com>
+Date:   Mon Mar 14 17:50:25 2022 +1100
+
+    Snatchpad Vial port (#132)
+    
+    * Added Vial port for Snatchpad.
+    
+    * Added Vial keymap.
+    
+    * Updated licence header.
+    
+    * Defined default encoder behaviour.
+    
+    * Added encoders enable in rules.
+    
+    * removed files already in qmk
+
+[33mcommit 60204b8c62b42bc9a4757df70b2cbf1b184b39cb[m
+Author: WrinkleKrinkles <100941474+WrinkleKrinkles@users.noreply.github.com>
+Date:   Mon Mar 7 16:12:24 2022 +0700
+
+    VIAL ported to Vega (#131)
+    
+    Readme.md for changes
+
+[33mcommit 54b14e8a7fba08a30d510312f77d78083d531576[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Mon Jan 3 08:51:14 2022 -0500
+
+    dynamic_keymap: support vial 2-byte macros
+
+[33mcommit 53a41dcfab6225422eb10e469b6ac613ac8fae31[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Thu Sep 30 13:16:41 2021 -0400
+
+    Add dynamic key overrides support
+
+[33mcommit 0f73a109c67078b2b1de85a010d7e267941e248d[m
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sun Mar 6 20:24:38 2022 -0600
+
+    fix build
+
+[33mcommit 3a3c93383f9ccc856c58e60246277fa880873ae7[m
+Merge: 465dd1e7ce 30209de9fd
+Author: Ilya Zhuravlev <whatever@xyz.is>
+Date:   Sun Mar 6 20:04:27 2022 -0600
+
+    Merge remote-tracking branch 'qmk/master' into merge-2022-03-06
+
+[33mcommit 30209de9fd2e2d142ef1e086a851ceeb058cfcef[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Sun Mar 6 21:58:08 2022 +0000
+
+    merge/uma - Resolve configurator issues (#16551)
+
+[33mcommit 16cd1d9bf78539dfd2590a831ba9708dcac69411[m
+Author: Takeshi ISHII <2170248+mtei@users.noreply.github.com>
+Date:   Sun Mar 6 10:18:41 2022 +0900
+
+    Change helix:five_rows keymap to use QMK standerd oled driver (#16539)
+
+[33mcommit 465dd1e7cec0ad65be867f79de910f47d94bd749[m
+Author: jotix <69703151+jotix@users.noreply.github.com>
+Date:   Sat Mar 5 21:46:27 2022 -0300
+
+    Bm40hsrgb jotix vial (#130)
+    
+    * leds on in layers 4 & 5
+    
+    * bm40hsrgb jotix_vial keymap
+
+[33mcommit 498fd87f155c79c60540913db2fd49ea7464ac62[m
+Author: jotix <69703151+jotix@users.noreply.github.com>
+Date:   Sat Mar 5 21:45:57 2022 -0300
+
+    leds on in layers 4 & 5 (#129)
+
+[33mcommit 8e9d45d2708d71cf89bed704e8e0e1bf5671804f[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Sun Mar 6 09:54:32 2022 +1100
+
+    `qmk info`: nicer rendering of ISO enter (#16466)
+
+[33mcommit b202e593226c2dd88b922e99c0c7ba8db401003e[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Sat Mar 5 20:59:54 2022 +0000
+
+    Update info.json (#16540)
+
+[33mcommit adef73a79068c538161268dbda67f0681468a782[m
+Author: wadrian <wadrian@users.noreply.github.com>
+Date:   Sat Mar 5 06:27:39 2022 +0100
+
+    add basic ymdk ymd09 vial support (#125)
+    
+    add file:     keyboards/ymdk/ymd09/keymaps/vial/config.h
+    add file:     keyboards/ymdk/ymd09/keymaps/vial/keymap.c
+    add file:     keyboards/ymdk/ymd09/keymaps/vial/readme.md
+    add file:     keyboards/ymdk/ymd09/keymaps/vial/rules.mk
+    add file:     keyboards/ymdk/ymd09/keymaps/vial/vial.json
+
+[33mcommit 8036dc88b84d64ee4ea8b11b6ffd3f96a6aa7a5e[m
+Author: WrinkleKrinkles <100941474+WrinkleKrinkles@users.noreply.github.com>
+Date:   Sat Mar 5 05:27:00 2022 +0000
+
+    Added basic VIAL support for RAMA Works U80-A and H60 (Kei) (#128)
+    
+    * Added basic support for RAMA Works U80-A
+    
+    Successfully compiled above configurations.
+    
+    Disabled or reduced features as follows:
+    -Layer limited into 2 (0 and 1)
+    -Space Cadet
+    -Leader keys
+    -Grave Escape
+    -Putting VIAL_INSECURE
+    -Combo
+    -Tap dance
+    
+    * Add files via upload
+    
+    * Added VIAL Secure
+    
+    * Added porting to H60 PCB
+    
+    Compile successful.
+    
+    Tested on Monokei Kei with H60 PCB.
+    
+    * Update readme.md
+    
+    * readme.md revised
+
+[33mcommit da6d6ce2e1f266892badbd42fb8c6735e61e784f[m
+Author: kiilerix <mads@kiilerich.com>
+Date:   Sat Mar 5 05:58:50 2022 +0100
+
+    Some docs improvements (#15845)
+    
+    * docs: clarify in "Keymap Overview" what LAYOUT is and isn't
+    
+    It is not strictly necessary to use LAYOUT macros in keyboard.c, but it
+    is a convenient abstraction of hardware internals, allowing focus on the
+    physical keyboard layout.
+    
+    From the C source point of view LAYOUT is macro with a parameter list,
+    which expands to a array of rows that each is an array with a keyboard
+    scancode for each column. A macro parameter list is not an array, and
+    even less a single array.
+    
+    Perhaps no big deal, but also no reason to give incorrect hints.
+    
+    * docs: update "Understanding QMK's Code" to current code structure introduced in 96e2b13d1de
+    
+    This part of the documentation was no longer correct. I tried updating
+    it, mainly copy editing and using github links to latest release.
+    
+    This is not trying to fix all problems, but just trying to fix some
+    problems while reusing much of the old phrases and structure.
+    
+    * Update docs to use "qmk format-python"
+
+[33mcommit 82dd84e257db8e5fd1eb33c152a0026ee5bee7fe[m
+Author: yulei <yuleiz@gmail.com>
+Date:   Sat Mar 5 12:57:19 2022 +0800
+
+    support more leds (#15840)
+
+[33mcommit 0be73456408c0509a69ef0893e6e5674ba53ae3e[m
+Author: Kyle McCreery <mccreery.kyle@gmail.com>
+Date:   Fri Mar 4 13:10:32 2022 -0500
+
+    [Keyboard] BDE Rev2 (#15877)
+    
+    Co-authored-by: Drashna Jaelre <drashna@live.com>
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+
+[33mcommit c0185116d780cee4bf61c70be0221be2e8ce5962[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Fri Mar 4 17:06:15 2022 +0000
+
+    More validation of declared LAYOUT macro names (#16520)
+
+[33mcommit 34ba7f1c18a6924f47947e76b32d7620411d1e7a[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Fri Mar 4 15:43:55 2022 +1100
+
+    Bug report template: require `qmk doctor` output (#16517)
+
+[33mcommit d412854e37a53d35e567af3dc5c452d64c570fdd[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Fri Mar 4 14:56:59 2022 +1100
+
+    analog.[ch]: remove unnecessary includes (#16471)
+
+[33mcommit aab2ac22c5217afcbbbaff8b5444b02765f6de66[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Fri Mar 4 14:52:15 2022 +1100
+
+    Melody96 refactor (#16455)
+
+[33mcommit 61ba8efa3e358fbf4495c76b9d7c33aa2ec1259e[m
+Author: jels <66403163+Jels02@users.noreply.github.com>
+Date:   Fri Mar 4 11:49:14 2022 +1000
+
+    Update pr_checklist.md (#16484)
+    
+    Update readme.md template link from https://github.com/qmk/qmk_firmware/blob/master/data/templates/avr/readme.md to https://github.com/qmk/qmk_firmware/blob/master/data/templates/keyboard/readme.md
+
+[33mcommit e01307f265a9c82befd1fe725f04b3930a875230[m
+Author: jels <66403163+Jels02@users.noreply.github.com>
+Date:   Fri Mar 4 09:38:24 2022 +1000
+
+    Typo in squeezing_avr.md (#16506)
+    
+    Fixed typo in squeezing_avr docs.
+
+[33mcommit 7fb312ccd7d62a151a35ba70decb722aa9193115[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Thu Mar 3 22:35:51 2022 +0000
+
+    Fix use of ISSI driver config before init (#16493)
+
+[33mcommit 4a66bdf29443607ae01c1a6c87b657f89d3a1769[m
+Author: Takeshi ISHII <2170248+mtei@users.noreply.github.com>
+Date:   Fri Mar 4 05:23:49 2022 +0900
+
+    Fix helix/rev2 not working properly when using split_common. (#16512)
+    
+    When helix/rev2 was using split_common, it didn't work properly and I couldn't type on the right hand side.
+    
+    The cause is that the following code, added in 0.16.0 to `quantum/keyboard.c`, does not include `quantum/split_common/split_util.h` but instead includes `keyboards/helix/rev2/split_util.h`. Therefore, `split_pre_init()/split_post_init()` in `quantum/split_common/split_util.c` was not called.
+    
+    ```c
+      #ifdef SPLIT_KEYBOARD
+      #    include "split_util.h"
+      #endif
+    ```
+
+[33mcommit ae2c77c8272a3b90c75dc2750a0f13a9cd629953[m
+Author: Gompa <gompa@h-bomb.nl>
+Date:   Thu Mar 3 18:24:04 2022 +0100
+
+    [Bug] fix v-usb connection enumeration, ifdef workaround (#16511)
+    
+    Co-authored-by: Joel Challis <git@zvecr.com>
+
+[33mcommit 75b40dc7a537e7f223a73c165a3f6f0e2e91817c[m
+Author: Takeshi ISHII <2170248+mtei@users.noreply.github.com>
+Date:   Thu Mar 3 23:27:21 2022 +0900
+
+    Fix mistakes in the include path in `helix/rev2/local_features.mk`. (#16507)
+    
+    ```diff
+      --- a/keyboards/helix/rev2/local_features.mk
+      +++ b/keyboards/helix/rev2/local_features.mk
+      @@ -6,7 +6,7 @@
+       #
+    
+       KEYBOARD_LOCAL_FEATURES_MK :=
+      --include $(strip $(HELIX_TOP_DIR)/pico/override_helix_options.mk) ## File ded  icated to maintenance
+      +-include $(strip $(HELIX_TOP_DIR)/rev2/override_helix_options.mk) ## File dedicated to maintenance
+      ```
+
+[33mcommit 96b6ddf4bf79f22f850504d205a57e2730578b3b[m
+Author: Jake VanderVaate <96353168+jakevandervaate@users.noreply.github.com>
+Date:   Thu Mar 3 09:53:40 2022 +0000
+
+    fixed typo in docs/newbs_getting_started.md (#16501)
+
+[33mcommit e73f8e942c8f0aa4b471669436d16ad785b63a38[m
+Author: Takeshi ISHII <2170248+mtei@users.noreply.github.com>
+Date:   Wed Mar 2 20:15:10 2022 +0900
+
+    Change 'helix/rev2:default' setting to use split_common (#16432)
+    
+    * add licenses message to helix/rev2 files
+    
+    * Minimize the processing of helix/rev2/local_features.mk
+    
+    * Changed helix/rev2 default setting to use split_common
+    
+    * fix helix/rev2:edvorakjp build error
+    
+    * Remove unnecessary '#include' from keymap.c
+    
+    * helix keymaps Workaround for build errors. five_rows_jis, fraanrosi, froggy, froggy_106, yshrsmz
+    
+    * Revert "fix helix/rev2:edvorakjp build error"
+    
+    This reverts commit 731dbbe15155b3efe2ff9f5ad61c7d0cf529e837.
+    Separated into a single PR #16433.
+    
+    * Revert "Changed helix/rev2 default setting to use split_common"
+    
+    This reverts commit e76dbd7762e06e0781ee004213878b1a5029fa98.
+    
+    * add 'SPLIT_*_STATE_ENABLE' into helix/rev2/config.h
+    
+    * Revert "helix keymaps Workaround for build errors. five_rows_jis, fraanrosi, froggy, froggy_106, yshrsmz"
+    
+    This reverts commit 9b316c1c6a532f908f2ac430233089797ce7c794.
+    
+    * change helix:default to use split_common
+    
+    * change helix:five_rows to use split_common
+    
+    * add comment into helix/rev2/rules.mk
+    
+    * change helix:led_test to use split_common
+
+[33mcommit 09a43b12cbb914eb239ce447ad89004f0304be71[m
+Author: xiao <307671+xia0@users.noreply.github.com>
+Date:   Wed Mar 2 10:18:38 2022 +1030
+
+    Revert "handwired/3dortho14u: refactor layout data (#16475)" (#16485)
+    
+    This reverts commit 3ac769b6abe9b97a94033f376b28482d2d5f7b00.
+
+[33mcommit 325c6341017381382f804efa214a83f3014f399f[m
+Author: James Young <18669334+noroadsleft@users.noreply.github.com>
+Date:   Tue Mar 1 14:52:25 2022 -0800
+
+    atlas_65 Layout Macro Refactor (#16483)
+    
+    * atlas_65.h: add matrix diagram
+    
+    * atlas_65.h: apply linting
+    
+    - convert tabs to spaces
+      - four-space indent
+    - align backslashes in layout macro
+    
+    * atlas_65.h: adjust layout macro alignment
+    
+    Visually separates each side. White-space-only change.
+    
+    * physically arrange layout macro
+    
+    Move the matrix position identifiers in the layout macro to resemble the assembled keyboard's layout.
+    
+    - move `k46` (right side B) to the fourth (Shift) row
+    - move each of `k1E`, `k2E` and `k3E` (right side navigation keys) up one row
+    - update keymaps to match
+    
+    * update maintainer data
+    
+    Update the maintainer data in `info.json` and `readme.md`.
+
+[33mcommit 369575ad138656a47e2f94ce41e5a31e39a3dc84[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Tue Mar 1 02:12:01 2022 +0000
+
+    Remove invalid keyboard_folder from gk6 (#16480)
+
+[33mcommit 36635c2203fa022b87241ae2e31dc36c4612ab5b[m
+Author: James Young <18669334+noroadsleft@users.noreply.github.com>
+Date:   Mon Feb 28 17:53:53 2022 -0800
+
+    Ellora65: remove dead space from Configurator rendering (#16478)
+
+[33mcommit c9d9e70ac7ae6170728cbc8ac91c9c3269afe993[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Tue Mar 1 01:52:01 2022 +0000
+
+    Move projectcain encoder logic to keyboard level (#16479)
+
+[33mcommit f293e6b4da5a3eca36e6a6da7c1bcbf3ecd536e8[m
+Author: James Young <18669334+noroadsleft@users.noreply.github.com>
+Date:   Mon Feb 28 15:33:55 2022 -0800
+
+    Glacier: Community Layout support (#16474)
+    
+    * Glacier: Community Layout support
+    
+    Enables the Glacier to use QMK's `tkl_f13_ansi_tsangan` community layout.
+    
+    - rename `LAYOUT` to `LAYOUT_tkl_f13_ansi_tsangan`
+    - add `LAYOUTS` rule to `rules.mk`
+    
+    * info.json: correct maintainer value
+    
+    Use the maintainer's GitHub username.
+
+[33mcommit 3ac769b6abe9b97a94033f376b28482d2d5f7b00[m
+Author: James Young <18669334+noroadsleft@users.noreply.github.com>
+Date:   Mon Feb 28 15:33:21 2022 -0800
+
+    handwired/3dortho14u: refactor layout data (#16475)
+    
+    Remove nonextant matrix positions from the layout data.
+
+[33mcommit d1068b23ad4bc70d135e94d6e278733df93024d8[m
+Author: James Young <18669334+noroadsleft@users.noreply.github.com>
+Date:   Mon Feb 28 15:32:33 2022 -0800
+
+    snatchpad: update layout data (#16476)
+    
+    Fixes key overlaps in QMK Configurator.
+
+[33mcommit fbfd5312b995a32af690c183cad0dc988f695e89[m
+Author: Erovia <Erovia@users.noreply.github.com>
+Date:   Mon Feb 28 20:02:39 2022 +0000
+
+    CLI: Validate JSON keymap input (#16261)
+    
+    * Fix schema validator
+    
+    It should use the passed schema.
+    
+    * Add required attributes to keymap schema
+    
+    * Rework subcommands to validate the JSON keymaps
+    
+    The 'compile', 'flash' and 'json2c' subcommands were reworked to add
+    JSON keymap validation so error is reported for non-JSON and
+    non-compliant-JSON inputs.
+    
+    * Fix required fields in keymap schema
+    
+    * Add tests
+    
+    * Fix compiling keymaps directly from keymap directory
+    
+    * Schema should not require version for now.
+
+[33mcommit 779c7debcfff1a4a3ad578a0c12bdd50cba11039[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Sun Feb 27 12:39:24 2022 +0000
+
+    Fix issues with data driven split keyboards (#16457)
+
+[33mcommit e884414e1ef336361217f9e6a2dae9817bd19508[m
+Author: Takeshi ISHII <2170248+mtei@users.noreply.github.com>
+Date:   Sun Feb 27 20:30:00 2022 +0900
+
+    fix helix/rev2:edvorakjp build error (#16433)
+    
+    'helix/rev2/keymaps/edvorakjp' was no longer buildable due to changes made by #14864.
+    The reason is that the prototype of `oled_task_user()` was changed in keymaps/edvorakjp/oled.c, but keymaps/edvorakjp/oled.h was not changed.
+    Therefore, I modified the prototype in keymaps/edvorakjp/oled.h.
+
+[33mcommit 77cdb20e1627950c6cff28f0f2f96ed22aa17f82[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Sun Feb 27 10:34:26 2022 +0000
+
+    Revert CLI default for manufacturer (#16467)
+
+[33mcommit a7a3f722353d5fafa7d1f89c4d0f969ff2c75b87[m
+Author: James Young <18669334+noroadsleft@users.noreply.github.com>
+Date:   Sun Feb 27 02:08:10 2022 -0800
+
+    Wolf Sabre: fix Configurator layout data (#16465)
+    
+    * apply friendly formatting to info.json
+    
+    * rebuild Configurator layout data
+    
+    KLE Rotation leads to incorrect layout data when converted to `info.json` format.
+    
+    * add matrix diagram to sabre.h
+
+[33mcommit 57601d3cfe7db69e245b9bc45d16317ba05ab366[m
+Author: James Young <18669334+noroadsleft@users.noreply.github.com>
+Date:   Sun Feb 27 00:38:51 2022 -0800
+
+    Wren: fix QMK Configurator key sequence (#16462)
+    
+    * Wren: fix QMK Configurator key sequence
+    
+    * info.json: update maintainer field
+
+[33mcommit 29ab430f1f302bc64ad1549147f24235ba230a9c[m
+Author: Albert Y <76888457+filterpaper@users.noreply.github.com>
+Date:   Sun Feb 27 10:38:46 2022 +0800
+
+    [Docs] Anchor link correction in rgb matrix docs (#16460)
+
+[33mcommit 1d30ee72ab0ed78fb4b4eda39cd8f2886d156a1c[m
+Author: stanrc85 <47038504+stanrc85@users.noreply.github.com>
+Date:   Sat Feb 26 21:29:59 2022 -0500
+
+    [Keymap] stanrc85 userspace rules cleanup (#16447)
+
+[33mcommit 259cf769664b075613399afd888e916a3b028897[m
+Author: Dasky <32983009+daskygit@users.noreply.github.com>
+Date:   Sun Feb 27 01:50:44 2022 +0000
+
+    Link WS2812 driver page from rgb feature docs (#16366)
+
+[33mcommit c1e008b0520a983226622af21e82d7ebe24b83f3[m
+Author: James Young <18669334+noroadsleft@users.noreply.github.com>
+Date:   Sat Feb 26 17:36:30 2022 -0800
+
+    [Keyboard] add YMDK YMD21 v2 (#16442)
+    
+    * [Keyboard] add YMDK YMD21 v2
+    
+    * remove trailing whitespace from default keymap
+
+[33mcommit 97d0e7cb2d1b4e3db16aa68a3d87437ffd472ffe[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Sun Feb 27 12:35:10 2022 +1100
+
+    [Docs] Add commands to flashing docs (#16456)
+
+[33mcommit d94b5d0b8219dfce42aad5798d3bb1d6cf7fec19[m
+Author: Dari <41168529+dari-studios@users.noreply.github.com>
+Date:   Sat Feb 26 20:18:51 2022 -0500
+
+    [Handwired] Support for Adafruit lemon keypad (#16395)
+    
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+    Co-authored-by: zvecr <git@zvecr.com>
+
+[33mcommit 3057e5f8ca523427644ca1e8745bc0b5492a6d67[m
+Author: peepeetee <43021794+peepeetee@users.noreply.github.com>
+Date:   Sun Feb 27 09:06:48 2022 +0800
+
+    [Keyboard] ada1800mini (#16386)
+    
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+    Co-authored-by: Drashna Jaelre <drashna@live.com>
+
+[33mcommit 83a32b257473c5dc9fbacd71a3c1470dde21ad84[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Sat Feb 26 03:20:57 2022 +0000
+
+    Remove 1k USB_POLLING_INTERVAL_MS config from keyboards and default-ish keymaps (#16448)
+    
+    * Remove 1k USB_POLLING_INTERVAL_MS config from keyboard level
+    
+    * Remove 1k USB_POLLING_INTERVAL_MS config from default|via keymaps
+
+[33mcommit e7931289918221081cbe2a7ea5df27a5d86324db[m
+Merge: c0ee3d2c79 cf31355f08
+Author: zvecr <git@zvecr.com>
+Date:   Fri Feb 25 23:45:40 2022 +0000
+
+    Merge remote-tracking branch 'origin/develop'
+
+[33mcommit c0ee3d2c79388187883b1b1b1d1a0b6842acf741[m
+Merge: 8aec20c0da 51db8baf77
+Author: zvecr <git@zvecr.com>
+Date:   Fri Feb 25 23:45:07 2022 +0000
+
+    Merge '51db8baf77e2c0aa5f54d73114e84a33306d7380' as empty
+
+[33mcommit cf31355f08dca311a013168eb3eb995e2fc6a3d1[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Wed Feb 23 17:33:08 2022 +0000
+
+    Changelog 2022q1 (#16380)
+    
+    * Initial changelog pass
+    
+    * update generate-develop-pr-list content
+    
+    * Fix bad word-ness
+    
+    * Fix generate-develop-pr-list ignores
+    
+    * Update docs/ChangeLog/20220226.md
+    
+    Co-authored-by: Sergey Vlasov <sigprof@gmail.com>
+    
+    Co-authored-by: Sergey Vlasov <sigprof@gmail.com>
+
+[33mcommit bd01e1cee8b5050ae62a7ed2597eac95c22627bf[m
+Merge: a58a95f1f5 8aec20c0da
+Author: QMK Bot <hello@qmk.fm>
+Date:   Tue Feb 22 18:32:43 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 8aec20c0da9481c5294b216346231a98570d1626[m
+Author: QMK Bot <hello@qmk.fm>
+Date:   Tue Feb 22 10:29:47 2022 -0800
+
+    Format code according to conventions (#16435)
+
+[33mcommit a58a95f1f5c80fc493d12505d397f0e88f76ce9a[m
+Merge: 3039186dd9 5330d0888d
+Author: QMK Bot <hello@qmk.fm>
+Date:   Tue Feb 22 18:24:50 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 5330d0888dd10bfbdb55196d0713db344e0c3fbb[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Tue Feb 22 18:24:18 2022 +0000
+
+    Install extra CLI dependencies that are missing (#16426)
+    
+    * Install extra CLI dependencies that are missing
+    
+    * dos2unix is part of base container
+
+[33mcommit 3039186dd91180547a917a02072770e78a44fd48[m
+Merge: 749918e119 7646e567bd
+Author: QMK Bot <hello@qmk.fm>
+Date:   Tue Feb 22 14:10:20 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 7646e567bdf7119899a32f50cc0bad6d957b4f6d[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Wed Feb 23 01:09:45 2022 +1100
+
+    handwired/frankie_macropad: disable some features to reduce size (#16431)
+
+[33mcommit 749918e119a9d0fc7cc01ddf9b8dc11ceef00fba[m
+Merge: c2ea26745d 5dcc0743f5
+Author: QMK Bot <hello@qmk.fm>
+Date:   Tue Feb 22 02:58:43 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 5dcc0743f596f97cbae548315b48478ce4d81e47[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Tue Feb 22 02:57:52 2022 +0000
+
+    Install extra CLI dependencies that are missing (#16425)
+
+[33mcommit c2ea26745d07dbf27edc9e29fe72158836b5b8c8[m
+Merge: 6b94d8e1c9 e0342fec18
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 19:23:59 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit e0342fec18e4b6b14a820d7a5d62954853c91756[m
+Author: Fernando Rodrigues <fernando.delphi@gmail.com>
+Date:   Mon Feb 21 16:23:29 2022 -0300
+
+    [Keyboard] Fixed default keymap and add VIA for Baredev rev1 (#15818)
+    
+    Co-authored-by: Drashna Jaelre <drashna@live.com>
+
+[33mcommit 6b94d8e1c9802fdbffbccb937e75466ed26e44f7[m
+Merge: 82a670135f ffe9c22032
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 19:22:55 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit ffe9c220328ac05f7e6be64b6552547f7a12ed38[m
+Author: xiao <307671+xia0@users.noreply.github.com>
+Date:   Tue Feb 22 06:22:25 2022 +1100
+
+    [Keyboard] Add keyboard 3dortho14u (#16329)
+    
+    Co-authored-by: xia0 <xiao@morgan.net.au>
+
+[33mcommit 82a670135f920c4dea76201a4cc3042dcee56ce0[m
+Merge: 145dca0e49 239fed2ef1
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 19:22:24 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 239fed2ef1f41d8d2c962e8519de39fff5ce44ac[m
+Author: Alexander <7888825+keyzog@users.noreply.github.com>
+Date:   Mon Feb 21 22:21:54 2022 +0300
+
+    [Keyboard] Move rgb animation defines for KAPL keyboard (#16341)
+
+[33mcommit 145dca0e4913953d64619746d2462bc1569aa9fe[m
+Merge: a5901a6c0d 31f5900666
+Author: fauxpark <fauxpark@gmail.com>
+Date:   Tue Feb 22 05:21:40 2022 +1100
+
+    Merge remote-tracking branch 'upstream/master' into develop
+
+[33mcommit 31f590066646b0be76d3ba9bb1b38174b46d507f[m
+Author: jack <59737601+waffle87@users.noreply.github.com>
+Date:   Mon Feb 21 11:04:14 2022 -0700
+
+    fix layout macro (#16414)
+    
+    Co-authored-by: jack <{ID}+{username}@users.noreply.github.com>
+
+[33mcommit 302ed624ac0910eea80ff4376dc2b8df5fd94b3f[m
+Author: Danny <nooges@users.noreply.github.com>
+Date:   Mon Feb 21 13:02:30 2022 -0500
+
+    Add encoder defaults for Keebio boards (#16398)
+    
+    * Add BDN9 encoder defaults
+    
+    * Add DSP40 encoder default
+    
+    * Add FoldKB encoder defaults
+    
+    * Add Iris encoder defaults
+    
+    * Update Iris Rev. 6 encoder orientation
+    
+    * Add KBO-5000 encoder defaults
+    
+    * Add Quefrency encoder defaults
+    
+    * Add Sinc encoder defaults
+    
+    * Add Stick encoder defaults
+    
+    * Remove encoder settings from VIA keymaps
+
+[33mcommit 6ad86042fedf80ed31f0696759750f2f8aa033e3[m
+Author: jack <59737601+waffle87@users.noreply.github.com>
+Date:   Mon Feb 21 10:57:13 2022 -0700
+
+    Fix kikoslab/ellora65 (#16415)
+
+[33mcommit 2f0dc0fb6d36b43e0d143224e4a9058b77c4e0e3[m
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 09:44:27 2022 -0800
+
+    Format code according to conventions (#16419)
+
+[33mcommit a5901a6c0d4f5495279467650797a4fa0ac40368[m
+Author: Adam Lickel <adam@lickel.com>
+Date:   Mon Feb 21 09:35:23 2022 -0800
+
+    [Keymap] BDN9 keymap (#15924)
+
+[33mcommit 32903779181c31244c7c7b97a04bda0fd5b59de1[m
+Author: peepeetee <43021794+peepeetee@users.noreply.github.com>
+Date:   Tue Feb 22 01:12:18 2022 +0800
+
+    [Keyboard] infinity81 (#16387)
+
+[33mcommit 83b9483045d6a84d282e3a4e9d650e81f5368c53[m
+Author: yiancar <yiangosyiangou@cytanet.com.cy>
+Date:   Mon Feb 21 17:11:49 2022 +0000
+
+    [keyboard] DC01 i2c timeout fix (#16392)
+
+[33mcommit 0b21fbc37b784db576adfa46aea6ef7237c7b62e[m
+Author: evanmcook <42785294+evanmcook@users.noreply.github.com>
+Date:   Mon Feb 21 12:11:23 2022 -0500
+
+    [Keyboard] add evancookaudio sleepingdinosaur (#16320)
+    
+    Co-authored-by: Joel Challis <git@zvecr.com>
+
+[33mcommit 7e4f74d6897c5c34be084317a3647f974fdd4e71[m
+Author: takashicompany <t@kashi.company>
+Date:   Tue Feb 22 02:11:00 2022 +0900
+
+    [Keyboard] Update Heavy Left (#16354)
+
+[33mcommit 59f671744b7474cdc07830799053ba1d61edbf72[m
+Author: peepeetee <43021794+peepeetee@users.noreply.github.com>
+Date:   Tue Feb 22 01:10:19 2022 +0800
+
+    [Keyboard] ID75 v2 (#16351)
+
+[33mcommit 7fb22706fdb41030bff7fc1bf480d8b002ec86c5[m
+Author: Wolf Van Herreweghe <wolfvanh@gmail.com>
+Date:   Mon Feb 21 18:10:06 2022 +0100
+
+    [Keyboard] Add sabre (#15964)
+    
+    Co-authored-by: Wolf Van Herreweghe <wolfvh@getupgamesofficial.com>
+
+[33mcommit 249eb871028aaaaf508136088ef25fb67a83b28e[m
+Author: 66f9e4eae <99080777+66f94eae@users.noreply.github.com>
+Date:   Tue Feb 22 01:09:19 2022 +0800
+
+    [Keyboard] [redox_w] add dvorak layout and white led support (#16259)
+    
+    Co-authored-by: Drashna Jaelre <drashna@live.com>
+
+[33mcommit b1f86225136247177858203f08e7a3af09c4ad63[m
+Author: Michal Petrik <misopetrik@gmail.com>
+Date:   Mon Feb 21 18:08:36 2022 +0100
+
+    [Docs] Update feature_leader_key.md (#16344)
+    
+    Co-authored-by: zvecr <git@zvecr.com>
+
+[33mcommit d3584be431871cb636cca95107c956c614684b4d[m
+Author: Michal Petrik <misopetrik@gmail.com>
+Date:   Mon Feb 21 18:08:07 2022 +0100
+
+    [Docs] Update newbs_building_firmware.md (#16333)
+
+[33mcommit c204c735af9fc5bf2438ca4fedfc8914529d660e[m
+Author: Takeshi ISHII <2170248+mtei@users.noreply.github.com>
+Date:   Tue Feb 22 01:30:49 2022 +0900
+
+    Helix/pico move to split_common (#16418)
+
+[33mcommit 25ba9b41c119fde21b5c996a90a0b28b3e32d271[m
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 08:29:54 2022 -0800
+
+    Format code according to conventions (#16421)
+
+[33mcommit a44abeb99ae79e2fc88f3d323477e7408c5baf41[m
+Merge: 69a6772074 f30f963a0b
+Author: fauxpark <fauxpark@gmail.com>
+Date:   Tue Feb 22 03:04:41 2022 +1100
+
+    Merge remote-tracking branch 'upstream/master' into develop
+
+[33mcommit f30f963a0b6ccaa151fe83dd8302fa1f6829086e[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Tue Feb 22 02:47:44 2022 +1100
+
+    Internal docs generation updates (#16411)
+
+[33mcommit b1de11c27575f9956d2f7dfd6bf0240d630e3ae1[m
+Author: Takeshi ISHII <2170248+mtei@users.noreply.github.com>
+Date:   Mon Feb 21 23:13:06 2022 +0900
+
+    Fix a potential bug in encoder_init(). (#16372)
+    
+    After executing `setPinInputHigh(pin)`, it is necessary to wait for the charging time to read from the corresponding pin. This is the same as requiring `matrix_output_unselect_delay()` after doing `unselect_row()` in matrix.c.
+
+[33mcommit 69a67720745ee54fa285383ec94aee7d9fdb3269[m
+Merge: 0f962af691 ae5f43072f
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 09:04:17 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit ae5f43072f0de93b65854af569ba90564b8003de[m
+Author: jackytrabbit <jacky_lijun@126.com>
+Date:   Mon Feb 21 17:03:18 2022 +0800
+
+    Update the support for lazydesigners/dimple (#14797)
+    
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+
+[33mcommit 0f962af6918beca965784315eca63b7f395b723a[m
+Merge: 7d153b9a66 f252287b0e
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 08:55:44 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit f252287b0ec08f1b977cb7bfa4279db4499e8a88[m
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 00:55:23 2022 -0800
+
+    Format code according to conventions (#16412)
+
+[33mcommit 67b9a722c0d780e80a6d68c7a6981a68897db736[m
+Author: Brandon Claveria <48102030+swiftrax@users.noreply.github.com>
+Date:   Mon Feb 21 00:55:05 2022 -0800
+
+    [Keyboard] Add Ellora65 (#14754)
+    
+    Co-authored-by: Joel Challis <git@zvecr.com>
+    Co-authored-by: Drashna Jaelre <drashna@live.com>
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+    Co-authored-by: swiftrax <swiftrax@github.com>
+
+[33mcommit 7d153b9a66670ef26f826de01384a9b9713598ec[m
+Merge: 8dc7cae7c7 18490537a5
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 08:40:46 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 18490537a5a2c050ecfa1ee2209229eba6b8b342[m
+Author: xiao <307671+xia0@users.noreply.github.com>
+Date:   Mon Feb 21 19:40:11 2022 +1100
+
+    [Keyboard] Add Snatchpad keyboard (#16330)
+    
+    Co-authored-by: Drashna Jaelre <drashna@live.com>
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+    Co-authored-by: xia0 <xiao@morgan.net.au>
+
+[33mcommit 8dc7cae7c712b6f405e69b5a25dbb111fb8fdc5e[m
+Merge: f01caa2a5a 2d1f2810a4
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 08:39:42 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 2d1f2810a41b8a93c21035b14afacb717ef7c822[m
+Author: federicoweber <federicoweber@gmail.com>
+Date:   Mon Feb 21 00:38:53 2022 -0800
+
+    [Keyboard] add Gizmo Engineering GK6 keyboard (#13907)
+    
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+    Co-authored-by: Drashna Jaelre <drashna@live.com>
+
+[33mcommit f01caa2a5a1fa4ba97ebe77b1dd2cf1340320de2[m
+Merge: 99099c4173 019dddcfa3
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 08:29:26 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 019dddcfa3cb7a1e961e1fefb302eb71bea312f9[m
+Author: hunter <hcdarrach@gmail.com>
+Date:   Mon Feb 21 03:28:49 2022 -0500
+
+    [Keyboard] Add foundation (#16289)
+    
+    Co-authored-by: Joel Challis <git@zvecr.com>
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+    Co-authored-by: Drashna Jaelre <drashna@live.com>
+
+[33mcommit 99099c417339d9ce20afcd19d7cfb9c86573e78b[m
+Merge: 09b44d2e73 deb0fe4bcc
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 07:53:37 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit deb0fe4bccb15cd28832928bab207ef1a16a2054[m
+Author: Tim Liu <74063834+Timliuzhaolu@users.noreply.github.com>
+Date:   Mon Feb 21 15:52:39 2022 +0800
+
+    [Keyboard] Add glacier in creatkeebs folder (#16079)
+    
+    Co-authored-by: Joel Challis <git@zvecr.com>
+    Co-authored-by: Drashna Jaelre <drashna@live.com>
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+
+[33mcommit 09b44d2e73db9c92373da318dd425c4a14aadaca[m
+Merge: 63b8959413 2e31f542dc
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 07:44:26 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 2e31f542dc7f42fa95d16cbe1250da4243b04ac3[m
+Author: holtenc <holtenc@gmail.com>
+Date:   Mon Feb 21 01:43:55 2022 -0600
+
+    [Keyboard] Add Obro (#15884)
+    
+    Co-authored-by: Drashna Jaelre <drashna@live.com>
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+
+[33mcommit 63b89594130a5af0d0661ecd534925171ad75861[m
+Merge: 37feb4fcb4 14fb3cc8b0
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 06:33:42 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 14fb3cc8b04d019b585b0ea25d11f2939949429f[m
+Author: L. K. Post <Crote@users.noreply.github.com>
+Date:   Mon Feb 21 07:33:00 2022 +0100
+
+    [Keyboard] Add Kyria rev. 2 (#16178)
+
+[33mcommit 37feb4fcb441b9cb7b7de687eed22ad8049b9689[m
+Merge: 6a90e13224 9bf25d1cd5
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 06:17:00 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 9bf25d1cd5f7616d30b000d50c51acd9dfaacd41[m
+Author: Ivan Gromov <38141348+key10iq@users.noreply.github.com>
+Date:   Mon Feb 21 10:16:23 2022 +0400
+
+    [Keyboard] Add Monoflex 60 keyboard (#16234)
+    
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+
+[33mcommit 6a90e132243b951eda77979f7dedca0df08f3045[m
+Merge: b21a803ec6 2d1d44edb7
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 06:05:20 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 2d1d44edb701a47571d8ad2a07cb0899f255849e[m
+Author: jack <59737601+waffle87@users.noreply.github.com>
+Date:   Sun Feb 20 23:04:43 2022 -0700
+
+    [Keyboard] Fix Hineybush/h08_ocelot and Hineybush/h65(_hotswap) (#16405)
+
+[33mcommit b21a803ec64d580fc8bb1fc5a2ce27ffa261958e[m
+Merge: 21a4f42957 f7b5d67a7b
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 06:02:11 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit f7b5d67a7bfc5cbcf7e71ad5a203b34961cfc352[m
+Author: TW59420 <40019210+TW59420@users.noreply.github.com>
+Date:   Mon Feb 21 14:01:31 2022 +0800
+
+    [Keyboard] Add MW75R2 PCB (#15042)
+    
+    Co-authored-by: Ryan <fauxpark@gmail.com>
+    Co-authored-by: James Young <18669334+noroadsleft@users.noreply.github.com>
+
+[33mcommit 21a4f42957a32829fab3dc2ed8dce780b9966406[m
+Merge: 31ee13a5d7 65af7272f3
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 05:57:49 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 65af7272f34148d8ea8e2b75e4e463fcb607e6f2[m
+Author: jack <59737601+waffle87@users.noreply.github.com>
+Date:   Sun Feb 20 22:57:11 2022 -0700
+
+    [Keyboard] Fix mwstudio/mw65_rgb errors (#16410)
+
+[33mcommit 31ee13a5d79a1c67f928e3ac06b2f29046b2a52c[m
+Merge: f6d8dd972e 3bc8afbb81
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 21 01:19:42 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 3bc8afbb81d2910dbfff45d6c5a26bd54f793697[m
+Author: HorrorTroll <sonicvipduc@gmail.com>
+Date:   Mon Feb 21 08:18:35 2022 +0700
+
+    Update fix for MW65_rgb and added personal keymap (#15279)
+    
+    * Update fix for MW65 and added personal keymap
+    
+    * Resolve fix
+    
+    * Resolved fix, again
+    
+    * Added missing GPLv2 license headers
+    
+    * Resolved issue
+
+[33mcommit f6d8dd972ebf60549cafe33f289b116133053f58[m
+Merge: 4d3ce3cdf8 d175ee1d9b
+Author: QMK Bot <hello@qmk.fm>
+Date:   Sun Feb 20 18:37:05 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit d175ee1d9bc679b501391ad4a8b463d6d9def721[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Mon Feb 21 05:36:15 2022 +1100
+
+    rart67m: move OLED and WPM code to default keymap (#16403)
+    
+    * rart67m: move OLED and WPM code to default keymap
+    
+    * Apply suggestions from code review
+    
+    Co-authored-by: Joel Challis <git@zvecr.com>
+    
+    Co-authored-by: Joel Challis <git@zvecr.com>
+
+[33mcommit 4d3ce3cdf8c9352304009bcee1b1e2da385e2dcc[m
+Merge: f787114fe9 60f22831cb
+Author: QMK Bot <hello@qmk.fm>
+Date:   Sun Feb 20 13:57:38 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 60f22831cb9fd65ab4157794df42828950f88300[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Mon Feb 21 00:57:03 2022 +1100
+
+    clueboard/card: disable Command to reduce size (#16404)
+
+[33mcommit f787114fe939f7861cf4e9234b0d0e646ad365cc[m
+Merge: 1d9808606a 38e3be4c74
+Author: QMK Bot <hello@qmk.fm>
+Date:   Sun Feb 20 08:21:51 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 38e3be4c749f9d35a6d37e501d0fbaa737197240[m
+Author: Josh Hinnebusch <joshhinnebusch@gmail.com>
+Date:   Sun Feb 20 03:21:18 2022 -0500
+
+    Add h08_ocelot and h65 PCBs (#14054)
+    
+    * add h65 start
+    
+    * add h65 base files
+    
+    * add ocelot base files
+    
+    * add via keymap
+    
+    * Update keyboards/hineybush/h08_ocelot/config.h
+    
+    * Update keyboards/hineybush/h65/config.h
+    
+    * add base files for h65 hotswap
+    
+    * changes made per PR
+    
+    * finally made updates per PR
+    
+    * update readmes
+    
+    * Update keyboards/hineybush/h65_hotswap/config.h
+    
+    * Update keyboards/hineybush/h65_hotswap/rules.mk
+    
+    * Update keyboards/hineybush/h65_hotswap/rules.mk
+    
+    * Update keyboards/hineybush/h65_hotswap/readme.md
+    
+    * Update keyboards/hineybush/h65_hotswap/info.json
+    
+    * Update keyboards/hineybush/h65/rules.mk
+    
+    * Update keyboards/hineybush/h65_hotswap/keymaps/default/keymap.c
+    
+    * Update keyboards/hineybush/h65_hotswap/keymaps/default/keymap.c
+    
+    * Update keyboards/hineybush/h65_hotswap/h65_hotswap.h
+    
+    * Update keyboards/hineybush/h65_hotswap/keymaps/default/keymap.c
+    
+    * Update keyboards/hineybush/h65_hotswap/keymaps/default/keymap.c
+    
+    * Update keyboards/hineybush/h65/rules.mk
+    
+    * Update keyboards/hineybush/h65/readme.md
+    
+    * Update keyboards/hineybush/h08_ocelot/h08_ocelot.h
+    
+    * Update keyboards/hineybush/h08_ocelot/keymaps/default/keymap.c
+    
+    * Update keyboards/hineybush/h08_ocelot/keymaps/default/keymap.c
+    
+    * Update keyboards/hineybush/h08_ocelot/keymaps/via/keymap.c
+    
+    * Update keyboards/hineybush/h08_ocelot/keymaps/via/keymap.c
+    
+    * Update keyboards/hineybush/h08_ocelot/readme.md
+    
+    * Update keyboards/hineybush/h08_ocelot/rules.mk
+    
+    * Update keyboards/hineybush/h08_ocelot/rules.mk
+    
+    * Update keyboards/hineybush/h65/h65.h
+    
+    * Update keyboards/hineybush/h08_ocelot/info.json
+    
+    * Update keyboards/hineybush/h65/info.json
+    
+    * Update keyboards/hineybush/h65/keymaps/default/keymap.c
+    
+    * Apply suggestions from code review
+    
+    * update jsons for default qmk config layout
+    
+    * Update keyboards/hineybush/h08_ocelot/rules.mk
+    
+    * Update keyboards/hineybush/h65/h65.h
+    
+    * Update keyboards/hineybush/h65/info.json
+    
+    * Update keyboards/hineybush/h65/keymaps/default/keymap.c
+    
+    * Update keyboards/hineybush/h65_hotswap/keymaps/default/keymap.c
+    
+    * Update keyboards/hineybush/h65_hotswap/keymaps/via/keymap.c
+    
+    * Update keyboards/hineybush/h65_hotswap/keymaps/via/keymap.c
+    
+    * Update keyboards/hineybush/h65_hotswap/keymaps/via/keymap.c
+    
+    * Update keyboards/hineybush/h65_hotswap/rules.mk
+    
+    * Update keyboards/hineybush/h65/config.h
+
+[33mcommit 1d9808606a54ac9b768bf0e94c0392a21b347835[m
+Merge: e2691c22c1 60e28544b2
+Author: QMK Bot <hello@qmk.fm>
+Date:   Sun Feb 20 07:10:44 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 60e28544b2ac9a4fc4150ece316352cf1d4eccef[m
+Author: Benjamin Chausse <benjamin@chausse.xyz>
+Date:   Sun Feb 20 02:10:15 2022 -0500
+
+    Bliss Hotdox keymaps (#13160)
+    
+    * Bliss Hotdox keymaps
+    
+    * Update keyboards/hotdox/keymaps/bliss/keymap.c
+    
+    * Update keyboards/hotdox/keymaps/bliss/keymap.c
+    
+    * Add GPL License to keymap.c file
+    Changes to be committed:
+            modified:   keymap.c
+    
+    * make changes requested by fauxpark
+    
+    * Update keyboards/hotdox/keymaps/bliss/readme.md
+    
+    * Update keyboards/hotdox/keymaps/bliss/keymap.c
+    
+    * Update keyboards/hotdox/keymaps/bliss/readme.md
+
+[33mcommit e2691c22c1c00dfe4bbf872f38535bebd00b1271[m
+Merge: 5b688a09ec 73657a7d58
+Author: QMK Bot <hello@qmk.fm>
+Date:   Sun Feb 20 05:52:47 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 73657a7d5828b06c3a0dc9e35e126a0a26913b0b[m
+Author: Matthew Dias <matthewdias@me.com>
+Date:   Sat Feb 19 23:52:11 2022 -0600
+
+    Add kikkou keyboard (#15291)
+    
+    * Add kikkou keyboard
+    
+    * Apply suggestions from code review
+    
+    * Update keyboards/kikkou/rules.mk
+    
+    * Apply suggestions from code review1
+
+[33mcommit 5b688a09ecfd95215941d76eb696aa6de2c988dd[m
+Merge: da280739ef 4666d26008
+Author: fauxpark <fauxpark@gmail.com>
+Date:   Sat Feb 19 04:27:09 2022 +1100
+
+    Merge remote-tracking branch 'upstream/master' into develop
+
+[33mcommit 4666d2600801ecca959cc13911e69379978a0436[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Sat Feb 19 02:53:36 2022 +1100
+
+    Fix a couple of boards being wrongly identified as AVR (#16377)
+
+[33mcommit 2d12eacb4b9bf1b3d331cec0bd06fd1a58a5d217[m
+Author: Simon <47527944+Frooastside@users.noreply.github.com>
+Date:   Thu Feb 17 17:59:12 2022 +0100
+
+    [Keyboard] Renamed Frooastboard to Frooastboard Nano (#16373)
+
+[33mcommit 7dd993fb066ad34623bc2875b7b609de1732a027[m
+Author: Joakim Tufvegren <104522+firetech@users.noreply.github.com>
+Date:   Thu Feb 17 17:53:06 2022 +0100
+
+    Fix build error for LED Matrix effect solid_reactive_wide. (#16383)
+
+[33mcommit da280739efa1d23346f9540044b8689a31ca8689[m
+Merge: 0d9a0d5d97 548a463fe9
+Author: Drashna Jael're <drashna@live.com>
+Date:   Thu Feb 17 08:44:30 2022 -0800
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 548a463fe9e60410e5798b6fd10a9e18ba2f28bb[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Fri Feb 18 03:43:03 2022 +1100
+
+    `mokey/xox70`: clean up layouts (#16375)
+
+[33mcommit 7f63bcf38b55b3bf23c5606c2e1f8e15724f5984[m
+Author: Joakim Tufvegren <104522+firetech@users.noreply.github.com>
+Date:   Thu Feb 17 17:33:07 2022 +0100
+
+    [Bug] Re-add call to `suspend_power_down_kb()` (#16382)
+
+[33mcommit 7e00fcd7bc8bca8b0f78f55a8827247f503a58ce[m
+Author: Takeshi ISHII <2170248+mtei@users.noreply.github.com>
+Date:   Fri Feb 18 01:18:16 2022 +0900
+
+    [Keyboard] Remove Helix/rev1 (#16389)
+
+[33mcommit 0d9a0d5d97bfbe39777c3f87ed7f67cdf9446176[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Wed Feb 16 20:58:40 2022 +0000
+
+    Align new-keyboard with recent schema updates (#16378)
+
+[33mcommit 5ff823d35f81e6098a561480220a787144c1208c[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Wed Feb 16 17:46:48 2022 +0000
+
+    Bodge for helix build failures (#16376)
+
+[33mcommit 08ebf1523b2bb2d2a3d373447048b90f1c91cc2c[m
+Merge: 6a8df58887 da68083fdf
+Author: QMK Bot <hello@qmk.fm>
+Date:   Tue Feb 15 17:48:14 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit da68083fdf6e3237a1b6f4d1c8fee70ee10386c2[m
+Author: Dan Nixon <dan@dan-nixon.com>
+Date:   Tue Feb 15 17:47:35 2022 +0000
+
+    Update USB VID and PID for Aya (#16363)
+
+[33mcommit 6a8df588879d4026c8b26f350d9164a36a6fd289[m
+Merge: 16767312db 92eb067a63
+Author: QMK Bot <hello@qmk.fm>
+Date:   Tue Feb 15 07:02:33 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 92eb067a63a1cf238583fe4de89f18911ec467ec[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Tue Feb 15 18:01:54 2022 +1100
+
+    Add extra braces for trackball keymaps (#16361)
+
+[33mcommit 16767312dbb101fe8d87d02655a78809e4b6330f[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Tue Feb 15 04:45:32 2022 +0000
+
+    Align docs to new-keyboard behaviour (#16357)
+
+[33mcommit fede569bbe66e2fa0b16cc3ac7b7e6b66daf9f86[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Tue Feb 15 04:41:16 2022 +0000
+
+    Allow NO_PIN within info.json (#16359)
+
+[33mcommit a977deb2b55118436dca6c625cac5916cbb23f93[m
+Author: Fernando Rodrigues <fernando.delphi@gmail.com>
+Date:   Tue Feb 15 01:31:19 2022 -0300
+
+    Adding BareDev rev1 keyboard (#122)
+
+[33mcommit 96a5714462f00ba40c2fb90ea8e67986a70968d8[m
+Author: hunter <hcdarrach@gmail.com>
+Date:   Mon Feb 14 23:30:21 2022 -0500
+
+    added wavtype/foundation (#121)
+    
+    * added foundation and manta
+    
+    * optimizing firmware size and removing error
+    
+    * removed p01 ultra and manta
+    
+    * Revert "removed p01 ultra and manta"
+    
+    This reverts commit f34b9e3c0741c4fbf5d5c2df3d4dd4d696d69846.
+    
+    * removed manta
+
+[33mcommit b0621223bc53f634a28243b874379e8e157878fd[m
+Author: Joel Challis <git@zvecr.com>
+Date:   Tue Feb 15 01:42:58 2022 +0000
+
+    Various fixes for new-keyboard (#16358)
+
+[33mcommit c9f192bae88ba4190d2e7f0bd560563b377f394d[m
+Merge: 23c238a180 ac8bee7091
+Author: QMK Bot <hello@qmk.fm>
+Date:   Tue Feb 15 01:16:27 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit ac8bee7091d5a5fc55afb7054562c0d23f932880[m
+Author: Ryan <fauxpark@gmail.com>
+Date:   Tue Feb 15 12:15:53 2022 +1100
+
+    Fix multiple definition errors for trackball "boards" with no keys (#16350)
+
+[33mcommit 23c238a1807c3e8c3bdd4eb432506a1469640df5[m
+Author: Erovia <Erovia@users.noreply.github.com>
+Date:   Mon Feb 14 11:02:35 2022 +0000
+
+    CLI: Minor additions #12795 (#16276)
+
+[33mcommit 1980e48e0d9a5745291829e7612628cc24668c57[m
+Merge: 61ed2e2b3c 485cf920b4
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 14 06:25:23 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 485cf920b4f2d7bf5702573d008c5e435ee570a2[m
+Author: James Young <18669334+noroadsleft@users.noreply.github.com>
+Date:   Sun Feb 13 22:24:52 2022 -0800
+
+    Xenon: correct QMK Configurator key sequence (#16332)
+
+[33mcommit 61ed2e2b3ccd0ad6d7fa89d8e4e4804fcefd2b76[m
+Merge: f77e569e9f 6b01657a86
+Author: QMK Bot <hello@qmk.fm>
+Date:   Mon Feb 14 06:24:45 2022 +0000
+
+    Merge remote-tracking branch 'origin/master' into develop
+
+[33mcommit 6b01657a8682c7d882c9721745010b56b362d55c[m
+Author: James Young <18669334+noroadsleft@users.noreply.github.com>
+Date:   Sun Feb 13 22:24:11 2022 -0800
+
+    Mode M75S Layout Additions, Configurator Data and Code Touch-Up (#16327)
+    
+    * m75s.h: correct matrix position identifier
+    
+    `K5C` is actually on row 4, so it should be `K4C`.
+    
+    * m75s.h: add matrix diagram
+    
+    * add QMK Configurator data
+    
+    * polish whitespace
+    
+    - convert tabs to spaces
+    - update indent to four spaces
+    - remove trailing whitespace
+    
+    * update readme
+    
+    Didn't seem to be fully updated after being copied from the M65S codebase.
+    
+    * add LAYOUT_ansi with keymap
+    
+    ANSI layout with 2u Backspace.
+    
+    * add LAYOUT_iso with keymap
+    
+    ISO layout with 2u Backspace.
+    
+    * add LAYOUT_ansi_tsangan with keymap
+    
+    ANSI layout with 2u Backspace and 7u Spacebar.
+    
+    * add LAYOUT_iso_tsangan with keymap
+    
+    ISO layout with 2u Backspace and 7u Spacebar.
+    
+    * add LAYOUT_ansi_split_bs with keymap
+    
+    ANSI layout w
