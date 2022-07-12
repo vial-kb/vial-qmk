@@ -26,6 +26,16 @@
 #include "vial.h"
 #endif
 
+#ifdef ENCODER_ENABLE
+#    include "encoder.h"
+#else
+#    define NUM_ENCODERS 0
+#endif
+
+#ifndef DYNAMIC_KEYMAP_LAYER_COUNT
+#    define DYNAMIC_KEYMAP_LAYER_COUNT 4
+#endif
+
 #ifndef DYNAMIC_KEYMAP_MACRO_COUNT
 #    define DYNAMIC_KEYMAP_MACRO_COUNT 16
 #endif
@@ -116,6 +126,17 @@ static pin_t encoders_pad_a[] = ENCODERS_PAD_A;
 #    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (VIAL_KEY_OVERRIDE_EEPROM_ADDR + VIAL_KEY_OVERRIDE_SIZE)
 #endif
 
+// Dynamic macro starts after dynamic encoders, but only when using ENCODER_MAP
+#ifdef ENCODER_MAP_ENABLE
+#    ifndef DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
+#        define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (DYNAMIC_KEYMAP_ENCODER_EEPROM_ADDR + (DYNAMIC_KEYMAP_LAYER_COUNT * NUM_ENCODERS * 2 * 2))
+#    endif // DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
+#else      // ENCODER_MAP_ENABLE
+#    ifndef DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
+#        define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (DYNAMIC_KEYMAP_ENCODER_EEPROM_ADDR)
+#    endif // DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
+#endif     // ENCODER_MAP_ENABLE
+
 // Sanity check that dynamic keymaps fit in available EEPROM
 // If there's not 100 bytes available for macros, then something is wrong.
 // The keyboard should override DYNAMIC_KEYMAP_LAYER_COUNT to reduce it,
@@ -139,9 +160,7 @@ void *dynamic_keymap_key_to_eeprom_address(uint8_t layer, uint8_t row, uint8_t c
 }
 
 uint16_t dynamic_keymap_get_keycode(uint8_t layer, uint8_t row, uint8_t column) {
-    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || row >= MATRIX_ROWS || column >= MATRIX_COLS)
-        return KC_NO;
-
+    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || row >= MATRIX_ROWS || column >= MATRIX_COLS) return KC_NO;
     void *address = dynamic_keymap_key_to_eeprom_address(layer, row, column);
     // Big endian, so we can read/write EEPROM directly from host if we want
     uint16_t keycode = eeprom_read_byte(address) << 8;
@@ -150,44 +169,35 @@ uint16_t dynamic_keymap_get_keycode(uint8_t layer, uint8_t row, uint8_t column) 
 }
 
 void dynamic_keymap_set_keycode(uint8_t layer, uint8_t row, uint8_t column, uint16_t keycode) {
-    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || row >= MATRIX_ROWS || column >= MATRIX_COLS)
-        return;
-
-#ifdef VIAL_ENABLE
-    if (keycode == RESET && !vial_unlocked)
-        return;
-#endif
-
+    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || row >= MATRIX_ROWS || column >= MATRIX_COLS) return;
     void *address = dynamic_keymap_key_to_eeprom_address(layer, row, column);
     // Big endian, so we can read/write EEPROM directly from host if we want
     eeprom_update_byte(address, (uint8_t)(keycode >> 8));
     eeprom_update_byte(address + 1, (uint8_t)(keycode & 0xFF));
 }
 
-#ifdef VIAL_ENCODERS_ENABLE
-static void *dynamic_keymap_encoder_to_eeprom_address(uint8_t layer, uint8_t idx, uint8_t dir) {
-    return ((void *)VIAL_ENCODERS_EEPROM_ADDR) + (layer * NUMBER_OF_ENCODERS * 2 * 2) + (idx * 2 * 2) + dir * 2;
+#ifdef ENCODER_MAP_ENABLE
+void *dynamic_keymap_encoder_to_eeprom_address(uint8_t layer, uint8_t encoder_id) {
+    return ((void *)DYNAMIC_KEYMAP_ENCODER_EEPROM_ADDR) + (layer * NUM_ENCODERS * 2 * 2) + (encoder_id * 2 * 2);
 }
 
-uint16_t dynamic_keymap_get_encoder(uint8_t layer, uint8_t idx, uint8_t dir) {
-    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || idx >= NUMBER_OF_ENCODERS || dir > 1)
-        return 0;
-
-    void *address = dynamic_keymap_encoder_to_eeprom_address(layer, idx, dir);
-    uint16_t keycode = eeprom_read_byte(address) << 8;
-    keycode |= eeprom_read_byte(address + 1);
+uint16_t dynamic_keymap_get_encoder(uint8_t layer, uint8_t encoder_id, bool clockwise) {
+    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || encoder_id >= NUM_ENCODERS) return KC_NO;
+    void *address = dynamic_keymap_encoder_to_eeprom_address(layer, encoder_id);
+    // Big endian, so we can read/write EEPROM directly from host if we want
+    uint16_t keycode = ((uint16_t)eeprom_read_byte(address + (clockwise ? 0 : 2))) << 8;
+    keycode |= eeprom_read_byte(address + (clockwise ? 0 : 2) + 1);
     return keycode;
 }
 
-void dynamic_keymap_set_encoder(uint8_t layer, uint8_t idx, uint8_t dir, uint16_t keycode) {
-    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || idx >= NUMBER_OF_ENCODERS || dir > 1)
-        return;
-
-    void *address = dynamic_keymap_encoder_to_eeprom_address(layer, idx, dir);
-    eeprom_update_byte(address, (uint8_t)(keycode >> 8));
-    eeprom_update_byte(address + 1, (uint8_t)(keycode & 0xFF));
+void dynamic_keymap_set_encoder(uint8_t layer, uint8_t encoder_id, bool clockwise, uint16_t keycode) {
+    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || encoder_id >= NUM_ENCODERS) return;
+    void *address = dynamic_keymap_encoder_to_eeprom_address(layer, encoder_id);
+    // Big endian, so we can read/write EEPROM directly from host if we want
+    eeprom_update_byte(address + (clockwise ? 0 : 2), (uint8_t)(keycode >> 8));
+    eeprom_update_byte(address + (clockwise ? 0 : 2) + 1, (uint8_t)(keycode & 0xFF));
 }
-#endif
+#endif // ENCODER_MAP_ENABLE
 
 #ifdef QMK_SETTINGS
 uint8_t dynamic_keymap_get_qmk_settings(uint16_t offset) {
@@ -273,12 +283,6 @@ int dynamic_keymap_set_key_override(uint8_t index, const vial_key_override_entry
 }
 #endif
 
-#if defined(VIAL_ENCODERS_ENABLE) && defined(VIAL_ENCODER_DEFAULT)
-static const uint16_t PROGMEM vial_encoder_default[] = VIAL_ENCODER_DEFAULT;
-_Static_assert(sizeof(vial_encoder_default)/sizeof(*vial_encoder_default) == 2 * DYNAMIC_KEYMAP_LAYER_COUNT * NUMBER_OF_ENCODERS,
-    "There should be DYNAMIC_KEYMAP_LAYER_COUNT * NUMBER_OF_ENCODERS * 2 entries in the VIAL_ENCODER_DEFAULT array.");
-#endif
-
 void dynamic_keymap_reset(void) {
 #ifdef VIAL_ENABLE
     /* temporarily unlock the keyboard so we can set hardcoded RESET keycode */
@@ -295,18 +299,12 @@ void dynamic_keymap_reset(void) {
                 dynamic_keymap_set_keycode(layer, row, column, pgm_read_word(&keymaps[layer][row][column]));
             }
         }
-
-#ifdef VIAL_ENCODERS_ENABLE
-    for (int idx = 0; idx < NUMBER_OF_ENCODERS; ++idx) {
-#ifdef VIAL_ENCODER_DEFAULT
-        dynamic_keymap_set_encoder(layer, idx, 0, pgm_read_word(&vial_encoder_default[2 * (layer * NUMBER_OF_ENCODERS + idx)]));
-        dynamic_keymap_set_encoder(layer, idx, 1, pgm_read_word(&vial_encoder_default[2 * (layer * NUMBER_OF_ENCODERS + idx) + 1]));
-#else
-        dynamic_keymap_set_encoder(layer, idx, 0, KC_TRNS);
-        dynamic_keymap_set_encoder(layer, idx, 1, KC_TRNS);
-#endif
-    }
-#endif
+#ifdef ENCODER_MAP_ENABLE
+        for (int encoder = 0; encoder < NUM_ENCODERS; encoder++) {
+            dynamic_keymap_set_encoder(layer, encoder, true, pgm_read_word(&encoder_map[layer][encoder][0]));
+            dynamic_keymap_set_encoder(layer, encoder, false, pgm_read_word(&encoder_map[layer][encoder][1]));
+        }
+#endif // ENCODER_MAP_ENABLE
     }
 
 #ifdef QMK_SETTINGS
@@ -428,9 +426,15 @@ uint16_t keymap_key_to_keycode(uint8_t layer, keypos_t key) {
 
     if (layer < DYNAMIC_KEYMAP_LAYER_COUNT && key.row < MATRIX_ROWS && key.col < MATRIX_COLS) {
         return dynamic_keymap_get_keycode(layer, key.row, key.col);
-    } else {
-        return KC_NO;
     }
+#ifdef ENCODER_MAP_ENABLE
+    else if (layer < DYNAMIC_KEYMAP_LAYER_COUNT && key.row == KEYLOC_ENCODER_CW && key.col < NUM_ENCODERS) {
+        return dynamic_keymap_get_encoder(layer, key.col, true);
+    } else if (layer < DYNAMIC_KEYMAP_LAYER_COUNT && key.row == KEYLOC_ENCODER_CCW && key.col < NUM_ENCODERS) {
+        return dynamic_keymap_get_encoder(layer, key.col, false);
+    }
+#endif // ENCODER_MAP_ENABLE
+    return KC_NO;
 }
 
 uint8_t dynamic_keymap_macro_get_count(void) {
