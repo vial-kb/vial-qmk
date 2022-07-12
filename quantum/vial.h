@@ -73,7 +73,7 @@ void vial_keycode_tap(uint16_t keycode);
 
 /* Fake position in keyboard matrix, can't use 255 as that is immediately rejected by IS_NOEVENT
    used to send arbitrary keycodes thru process_record_quantum_helper */
-#define VIAL_MATRIX_MAGIC 254
+#define VIAL_MATRIX_MAGIC 240
 
 
 #ifdef TAP_DANCE_ENABLE
