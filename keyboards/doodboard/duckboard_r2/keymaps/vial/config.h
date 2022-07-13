@@ -7,9 +7,6 @@
 #define VIAL_UNLOCK_COMBO_ROWS { 4, 4 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 4 }
 
-#define VIAL_ENCODER_DEFAULT { KC_VOLD, KC_VOLU, KC_UP,   KC_DOWN, \
-                               KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, \
-                               KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS  }
                                
 #undef ENCODER_RESOLUTION
 #define ENCODER_RESOLUTION 4

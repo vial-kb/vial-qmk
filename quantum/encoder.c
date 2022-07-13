@@ -79,11 +79,6 @@ __attribute__((weak)) bool encoder_update_kb(uint8_t index, bool clockwise) {
     return encoder_update_user(index, clockwise);
 }
 
-#ifdef VIAL_ENCODERS_ENABLE
-#include "vial.h"
-#define encoder_update_kb vial_encoder_update
-#endif
-
 void encoder_init(void) {
 #ifdef SPLIT_KEYBOARD
     thisHand  = isLeftHand ? 0 : NUM_ENCODERS_LEFT;

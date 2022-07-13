@@ -575,10 +575,6 @@ ifeq ($(strip $(VIAL_INSECURE)), yes)
     OPT_DEFS += -DVIAL_INSECURE
 endif
 
-ifeq ($(strip $(VIAL_ENCODERS_ENABLE)), yes)
-    OPT_DEFS += -DVIAL_ENCODERS_ENABLE
-endif
-
 ifeq ($(strip $(VIALRGB_ENABLE)), yes)
     SRC += $(QUANTUM_DIR)/vialrgb.c
     OPT_DEFS += -DVIALRGB_ENABLE

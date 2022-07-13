@@ -29,10 +29,6 @@ void vial_init(void);
 void vial_handle_cmd(uint8_t *data, uint8_t length);
 bool process_record_vial(uint16_t keycode, keyrecord_t *record);
 
-#ifdef VIAL_ENCODERS_ENABLE
-bool vial_encoder_update(uint8_t index, bool clockwise);
-#endif
-
 extern int vial_unlocked;
 extern int vial_unlock_in_progress;
 

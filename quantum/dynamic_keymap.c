@@ -71,22 +71,13 @@
 
 // Encoders are located right after the dynamic keymap
 #define VIAL_ENCODERS_EEPROM_ADDR (DYNAMIC_KEYMAP_EEPROM_ADDR + (DYNAMIC_KEYMAP_LAYER_COUNT * MATRIX_ROWS * MATRIX_COLS * 2))
+#define DYNAMIC_KEYMAP_ENCODER_EEPROM_ADDR VIAL_ENCODERS_EEPROM_ADDR
 
-#ifdef VIAL_ENCODERS_ENABLE
-#ifdef SPLIT_KEYBOARD
-#define NUMBER_OF_ENCODERS (2 * sizeof(encoders_pad_a) / sizeof(pin_t))
-#else
-#define NUMBER_OF_ENCODERS (sizeof(encoders_pad_a) / sizeof(pin_t))
-#endif
-static pin_t encoders_pad_a[] = ENCODERS_PAD_A;
-#define VIAL_ENCODERS_SIZE (NUMBER_OF_ENCODERS * DYNAMIC_KEYMAP_LAYER_COUNT * 2 * 2)
-#else
-#define VIAL_ENCODERS_SIZE 0
-#endif
-
-#define VIAL_QMK_SETTINGS_EEPROM_ADDR (VIAL_ENCODERS_EEPROM_ADDR + VIAL_ENCODERS_SIZE)
+#define VIAL_ENCODERS_SIZE (NUM_ENCODERS * DYNAMIC_KEYMAP_LAYER_COUNT * 2 * 2)
 
 // QMK settings area is just past encoders
+#define VIAL_QMK_SETTINGS_EEPROM_ADDR (VIAL_ENCODERS_EEPROM_ADDR + VIAL_ENCODERS_SIZE)
+
 #ifdef QMK_SETTINGS
 #include "qmk_settings.h"
 #define VIAL_QMK_SETTINGS_SIZE (sizeof(qmk_settings_t))
@@ -125,17 +116,6 @@ static pin_t encoders_pad_a[] = ENCODERS_PAD_A;
 #ifndef DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
 #    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (VIAL_KEY_OVERRIDE_EEPROM_ADDR + VIAL_KEY_OVERRIDE_SIZE)
 #endif
-
-// Dynamic macro starts after dynamic encoders, but only when using ENCODER_MAP
-#ifdef ENCODER_MAP_ENABLE
-#    ifndef DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
-#        define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (DYNAMIC_KEYMAP_ENCODER_EEPROM_ADDR + (DYNAMIC_KEYMAP_LAYER_COUNT * NUM_ENCODERS * 2 * 2))
-#    endif // DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
-#else      // ENCODER_MAP_ENABLE
-#    ifndef DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
-#        define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (DYNAMIC_KEYMAP_ENCODER_EEPROM_ADDR)
-#    endif // DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
-#endif     // ENCODER_MAP_ENABLE
 
 // Sanity check that dynamic keymaps fit in available EEPROM
 // If there's not 100 bytes available for macros, then something is wrong.
