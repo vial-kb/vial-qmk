@@ -6,7 +6,7 @@
 #define VIAL_UNLOCK_COMBO_ROWS {1, 4}
 #define VIAL_UNLOCK_COMBO_COLS {0, 6}
 
-/* Moves Bootmagic Lite key from "Esc" to "b" to avoid conflict with qmk-dfu
+/* Moves Bootmagic Lite key from "Esc" to "Left Control" to avoid conflict with qmk-dfu
  * See https://docs.qmk.fm/#/flashing?id=qmk-dfu */
-#define BOOTMAGIC_LITE_ROW 3
-#define BOOTMAGIC_LITE_COLUMN 6
+#define BOOTMAGIC_LITE_ROW 4
+#define BOOTMAGIC_LITE_COLUMN 0
