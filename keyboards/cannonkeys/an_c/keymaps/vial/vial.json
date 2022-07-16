@@ -1,5 +1,5 @@
 {
-    "lightning": "qmk_backlight_rgblight",
+    "lighting": "qmk_backlight_rgblight",
     "matrix": {"rows": 5, "cols": 15},
     "layouts": {
         "labels": [
