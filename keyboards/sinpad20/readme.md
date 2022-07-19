@@ -1,12 +1,12 @@
 # sinpad20
 
-![sinpad20](imgur.com image replace me!)
+![sinpad20](https://i.imgur.com/RZzWVGe.png)
 
-*A short description of the keyboard/project*
+https://github.com/CountKeepo/sinpad20
 
 * Keyboard Maintainer: [Count Keepo](https://github.com/CountKeepo)
-* Hardware Supported: *The PCBs, controllers supported*
-* Hardware Availability: *Links to where you can find this hardware*
+* Hardware Supported: *Pro Micro*
+* Hardware Availability: https://github.com/CountKeepo/sinpad20
 
 Make example for this keyboard (after setting up your build environment):
 
