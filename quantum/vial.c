@@ -44,10 +44,6 @@ _Static_assert(VIAL_UNLOCK_NUM_KEYS < 15, "Max 15 unlock keys");
 _Static_assert(sizeof(vial_unlock_combo_rows) == sizeof(vial_unlock_combo_cols), "The number of unlock cols and rows should be the same");
 #endif
 
-#ifndef VIAL_ENCODER_KEYCODE_DELAY
-#define VIAL_ENCODER_KEYCODE_DELAY 10
-#endif
-
 #include "qmk_settings.h"
 
 #ifdef VIAL_TAP_DANCE_ENABLE
@@ -123,7 +119,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
             memcpy_P(msg, &keyboard_definition[start], end - start);
             break;
         }
-#ifdef VIAL_ENCODERS_ENABLE
+#ifdef ENCODER_MAP_ENABLE
         case vial_get_encoder: {
             uint8_t layer = msg[2];
             uint8_t idx = msg[3];
@@ -325,39 +321,6 @@ void vial_keycode_tap(uint16_t keycode) {
     qs_wait_ms(QS_tap_code_delay);
     vial_keycode_up(keycode);
 }
-
-#ifdef VIAL_ENCODERS_ENABLE
-static void exec_keycode(uint16_t keycode) {
-    vial_keycode_down(keycode);
-
-#if VIAL_ENCODER_KEYCODE_DELAY > 0
-    wait_ms(VIAL_ENCODER_KEYCODE_DELAY);
-#endif
-
-    vial_keycode_up(keycode);
-}
-
-bool vial_encoder_update(uint8_t index, bool clockwise) {
-    uint16_t code;
-
-    layer_state_t layers = layer_state | default_layer_state;
-    /* check top layer first */
-    for (int8_t i = MAX_LAYER - 1; i >= 0; i--) {
-        if (layers & (1UL << i)) {
-            code = dynamic_keymap_get_encoder(i, index, clockwise);
-            if (code != KC_TRNS) {
-                exec_keycode(code);
-                return true;
-            }
-        }
-    }
-    /* fall back to layer 0 */
-    code = dynamic_keymap_get_encoder(0, index, clockwise);
-    exec_keycode(code);
-
-    return true;
-}
-#endif
 
 #ifdef VIAL_TAP_DANCE_ENABLE
 #include "process_tap_dance.h"

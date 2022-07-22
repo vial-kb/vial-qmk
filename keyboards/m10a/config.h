@@ -25,7 +25,7 @@
 #define PRODUCT_ID      0x00AA // 10-A
 #define DEVICE_VER      0x0001
 #define MANUFACTURER    RAMA WORKS
-#define PRODUCT         RAMA WORKS M10-A
+#define PRODUCT         M10-A
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -70,5 +70,3 @@
 //#define NO_ACTION_LAYER
 //#define NO_ACTION_TAPPING
 //#define NO_ACTION_ONESHOT
-//#define NO_ACTION_MACRO
-//#define NO_ACTION_FUNCTION
