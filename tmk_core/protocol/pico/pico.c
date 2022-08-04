@@ -272,9 +272,11 @@ void tud_hid_set_report_cb(uint8_t itf, uint8_t report_id, hid_report_type_t rep
             // LED status
             keyboard_indicator_led = buffer[0];
             break;
+#ifdef VIA_ENABLE
         case ITF_NUM_HID_RAW:
             raw_hid_receive((uint8_t*)buffer, bufsize);
             break;
+#endif
         default:
             break;
     }
