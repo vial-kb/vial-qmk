@@ -44,10 +44,6 @@ _Static_assert(VIAL_UNLOCK_NUM_KEYS < 15, "Max 15 unlock keys");
 _Static_assert(sizeof(vial_unlock_combo_rows) == sizeof(vial_unlock_combo_cols), "The number of unlock cols and rows should be the same");
 #endif
 
-#ifndef VIAL_ENCODER_KEYCODE_DELAY
-#define VIAL_ENCODER_KEYCODE_DELAY 10
-#endif
-
 #include "qmk_settings.h"
 
 #ifdef VIAL_TAP_DANCE_ENABLE
@@ -72,6 +68,12 @@ void vial_init(void) {
 #ifdef VIAL_KEY_OVERRIDE_ENABLE
     reload_key_override();
 #endif
+}
+
+__attribute__((unused)) static uint16_t vial_keycode_firewall(uint16_t in) {
+    if (in == RESET && !vial_unlocked)
+        return 0;
+    return in;
 }
 
 void vial_handle_cmd(uint8_t *msg, uint8_t length) {
@@ -117,7 +119,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
             memcpy_P(msg, &keyboard_definition[start], end - start);
             break;
         }
-#ifdef VIAL_ENCODERS_ENABLE
+#ifdef ENCODER_MAP_ENABLE
         case vial_get_encoder: {
             uint8_t layer = msg[2];
             uint8_t idx = msg[3];
@@ -130,7 +132,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
             break;
         }
         case vial_set_encoder: {
-            dynamic_keymap_set_encoder(msg[2], msg[3], msg[4], (msg[5] << 8) | msg[6]);
+            dynamic_keymap_set_encoder(msg[2], msg[3], msg[4], vial_keycode_firewall((msg[5] << 8) | msg[6]));
             break;
         }
 #endif
@@ -236,6 +238,10 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 uint8_t idx = msg[3];
                 vial_tap_dance_entry_t td;
                 memcpy(&td, &msg[4], sizeof(td));
+                td.on_tap = vial_keycode_firewall(td.on_tap);
+                td.on_hold = vial_keycode_firewall(td.on_hold);
+                td.on_double_tap = vial_keycode_firewall(td.on_double_tap);
+                td.on_tap_hold = vial_keycode_firewall(td.on_tap_hold);
                 msg[0] = dynamic_keymap_set_tap_dance(idx, &td);
                 reload_tap_dance();
                 break;
@@ -253,6 +259,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 uint8_t idx = msg[3];
                 vial_combo_entry_t entry;
                 memcpy(&entry, &msg[4], sizeof(entry));
+                entry.output = vial_keycode_firewall(entry.output);
                 msg[0] = dynamic_keymap_set_combo(idx, &entry);
                 reload_combo();
                 break;
@@ -270,6 +277,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 uint8_t idx = msg[3];
                 vial_key_override_entry_t entry;
                 memcpy(&entry, &msg[4], sizeof(entry));
+                entry.replacement = vial_keycode_firewall(entry.replacement);
                 msg[0] = dynamic_keymap_set_key_override(idx, &entry);
                 reload_key_override();
                 break;
@@ -313,39 +321,6 @@ void vial_keycode_tap(uint16_t keycode) {
     qs_wait_ms(QS_tap_code_delay);
     vial_keycode_up(keycode);
 }
-
-#ifdef VIAL_ENCODERS_ENABLE
-static void exec_keycode(uint16_t keycode) {
-    vial_keycode_down(keycode);
-
-#if VIAL_ENCODER_KEYCODE_DELAY > 0
-    wait_ms(VIAL_ENCODER_KEYCODE_DELAY);
-#endif
-
-    vial_keycode_up(keycode);
-}
-
-bool vial_encoder_update(uint8_t index, bool clockwise) {
-    uint16_t code;
-
-    layer_state_t layers = layer_state | default_layer_state;
-    /* check top layer first */
-    for (int8_t i = MAX_LAYER - 1; i >= 0; i--) {
-        if (layers & (1UL << i)) {
-            code = dynamic_keymap_get_encoder(i, index, clockwise);
-            if (code != KC_TRNS) {
-                exec_keycode(code);
-                return true;
-            }
-        }
-    }
-    /* fall back to layer 0 */
-    code = dynamic_keymap_get_encoder(0, index, clockwise);
-    exec_keycode(code);
-
-    return true;
-}
-#endif
 
 #ifdef VIAL_TAP_DANCE_ENABLE
 #include "process_tap_dance.h"

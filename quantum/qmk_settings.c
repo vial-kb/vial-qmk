@@ -10,10 +10,17 @@
 #include "process_combo.h"
 #include "action_tapping.h"
 
+static int eeprom_settings_get(const qmk_settings_proto_t *proto, void *setting, size_t maxsz);
+static int eeprom_settings_set(const qmk_settings_proto_t *proto, const void *setting, size_t maxsz);
+static int magic_settings_get(const qmk_settings_proto_t *proto, void *setting, size_t maxsz);
+static int magic_settings_set(const qmk_settings_proto_t *proto, const void *setting, size_t maxsz);
+
 qmk_settings_t QS;
 
-#define DECLARE_SETTING(id, field)  { .qsid=id, .ptr=&QS.field, .sz=sizeof(QS.field) }
-#define DECLARE_SETTING_CB(id, field, callback) { .qsid=id, .ptr=&QS.field, .sz=sizeof(QS.field), .cb=callback }
+#define DECLARE_SETTING_NOTIFY(id, _get, _set, _notify)  { .qsid=id, .get=_get, .set=_set, .notify=_notify }
+#define DECLARE_SETTING(id, _get, _set) DECLARE_SETTING_NOTIFY(id, _get, _set, NULL)
+#define DECLARE_STATIC_SETTING_NOTIFY(id, field, notify_)  { .qsid=id, .ptr=&QS.field, .sz=sizeof(QS.field), .get=eeprom_settings_get, .set=eeprom_settings_set, .notify=notify_ }
+#define DECLARE_STATIC_SETTING(id, field) DECLARE_STATIC_SETTING_NOTIFY(id, field, NULL)
 
 static void auto_shift_timeout_apply(void) {
     set_autoshift_timeout(QS.auto_shift_timeout);
@@ -33,38 +40,32 @@ static void mousekey_apply(void) {
 #endif
 
 static const qmk_settings_proto_t protos[] PROGMEM = {
-   DECLARE_SETTING(1, grave_esc_override),
-   DECLARE_SETTING(2, combo_term),
-   DECLARE_SETTING(3, auto_shift),
-   DECLARE_SETTING_CB(4, auto_shift_timeout, auto_shift_timeout_apply),
-   DECLARE_SETTING(5, osk_tap_toggle),
-   DECLARE_SETTING(6, osk_timeout),
-   DECLARE_SETTING(7, tapping_term),
-   DECLARE_SETTING(8, tapping),
+   DECLARE_STATIC_SETTING(1, grave_esc_override),
+   DECLARE_STATIC_SETTING(2, combo_term),
+   DECLARE_STATIC_SETTING(3, auto_shift),
+   DECLARE_STATIC_SETTING_NOTIFY(4, auto_shift_timeout, auto_shift_timeout_apply),
+   DECLARE_STATIC_SETTING(5, osk_tap_toggle),
+   DECLARE_STATIC_SETTING(6, osk_timeout),
+   DECLARE_STATIC_SETTING(7, tapping_term),
+   DECLARE_STATIC_SETTING(8, tapping),
 #ifdef MOUSEKEY_ENABLE
-   DECLARE_SETTING_CB(9, mousekey_delay, mousekey_apply),
-   DECLARE_SETTING_CB(10, mousekey_interval, mousekey_apply),
-   DECLARE_SETTING_CB(11, mousekey_move_delta, mousekey_apply),
-   DECLARE_SETTING_CB(12, mousekey_max_speed, mousekey_apply),
-   DECLARE_SETTING_CB(13, mousekey_time_to_max, mousekey_apply),
-   DECLARE_SETTING_CB(14, mousekey_wheel_delay, mousekey_apply),
-   DECLARE_SETTING_CB(15, mousekey_wheel_interval, mousekey_apply),
-   DECLARE_SETTING_CB(16, mousekey_wheel_max_speed, mousekey_apply),
-   DECLARE_SETTING_CB(17, mousekey_wheel_time_to_max, mousekey_apply),
+   DECLARE_STATIC_SETTING_NOTIFY(9, mousekey_delay, mousekey_apply),
+   DECLARE_STATIC_SETTING_NOTIFY(10, mousekey_interval, mousekey_apply),
+   DECLARE_STATIC_SETTING_NOTIFY(11, mousekey_move_delta, mousekey_apply),
+   DECLARE_STATIC_SETTING_NOTIFY(12, mousekey_max_speed, mousekey_apply),
+   DECLARE_STATIC_SETTING_NOTIFY(13, mousekey_time_to_max, mousekey_apply),
+   DECLARE_STATIC_SETTING_NOTIFY(14, mousekey_wheel_delay, mousekey_apply),
+   DECLARE_STATIC_SETTING_NOTIFY(15, mousekey_wheel_interval, mousekey_apply),
+   DECLARE_STATIC_SETTING_NOTIFY(16, mousekey_wheel_max_speed, mousekey_apply),
+   DECLARE_STATIC_SETTING_NOTIFY(17, mousekey_wheel_time_to_max, mousekey_apply),
 #endif
-   DECLARE_SETTING(18, tap_code_delay),
-   DECLARE_SETTING(19, tap_hold_caps_delay),
-   DECLARE_SETTING(20, tapping_toggle),
+   DECLARE_STATIC_SETTING(18, tap_code_delay),
+   DECLARE_STATIC_SETTING(19, tap_hold_caps_delay),
+   DECLARE_STATIC_SETTING(20, tapping_toggle),
+   DECLARE_SETTING(21, magic_settings_get, magic_settings_set),
 };
 
-static const qmk_settings_proto_t *find_setting(uint16_t qsid) {
-    for (size_t i = 0; i < sizeof(protos)/sizeof(*protos); ++i)
-        if (pgm_read_word(&protos[i].qsid) == qsid)
-            return &protos[i];
-    return NULL;
-}
-
-static void load_settings(void) {
+static void eeprom_settings_load(void) {
     for (size_t i = 0; i < sizeof(qmk_settings_t); ++i) {
         uint8_t byte;
         byte = dynamic_keymap_get_qmk_settings(i);
@@ -72,7 +73,7 @@ static void load_settings(void) {
     }
 }
 
-static void save_settings(void) {
+static void eeprom_settings_save(void) {
     for (size_t i = 0; i < sizeof(qmk_settings_t); ++i) {
         uint8_t old_byte, new_byte;
         old_byte = dynamic_keymap_get_qmk_settings(i);
@@ -82,14 +83,79 @@ static void save_settings(void) {
     }
 }
 
+static int eeprom_settings_get(const qmk_settings_proto_t *proto, void *setting, size_t maxsz) {
+    uint16_t sz = pgm_read_word(&proto->sz);
+    if (sz > maxsz)
+        return -1;
+    memcpy(setting, pgm_read_ptr(&proto->ptr), sz);
+    return 0;
+}
+
+static int eeprom_settings_set(const qmk_settings_proto_t *proto, const void *setting, size_t maxsz) {
+    uint16_t sz = pgm_read_word(&proto->sz);
+    if (pgm_read_word(&proto->sz) > maxsz)
+        return -1;
+    memcpy(pgm_read_ptr(&proto->ptr), setting, sz);
+    eeprom_settings_save();
+    return 0;
+}
+
+static int magic_settings_get(const qmk_settings_proto_t *proto, void *setting, size_t maxsz) {
+    uint32_t flags;
+
+    if (maxsz < sizeof(flags))
+        return -1;
+
+    flags = \
+        (keymap_config.swap_control_capslock << 0) |
+        (keymap_config.capslock_to_control << 1) |
+        (keymap_config.swap_lalt_lgui << 2) |
+        (keymap_config.swap_ralt_rgui << 3) |
+        (keymap_config.no_gui << 4) |
+        (keymap_config.swap_grave_esc << 5) |
+        (keymap_config.swap_backslash_backspace << 6) |
+        (keymap_config.nkro << 7) |
+        (keymap_config.swap_lctl_lgui << 8) |
+        (keymap_config.swap_rctl_rgui << 9) |
+        0;
+
+    memcpy(setting, &flags, sizeof(flags));
+    return 0;
+}
+
+static int magic_settings_set(const qmk_settings_proto_t *proto, const void *setting, size_t maxsz) {
+    uint32_t flags;
+
+    if (maxsz < sizeof(flags))
+        return -1;
+
+    memcpy(&flags, setting, sizeof(flags));
+
+    /* must call clear_keyboard for the NKRO setting to not cause stuck keys */
+    clear_keyboard();
+    keymap_config.swap_control_capslock = !!(flags & (1 << 0));
+    keymap_config.capslock_to_control = !!(flags & (1 << 1));
+    keymap_config.swap_lalt_lgui = !!(flags & (1 << 2));
+    keymap_config.swap_ralt_rgui = !!(flags & (1 << 3));
+    keymap_config.no_gui = !!(flags & (1 << 4));
+    keymap_config.swap_grave_esc = !!(flags & (1 << 5));
+    keymap_config.swap_backslash_backspace = !!(flags & (1 << 6));
+    keymap_config.nkro = !!(flags & (1 << 7));
+    keymap_config.swap_lctl_lgui = !!(flags & (1 << 8));
+    keymap_config.swap_rctl_rgui = !!(flags & (1 << 9));
+    eeconfig_update_keymap(keymap_config.raw);
+
+    return 0;
+}
+
 void qmk_settings_init(void) {
-    load_settings();
+    eeprom_settings_load();
     /* execute all callbacks to initialize the settings */
     for (size_t i = 0; i < sizeof(protos)/sizeof(*protos); ++i) {
         const qmk_settings_proto_t *proto = &protos[i];
-        qmk_setting_callback_t cb = pgm_read_ptr(&proto->cb);
-        if (cb)
-            cb();
+        qmk_settings_notify_t notify = pgm_read_ptr(&proto->notify);
+        if (notify)
+            notify();
     }
 }
 
@@ -119,7 +185,14 @@ void qmk_settings_reset(void) {
     QS.tap_hold_caps_delay = TAP_HOLD_CAPS_DELAY;
     QS.tapping_toggle = TAPPING_TOGGLE;
 
-    save_settings();
+    eeprom_settings_save();
+
+    /* must call clear_keyboard for the NKRO setting to not cause stuck keys */
+    clear_keyboard();
+    keymap_config.raw = 0;
+    keymap_config.oneshot_enable = 1;
+    eeconfig_update_keymap(keymap_config.raw);
+
     /* to trigger all callbacks */
     qmk_settings_init();
 }
@@ -144,23 +217,41 @@ void qmk_settings_query(uint16_t qsid_gt, void *buffer, size_t sz) {
     }
 }
 
+static const qmk_settings_proto_t *find_setting(uint16_t qsid) {
+    for (size_t i = 0; i < sizeof(protos)/sizeof(*protos); ++i)
+        if (pgm_read_word(&protos[i].qsid) == qsid)
+            return &protos[i];
+    return NULL;
+}
+
 int qmk_settings_get(uint16_t qsid, void *setting, size_t maxsz) {
     const qmk_settings_proto_t *proto = find_setting(qsid);
-    if (!proto || pgm_read_word(&proto->sz) > maxsz)
+    if (!proto)
         return -1;
-    memcpy(setting, pgm_read_ptr(&proto->ptr), pgm_read_word(&proto->sz));
-    return 0;
+
+    qmk_settings_get_t get = pgm_read_ptr(&proto->get);
+    if (!get)
+        return -1;
+
+    return get(proto, setting, maxsz);
 }
 
 int qmk_settings_set(uint16_t qsid, const void *setting, size_t maxsz) {
     const qmk_settings_proto_t *proto = find_setting(qsid);
-    if (!proto || pgm_read_word(&proto->sz) > maxsz)
+    if (!proto)
         return -1;
-    memcpy(pgm_read_ptr(&proto->ptr), setting, pgm_read_word(&proto->sz));
-    save_settings();
-    qmk_setting_callback_t cb = pgm_read_ptr(&proto->cb);
-    if (cb)
-        cb();
+
+    qmk_settings_set_t set = pgm_read_ptr(&proto->set);
+    if (!set)
+        return -1;
+
+    int ret = set(proto, setting, maxsz);
+    if (ret != 0)
+        return ret;
+
+    qmk_settings_notify_t notify = pgm_read_ptr(&proto->notify);
+    if (notify)
+        notify();
     return 0;
 }
 
