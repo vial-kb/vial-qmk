@@ -26,4 +26,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VIAL_KEYBOARD_UID {0x3B, 0x87, 0xE1, 0xE7, 0x57, 0x30, 0x78, 0x13}
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
 #define VIAL_UNLOCK_COMBO_COLS { 1, 4 }
-#define VIAL_ENCODER_DEFAULT { KC_VOLD, KC_VOLU, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_VOLD, KC_VOLU, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS }

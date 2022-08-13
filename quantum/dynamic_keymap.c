@@ -20,9 +20,20 @@
 #include "quantum.h" // for send_string()
 #include "dynamic_keymap.h"
 #include "via.h" // for default VIA_EEPROM_ADDR_END
+#include <string.h>
 
 #ifdef VIAL_ENABLE
 #include "vial.h"
+#endif
+
+#ifdef ENCODER_ENABLE
+#    include "encoder.h"
+#else
+#    define NUM_ENCODERS 0
+#endif
+
+#ifndef DYNAMIC_KEYMAP_LAYER_COUNT
+#    define DYNAMIC_KEYMAP_LAYER_COUNT 4
 #endif
 
 #ifndef DYNAMIC_KEYMAP_MACRO_COUNT
@@ -60,22 +71,13 @@
 
 // Encoders are located right after the dynamic keymap
 #define VIAL_ENCODERS_EEPROM_ADDR (DYNAMIC_KEYMAP_EEPROM_ADDR + (DYNAMIC_KEYMAP_LAYER_COUNT * MATRIX_ROWS * MATRIX_COLS * 2))
+#define DYNAMIC_KEYMAP_ENCODER_EEPROM_ADDR VIAL_ENCODERS_EEPROM_ADDR
 
-#ifdef VIAL_ENCODERS_ENABLE
-#ifdef SPLIT_KEYBOARD
-#define NUMBER_OF_ENCODERS (2 * sizeof(encoders_pad_a) / sizeof(pin_t))
-#else
-#define NUMBER_OF_ENCODERS (sizeof(encoders_pad_a) / sizeof(pin_t))
-#endif
-static pin_t encoders_pad_a[] = ENCODERS_PAD_A;
-#define VIAL_ENCODERS_SIZE (NUMBER_OF_ENCODERS * DYNAMIC_KEYMAP_LAYER_COUNT * 2 * 2)
-#else
-#define VIAL_ENCODERS_SIZE 0
-#endif
-
-#define VIAL_QMK_SETTINGS_EEPROM_ADDR (VIAL_ENCODERS_EEPROM_ADDR + VIAL_ENCODERS_SIZE)
+#define VIAL_ENCODERS_SIZE (NUM_ENCODERS * DYNAMIC_KEYMAP_LAYER_COUNT * 2 * 2)
 
 // QMK settings area is just past encoders
+#define VIAL_QMK_SETTINGS_EEPROM_ADDR (VIAL_ENCODERS_EEPROM_ADDR + VIAL_ENCODERS_SIZE)
+
 #ifdef QMK_SETTINGS
 #include "qmk_settings.h"
 #define VIAL_QMK_SETTINGS_SIZE (sizeof(qmk_settings_t))
@@ -101,9 +103,18 @@ static pin_t encoders_pad_a[] = ENCODERS_PAD_A;
 #define VIAL_COMBO_SIZE 0
 #endif
 
+// Key overrides
+#define VIAL_KEY_OVERRIDE_EEPROM_ADDR (VIAL_COMBO_EEPROM_ADDR + VIAL_COMBO_SIZE)
+
+#ifdef VIAL_KEY_OVERRIDE_ENABLE
+#define VIAL_KEY_OVERRIDE_SIZE (sizeof(vial_key_override_entry_t) * VIAL_KEY_OVERRIDE_ENTRIES)
+#else
+#define VIAL_KEY_OVERRIDE_SIZE 0
+#endif
+
 // Dynamic macro
 #ifndef DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
-#    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (VIAL_COMBO_EEPROM_ADDR + VIAL_COMBO_SIZE)
+#    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (VIAL_KEY_OVERRIDE_EEPROM_ADDR + VIAL_KEY_OVERRIDE_SIZE)
 #endif
 
 // Sanity check that dynamic keymaps fit in available EEPROM
@@ -129,9 +140,7 @@ void *dynamic_keymap_key_to_eeprom_address(uint8_t layer, uint8_t row, uint8_t c
 }
 
 uint16_t dynamic_keymap_get_keycode(uint8_t layer, uint8_t row, uint8_t column) {
-    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || row >= MATRIX_ROWS || column >= MATRIX_COLS)
-        return KC_NO;
-
+    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || row >= MATRIX_ROWS || column >= MATRIX_COLS) return KC_NO;
     void *address = dynamic_keymap_key_to_eeprom_address(layer, row, column);
     // Big endian, so we can read/write EEPROM directly from host if we want
     uint16_t keycode = eeprom_read_byte(address) << 8;
@@ -140,49 +149,35 @@ uint16_t dynamic_keymap_get_keycode(uint8_t layer, uint8_t row, uint8_t column) 
 }
 
 void dynamic_keymap_set_keycode(uint8_t layer, uint8_t row, uint8_t column, uint16_t keycode) {
-    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || row >= MATRIX_ROWS || column >= MATRIX_COLS)
-        return;
-
-#ifdef VIAL_ENABLE
-    if (keycode == RESET && !vial_unlocked)
-        return;
-#endif
-
+    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || row >= MATRIX_ROWS || column >= MATRIX_COLS) return;
     void *address = dynamic_keymap_key_to_eeprom_address(layer, row, column);
     // Big endian, so we can read/write EEPROM directly from host if we want
     eeprom_update_byte(address, (uint8_t)(keycode >> 8));
     eeprom_update_byte(address + 1, (uint8_t)(keycode & 0xFF));
 }
 
-#ifdef VIAL_ENCODERS_ENABLE
-static void *dynamic_keymap_encoder_to_eeprom_address(uint8_t layer, uint8_t idx, uint8_t dir) {
-    return ((void *)VIAL_ENCODERS_EEPROM_ADDR) + (layer * NUMBER_OF_ENCODERS * 2 * 2) + (idx * 2 * 2) + dir * 2;
+#ifdef ENCODER_MAP_ENABLE
+void *dynamic_keymap_encoder_to_eeprom_address(uint8_t layer, uint8_t encoder_id) {
+    return ((void *)DYNAMIC_KEYMAP_ENCODER_EEPROM_ADDR) + (layer * NUM_ENCODERS * 2 * 2) + (encoder_id * 2 * 2);
 }
 
-uint16_t dynamic_keymap_get_encoder(uint8_t layer, uint8_t idx, uint8_t dir) {
-    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || idx >= NUMBER_OF_ENCODERS || dir > 1)
-        return 0;
-
-    void *address = dynamic_keymap_encoder_to_eeprom_address(layer, idx, dir);
-    uint16_t keycode = eeprom_read_byte(address) << 8;
-    keycode |= eeprom_read_byte(address + 1);
+uint16_t dynamic_keymap_get_encoder(uint8_t layer, uint8_t encoder_id, bool clockwise) {
+    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || encoder_id >= NUM_ENCODERS) return KC_NO;
+    void *address = dynamic_keymap_encoder_to_eeprom_address(layer, encoder_id);
+    // Big endian, so we can read/write EEPROM directly from host if we want
+    uint16_t keycode = ((uint16_t)eeprom_read_byte(address + (clockwise ? 0 : 2))) << 8;
+    keycode |= eeprom_read_byte(address + (clockwise ? 0 : 2) + 1);
     return keycode;
 }
 
-void dynamic_keymap_set_encoder(uint8_t layer, uint8_t idx, uint8_t dir, uint16_t keycode) {
-    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || idx >= NUMBER_OF_ENCODERS || dir > 1)
-        return;
-
-#ifdef VIAL_ENABLE
-    if (keycode == RESET && !vial_unlocked)
-        return;
-#endif
-
-    void *address = dynamic_keymap_encoder_to_eeprom_address(layer, idx, dir);
-    eeprom_update_byte(address, (uint8_t)(keycode >> 8));
-    eeprom_update_byte(address + 1, (uint8_t)(keycode & 0xFF));
+void dynamic_keymap_set_encoder(uint8_t layer, uint8_t encoder_id, bool clockwise, uint16_t keycode) {
+    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT || encoder_id >= NUM_ENCODERS) return;
+    void *address = dynamic_keymap_encoder_to_eeprom_address(layer, encoder_id);
+    // Big endian, so we can read/write EEPROM directly from host if we want
+    eeprom_update_byte(address + (clockwise ? 0 : 2), (uint8_t)(keycode >> 8));
+    eeprom_update_byte(address + (clockwise ? 0 : 2) + 1, (uint8_t)(keycode & 0xFF));
 }
-#endif
+#endif // ENCODER_MAP_ENABLE
 
 #ifdef QMK_SETTINGS
 uint8_t dynamic_keymap_get_qmk_settings(uint16_t offset) {
@@ -246,10 +241,26 @@ int dynamic_keymap_set_combo(uint8_t index, const vial_combo_entry_t *entry) {
 }
 #endif
 
-#if defined(VIAL_ENCODERS_ENABLE) && defined(VIAL_ENCODER_DEFAULT)
-static const uint16_t PROGMEM vial_encoder_default[] = VIAL_ENCODER_DEFAULT;
-_Static_assert(sizeof(vial_encoder_default)/sizeof(*vial_encoder_default) == 2 * DYNAMIC_KEYMAP_LAYER_COUNT * NUMBER_OF_ENCODERS,
-    "There should be DYNAMIC_KEYMAP_LAYER_COUNT * NUMBER_OF_ENCODERS * 2 entries in the VIAL_ENCODER_DEFAULT array.");
+#ifdef VIAL_KEY_OVERRIDE_ENABLE
+int dynamic_keymap_get_key_override(uint8_t index, vial_key_override_entry_t *entry) {
+    if (index >= VIAL_KEY_OVERRIDE_ENTRIES)
+        return -1;
+
+    void *address = (void*)(VIAL_KEY_OVERRIDE_EEPROM_ADDR + index * sizeof(vial_key_override_entry_t));
+    eeprom_read_block(entry, address, sizeof(vial_key_override_entry_t));
+
+    return 0;
+}
+
+int dynamic_keymap_set_key_override(uint8_t index, const vial_key_override_entry_t *entry) {
+    if (index >= VIAL_KEY_OVERRIDE_ENTRIES)
+        return -1;
+
+    void *address = (void*)(VIAL_KEY_OVERRIDE_EEPROM_ADDR + index * sizeof(vial_key_override_entry_t));
+    eeprom_write_block(entry, address, sizeof(vial_key_override_entry_t));
+
+    return 0;
+}
 #endif
 
 void dynamic_keymap_reset(void) {
@@ -268,18 +279,12 @@ void dynamic_keymap_reset(void) {
                 dynamic_keymap_set_keycode(layer, row, column, pgm_read_word(&keymaps[layer][row][column]));
             }
         }
-
-#ifdef VIAL_ENCODERS_ENABLE
-    for (int idx = 0; idx < NUMBER_OF_ENCODERS; ++idx) {
-#ifdef VIAL_ENCODER_DEFAULT
-        dynamic_keymap_set_encoder(layer, idx, 0, pgm_read_word(&vial_encoder_default[2 * (layer * NUMBER_OF_ENCODERS + idx)]));
-        dynamic_keymap_set_encoder(layer, idx, 1, pgm_read_word(&vial_encoder_default[2 * (layer * NUMBER_OF_ENCODERS + idx) + 1]));
-#else
-        dynamic_keymap_set_encoder(layer, idx, 0, KC_TRNS);
-        dynamic_keymap_set_encoder(layer, idx, 1, KC_TRNS);
-#endif
-    }
-#endif
+#ifdef ENCODER_MAP_ENABLE
+        for (int encoder = 0; encoder < NUM_ENCODERS; encoder++) {
+            dynamic_keymap_set_encoder(layer, encoder, true, pgm_read_word(&encoder_map[layer][encoder][0]));
+            dynamic_keymap_set_encoder(layer, encoder, false, pgm_read_word(&encoder_map[layer][encoder][1]));
+        }
+#endif // ENCODER_MAP_ENABLE
     }
 
 #ifdef QMK_SETTINGS
@@ -297,6 +302,14 @@ void dynamic_keymap_reset(void) {
     vial_combo_entry_t combo = { 0 };
     for (size_t i = 0; i < VIAL_COMBO_ENTRIES; ++i)
         dynamic_keymap_set_combo(i, &combo);
+#endif
+
+#ifdef VIAL_KEY_OVERRIDE_ENABLE
+    vial_key_override_entry_t ko = { 0 };
+    ko.layers = ~0;
+    ko.options = vial_ko_option_activation_negative_mod_up | vial_ko_option_activation_required_mod_down | vial_ko_option_activation_trigger_down;
+    for (size_t i = 0; i < VIAL_KEY_OVERRIDE_ENTRIES; ++i)
+        dynamic_keymap_set_key_override(i, &ko);
 #endif
 
 #ifdef VIAL_ENABLE
@@ -393,9 +406,15 @@ uint16_t keymap_key_to_keycode(uint8_t layer, keypos_t key) {
 
     if (layer < DYNAMIC_KEYMAP_LAYER_COUNT && key.row < MATRIX_ROWS && key.col < MATRIX_COLS) {
         return dynamic_keymap_get_keycode(layer, key.row, key.col);
-    } else {
-        return KC_NO;
     }
+#ifdef ENCODER_MAP_ENABLE
+    else if (layer < DYNAMIC_KEYMAP_LAYER_COUNT && key.row == KEYLOC_ENCODER_CW && key.col < NUM_ENCODERS) {
+        return dynamic_keymap_get_encoder(layer, key.col, true);
+    } else if (layer < DYNAMIC_KEYMAP_LAYER_COUNT && key.row == KEYLOC_ENCODER_CCW && key.col < NUM_ENCODERS) {
+        return dynamic_keymap_get_encoder(layer, key.col, false);
+    }
+#endif // ENCODER_MAP_ENABLE
+    return KC_NO;
 }
 
 uint8_t dynamic_keymap_macro_get_count(void) {
@@ -439,6 +458,13 @@ void dynamic_keymap_macro_reset(void) {
         eeprom_update_byte(p, 0);
         ++p;
     }
+}
+
+static uint16_t decode_keycode(uint16_t kc) {
+    /* map 0xFF01 => 0x0100; 0xFF02 => 0x0200, etc */
+    if (kc > 0xFF00)
+        return (kc & 0xFF) << 8;
+    return kc;
 }
 
 void dynamic_keymap_macro_send(uint8_t id) {
@@ -495,6 +521,27 @@ void dynamic_keymap_macro_send(uint8_t id) {
                 data[2] = eeprom_read_byte(p++);
                 if (data[2] != 0)
                     send_string(data);
+            } else if (data[1] == VIAL_MACRO_EXT_TAP || data[1] == VIAL_MACRO_EXT_DOWN || data[1] == VIAL_MACRO_EXT_UP) {
+                data[2] = eeprom_read_byte(p++);
+                if (data[2] != 0) {
+                    data[3] = eeprom_read_byte(p++);
+                    if (data[3] != 0) {
+                        uint16_t kc;
+                        memcpy(&kc, &data[2], sizeof(kc));
+                        kc = decode_keycode(kc);
+                        switch (data[1]) {
+                        case VIAL_MACRO_EXT_TAP:
+                            vial_keycode_tap(kc);
+                            break;
+                        case VIAL_MACRO_EXT_DOWN:
+                            vial_keycode_down(kc);
+                            break;
+                        case VIAL_MACRO_EXT_UP:
+                            vial_keycode_up(kc);
+                            break;
+                        }
+                    }
+                }
             } else if (data[1] == SS_DELAY_CODE) {
                 // For delay, decode the delay and wait_ms for that amount
                 uint8_t d0 = eeprom_read_byte(p++);
