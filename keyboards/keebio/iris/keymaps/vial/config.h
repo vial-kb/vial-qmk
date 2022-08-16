@@ -21,5 +21,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define EE_HANDS
 #define VIAL_KEYBOARD_UID {0xBC, 0x99, 0xF2, 0x61, 0x45, 0x7C, 0xC8, 0xB9}
 
-#define VIAL_UNLOCK_COMBO_ROWS {0,4,5,9}
-#define VIAL_UNLOCK_COMBO_COLS {0,0,4,4}
+#define VIAL_UNLOCK_COMBO_ROWS {0,9}
+#define VIAL_UNLOCK_COMBO_COLS {0,5}
