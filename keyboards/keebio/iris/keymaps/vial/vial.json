@@ -4,7 +4,7 @@
         "rows": 10,
         "cols": 6
     },
-    "lighting":"none",
+    "lighting":"qmk_backlight_rgblight",
     "vendorId":"0x494b",
     "productId":"0x0001",
     "layouts": {
