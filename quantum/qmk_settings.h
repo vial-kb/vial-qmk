@@ -156,13 +156,21 @@ extern qmk_settings_t QS;
 #define QS_grave_esc_shift_override (QS.grave_esc_override & 8)
 
 /* Auto shift */
-#define QS_auto_shift_enable (QS.auto_shift & 1)
-#define QS_auto_shift_modifiers (QS.auto_shift & 2)
-#define QS_auto_shift_no_auto_shift_special (QS.auto_shift & 4)
-#define QS_auto_shift_no_auto_shift_numeric (QS.auto_shift & 8)
-#define QS_auto_shift_no_auto_shift_alpha (QS.auto_shift & 16)
-#define QS_auto_shift_repeat (QS.auto_shift & 32)
-#define QS_auto_shift_no_auto_repeat (QS.auto_shift & 64)
+#define _QS_auto_shift_enable_bit 1
+#define _QS_auto_shift_modifiers_bit 2
+#define _QS_auto_shift_no_auto_shift_special_bit 4
+#define _QS_auto_shift_no_auto_shift_numeric_bit 8
+#define _QS_auto_shift_no_auto_shift_alpha_bit 16
+#define _QS_auto_shift_repeat_bit 32
+#define _QS_auto_shift_no_auto_repeat_bit 64
+
+#define QS_auto_shift_enable (QS.auto_shift & _QS_auto_shift_enable_bit)
+#define QS_auto_shift_modifiers (QS.auto_shift & _QS_auto_shift_modifiers_bit)
+#define QS_auto_shift_no_auto_shift_special (QS.auto_shift & _QS_auto_shift_no_auto_shift_special_bit)
+#define QS_auto_shift_no_auto_shift_numeric (QS.auto_shift & _QS_auto_shift_no_auto_shift_numeric_bit)
+#define QS_auto_shift_no_auto_shift_alpha (QS.auto_shift & _QS_auto_shift_no_auto_shift_alpha_bit)
+#define QS_auto_shift_repeat (QS.auto_shift & _QS_auto_shift_no_auto_repeat_bit)
+#define QS_auto_shift_no_auto_repeat (QS.auto_shift & _QS_auto_shift_no_auto_repeat_bit)
 
 /* One Shot Keys */
 #define QS_oneshot_tap_toggle (QS.osk_tap_toggle)
