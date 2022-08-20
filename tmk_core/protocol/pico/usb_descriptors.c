@@ -144,7 +144,7 @@ uint8_t const desc_fs_configuration[] = {
     // address, size & polling interval
     TUD_HID_DESCRIPTOR(ITF_NUM_HID_KEYBOARD, 2, HID_ITF_PROTOCOL_NONE,
                        sizeof(desc_keyboard), EPNUM_HID_KEYBOARD_IN,
-                       CFG_TUD_HID_EP_BUFSIZE, 10),
+                       CFG_TUD_HID_EP_BUFSIZE, USB_POLLING_INTERVAL_MS),
     TUD_HID_INOUT_DESCRIPTOR(ITF_NUM_HID_RAW, 2, HID_ITF_PROTOCOL_NONE,
                              sizeof(desc_raw), EPNUM_HID_RAW_OUT,
                              EPNUM_HID_RAW_IN, CFG_TUD_HID_EP_BUFSIZE, 1),
