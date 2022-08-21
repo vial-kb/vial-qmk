@@ -22,10 +22,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // place overrides here
 
-
-#define VIAL_KEYBOARD_UID {0x46, 0x55, 0x43, 0x4B, 0x53, 0x48, 0x49, 0x54}
-#define VIAL_UNLOCK_COMBO_ROWS { 0, 2 }
-#define VIAL_UNLOCK_COMBO_COLS { 0, 13 }
+#define VIAL_KEYBOARD_UID {0xE4, 0x99, 0x35, 0x98, 0xBC, 0xC5, 0xA0, 0x11}
+#define VIAL_UNLOCK_COMBO_ROWS {4, 9}
+#define VIAL_UNLOCK_COMBO_COLS {4, 4}
 
 // If you need more program area, try select and reduce rgblight modes to use.
 
