@@ -271,7 +271,7 @@ int dynamic_keymap_set_key_override(uint8_t index, const vial_key_override_entry
 
 void dynamic_keymap_reset(void) {
 #ifdef VIAL_ENABLE
-    /* temporarily unlock the keyboard so we can set hardcoded RESET keycode */
+    /* temporarily unlock the keyboard so we can set hardcoded QK_BOOT keycode */
     int vial_unlocked_prev = vial_unlocked;
     vial_unlocked = 1;
 #endif
@@ -357,7 +357,7 @@ void dynamic_keymap_set_buffer(uint16_t offset, uint16_t size, uint8_t *data) {
         return;
 
 #ifndef VIAL_INSECURE
-    /* Check whether it is trying to send a RESET keycode; only allow setting these if unlocked */
+    /* Check whether it is trying to send a QK_BOOT keycode; only allow setting these if unlocked */
     if (!vial_unlocked) {
         /* how much of the input array we'll have to check in the loop */
         uint16_t chk_offset = 0;
@@ -366,7 +366,7 @@ void dynamic_keymap_set_buffer(uint16_t offset, uint16_t size, uint8_t *data) {
         /* initial byte misaligned -- this means the first keycode will be a combination of existing and new data */
         if (offset % 2 != 0) {
             uint16_t kc = (eeprom_read_byte((uint8_t*)target - 1) << 8) | data[0];
-            if (kc == RESET)
+            if (kc == QK_BOOT)
                 data[0] = 0xFF;
 
             /* no longer have to check the first byte */
@@ -376,17 +376,17 @@ void dynamic_keymap_set_buffer(uint16_t offset, uint16_t size, uint8_t *data) {
         /* final byte misaligned -- this means the last keycode will be a combination of new and existing data */
         if ((offset + size) % 2 != 0) {
             uint16_t kc = (data[size - 1] << 8) | eeprom_read_byte((uint8_t*)target + size);
-            if (kc == RESET)
+            if (kc == QK_BOOT)
                 data[size - 1] = 0xFF;
 
             /* no longer have to check the last byte */
             chk_sz -= 1;
         }
 
-        /* check the entire array, replace any instances of RESET with invalid keycode 0xFFFF */
+        /* check the entire array, replace any instances of QK_BOOT with invalid keycode 0xFFFF */
         for (uint16_t i = chk_offset; i < chk_sz; i += 2) {
             uint16_t kc = (data[i] << 8) | data[i + 1];
-            if (kc == RESET) {
+            if (kc == QK_BOOT) {
                 data[i] = 0xFF;
                 data[i + 1] = 0xFF;
             }

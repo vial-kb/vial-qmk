@@ -71,7 +71,7 @@ void vial_init(void) {
 }
 
 __attribute__((unused)) static uint16_t vial_keycode_firewall(uint16_t in) {
-    if (in == RESET && !vial_unlocked)
+    if (in == QK_BOOT && !vial_unlocked)
         return 0;
     return in;
 }
