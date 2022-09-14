@@ -5,3 +5,7 @@
 
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 5 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 3 }
+
+#if defined(__AVR_ATmega32U4__)
+    #define NO_ACTION_ONESHOT
+#endif
