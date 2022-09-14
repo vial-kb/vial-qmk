@@ -11,7 +11,9 @@
 #define CH_CFG_ST_TIMEDELTA                 0
 
 /* Workaround a bug in chibios where port_timer_enable is not defined for RP2040 in tick mode */
+#if !defined(_FROM_ASM_)
 void stBind(void);
 #define port_timer_enable(oip) stBind()
+#endif
 
 #include_next <chconf.h>
