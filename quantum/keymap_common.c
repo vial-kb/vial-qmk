@@ -84,7 +84,7 @@ action_t action_for_keycode(uint16_t keycode) {
             break;
         case QK_TO ... QK_TO_MAX:;
             // Layer set "GOTO"
-            action_layer = keycode & 0xFF;
+            action_layer = keycode & 0xF;
             action.code  = ACTION_LAYER_GOTO(action_layer);
             break;
         case QK_MOMENTARY ... QK_MOMENTARY_MAX:;
