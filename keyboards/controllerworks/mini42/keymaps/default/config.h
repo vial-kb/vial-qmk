@@ -14,11 +14,8 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#pragma once
 
-#define VIAL_KEYBOARD_UID {0x08, 0xE9, 0xFB, 0x54, 0x10, 0x3E, 0xE0, 0x63}
-#define VIAL_UNLOCK_COMBO_ROWS { 0, 1 }
-#define VIAL_UNLOCK_COMBO_COLS { 0, 0 }
+#pragma once
 
 #ifdef RGBLIGHT_ENABLE
 #    define RGBLED_NUM 54 // Number of LEDs
