@@ -1,8 +1,6 @@
 LTO_ENABLE = yes
 SPLIT_KEYBOARD = yes
 SERIAL_DRIVER = vendor
-# EEPROM_DRIVER = wear_leveling
-# WEAR_LEVELING_DRIVER = rp2040_flash
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output

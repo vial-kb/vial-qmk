@@ -1,8 +1,8 @@
 # mini42
 
-![mini42](imgur.com image replace me!)
+![mini42](https://i.imgur.com/xrSKhqR.png)
 
-*A short description of the keyboard/project*
+*A pre-built, low profile, split mechanical keyboard based on the RP2040 processor*
 
 * Keyboard Maintainer: [Kevin Gee](https://github.com/controller-works)
 * Hardware Supported: *mini42 split ergonomic keyboard*
@@ -10,18 +10,33 @@
 
 Make example for this keyboard (after setting up your build environment):
 
-    make mini42:default
+```sh
+    make controllerworks/mini42:default
+```
 
 Flashing example for this keyboard:
 
-    make mini42:default:flash
-
+```sh
+    make controllerworks/mini42:default:flash
+```
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
+## Features
+- Highly integrated design with microcontroller, USB and TRRS connectors, and OLED all integrated on the main board with no secondary modules
+- RP2040 processor by Raspberry Pi Foundation running at 130 MHz with 16MB flash memory
+- CNC milled aluminum case with only 8mm thickness
+- "PCB art" shine through back plate with gold surface finish
+- 128x32 OLED on each keyboard half
+- 42 per-key RGB LEDs and 12 backlight RGB LEDS are individually addressable
+- ESD and over-current protection on USB and TRRS connectors
+- Reset and boot tactile switches
+- USB C host connection
+- Hot swap connectors for Kailh Chocolate PG1350 switches
+- Chocolate key spacing (18mm horizontal x 17mm vertical)
 ## Bootloader
 
 Enter the bootloader in 3 ways:
 
-* **Bootmagic reset**: Hold down the key at (0,0) in the matrix (usually the top left key or Escape) and plug in the keyboard
-* **Physical reset button**: Briefly press the button on the back of the PCB - some may have pads you must short instead
+* **Bootmagic reset**: Hold down the upper left key on the left hand keyboard half or the upper right key on the right hand keyboard half while plugging in USB
+* **Physical reset button**: Press the RST button twice, rapidly
 * **Keycode in layout**: Press the key mapped to `QK_BOOT` if it is available

@@ -13,7 +13,7 @@
         "nkro": true
     },
     "processor": "RP2040",
-    "url": "https://controller.works",
+    "url": "https://controller.works/products/mini42-low-profile-ergonomic-keyboard",
     "usb": {
         "device_version": "1.0.0",
         "pid": "0x0003",
