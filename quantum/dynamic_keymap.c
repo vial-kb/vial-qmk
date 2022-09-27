@@ -39,13 +39,7 @@
 #    define NUM_ENCODERS 0
 #endif
 
-#ifndef DYNAMIC_KEYMAP_LAYER_COUNT
-#    define DYNAMIC_KEYMAP_LAYER_COUNT 4
-#endif
-
-#ifndef DYNAMIC_KEYMAP_MACRO_COUNT
-#    define DYNAMIC_KEYMAP_MACRO_COUNT 16
-#endif
+_Static_assert(DYNAMIC_KEYMAP_MACRO_COUNT+MACRO00 < USER00, "DYNAMIC_KEYMAP_MACRO_COUNT too big.");
 
 #ifndef TOTAL_EEPROM_BYTE_COUNT
 #    error Unknown total EEPROM size. Cannot derive maximum for dynamic keymaps.
