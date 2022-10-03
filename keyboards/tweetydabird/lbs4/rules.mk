@@ -1,34 +1,31 @@
-# MCU name
+# MCU type and Bootloader
 MCU = atmega32u4
-
-# Bootloader selection
-BOOTLOADER = caterina		# Caterina is the correct bootloader for a standard Pro Micro
-
-# Link Time Optimization
-LTO_ENABLE = yes			# Optimize size at compile (takes longer time)
-
-# Debug otions
-CONSOLE_ENABLE = no         # Console for debug
-COMMAND_ENABLE = no         # Commands for debug and configuration
+BOOTLOADER = caterina 		# Bootloader for ProMicro
+#BOOTLOADER = qmk-dfu		# Bootloader for Elite
 
 # Build Options
-BOOTMAGIC_ENABLE = yes      # Bootmagic Lite allows reset from key on plug-in
-
-MOUSEKEY_ENABLE = no        # Mouse keys
-AUDIO_ENABLE = no           # Audio output
-
-EXTRAKEY_ENABLE = yes       # Audio control and System control
+BOOTMAGIC_ENABLE = yes		# Bootmagic Lite allows reset from key on plug-in
 ENCODER_ENABLE = yes		# Rotary encoder
-
-NKRO_ENABLE = no            # USB Nkey Rollover, if this doesn't work, see here: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
+EXTRAKEY_ENABLE = yes		# Audio and System control
 
 # RGB and Backlight
-BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
-RGBLIGHT_ENABLE = yes        # Enable keyboard RGB underglow
-#RGB_MATRIX_ENABLE = yes		# Enable RGB matrix
-#RGB_MATRIX_DRIVER = WS2812	# Define matrix type
+BACKLIGHT_ENABLE = no		# Enable keyboard backlight functionality
+RGBLIGHT_ENABLE = yes		# Enable keyboard RGB underglow
 
-# Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
-SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
+SLEEP_LED_ENABLE = no		# Breathing sleep LED during USB suspend
+
+# Debug otions
+CONSOLE_ENABLE = no			# Console for debug
+COMMAND_ENABLE = no			# Commands for debug and configuration
+
+# Disabled to save space 
+#TAP_DANCE_ENABLE = no		# Allows assigning multiple keycodes to the same key
+MOUSEKEY_ENABLE = no        # Mouse keys
+AUDIO_ENABLE = no           # Audio output
+SPACE_CADET_ENABLE = no		# Use left/right shift for opening and closing parantesis
+GRAVE_ESC_ENABLE = no		# Allow Esc to act as ~ when needed
+MAGIC_ENABLE = no			# Allow remapping of modifiers for Win/iOS etc
+NKRO_ENABLE = no            # Allow more than 6 keys to be used at once
+
 
 

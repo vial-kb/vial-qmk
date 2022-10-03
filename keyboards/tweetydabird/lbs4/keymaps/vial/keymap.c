@@ -3,34 +3,30 @@
 
 #include QMK_KEYBOARD_H
 
-// Defines names for use in layer keycodes and the keymap
-enum layer_names {
-    _BASE,
-    _RGB
-};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    /* Base */
-    [_BASE] = LAYOUT(
-        TO(_RGB),	KC_MSEL,	KC_MPRV,	KC_MNXT,	KC_MPLY
+    [0] = LAYOUT(
+        RGB_TOG,	KC_MSEL,	KC_MPRV,	KC_MNXT,	KC_MPLY
     ),
-    [_RGB] = LAYOUT(
-        TO(_BASE),	RGB_VAI,	RGB_TOG,	RGB_VAD, 	RGB_TOG
+	
+	[1] = LAYOUT(
+        KC_TRNS, 	KC_TRNS,	KC_TRNS, 	KC_TRNS, 	KC_TRNS
+    ),
+	
+	[2] = LAYOUT(
+        KC_TRNS, 	KC_TRNS,	KC_TRNS, 	KC_TRNS, 	KC_TRNS
+    ),
+
+    [3] = LAYOUT(
+        KC_TRNS, 	KC_TRNS,	KC_TRNS, 	KC_TRNS, 	KC_TRNS
     )
 };
 
-#ifdef ENCODER_ENABLE
-
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) { /* First encoder */
-			if(clockwise){
-				tap_code(KC_VOLU);
-			} else {
-				tap_code(KC_VOLD);
-			}		
-        }
-    } 
-	return true;
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
+    [1] =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
+    [2] =  { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
+    [3] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  }
 };
-
 #endif
