@@ -7,9 +7,10 @@ BOOTLOADER = caterina 		# Bootloader for ProMicro
 BOOTMAGIC_ENABLE = yes		# Bootmagic Lite allows reset from key on plug-in
 ENCODER_ENABLE = yes		# Rotary encoder
 EXTRAKEY_ENABLE = yes		# Audio and System control
+TAP_DANCE_ENABLE = yes		# Allows assigning multiple keycodes to the same key
 
 # RGB and Backlight
-BACKLIGHT_ENABLE = no		# Enable keyboard backlight functionality
+BACKLIGHT_ENABLE = no		# No backlight functionality
 RGBLIGHT_ENABLE = yes		# Enable keyboard RGB underglow
 
 SLEEP_LED_ENABLE = no		# Breathing sleep LED during USB suspend
@@ -19,7 +20,6 @@ CONSOLE_ENABLE = no			# Console for debug
 COMMAND_ENABLE = no			# Commands for debug and configuration
 
 # Disabled to save space 
-#TAP_DANCE_ENABLE = no		# Allows assigning multiple keycodes to the same key
 MOUSEKEY_ENABLE = no        # Mouse keys
 AUDIO_ENABLE = no           # Audio output
 SPACE_CADET_ENABLE = no		# Use left/right shift for opening and closing parantesis
