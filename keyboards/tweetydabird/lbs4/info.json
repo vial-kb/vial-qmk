@@ -1,0 +1,97 @@
+{
+    "keyboard_name": "LittleBigScroll 4",
+	"manufacturer": "Tweetys Wild Thinking",
+	"url": "https://lectronz.com/stores/tweetys-wild-thinking",
+	"maintainer": "TweetyDaBird",	
+	
+	"development_board": "promicro",
+	"bootloader_instructions": "Short marked pads on PCB, or hold top-outer key when plugging in each hand.",
+	
+	"keyboard_folder": "tweetydabird/lbs4",
+	
+	"usb": {
+        "device_version": "1.1.1",
+        "pid": "0x23B0",
+        "vid": "0xFEED"
+    },
+	
+    "debounce": 5,
+	
+	"config_h_features": {
+        "audio": false,
+        "backlight": false,
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "encoder": true,
+        "extrakey": true,
+        "grave_esc": false,
+        "magic": false,
+        "mousekey": false,
+        "nkro": false,
+        "rgblight": true,
+        "sleep_led": false,
+        "space_cadet": false,
+		"tap_dance": false
+    },
+	
+	"features": {
+        "audio": false,
+        "backlight": false,
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "encoder": true,
+        "extrakey": true,
+        "grave_esc": false,
+        "magic": false,
+        "mousekey": false,
+        "nkro": false,
+        "rgblight": true,
+        "sleep_led": false,
+        "space_cadet": false,
+		"tap_dance": false
+    },
+	
+	"encoder": {
+        "enabled": true,
+        "rotary": [
+            {
+                "pin_a": "B1",
+                "pin_b": "F7",
+                "resolution": 4
+            }
+        ]
+    },
+    
+	"rgblight": {
+		"pin": "D2",
+		"led_count": 6,
+    },
+
+	"matrix_pins": {
+        "direct": [
+            ["E6", "D7", null],
+            ["B5", "B4", "F4"]
+        ]
+    },
+	
+    "matrix_size": {
+        "cols": 3,
+        "rows": 2
+    },
+    
+    "layouts": {
+        "LAYOUT": {
+            "layout": [	
+			{ "label": "Play", 	"matrix": [0, 2], "x": 2, "y": 0, "w": 2, "h": 2 }, 
+			
+			{ "label": "F1", 	"matrix": [0, 0], "x": 0, "y": 0, "w": 1, "h": 1 }, 
+			{ "label": "F2", 	"matrix": [0, 1], "x": 1, "y": 0, "w": 1, "h": 1 }, 
+			
+			{ "label": "F3", 	"matrix": [1, 0], "x": 0, "y": 1, "w": 1, "h": 1 },
+			{ "label": "F4", 	"matrix": [1, 1], "x": 1, "y": 1, "w": 1, "h": 1 },
+			]
+		}
+	}	
+}
