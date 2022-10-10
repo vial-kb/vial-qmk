@@ -183,7 +183,7 @@ void via_set_layout_options(uint32_t value) {
 bool process_record_via(uint16_t keycode, keyrecord_t *record) {
     // Handle macros
     if (record->event.pressed) {
-        if (keycode >= MACRO00 && keycode <= MACRO15) {
+        if (keycode >= MACRO00 && keycode <= MACRO00 + DYNAMIC_KEYMAP_MACRO_COUNT - 1) {
             uint8_t id = keycode - MACRO00;
             dynamic_keymap_macro_send(id);
             return false;

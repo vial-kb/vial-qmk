@@ -2,6 +2,7 @@
 
 #include <inttypes.h>
 #include <stddef.h>
+#include "quantum/action.h"
 
 /* take qmk config macros and set up helper variables for default settings */
 
@@ -146,6 +147,8 @@ void qmk_settings_reset(void);
 void qmk_settings_query(uint16_t qsid_gt, void *buffer, size_t sz);
 int qmk_settings_get(uint16_t qsid, void *setting, size_t maxsz);
 int qmk_settings_set(uint16_t qsid, const void *setting, size_t maxsz);
+
+uint16_t qs_get_tapping_term(uint16_t keycode, keyrecord_t *record);
 
 extern qmk_settings_t QS;
 
