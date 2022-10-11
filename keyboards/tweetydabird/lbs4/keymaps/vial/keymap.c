@@ -5,23 +5,27 @@
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-        RGB_TOG,	KC_MSEL,	
-		KC_MPRV,	KC_MNXT,	KC_MPLY
+        KC_MPLY,
+		RGB_TOG,	KC_MUTE,	
+		KC_MPRV,	KC_MNXT
     ),
 	
 	[1] = LAYOUT(
+		KC_TRNS,
         KC_TRNS, 	KC_TRNS,	
-		KC_TRNS, 	KC_TRNS, 	KC_TRNS
+		KC_TRNS, 	KC_TRNS
     ),
 	
 	[2] = LAYOUT(
-        KC_TRNS, 	KC_TRNS,	
-		KC_TRNS, 	KC_TRNS, 	KC_TRNS
+        KC_TRNS, 	
+		KC_TRNS,	KC_TRNS,
+		KC_TRNS, 	KC_TRNS
     ),
 
     [3] = LAYOUT(
-        KC_TRNS, 	KC_TRNS,	
-		KC_TRNS, 	KC_TRNS, 	KC_TRNS
+        KC_TRNS, 	
+		KC_TRNS,	KC_TRNS, 	
+		KC_TRNS, 	KC_TRNS
     )
 };
 
