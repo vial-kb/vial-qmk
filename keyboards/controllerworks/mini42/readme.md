@@ -1,6 +1,7 @@
 # mini42
 
-![mini42](https://i.imgur.com/xrSKhqR.png)
+![mini42](https://i.imgur.com/xrSKhqRh.png)
+![mini42PCB](https://i.imgur.com/R7u1KB8h.png)
 
 *A pre-built, low profile, split mechanical keyboard based on the RP2040 processor*
 
@@ -32,7 +33,7 @@ See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_to
 - Reset and boot tactile switches
 - USB C host connection
 - Hot swap connectors for Kailh Chocolate PG1350 switches
-- Chocolate key spacing (18mm horizontal x 17mm vertical)
+- Chocolate key spacing (18mm horizontal x 17mm vertical) 
 ## Bootloader
 
 Enter the bootloader in 3 ways:

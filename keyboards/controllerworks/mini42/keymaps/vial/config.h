@@ -20,13 +20,6 @@
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 1 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 0 }
 
-#ifdef RGBLIGHT_ENABLE
-#    define RGBLED_NUM 54 // Number of LEDs
-#    define RGBLED_SPLIT \
-        { 27, 27 }
-#    define RGBLIGHT_SPLIT
-#endif
-
 #ifdef RGB_MATRIX_ENABLE
 #    define RGBLED_NUM       54 // Number of LEDs
 #    define DRIVER_LED_TOTAL RGBLED_NUM
