@@ -1,4 +1,4 @@
-/* Copyright 2020 Erkki Halinen & Toni Johansson
+/* Copyright 2022 imchipwood && deveth0
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,26 +13,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #pragma once
-#include "config_common.h"
 
-/* key matrix size */
-#define MATRIX_ROWS 4
-#define MATRIX_COLS 10
+#include "quantum.h"
 
-/* prkl30 default pinout */
-#define MATRIX_ROW_PINS { D4, C6, D7, E6 }
-#define MATRIX_COL_PINS { B4, B5, F6, F5, F4, F7, B1, B3, B2, B6}
-/* COL2ROW, ROW2COL*/
-#define DIODE_DIRECTION COL2ROW
-#define ENCODERS_PAD_A { D3 }
-#define ENCODERS_PAD_B { D2 }
-#define ENCODER_RESOLUTION 4
 
-/* RGB Light Configuration */
-
-#define RGB_DI_PIN D1
-#define RGBLED_NUM 13
-#define RGBLIGHT_HUE_STEP 8
-#define RGBLIGHT_SAT_STEP 8
-#define RGBLIGHT_VAL_STEP 8
+#define LAYOUT( \
+             k01, k02, k03, k04, \
+             k11, k12, k13, k14, \
+             k21, k22, k23, k24, \
+        k30, k31, k32, k33, k34 \
+) \
+{ \
+    { KC_NO, k01, k02, k03, k04 }, \
+    { KC_NO, k11, k12, k13, k14 }, \
+    { KC_NO, k21, k22, k23, k24 }, \
+    { k30,   k31, k32, k33, k34 }, \
+}

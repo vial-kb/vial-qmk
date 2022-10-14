@@ -1,4 +1,4 @@
-/* Copyright 2020 Erkki Halinen & Toni Johansson
+/* Copyright 2022 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,26 +13,26 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 #pragma once
-#include "config_common.h"
 
-/* key matrix size */
-#define MATRIX_ROWS 4
-#define MATRIX_COLS 10
+#include "quantum.h"
 
-/* prkl30 default pinout */
-#define MATRIX_ROW_PINS { D4, C6, D7, E6 }
-#define MATRIX_COL_PINS { B4, B5, F6, F5, F4, F7, B1, B3, B2, B6}
-/* COL2ROW, ROW2COL*/
-#define DIODE_DIRECTION COL2ROW
-#define ENCODERS_PAD_A { D3 }
-#define ENCODERS_PAD_B { D2 }
-#define ENCODER_RESOLUTION 4
+#define XXX KC_NO
 
-/* RGB Light Configuration */
-
-#define RGB_DI_PIN D1
-#define RGBLED_NUM 13
-#define RGBLIGHT_HUE_STEP 8
-#define RGBLIGHT_SAT_STEP 8
-#define RGBLIGHT_VAL_STEP 8
+#define LAYOUT_numpad_6x4( \
+       K00, K01, K02, K03, \
+       K10, K11, K12, K13, \
+       K20, K21, K22,      \
+       K30, K31, K32, K23, \
+       K40, K41, K42,      \
+       K50,      K52, K43  \
+) \
+{ \
+    { K00, K01, K02, K03 }, \
+    { K10, K11, K12, K13 }, \
+    { K20, K21, K22, K23 }, \
+    { K30, K31, K32, XXX }, \
+    { K40, K41, K42, K43 }, \
+    { K50, XXX, K52, XXX }, \
+}
