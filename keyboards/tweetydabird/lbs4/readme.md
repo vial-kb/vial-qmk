@@ -2,7 +2,7 @@
 
 ![littlebigscroll4](https://i.imgur.com/MMGSDz2.jpg)
 
-* A simple, easy to build, low cost macro pad with 4 Cherry MX hot swap keys and a clickable encoder wheel
+A simple, easy to build, low cost macro pad with 4 Cherry MX hot swap keys and a clickable encoder wheel
 
 
 * Keyboard Maintainer: [Markus Knutsson](https://github.com/TweetyDaBird)
