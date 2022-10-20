@@ -1,0 +1,53 @@
+{
+    "manufacturer": "Count Keepo",
+    "keyboard_name": "sinpad20",
+    "maintainer": "CountKeepo",
+    "bootloader": "caterina",
+    "diode_direction": "COL2ROW",
+    "features": {
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true
+    },
+    "matrix_pins": {
+        "cols": ["C6", "D7", "E6", "B2"],
+        "rows": ["F4", "F5", "B6", "F7", "B1", "B3"]
+    },
+    "processor": "atmega32u4",
+    "url": "",
+    "usb": {
+        "device_version": "1.0.0",
+        "pid": "0x0001",
+        "vid": "0xCEE9"
+    },
+    "layouts": {
+        "LAYOUT_all": {
+            "layout": [
+                {"matrix":[2,3], "x":0, "y":0, "w":2, "h":2}, 
+                {"matrix":[0,2], "x":2.25, "y":0}, 
+                {"matrix":[0,3], "x":3.25, "y":0}, 
+                {"matrix":[1,2], "x":2.25, "y":1}, 
+                {"matrix":[1,3], "x":3.25, "y":1}, 
+                {"matrix":[2,0], "x":0, "y":2.25}, 
+                {"matrix":[2,1], "x":1, "y":2.25}, 
+                {"matrix":[2,2], "x":2, "y":2.25}, 
+                {"matrix":[3,3], "x":3.25, "y":2.25, "h":2}, 
+                {"matrix":[3,0], "x":0, "y":3.25}, 
+                {"matrix":[3,1], "x":1, "y":3.25}, 
+                {"matrix":[3,2], "x":2, "y":3.25}, 
+                {"matrix":[4,0], "x":0, "y":4.25}, 
+                {"matrix":[4,1], "x":1, "y":4.25}, 
+                {"matrix":[4,2], "x":2, "y":4.25}, 
+                {"matrix":[4,3], "x":3.25, "y":4.25}, 
+                {"matrix":[5,0], "x":0, "y":5.25}, 
+                {"matrix":[5,1], "x":1, "y":5.25}, 
+                {"matrix":[5,2], "x":2, "y":5.25}, 
+                {"matrix":[5,3], "x":3.25, "y":5.25}
+            ]
+            
+        }
+    }
+}

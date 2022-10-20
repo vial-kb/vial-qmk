@@ -22,6 +22,13 @@
 #include "via.h" // for default VIA_EEPROM_ADDR_END
 #include <string.h>
 
+#ifdef VIA_ENABLE
+#    include "via.h" // for VIA_EEPROM_CONFIG_END
+#    define DYNAMIC_KEYMAP_EEPROM_START (VIA_EEPROM_CONFIG_END)
+#else
+#    define DYNAMIC_KEYMAP_EEPROM_START (EECONFIG_SIZE)
+#endif
+
 #ifdef VIAL_ENABLE
 #include "vial.h"
 #endif
@@ -32,13 +39,7 @@
 #    define NUM_ENCODERS 0
 #endif
 
-#ifndef DYNAMIC_KEYMAP_LAYER_COUNT
-#    define DYNAMIC_KEYMAP_LAYER_COUNT 4
-#endif
-
-#ifndef DYNAMIC_KEYMAP_MACRO_COUNT
-#    define DYNAMIC_KEYMAP_MACRO_COUNT 16
-#endif
+_Static_assert(DYNAMIC_KEYMAP_MACRO_COUNT+MACRO00 < USER00, "DYNAMIC_KEYMAP_MACRO_COUNT too big.");
 
 #ifndef TOTAL_EEPROM_BYTE_COUNT
 #    error Unknown total EEPROM size. Cannot derive maximum for dynamic keymaps.
@@ -60,13 +61,8 @@
 #endif
 
 // If DYNAMIC_KEYMAP_EEPROM_ADDR not explicitly defined in config.h,
-// default it start after VIA_EEPROM_CUSTOM_ADDR+VIA_EEPROM_CUSTOM_SIZE
 #ifndef DYNAMIC_KEYMAP_EEPROM_ADDR
-#    ifdef VIA_EEPROM_CUSTOM_CONFIG_ADDR
-#        define DYNAMIC_KEYMAP_EEPROM_ADDR (VIA_EEPROM_CUSTOM_CONFIG_ADDR + VIA_EEPROM_CUSTOM_CONFIG_SIZE)
-#    else
-#        error DYNAMIC_KEYMAP_EEPROM_ADDR not defined
-#    endif
+#    define DYNAMIC_KEYMAP_EEPROM_ADDR DYNAMIC_KEYMAP_EEPROM_START
 #endif
 
 // Encoders are located right after the dynamic keymap
@@ -128,6 +124,10 @@ _Static_assert(DYNAMIC_KEYMAP_EEPROM_MAX_ADDR >= DYNAMIC_KEYMAP_MACRO_EEPROM_ADD
 // up to and including DYNAMIC_KEYMAP_EEPROM_MAX_ADDR.
 #ifndef DYNAMIC_KEYMAP_MACRO_EEPROM_SIZE
 #    define DYNAMIC_KEYMAP_MACRO_EEPROM_SIZE (DYNAMIC_KEYMAP_EEPROM_MAX_ADDR - DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR + 1)
+#endif
+
+#ifndef DYNAMIC_KEYMAP_MACRO_DELAY
+#    define DYNAMIC_KEYMAP_MACRO_DELAY TAP_CODE_DELAY
 #endif
 
 uint8_t dynamic_keymap_get_layer_count(void) {
@@ -265,24 +265,31 @@ int dynamic_keymap_set_key_override(uint8_t index, const vial_key_override_entry
 
 void dynamic_keymap_reset(void) {
 #ifdef VIAL_ENABLE
-    /* temporarily unlock the keyboard so we can set hardcoded RESET keycode */
+    /* temporarily unlock the keyboard so we can set hardcoded QK_BOOT keycode */
     int vial_unlocked_prev = vial_unlocked;
     vial_unlocked = 1;
 #endif
 
     // Reset the keymaps in EEPROM to what is in flash.
-    // All keyboards using dynamic keymaps should define a layout
-    // for the same number of layers as DYNAMIC_KEYMAP_LAYER_COUNT.
     for (int layer = 0; layer < DYNAMIC_KEYMAP_LAYER_COUNT; layer++) {
         for (int row = 0; row < MATRIX_ROWS; row++) {
             for (int column = 0; column < MATRIX_COLS; column++) {
-                dynamic_keymap_set_keycode(layer, row, column, pgm_read_word(&keymaps[layer][row][column]));
+                if (layer < keymap_layer_count()) {
+                    dynamic_keymap_set_keycode(layer, row, column, pgm_read_word(&keymaps[layer][row][column]));
+                } else {
+                    dynamic_keymap_set_keycode(layer, row, column, KC_TRANSPARENT);
+                }
             }
         }
 #ifdef ENCODER_MAP_ENABLE
         for (int encoder = 0; encoder < NUM_ENCODERS; encoder++) {
-            dynamic_keymap_set_encoder(layer, encoder, true, pgm_read_word(&encoder_map[layer][encoder][0]));
-            dynamic_keymap_set_encoder(layer, encoder, false, pgm_read_word(&encoder_map[layer][encoder][1]));
+            if (layer < encodermap_layer_count()) {
+                dynamic_keymap_set_encoder(layer, encoder, true, pgm_read_word(&encoder_map[layer][encoder][0]));
+                dynamic_keymap_set_encoder(layer, encoder, false, pgm_read_word(&encoder_map[layer][encoder][1]));
+            } else {
+                dynamic_keymap_set_encoder(layer, encoder, true, KC_TRANSPARENT);
+                dynamic_keymap_set_encoder(layer, encoder, false, KC_TRANSPARENT);
+            }
         }
 #endif // ENCODER_MAP_ENABLE
     }
@@ -344,7 +351,7 @@ void dynamic_keymap_set_buffer(uint16_t offset, uint16_t size, uint8_t *data) {
         return;
 
 #ifndef VIAL_INSECURE
-    /* Check whether it is trying to send a RESET keycode; only allow setting these if unlocked */
+    /* Check whether it is trying to send a QK_BOOT keycode; only allow setting these if unlocked */
     if (!vial_unlocked) {
         /* how much of the input array we'll have to check in the loop */
         uint16_t chk_offset = 0;
@@ -353,7 +360,7 @@ void dynamic_keymap_set_buffer(uint16_t offset, uint16_t size, uint8_t *data) {
         /* initial byte misaligned -- this means the first keycode will be a combination of existing and new data */
         if (offset % 2 != 0) {
             uint16_t kc = (eeprom_read_byte((uint8_t*)target - 1) << 8) | data[0];
-            if (kc == RESET)
+            if (kc == QK_BOOT)
                 data[0] = 0xFF;
 
             /* no longer have to check the first byte */
@@ -363,17 +370,17 @@ void dynamic_keymap_set_buffer(uint16_t offset, uint16_t size, uint8_t *data) {
         /* final byte misaligned -- this means the last keycode will be a combination of new and existing data */
         if ((offset + size) % 2 != 0) {
             uint16_t kc = (data[size - 1] << 8) | eeprom_read_byte((uint8_t*)target + size);
-            if (kc == RESET)
+            if (kc == QK_BOOT)
                 data[size - 1] = 0xFF;
 
             /* no longer have to check the last byte */
             chk_sz -= 1;
         }
 
-        /* check the entire array, replace any instances of RESET with invalid keycode 0xFFFF */
+        /* check the entire array, replace any instances of QK_BOOT with invalid keycode 0xFFFF */
         for (uint16_t i = chk_offset; i < chk_sz; i += 2) {
             uint16_t kc = (data[i] << 8) | data[i + 1];
-            if (kc == RESET) {
+            if (kc == QK_BOOT) {
                 data[i] = 0xFF;
                 data[i + 1] = 0xFF;
             }
@@ -554,7 +561,7 @@ void dynamic_keymap_macro_send(uint8_t id) {
             }
         } else {
             // If the char wasn't magic, just send it
-            send_string(data);
+            send_string_with_delay(data, DYNAMIC_KEYMAP_MACRO_DELAY);
         }
     }
 }
