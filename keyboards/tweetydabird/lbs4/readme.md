@@ -1,21 +1,21 @@
 # Little Big Scroll 4
 
-![littlebigscroll4](imgur.com image replace me!)
+![littlebigscroll4](https://i.imgur.com/MMGSDz2.jpg)
 
-* A simple, easy to build, low cost macro pad with 4 Cherry MX hot swap keys and a clickable encoder wheel*
+* A simple, easy to build, low cost macro pad with 4 Cherry MX hot swap keys and a clickable encoder wheel
 
 
 * Keyboard Maintainer: [Markus Knutsson](https://github.com/TweetyDaBird)
-* Hardware Supported: LittleBigScroll 4 PCB, Pro Micro or pin-compatible
+* Hardware Supported: [LittleBigScroll 4 PCB](https://github.com/TweetyDaBird/Little-Big-Scroll), Pro Micro or pin-compatible
 * Hardware Availability: https://lectronz.com/stores/tweetys-wild-thinking
 
-Make example for this keyboard (after setting up your build environment):
+## Make example for this keyboard (after setting up your build environment):
 
-    make tweetydabird\lbs4:default
+    make tweetydabird\lbs4:vial
 
 Flashing example for this keyboard:
 
-    make tweetydabird\lbs4:default:flash
+    make tweetydabird\lbs4:vial:flash
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
