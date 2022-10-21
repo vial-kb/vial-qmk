@@ -1,0 +1,102 @@
+{
+	"keyboard_name": "Little Big Scroll 6",
+	"manufacturer": "Tweetys Wild Thinking",
+	"url": "https://lectronz.com/stores/tweetys-wild-thinking",
+	"maintainer": "TweetyDaBird",	
+	
+	"development_board": "promicro",
+	"bootloader_instructions": "Short marked pads on PCB, or hold top left key when plugging in.",
+
+    "keyboard_folder": "tweetydabird/lbs6",                                                                
+
+    "usb": {                                                                                               
+        "device_version": "1.1.0",                                                                         
+        "pid": "0x23B0",                                                                                   
+        "vid": "0xFEED"                                                                                    
+    },          
+
+	"debounce": 5,
+	
+	"config_h_features": {                                                                                 
+        "audio": false,                                                                                    
+        "backlight": false,                                                                                
+        "bootmagic": true,                                                                                 
+        "command": false,                                                                                  
+        "console": false,                                                                                  
+        "encoder": true,                                                                                   
+        "extrakey": true,                                                                                  
+        "grave_esc": false,                                                                                
+        "magic": false,                                                                                    
+        "mousekey": false,                                                                                 
+        "nkro": false,                                                                                     
+        "rgblight": true,                                                                                  
+        "sleep_led": false,                                                                                
+        "space_cadet": false,                                                                              
+        "tap_dance": false                                                                                  
+    },                                                                                                     
+
+    "features": {                                                                                          
+        "audio": false,                                                                                    
+        "backlight": false,                                                                                
+        "bootmagic": true,                                                                                 
+        "command": false,                                                                                  
+        "console": false,                                                                                  
+        "encoder": true,                                                                                   
+        "extrakey": true,                                                                                  
+        "grave_esc": false,                                                                                
+        "magic": false,                                                                                    
+        "mousekey": false,                                                                                 
+        "nkro": false,                                                                                     
+        "rgblight": true,                                                                                  
+        "sleep_led": false,                                                                                
+        "space_cadet": false,                                                                              
+        "tap_dance": false                                                                                  
+    },                                                                                                     
+    
+    "encoder": {                                                                                           
+        "enabled": true,                                                                                   
+        "rotary": [                                                                                        
+            {                                                                                              
+                "pin_a": "F7",                                                                             
+                "pin_b": "F6",                                                                             
+                "resolution": 4                                                                            
+            }                                                                                              
+        ]                                                                                                  
+    },                                       
+	
+	"mouse_key": {                                                                                         
+        "enabled": false                                                                                   
+    },                                                                                                     
+    	
+    "rgblight": {                                                                                          
+        "pin": "D2",
+		"led_count": 8,
+    },                                                                                                     
+	
+    "matrix_pins": {                                                                                       
+        "direct": [                                                                                        
+            [null, "F5", null],                                                                            
+            ["D4", "D7", "B4"],                                                                            
+            ["C6", "E6", "B5"]                                                                             
+        ]                                                                                                  
+    },                                                                                                     
+    
+	"matrix_size": {                                                                                       
+        "cols": 3,                                                                                         
+        "rows": 3                                                                                          
+    },                                                                                                     
+    
+	"layouts": {                                                                                           
+        "LAYOUT": {                                                                                        
+            "layout": [                                                                                    
+                { "label": "ENC", "matrix": [0, 1], "w": 1, "x": 0, "y": 0 },                              
+                { "label": "K00", "matrix": [1, 0], "w": 1, "x": 1, "y": 0 },                              
+                { "label": "K01", "matrix": [1, 1], "w": 1, "x": 2, "y": 0 },                              
+                { "label": "K02", "matrix": [1, 2], "w": 1, "x": 3, "y": 0 },                              
+                { "label": "K03", "matrix": [2, 0], "w": 1, "x": 4, "y": 0 },                              
+                { "label": "K04", "matrix": [2, 1], "w": 1, "x": 5, "y": 0 },                              
+                { "label": "K05", "matrix": [2, 2], "w": 1, "x": 6, "y": 0 }                               
+            ]                                                                                              
+        }                                                                                                  
+    }                                                                                                      
+}                                                                                                          
