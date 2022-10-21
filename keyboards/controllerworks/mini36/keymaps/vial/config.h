@@ -16,9 +16,12 @@
  */
 
 #pragma once
+
+//#    Vial settings
 #define VIAL_KEYBOARD_UID {0x9A, 0x6F, 0xD4, 0xAB, 0x07, 0x83, 0xDC, 0x00}
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 1 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 0 }
+
 #ifdef RGB_MATRIX_ENABLE
 //#    define SPLIT_TRANSPORT_MIRROR
 #   define RGB_MATRIX_KEYPRESSES // reacts to keypresses
