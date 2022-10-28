@@ -2,7 +2,7 @@
 
     "manufacturer": "KAISER",
     "keyboard_name": "Libra Mini",
-    "maintainer": "Jakob Grønhaug",
+    "maintainer": "jakobkg",
     "usb": {
         "vid": "0x4C4D",
         "pid": "0x4C24",
