@@ -1,0 +1,52 @@
+/* SPDX-License-Identifier: GPL-2.0-or-later */
+
+#pragma once
+
+#define VIAL_KEYBOARD_UID {0xFB, 0xDF, 0x01, 0xD7, 0x67, 0x0D, 0x4B, 0x54}
+#define VIAL_UNLOCK_COMBO_ROWS { 1, 4 }
+#define VIAL_UNLOCK_COMBO_COLS { 0, 2 }
+
+
+#define DIRECT_PINS { \
+    { NO_PIN, NO_PIN, GP0  }, \
+    { GP1,    GP2,    GP3  }, \
+    { GP4,    GP5,    GP6  }, \
+    { GP7,    GP8,    GP9  }, \
+    { GP10,   GP11,   GP12 }  \
+}
+
+/* Encoders */
+#define ENCODERS_PAD_A { GP18 }
+#define ENCODERS_PAD_B { GP17 }
+
+#define DEBOUNCE 5
+
+/* Double tap the side button to enter bootloader */
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_LED GP13
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 500U
+
+
+#ifdef RGB_MATRIX_ENABLE
+
+     /* RGB Defines */
+#    define RGB_DI_PIN GP19
+#    define DRIVER_LED_TOTAL 12
+#    define RGBLED_NUM 12
+
+     /* Enable Framebuffer and keypress effects */
+#    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+#    define RGB_MATRIX_KEYPRESSES
+
+#    define ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN
+#    define ENABLE_RGB_MATRIX_GRADIENT_LEFT_RIGHT
+#    define ENABLE_RGB_MATRIX_TYPING_HEATMAP
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_WIDE
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_CROSS
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTICROSS
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_NEXUS
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTINEXUS
+#endif
