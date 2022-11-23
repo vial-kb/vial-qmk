@@ -487,7 +487,12 @@ static void reload_tap_dance(void) {
 #endif
 
 #ifdef TAPPING_TERM_PER_KEY
+/* allow overriding get_tapping_term if vial features are disabled */
+#if defined(VIAL_TAP_DANCE_ENABLE) || defined(QMK_SETTINGS)
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+#else
+__attribute__((weak)) uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+#endif // defined(VIAL_TAP_DANCE_ENABLE) || defined(QMK_SETTINGS)
 #ifdef VIAL_TAP_DANCE_ENABLE
     if (keycode >= QK_TAP_DANCE && keycode <= QK_TAP_DANCE_MAX) {
         vial_tap_dance_entry_t td;
