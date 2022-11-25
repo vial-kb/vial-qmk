@@ -9,8 +9,6 @@
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 4 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 3 }
 
-//#define VIAL_TAP_DANCE_ENTRIES 2
-
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x0002
 #define PRODUCT_ID      0x0002

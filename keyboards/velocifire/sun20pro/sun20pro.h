@@ -19,19 +19,6 @@
 
 #define XXX KC_NO
 
-/* maypad numpad layout
- * .-------------------.
- * |NLCK|   /|   *|   -|
- * |-------------------|
- * |   7|   8|   9|    |
- * |--------------|    |
- * |   4|   5|   6|   +|
- * |-------------------|
- * |   1|   2|   3|    |
- * |--------------|    |
- * |        0|   .| Ent|
- * '-------------------'
- */
 // The first section contains all of the arguments
 // The second converts the arguments into a two-dimensional array
 #define LAYOUT( \
