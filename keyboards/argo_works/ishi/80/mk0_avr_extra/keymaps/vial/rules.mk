@@ -10,5 +10,5 @@ ifeq ($(strip $(MCU)), atmega32u4)
     CONSOLE_ENABLE = no
     COMMAND_ENABLE = no
     MOUSEKEY_ENABLE = no
-    TAP_DANCE_ENABLE = no    # if space becomes an issue, uncomment
+    TAP_DANCE_ENABLE = no
 endif
