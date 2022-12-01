@@ -16,8 +16,10 @@
 
 #include QMK_KEYBOARD_H
 
-#define BL 0
-#define UL 1
+enum custom_layers {
+    BL,
+    UL,
+};
 
 // OLED setup for bongocat
 #define IDLE_FRAMES 5
