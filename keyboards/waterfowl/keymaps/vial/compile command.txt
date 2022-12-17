@@ -1,0 +1,1 @@
+qmk compile -kb waterfowl -km vial
