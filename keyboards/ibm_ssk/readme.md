@@ -5,8 +5,8 @@
 *A short description of the keyboard/project*
 
 * Keyboard Maintainer: [RoastPotatoes](https://github.com/RoastPotatoes)
-* Hardware Supported: *The PCBs, controllers supported*
-* Hardware Availability: *Links to where you can find this hardware*
+* Hardware Supported: Aftermarket Model M Controller from Taobao uses stm32f401
+* Hardware Availability: [taobao link](https://h5.m.goofish.com/item?id=656161512104&spm=widle.12011849.0.0)
 
 Make example for this keyboard (after setting up your build environment):
 
