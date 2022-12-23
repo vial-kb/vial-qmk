@@ -4,7 +4,7 @@
 
 *A short description of the keyboard/project*
 
-* Keyboard Maintainer: [t](https://github.com/RoastPotatoes)
+* Keyboard Maintainer: [RoastPotatoes](https://github.com/RoastPotatoes)
 * Hardware Supported: *The PCBs, controllers supported*
 * Hardware Availability: *Links to where you can find this hardware*
 
