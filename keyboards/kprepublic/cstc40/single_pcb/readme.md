@@ -3,13 +3,16 @@
 A 40% hotswap ortholinear RGB keyboard from KP Republic.
 
 * Keyboard Maintainer: [Var](https://github.com/itsvar8)
-* Hardware Supported: CSTC40
+* Hardware Supported: CSTC40 (STM32F402 - without daughterboard version)
 * Hardware Availability: kprepublic.com
 
 Make example for this keyboard (after setting up your build environment):
 
-    for daughterboard version: make kprepublic/cstc40/daughterboard:default
-    for single pcb version: make kprepublic/cstc40/single_pcb:default
+    make cstc40:default
+
+Flashing example for this keyboard:
+
+    make cstc40:default:flash
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
