@@ -46,3 +46,10 @@
 
 /* override number of MIDI tone keycodes (each octave adds 12 keycodes and allocates 12 bytes) */
 //#define MIDI_TONE_KEYCODE_OCTAVES 2
+
+
+
+/* SPDX-License-Identifier: GPL-2.0-or-later */
+
+#pragma once
+#define VIAL_KEYBOARD_UID {0xBC, 0xFA, 0x5F, 0x10, 0xE9, 0x3D, 0xFE, 0x06}
