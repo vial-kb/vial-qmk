@@ -44,10 +44,6 @@ _Static_assert(VIAL_UNLOCK_NUM_KEYS < 15, "Max 15 unlock keys");
 _Static_assert(sizeof(vial_unlock_combo_rows) == sizeof(vial_unlock_combo_cols), "The number of unlock cols and rows should be the same");
 #endif
 
-#ifndef VIAL_ENCODER_KEYCODE_DELAY
-#define VIAL_ENCODER_KEYCODE_DELAY 10
-#endif
-
 #include "qmk_settings.h"
 
 #ifdef VIAL_TAP_DANCE_ENABLE
@@ -75,7 +71,7 @@ void vial_init(void) {
 }
 
 __attribute__((unused)) static uint16_t vial_keycode_firewall(uint16_t in) {
-    if (in == RESET && !vial_unlocked)
+    if (in == QK_BOOT && !vial_unlocked)
         return 0;
     return in;
 }
@@ -123,7 +119,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
             memcpy_P(msg, &keyboard_definition[start], end - start);
             break;
         }
-#ifdef VIAL_ENCODERS_ENABLE
+#ifdef ENCODER_MAP_ENABLE
         case vial_get_encoder: {
             uint8_t layer = msg[2];
             uint8_t idx = msg[3];
@@ -326,39 +322,6 @@ void vial_keycode_tap(uint16_t keycode) {
     vial_keycode_up(keycode);
 }
 
-#ifdef VIAL_ENCODERS_ENABLE
-static void exec_keycode(uint16_t keycode) {
-    vial_keycode_down(keycode);
-
-#if VIAL_ENCODER_KEYCODE_DELAY > 0
-    wait_ms(VIAL_ENCODER_KEYCODE_DELAY);
-#endif
-
-    vial_keycode_up(keycode);
-}
-
-bool vial_encoder_update(uint8_t index, bool clockwise) {
-    uint16_t code;
-
-    layer_state_t layers = layer_state | default_layer_state;
-    /* check top layer first */
-    for (int8_t i = MAX_LAYER - 1; i >= 0; i--) {
-        if (layers & (1UL << i)) {
-            code = dynamic_keymap_get_encoder(i, index, clockwise);
-            if (code != KC_TRNS) {
-                exec_keycode(code);
-                return true;
-            }
-        }
-    }
-    /* fall back to layer 0 */
-    code = dynamic_keymap_get_encoder(0, index, clockwise);
-    exec_keycode(code);
-
-    return true;
-}
-#endif
-
 #ifdef VIAL_TAP_DANCE_ENABLE
 #include "process_tap_dance.h"
 
@@ -515,15 +478,28 @@ qk_tap_dance_action_t tap_dance_actions[VIAL_TAP_DANCE_ENTRIES] = { };
 /* Load timings from eeprom into custom_tapping_term */
 static void reload_tap_dance(void) {
     for (size_t i = 0; i < VIAL_TAP_DANCE_ENTRIES; ++i) {
-        vial_tap_dance_entry_t td;
         tap_dance_actions[i].fn.on_each_tap = on_dance;
         tap_dance_actions[i].fn.on_dance_finished = on_dance_finished;
         tap_dance_actions[i].fn.on_reset = on_dance_reset;
         tap_dance_actions[i].user_data = (void*)i;
-        if (dynamic_keymap_get_tap_dance(i, &td) == 0) {
-            tap_dance_actions[i].custom_tapping_term = td.custom_tapping_term;
-        }
     }
+}
+#endif
+
+#ifdef TAPPING_TERM_PER_KEY
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+#ifdef VIAL_TAP_DANCE_ENABLE
+    if (keycode >= QK_TAP_DANCE && keycode <= QK_TAP_DANCE_MAX) {
+        vial_tap_dance_entry_t td;
+        if (dynamic_keymap_get_tap_dance(keycode & 0xFF, &td) == 0)
+            return td.custom_tapping_term;
+    }
+#endif
+#ifdef QMK_SETTINGS
+    return qs_get_tapping_term(keycode, record);
+#else
+    return TAPPING_TERM;
+#endif
 }
 #endif
 

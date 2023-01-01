@@ -1,6 +1,6 @@
 # cantor
 
-![cantor](https://i.imgur.com/Uvxm3zV.jpg)
+![cantor](https://i.imgur.com/Uvxm3zVh.jpg)
 
 The Cantor keyboard is a 42 key diodeless split keyboard, designed with simplicity in mind. It is inspired on the popular [corne](https://github.com/foostan/crkbd), [ferris](https://github.com/pierrechevalier83/ferris) and [sweep](https://github.com/davidphilipbarr/Sweep) keyboards, aiming to provide a more ergonomic (stronger column stagger) corne-like layout with a simple, easy to assemble and cheap design.
 
@@ -27,4 +27,4 @@ Enter the bootloader in 3 ways:
   * Press and hold the BOOT0 button.
   * Press and release the NRST button.
   * Release the BOOT0 button.
-* **Keycode in layout**: Press the key mapped to `RESET` if it is available
+* **Keycode in layout**: Press the key mapped to `QK_BOOT` if it is available
