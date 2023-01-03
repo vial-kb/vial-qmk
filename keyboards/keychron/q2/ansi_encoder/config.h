@@ -16,14 +16,13 @@
 
 #pragma once
 
-#include "quantum.h"
+/* RGB Matrix Configuration */
+#define DRIVER_1_LED_TOTAL 34
+#define DRIVER_2_LED_TOTAL 33
+#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-#if   defined(KEYBOARD_keychron_q2_ansi)
-#    include "ansi.h"
-#elif defined(KEYBOARD_keychron_q2_ansi_encoder)
-#    include "ansi_encoder.h"
-#elif defined(KEYBOARD_keychron_q2_iso)
-#    include "iso.h"
-#elif defined(KEYBOARD_keychron_q2_iso_encoder)
-#    include "iso_encoder.h"
-#endif
+/* Encoder used pins */
+#define ENCODERS_PAD_A { A10 }
+#define ENCODERS_PAD_B { B5 }
+#define ENCODER_RESOLUTION 4
+#define ENCODER_DEFAULT_POS 0x3

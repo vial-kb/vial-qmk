@@ -17,13 +17,3 @@
 #pragma once
 
 #include "quantum.h"
-
-#if   defined(KEYBOARD_keychron_q2_ansi)
-#    include "ansi.h"
-#elif defined(KEYBOARD_keychron_q2_ansi_encoder)
-#    include "ansi_encoder.h"
-#elif defined(KEYBOARD_keychron_q2_iso)
-#    include "iso.h"
-#elif defined(KEYBOARD_keychron_q2_iso_encoder)
-#    include "iso_encoder.h"
-#endif
