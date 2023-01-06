@@ -4,7 +4,7 @@
 
 A macropad that have 4-key keyboard made by DOIO, which controlled by an APM32F103CBT6 chipset. The keyboard features per-key RGB and 1 encoder.
 
-There are three keymaps: default, vial, and vial-inverted. vial-inverted is intended for use when the keyboard is plugged in upside down (with the encoder at the top).
+There are four keymaps: default, via, vial, and vial-inverted. vial-inverted is intended for use when the keyboard is plugged in upside down (with the encoder at the top).
 
 * Keyboard Maintainer: [filmstarr](https://github.com/filmstarr)
 * Hardware Supported: DOIO Knob Board - KB04

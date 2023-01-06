@@ -17,3 +17,6 @@
 #pragma once
 
 #define VIAL_KEYBOARD_UID {0x11, 0x10, 0xF5, 0xD0, 0x98, 0x20, 0xE9, 0xF6}
+
+#define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
+#define VIAL_UNLOCK_COMBO_COLS { 0, 3 }
