@@ -249,11 +249,6 @@ void matrix_print(void){
 
 }
 
-bool matrix_is_on(uint8_t row, uint8_t col)
-{
-    return (matrix_get_row(row) & (1<<col));
-}
-
 inline
 matrix_row_t matrix_get_row(uint8_t row)
 {
