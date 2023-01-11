@@ -1,0 +1,66 @@
+{
+  "name": "Winry315",
+  "vendorId": "0xF1F1",
+  "productId": "0x0315",
+  "lighting": {
+    "extends": "qmk_rgblight",
+    "underglowEffects": [
+      ["None", 0],
+      ["Solid Color", 1],
+      ["Breathing", 1],
+      ["Cycle All", 1]
+    ],
+    "supportedLightingValues": [
+      128,
+      129,
+      130,
+      131
+    ]
+  },
+  "matrix": {
+    "rows": 1,
+    "cols": 24
+  },
+  "layouts": {
+    "labels": [
+      [
+        "Encoder Side",
+        "Top",
+        "Left",
+        "Right",
+        "Bottom"
+      ]
+    ],
+    "keymap": [
+		{
+			"name": "Winry315 Macropad"
+		},
+		[
+			{
+				"y":0.25,"x":0.5
+			},
+			"0,0\n\n\n\n\n\n\n\n\ne",
+			{
+				"x":0.5
+			},
+			"0,1\n\n\n\n\n\n\n\n\ne",
+			{
+				"x":0.5
+			},
+			"0,2\n\n\n\n\n\n\n\n\ne"
+		],
+		[
+			{
+				"y":0.5
+			},
+			"0,0","1,0","2,0","3,0","4,0"
+		],
+		[
+			"0,1","1,1","2,1","3,1","4,1"
+		],
+		[
+			"0,2","1,2","2,2","3,2","4,2"
+		]
+	]
+  }
+}
