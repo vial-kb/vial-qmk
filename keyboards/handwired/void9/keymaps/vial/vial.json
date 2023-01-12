@@ -1,0 +1,78 @@
+{
+    "name":"VOID9",
+    "vendorId":"0xF055",
+    "productId":"0x3534",
+    "lighting":"none",
+    "matrix":{
+        "rows":3,
+        "cols":3
+    },
+    "layouts":{
+        "labels":[
+            [
+                "Encoder",
+                "None",
+                "Upper Left",
+                "Upper Right",
+                "Both"
+            ]
+		],
+        "keymap":[
+            [
+                "0,0\n\n\n0,3\n\n\n\n\n\ne",
+                "0,1\n\n\n0,3\n\n\n\n\n\ne",
+            {
+                "x": 3.5
+            },
+                "1,0\n\n\n0,3\n\n\n\n\n\ne",
+                "1,1\n\n\n0,3\n\n\n\n\n\ne"
+            ],
+            [
+                {
+                    "w": 2,
+                    "d": true
+                },
+                    "\n\n\n0,2",
+                {
+                    "x": 3.5
+                },
+                "1,0\n\n\n0,2\n\n\n\n\n\ne",
+                "1,1\n\n\n0,2\n\n\n\n\n\ne"
+            ],
+            [
+                "0,0\n\n\n0,1\n\n\n\n\n\ne",
+                "0,1\n\n\n0,1\n\n\n\n\n\ne"
+            ],
+            [
+                {
+                    "y": 0.25,
+                    "w": 2,
+                    "d": true
+                },
+                "\n\n\n0,0",
+                {
+                    "x": 0.25
+                },
+                "0,0",
+                "0,1",
+                "0,2"
+            ],
+            [
+                {
+                    "x": 2.25
+                },
+                "1,0",
+                "1,1",
+                "1,2"
+            ],
+            [
+                {
+                    "x": 2.25
+                },
+                "2,0",
+                "2,1",
+                "2,2"
+            ]
+        ]
+    }
+}
