@@ -5,10 +5,19 @@
   "lighting": {
     "extends": "qmk_rgblight",
     "underglowEffects": [
-      ["None", 0],
+    ["None", 0],
       ["Solid Color", 1],
-      ["Breathing", 1],
-      ["Cycle All", 1]
+      ["Solid - Highlighted Encoders", 1],
+      ["Vertical Gradient", 1],
+      ["Horizontal Gradient", 1],
+      ["Colorband - Saturation", 1],
+      ["Colorband - Brightness", 1],
+      ["Dual Beacon", 1],
+      ["Jellybean Raindrops", 1],
+      ["Hue Breathing", 1],
+      ["Hue Pendulum", 1],
+      ["Hue Wave", 1],
+      ["Pixel Rain", 1]
     ],
     "supportedLightingValues": [
       128,
@@ -18,8 +27,8 @@
     ]
   },
   "matrix": {
-    "rows": 1,
-    "cols": 24
+    "rows": 5,
+    "cols": 9
   },
   "layouts": {
     "labels": [
@@ -35,32 +44,54 @@
 		{
 			"name": "Winry315 Macropad"
 		},
-		[
-			{
-				"y":0.25,"x":0.5
-			},
-			"0,0\n\n\n\n\n\n\n\n\ne",
-			{
-				"x":0.5
-			},
-			"0,1\n\n\n\n\n\n\n\n\ne",
-			{
-				"x":0.5
-			},
-			"0,2\n\n\n\n\n\n\n\n\ne"
-		],
-		[
-			{
-				"y":0.5
-			},
-			"0,0","1,0","2,0","3,0","4,0"
-		],
-		[
-			"0,1","1,1","2,1","3,1","4,1"
-		],
-		[
-			"0,2","1,2","2,2","3,2","4,2"
+		
+			[
+				"0,0\n\n\n\n\n\n\n\n\ne",
+				"0,1\n\n\n\n\n\n\n\n\ne",
+				"1,0\n\n\n\n\n\n\n\n\ne",
+				"1,1\n\n\n\n\n\n\n\n\ne",
+				"2,0\n\n\n\n\n\n\n\n\ne",
+				"2,1\n\n\n\n\n\n\n\n\ne"
+			],
+			[
+				{
+					"x": 0.5
+				},
+				"0,0",
+				{
+					"x": 1
+				},
+				"0,2",
+				{
+					"x": 1
+				},
+				"0,4"
+			],
+			[
+				{
+					"y": 0.5
+				},
+				"1,0",
+				"1,1",
+				"1,2",
+				"1.3",
+				"1.4"
+			],
+			[
+				"2,0",
+				"2,1",
+				"2,2",
+				"2,3",
+				"2,4"
+			],
+			[
+				"3,0",
+				"3,1",
+				"3,2",
+				"3,3",
+				"3,4"
+			]
 		]
-	]
+	
   }
 }
