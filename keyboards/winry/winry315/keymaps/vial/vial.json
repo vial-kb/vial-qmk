@@ -2,30 +2,7 @@
   "name": "Winry315",
   "vendorId": "0xF1F1",
   "productId": "0x0315",
-  "lighting": {
-    "extends": "qmk_rgblight",
-    "underglowEffects": [
-    ["None", 0],
-      ["Solid Color", 1],
-      ["Solid - Highlighted Encoders", 1],
-      ["Vertical Gradient", 1],
-      ["Horizontal Gradient", 1],
-      ["Colorband - Saturation", 1],
-      ["Colorband - Brightness", 1],
-      ["Dual Beacon", 1],
-      ["Jellybean Raindrops", 1],
-      ["Hue Breathing", 1],
-      ["Hue Pendulum", 1],
-      ["Hue Wave", 1],
-      ["Pixel Rain", 1]
-    ],
-    "supportedLightingValues": [
-      128,
-      129,
-      130,
-      131
-    ]
-  },
+  "lighting": "vialrgb",
   "matrix": {
     "rows": 1,
     "cols": 24

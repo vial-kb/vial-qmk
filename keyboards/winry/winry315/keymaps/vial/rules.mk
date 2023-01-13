@@ -2,9 +2,10 @@ VIAL_ENABLE = yes
 VIA_ENABLE = yes
 LTO_ENABLE = yes
 QMK_SETTINGS = no
-RGB_MATRIX_ENABLE = no
 ENCODER_MAP_ENABLE = yes
+VIALRGB_ENABLE = yes
+MOUSEKEY_ENABLE = no
 
 
 
-SRC += encoder_actions.c
+#SRC += encoder_actions.c
