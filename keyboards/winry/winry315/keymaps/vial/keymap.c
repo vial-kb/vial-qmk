@@ -1,4 +1,5 @@
-// Copyright 2022 Sergey Vlasov (@sigprof)
+// Copyright 2022 Copyright 2023 Pedro Quaresma <pedro.quaresma@gmail.com>
+// With special thanks to Markus Knutsson <markus.knutsson@tweety.se>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H

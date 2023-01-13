@@ -6,6 +6,3 @@ ENCODER_MAP_ENABLE = yes
 VIALRGB_ENABLE = yes
 MOUSEKEY_ENABLE = no
 
-
-
-#SRC += encoder_actions.c
