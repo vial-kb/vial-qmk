@@ -2,7 +2,7 @@
   "name": "Rekt1800",
   "vendorId": "0xCA04",
   "productId": "0x2377",
-  "lighting": "none",
+  "lighting": "qmk_backlight",
   "matrix": {
     "rows": 6,
     "cols": 19

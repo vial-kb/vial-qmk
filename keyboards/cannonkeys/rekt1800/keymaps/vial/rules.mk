@@ -1,5 +1,6 @@
 VIA_ENABLE = yes
 VIAL_ENABLE = yes
+BACKLIGHT_ENABLE = yes
 
 # Options to reduce firmware size:
 LTO_ENABLE = yes  # make the compiler work harder
