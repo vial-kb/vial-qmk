@@ -1,6 +1,6 @@
 {
     "keyboard_name": "NCR-80",
-    "manufacturer": "NCR",
+    "manufacturer": "MT",
     "url": "https://www.aliexpress.com/item/1005003364462523.html",
     "maintainer": "qmk",
     "usb": {
