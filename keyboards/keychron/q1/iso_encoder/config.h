@@ -14,25 +14,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "q1.h"
+#pragma once
 
-const matrix_row_t matrix_mask[] = {
-    0b0111111111111101,
-    0b0111111111111111,
-    0b0111111111111111,
-    0b0111111111111111,
-    0b0111111111111111,
-    0b0111111111111111,
-};
+/* key matrix pins */
+#define MATRIX_ROW_PINS { D3, D2, B3, B2, B1, B0 }
+#define MATRIX_COL_PINS { D5, D4, D6, D7, B4, B5, B6, C6, C7, F7, F6, F5, F4, F1, F0 }
 
-#ifdef DIP_SWITCH_ENABLE
+/* DIP switch */
+#define DIP_SWITCH_MATRIX_GRID  { {0,1} }
 
-bool dip_switch_update_kb(uint8_t index, bool active) {
-    if (!dip_switch_update_user(index, active)) { return false;}
-    if (index == 0) {
-        default_layer_set(1UL << (active ? 2 : 0));
-    }
-    return true;
-}
+/* RGB Matrix Driver Configuration */
+#define DRIVER_COUNT 2
+#define DRIVER_ADDR_1 0b1010000
+#define DRIVER_ADDR_2 0b1011111
 
-#endif // DIP_SWITCH_ENABLE
+/* RGB Matrix Configuration */
+#define DRIVER_1_LED_TOTAL 59
+#define DRIVER_2_LED_TOTAL 24
+#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
+
+/* Encoder Configuration */
+#define ENCODERS_PAD_A { E6 }
+#define ENCODERS_PAD_B { B7 }
+
+/* Enable caps-lock LED */
+#define CAPS_LOCK_LED_INDEX 44

@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2022 @ Teimor Epstein
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,14 +16,17 @@
 
 #pragma once
 
-#include "quantum.h"
+#undef TAPPING_TERM
+#define TAPPING_TERM 200
 
-#if   defined(KEYBOARD_keychron_q1_ansi)
-#    include "ansi.h"
-#elif defined(KEYBOARD_keychron_q1_ansi_encoder)
-#    include "ansi_encoder.h"
-#elif defined(KEYBOARD_keychron_q1_iso)
-#    include "iso.h"
-#elif defined(KEYBOARD_keychron_q1_iso_encoder)
-#    include "iso_encoder.h"
+/* RGB Matrix Configuration */
+#ifdef RGB_MATRIX_ENABLE
+#    define RGB_DISABLE_WHEN_USB_SUSPENDED
+#    define MAC_LAYER_DEFAULT_COLOR RGB_CYAN
+#    define WIN_LAYER_DEFAULT_COLOR RGB_GREEN
+#    define CAPS_LOCK_INDICATOR_COLOR RGB_RED
+#    define CAPS_LOCK_INDICATOR_LIGHT_60
+#    define FN_LAYER_TRANSPARENT_KEYS_OFF
+#    define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_COLOR        // Sets the default mode, if none has been set
+#    define RGB_MATRIX_DEFAULT_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS  // Sets the default brightness value, if none has been set
 #endif
