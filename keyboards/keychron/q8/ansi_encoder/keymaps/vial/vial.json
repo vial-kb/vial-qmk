@@ -1,0 +1,297 @@
+{
+  "name": "Keychron Q8",
+  "vendorId": "0x3434",
+  "productId": "0x0181",
+  "lighting": "vialrgb",
+  "customKeycodes": [
+    {"name": "Mission Control", "title": "Mission Control in macOS", "shortName": "MCtrl"},
+    {"name": "Launch Pad",      "title": "Launch Pad in macOS",      "shortName": "LPad"},
+    {"name": "Left Option",     "title": "Left Option in macOS",     "shortName": "LOpt"},
+    {"name": "Right Option",    "title": "Right Option in macOS",    "shortName": "ROpt"},
+    {"name": "Left Cmd",        "title": "Left Command in macOS",    "shortName": "LCmd"},
+    {"name": "Right Cmd",       "title": "Right Command in macOS",   "shortName": "RCmd"},
+    {"name": "Siri",            "title": "Siri in macOS",            "shortName": "Siri"},
+    {"name": "Task View",       "title": "Task View in windows",     "shortName": "Task"},
+    {"name": "File Explorer",   "title": "File Explorer in windows", "shortName": "File"},
+    {"name": "Screen Shot",     "title": "Screenshot in macOS",      "shortName": "SShot"},
+    {"name": "Cortana",         "title": "Cortana in windows",       "shortName": "Cortana"}
+  ],
+  "matrix": {"rows": 5, "cols": 15},
+  "layouts": {
+    "keymap": [
+      [
+        {
+          "x": 2.75
+        },
+        "0,2",
+        {
+          "x": 8.85
+        },
+        "0,11",
+        {
+          "x": 3.5000000000000018,
+          "c": "#aaaaaa"
+        },
+        "0,14"
+      ],
+      [
+        {
+          "y": -0.8500000000000001,
+          "x": 13.6,
+          "c": "#cccccc"
+        },
+        "0,12",
+        {
+          "c": "#aaaaaa",
+          "w": 2
+        },
+        "0,13"
+      ],
+      [
+        {
+          "y": -0.9999999999999999,
+          "x": 18.25
+        },
+        "0,0\n\n\n\n\n\n\n\n\ne"
+      ],
+      [
+        {
+          "y": -0.9999999999999999,
+          "x": 19.25
+        },
+        "0,1\n\n\n\n\n\n\n\n\ne",
+        {
+          "x": -19.5,
+          "c": "#777777"
+        },
+        "0,0\nESC",
+        {
+          "c": "#cccccc"
+        },
+        "0,1"
+      ],
+      [
+        {
+          "x": 0.5,
+          "c": "#aaaaaa",
+          "w": 1.5
+        },
+        "1,0",
+        {
+          "c": "#cccccc"
+        },
+        "1,1",
+        {
+          "x": 10.3
+        },
+        "1,11",
+        "1,12",
+        {
+          "w": 1.5
+        },
+        "1,13"
+      ],
+      [
+        {
+          "y": -0.8999999999999999,
+          "x": 17.3,
+          "c": "#aaaaaa"
+        },
+        "1,14"
+      ],
+      [
+        {
+          "y": -0.10000000000000009,
+          "x": 0.25,
+          "w": 1.75
+        },
+        "2,0",
+        {
+          "c": "#cccccc"
+        },
+        "2,1",
+        {
+          "x": 9.75
+        },
+        "2,11",
+        "2,12",
+        {
+          "c": "#777777",
+          "w": 2.25
+        },
+        "2,13"
+      ],
+      [
+        {
+          "y": -0.8999999999999999,
+          "x": 17.5,
+          "c": "#aaaaaa"
+        },
+        "2,14"
+      ],
+      [
+        {
+          "y": -0.10000000000000009,
+          "w": 2.25
+        },
+        "3,0",
+        {
+          "c": "#cccccc"
+        },
+        "3,2",
+        {
+          "x": 10.15
+        },
+        "3,12",
+        {
+          "c": "#aaaaaa",
+          "w": 1.75
+        },
+        "3,13"
+      ],
+      [
+        {
+          "y": -0.75,
+          "x": 16.4,
+          "c": "#777777"
+        },
+        "3,14"
+      ],
+      [
+        {
+          "y": -0.25,
+          "c": "#aaaaaa",
+          "w": 1.25
+        },
+        "4,0",
+        {
+          "w": 1.25
+        },
+        "4,1"
+      ],
+      [
+        {
+          "y": -0.75,
+          "x": 15.4,
+          "c": "#777777"
+        },
+        "4,12",
+        "4,13",
+        "4,14"
+      ],
+      [
+        {
+          "r": 6,
+          "y": -5.7,
+          "x": 3.85,
+          "c": "#cccccc"
+        },
+        "0,3",
+        "0,4",
+        "0,5",
+        "0,6"
+      ],
+      [
+        {
+          "x": 3.35
+        },
+        "1,2",
+        "1,3",
+        "1,4",
+        "1,5"
+      ],
+      [
+        {
+          "x": 3.55
+        },
+        "2,2",
+        "2,3",
+        "2,4",
+        "2,5"
+      ],
+      [
+        {
+          "x": 3.9
+        },
+        "3,3",
+        "3,4",
+        "3,5",
+        "3,6"
+      ],
+      [
+        {
+          "x": 4,
+          "c": "#aaaaaa",
+          "w": 1.25
+        },
+        "4,2",
+        {
+          "c": "#cccccc",
+          "w": 2.25
+        },
+        "4,3",
+        {
+          "c": "#aaaaaa"
+        },
+        "4,6"
+      ],
+      [
+        {
+          "r": -6,
+          "y": -3.2,
+          "x": 8.35,
+          "c": "#cccccc"
+        },
+        "0,7",
+        "0,8",
+        "0,9",
+        "0,10"
+      ],
+      [
+        {
+          "x": 7.9
+        },
+        "1,6",
+        "1,7",
+        "1,8",
+        "1,9",
+        "1,10"
+      ],
+      [
+        {
+          "x": 8.25
+        },
+        "2,7",
+        "2,8",
+        "2,9",
+        "2,10"
+      ],
+      [
+        {
+          "x": 7.8
+        },
+        "3,7",
+        "3,8",
+        "3,9",
+        "3,10",
+        "3,11"
+      ],
+      [
+        {
+          "x": 7.8,
+          "c": "#aaaaaa"
+        },
+        "4,7",
+        {
+          "c": "#cccccc",
+          "w": 2.75
+        },
+        "4,8",
+        {
+          "c": "#aaaaaa"
+        },
+        "4,9"
+      ]
+    ]
+  }
+}
