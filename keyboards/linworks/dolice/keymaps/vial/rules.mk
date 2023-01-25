@@ -1,0 +1,7 @@
+LTO_ENABLE = yes
+VIA_ENABLE = yes
+VIAL_ENABLE = yes
+MOUSEKEY_ENABLE = no        # Mouse keys
+AUTO_SHIFT_ENABLE = yes
+COMBO_ENABLE = yes
+TAP_DANCE_ENABLE = yes
