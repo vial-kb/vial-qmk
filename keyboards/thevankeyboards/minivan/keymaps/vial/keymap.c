@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           LT(2, KC_LEFT), TG(1), KC_LGUI, KC_NO, LT(3, KC_ENT), LT(1, KC_SPC), RALT_T(KC_DOWN), RGUI_T(KC_UP), KC_NO, RCTL_T(KC_RIGHT)),
 
   [1] = LAYOUT(KC_GRV, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_TRNS,
-          KC_TAB, KC_LPRN, KC_RPRN, KC_LBRC, KC_RBRC, KC_TRNS, KC_PLUS, KC_1, KC_2, KC_3, KC_ASTR, KC_TRNS,
+          KC_TAB, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_TRNS, KC_PLUS, KC_1, KC_2, KC_3, KC_ASTR, KC_TRNS,
           KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MINS, KC_EQL, KC_TRNS, KC_TRNS, KC_TRNS, KC_WH_U, KC_TRNS,
           KC_TRNS, KC_TRNS, KC_NO, KC_0, KC_SPC, KC_WH_L, KC_WH_D, KC_NO, KC_WH_R),
 
@@ -37,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           KC_TRNS, KC_TRNS, KC_TRNS, KC_NO, LALT(KC_DEL), KC_DEL, KC_MS_L, KC_MS_D, KC_NO, KC_MS_R),
 
   [3] = LAYOUT(KC_TILD, KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_NO, KC_NO, KC_TRNS, KC_TRNS,
-          KC_CAPS, KC_LCBR, KC_RCBR, KC_LPRN, KC_RPRN, KC_NO, KC_PLUS, KC_DLR, KC_PIPE, KC_BSLS, KC_DQT,
+          KC_CAPS, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, KC_NO, KC_PLUS, KC_DLR, KC_PIPE, KC_BSLS, KC_DQT,
           KC_TRNS, KC_NO, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, KC_MUTE, KC_MINS, KC_EQL, KC_LT, KC_GT, KC_QUES,
           KC_TRNS, KC_TRNS, QK_BOOT, KC_NO, KC_NO, KC_NO, KC_UNDS, KC_TRNS, KC_TRNS, KC_NO, KC_TRNS)
 };
@@ -48,24 +48,27 @@ void process_indicator_update(layer_state_t state, uint8_t usb_led) {
   }
   if (usb_led & (1<<USB_LED_CAPS_LOCK)) {
   setrgb(255, 0, 0, (LED_TYPE *)&led[0]);
+  setrgb(255, 0, 0, (LED_TYPE *)&led[1]);
+  setrgb(255, 0, 0, (LED_TYPE *)&led[2]);
 }
 
     if (state & (1<<1)) {
   setrgb(255, 0, 255, (LED_TYPE *)&led[0]);
+  setrgb(255, 0, 255, (LED_TYPE *)&led[1]);
+  setrgb(255, 0, 255, (LED_TYPE *)&led[2]);
 }
 
   if (state & (1<<2)) {
+  setrgb(0, 0, 255, (LED_TYPE *)&led[0]);
   setrgb(0, 0, 255, (LED_TYPE *)&led[1]);
+  setrgb(0, 0, 255, (LED_TYPE *)&led[2]);
 }
 
     if (state & (1<<3)) {
+  setrgb(255, 255, 0, (LED_TYPE *)&led[0]);
   setrgb(255, 255, 0, (LED_TYPE *)&led[1]);
+  setrgb(255, 255, 0, (LED_TYPE *)&led[2]);
 }
-
-  if (state & (1<<1)) {
-  setrgb(10, 255, 125, (LED_TYPE *)&led[2]);
-}
-
 
   rgblight_set();
 };
@@ -83,13 +86,3 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 };
 
-/* const uint16_t PROGMEM test_combo1[] = {KC_D, KC_V, COMBO_END}; */
-/* const uint16_t PROGMEM test_combo2[] = {KC_C, KC_D, COMBO_END}; */
-/* const uint16_t PROGMEM test_combo3[] = {KC_C, KC_X, COMBO_END}; */
-/* const uint16_t PROGMEM test_combo4[] = {KC_COMM, KC_H, COMBO_END}; */
-/* combo_t key_combos[COMBO_COUNT] = { */
-/*     COMBO(test_combo1, LGUI(KC_V)), */
-/*     COMBO(test_combo2, LGUI(KC_C)), */
-/*     COMBO(test_combo3, LGUI(KC_X)), */
-/*     COMBO(test_combo4, KC_MINS), */
-/* }; */
