@@ -26,4 +26,4 @@ Enter the bootloader in 3 ways:
 
 * **Bootmagic reset**: Hold down the knob while plugging in the keyboard's USB cable
 * **Physical reset button**: Briefly press the button on the underside of the PCB
-* **Keycode in layout**: Press the key mapped to `QK_BOOT` *(or `RESET`)* if it is available, you can map this to the knob press with the Vial app
+* **Keycode in layout**: Press the key mapped to `QK_BOOT` *(or `RESET`)* if it is available
