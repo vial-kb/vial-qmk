@@ -42,8 +42,3 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LED_CAPS_LOCK_PIN C7
 #define LED_SCROLL_LOCK_PIN C6
 #define LED_PIN_ON_STATE 0
-
-// VIAL
-#define VIAL_KEYBOARD_UID {0xB6, 0xA6, 0x3B, 0x20, 0x22, 0xCE, 0xE9, 0x6D}
-#define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
-#define VIAL_UNLOCK_COMBO_COLS { 0, 1 }
