@@ -1,0 +1,11 @@
+{
+    "manufacturer": "Cyboard",
+    "maintainer": "Erik Trinkle",
+    "url": "https://cyboard.digital",
+    "keyboard_name": "Dactyl",
+    "usb": {
+        "vid": "0xFEED",
+        "pid": "0x0000",
+        "device_version": "1.0.0"
+    }
+}
