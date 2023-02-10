@@ -4,8 +4,8 @@
     "vendorId": "0xCB10",
     "lighting": "qmk_backlight_rgblight",
     "matrix": {
-        "rows": 10,
-        "cols": 12
+        "rows": 12,
+        "cols": 10
     },
     "layouts": {
                 "labels": [

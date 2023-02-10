@@ -1,31 +1,31 @@
-# The Key
+# The Key V2
 
-![The Key](https://i.imgur.com/hL5cRj9.jpg)
+![The Key V2](https://massdrop-s3.imgix.net/product-images/stack-overflow-the-key-v2-macropad/FP/vSqOp9eUQNGXW4zl3EVQ_7528-copy-pdp.jpg)
 
 
-The Stack Overflow "The Key" is a 3 button macropad based on atmega32u4 with Kailh Black Box switches.
+The Stack Overflow "The Key V2" is a 3 button macropad based on atmega32u4 with hot-swappble Kailh Black Box switches.
 
-> Some say a programmer’s best solution is a simple two-step process: copy and paste. On April 1st, 2021, Stack Overflow proved it. On that fateful day, each time users went to copy a piece of code, they were met with a pop-up for a fake product. It was called The Key: an ultra-compact macropad advertised as the new (and only) way to copy and paste on the platform. As it turns out, roughly one fourth of Stack Overflow’s 15 million users tries to copy and paste within five minutes of visiting the site. An even greater number saw the joke and loved it, with many demanding that The Key be developed in earnest. So, naturally, we teamed up with Stack Overflow to make it happen. What started as an April Fool’s gag is now a full-fledged macropad—designed by our very own community member Cassidy, with a portion of proceeds benefiting digitalundivided.
+> Last year, we brought Stack Overflow’s iconic April Fool’s joke to life. Advertised as the new (and only) way to copy and paste on the site, it was an ultra-compact macropad called The Key. The punchline-turned product was a huge hit, selling over 10K units and earning a nearly 5-star average review. Now, we’re back with a second act: The Key V2. The same size as its portable predecessor, this punchline-turned-product has a few notable changes—including an acrylic case to accent its two built-in RGB LEDs. Plus, we made it hot-swappable, so you can easily change out the switches for a truly custom experience. And just like the original, a portion of all proceeds from The Key V2 will go to the data-driven social startup digitalundivided.
 
 Keyboard Maintainer: [Drop / Massdrop](https://github.com/Massdrop/qmk_firmware) 
 
-Hardware Supported: Massdrop, Inc. **The Key**
+Hardware Supported: Massdrop, Inc. **The Key V2**
 
-Hardware Availability: Limited Release - https://drop.com/buy/stack-overflow-the-key-macropad
+Hardware Availability: Limited Release - https://drop.com/buy/stack-overflow-the-key-v2-macropad
 
 
 Make example for this keyboard (after setting up your build environment):
 ```bash
 # default provided by Drop / Stack Overflow
-make massdrop/thekey:default
+make massdrop/thekey_v2:default
 # common modification where C = CTRL+C, V = CTRL+V
-make massdrop/thekey:url-copy-paste
+make massdrop/thekey_v2:url-copy-paste
 ```
 
 Flashing example for this keyboard:
 ```bash
 # install in dfu mode
-make massdrop/thekey:default:dfu
+make massdrop/thekey_v2:default:dfu
 ```
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).

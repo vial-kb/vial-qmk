@@ -255,7 +255,7 @@ int qmk_settings_set(uint16_t qsid, const void *setting, size_t maxsz) {
     return 0;
 }
 
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+uint16_t qs_get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     return QS.tapping_term;
 }
 
