@@ -9,11 +9,11 @@ Numberpad created for degenerates with the option for 1 encoder.
 
 Make example for this keyboard (after setting up your build environment):
 
-	make thepanduuh/degenpad:default
+	make thepanduuh/degenpad:vial
 	
 Flashing example for this keyboard:
 
-	make thepanduuh/degenpad:default:flash
+	make thepanduuh/degenpad:vial:flash
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
