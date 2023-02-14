@@ -14,9 +14,10 @@
     "features": {
         "bootmagic": true,
         "command": false,
-        "console": false,
+        "console": true,
         "extrakey": true,
         "mousekey": true,
+        "pointing_device": true,
         "nkro": true,
         "rgblight": true
     },
@@ -25,10 +26,22 @@
         "caps_lock": "GP17"
     },
     "rgblight": {
+        "animations": {
+            "alternating": true,
+            "breathing": true,
+            "christmas": true,
+            "knight": true,
+            "rainbow_mood": true,
+            "rainbow_swirl": true,
+            "rgb_test": true,
+            "snake": true,
+            "static_gradient": true,
+            "twinkle": true
+        },
         "brightness_steps": 8,
         "hue_steps": 8,
         "led_count": 2,
-        "max_brightness": 255,
+        "max_brightness": 100,
         "pin": "GP25",
         "saturation_steps": 8,
         "split_count": [1, 1]
@@ -44,7 +57,6 @@
     },
     "split": {
         "enabled": true,
-        "main": "eeprom",
         "transport": {
             "protocol": "serial"
         }
