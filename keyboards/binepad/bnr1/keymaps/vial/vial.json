@@ -1,0 +1,10 @@
+{
+    "lighting": "none",
+    "matrix": { "rows": 1, "cols": 1 },
+    "layouts": {
+        "keymap": [
+            [{"x":1.25,"w":1.5,"h":1.5},"0,0"],
+            [{"y":-0.75},"0,0\n\n\n\n\n\n\n\n\ne",{"x":2},"0,1\n\n\n\n\n\n\n\n\ne"]
+        ]
+    }
+}
