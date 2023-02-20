@@ -33,8 +33,7 @@ diode)
  *
  */
 
-/* #define MATRIX_ROW_PINS { D1, D0, D4, C6, F7, F6, F5, F4 } */
-#define MATRIX_ROW_PINS { D5, B7, D4, C6, F7, F6, F5, F4 }
+#define MATRIX_ROW_PINS { D1, D0, D4, C6, F7, F6, F5, F4 }
 #define MATRIX_COL_PINS { D7, E6, B4, B5, B2, B3, B1 }
 
 #define ENCODERS_PAD_A { D2 }
