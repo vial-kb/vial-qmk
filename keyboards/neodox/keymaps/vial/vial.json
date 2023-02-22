@@ -1,7 +1,6 @@
 {
-  "name": "Redox",
-  "vendorId": "0x4D44",
-  "productId": "0x5244",
+  "name": "Neodox",
+  "vendorId": "Pastitas",
   "lighting": "qmk_rgblight",
   "matrix": { "rows": 10, "cols": 7 },
   "layouts": {

@@ -1,5 +1,5 @@
 /*
-Copyright 2018 Mattia Dal Ben <matthewdibi@gmail.com>
+Copyright 2023 Pastitas
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -14,7 +14,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 #pragma once
 
 /* Use I2C or Serial, not both */

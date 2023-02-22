@@ -1,1 +1,1 @@
-# The default keymap for Redox
+# The default keymap for Neodox
