@@ -3,8 +3,7 @@
 
 ![mini49](https://raw.githubusercontent.com/pcs3rd/qmk_firmware/master/keyboards/mini49/resources/keeb.jpg)
 
-A sub-60% ortholinear keyboard powered by qmk.  
-The VIA configuration can be found [here](https://github.com/pcs3rd/via-configurations/tree/main/keyboards/mini49)
+A sub-60% ortholinear keyboard powered by vial-qmk.  
 
 * Keyboard Maintainer: [Raymond Dean][def]
 * Hardware Supported: *RP2040*
