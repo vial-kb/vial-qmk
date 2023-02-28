@@ -18,13 +18,6 @@
 
 #include "config_common.h"
 
-/* USB Device descriptor parameter */
-#define VENDOR_ID       0x480E
-#define PRODUCT_ID      0x408F
-#define DEVICE_VER      0x0001
-#define MANUFACTURER    Vertex
-#define PRODUCT         AngleR2
-
 /* key matrix size */
 #define MATRIX_ROWS 6
 #define MATRIX_COLS 16
@@ -49,7 +42,6 @@
 #define LED_PIN_ON_STATE 0
 
 #define RGB_DI_PIN E6
-#ifdef RGB_DI_PIN
 #define RGBLIGHT_EFFECT_BREATHING
 #define RGBLIGHT_EFFECT_RAINBOW_MOOD
 #define RGBLIGHT_EFFECT_RAINBOW_SWIRL
@@ -60,12 +52,7 @@
 #define RGBLIGHT_EFFECT_RGB_TEST
 #define RGBLIGHT_EFFECT_ALTERNATING
 #define RGBLIGHT_EFFECT_TWINKLE
-#define RGBLIGHT_DEFAULT_MODE (RGBLIGHT_EFFECT_RAINBOW_MOOD + 6)
-#define RGBLIGHT_DEFAULT_SPD 10
-#define RGBLED_NUM 30
-#define RGBLIGHT_HUE_STEP 10
-#define RGBLIGHT_SAT_STEP 10
-#define RGBLIGHT_VAL_STEP 10
-#define RGBLIGHT_LIMIT_VAL 130 // limits maximum brightness of LEDs to 150 out of 255. Higher may cause the controller to crash.
-#endif
-#define DEBOUNCE 5
+#define RGBLED_NUM 6
+#define RGBLIGHT_HUE_STEP 8
+#define RGBLIGHT_SAT_STEP 8
+#define RGBLIGHT_VAL_STEP 8
