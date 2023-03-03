@@ -1,9 +1,9 @@
 {
-    "keyboard": "binepad/bn009r2",
+    "keyboard": "binepad/bn009",
     "version": 1,
     "author": "binepad",
-    "notes": "This file is a keymap.json file for binepad/bn009r2",
-    "keymap": "default_json",
+    "notes": "This file is a keymap.json file for binepad/bn009",
+    "keymap": "default",
     "layout": "LAYOUT_ortho_3x3",
     "layers": [
         [
