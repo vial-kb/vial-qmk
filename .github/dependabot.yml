@@ -2,7 +2,7 @@ version: 2
 updates:
   - package-ecosystem: "github-actions"
     directory: "/"
-    labels: CI
+    labels: [CI]
     reviewers:
       - "qmk/collaborators"
     schedule:
