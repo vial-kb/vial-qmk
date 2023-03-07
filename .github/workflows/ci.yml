@@ -21,5 +21,6 @@ jobs:
 
     - name: Compile Vial keyboards
       run: |
+        git config --global --add safe.directory $(pwd)
         make git-submodule
         python3 util/ci_compile_vial_keyboards.py
