@@ -1,6 +1,6 @@
 VIA_ENABLE = yes
 VIAL_ENABLE = yes
-VIALRGB_ENABLe = yes
+VIALRGB_ENABLE = yes
 ENCODER_MAP_ENABLE = yes
 
 VPATH += keyboards/keychron/common
