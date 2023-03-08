@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "config_common.h"
 
-#define VIAL_KEYBOARD_UID {0x1F, 0x07, 0x87, 0x74, 0xDF, 0x59, 0x8B, 0x59}
+#define VIAL_KEYBOARD_UID {0x8D, 0x57, 0x95, 0x93, 0xF2, 0x7A, 0x1A, 0x8E}
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 1 }
 #define DYNAMIC_KEYMAP_LAYER_COUNT 17
