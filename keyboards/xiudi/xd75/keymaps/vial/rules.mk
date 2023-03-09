@@ -1,7 +1,0 @@
-# Build options
-COMBO_ENABLE = yes
-KEY_OVERRIDE_ENABLE = no
-LTO_ENABLE = yes
-QMK_SETTINGS = no
-VIA_ENABLE = yes
-VIAL_ENABLE = yes
