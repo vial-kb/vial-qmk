@@ -17,9 +17,6 @@
 
 #pragma once
 
-#define DRIVER_1_LED_TOTAL 31
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL)
-
 //enable RGB Matrix Effects for Vial
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
