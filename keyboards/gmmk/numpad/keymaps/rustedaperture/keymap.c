@@ -25,28 +25,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //      1        2       3       RET
 //      0                        .
 
-  [_BASE] = LAYOUT(
+  [0] = LAYOUT(
     MO(1),   KC_PSLS,   KC_PAST,   KC_PMNS,
     KC_P7,   KC_P8,     KC_P9,     KC_PPLS,
     KC_P4,   KC_P5,     KC_P6,     KC_CALC,
     KC_P1,   KC_P2,     KC_P3,     KC_PENT,
     KC_P0,                         KC_PDOT
   ),
-  [_UTIL] = LAYOUT(
+  [1] = LAYOUT(
     _______,   KC_PSLS,   KC_PAST,   KC_PMNS,
     KC_P7,     RGB_VAI,   KC_P9,     KC_PPLS,
     RGB_RMOD,  KC_P5,     RGB_MOD,   KC_CALC,
     KC_P1,     RGB_VAD,   KC_P3,     KC_PENT,
     RGB_TOG,                         QK_BOOT
   ),
-  [_DRAW1] = LAYOUT(
+  [2] = LAYOUT(
     _______,   KC_PSLS,   KC_PAST,   KC_PMNS,
     KC_P7,     RGB_VAI,   KC_P9,     KC_PPLS,
     RGB_RMOD,  KC_P5,     RGB_MOD,   KC_CALC,
     KC_P1,     RGB_VAD,   KC_P3,     KC_PENT,
     RGB_TOG,                         QK_BOOT
   ),
-  [_DRAW2] = LAYOUT(
+  [3] = LAYOUT(
     _______,   KC_PSLS,   KC_PAST,   KC_PMNS,
     KC_P7,     RGB_VAI,   KC_P9,     KC_PPLS,
     RGB_RMOD,  KC_P5,     RGB_MOD,   KC_CALC,
@@ -71,10 +71,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
-    [_BASE] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
-    [_UTIL] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
-    [_DRAW1] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
-    [_DRAW2] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
+    [0] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
+    [1] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
+    [2] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
+    [3] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
     [4] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
     [5] = { ENCODER_CCW_CW(KC_VOLU, KC_VOLD) },
 };
@@ -82,10 +82,10 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 // Capslock, Scroll lock and Numlock indicator on Left side lights.
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     switch (get_highest_layer(layer_state)) { // special handling per layer
-        case _BASE: // on Fn layer select what the encoder does when pressed
+        case 0: // on Fn layer select what the encoder does when pressed
             rgb_matrix_set_color(LED_NUM, RGB_LAYERCHANGE); //FN key
             break;
-        case _UTIL: // on Fn layer select what the encoder does when pressed
+        case 1: // on Fn layer select what the encoder does when pressed
             rgb_matrix_set_color(LED_NUM, RGB_LAYERCHANGE); //FN key
             rgb_matrix_set_color(LED_DIV, RGB_LAYERCHANGE);
             rgb_matrix_set_color(LED_STAR, RGB_LAYERCHANGE);
@@ -107,7 +107,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             rgb_matrix_set_color(LED_DOT, RGB_BLACK);
             rgb_matrix_set_color(LED_ENTER, RGB_BLACK);
             break;
-        case _DRAW1: // on Fn layer select what the encoder does when pressed
+        case 2: // on Fn layer select what the encoder does when pressed
             for (uint8_t i = 0; i < ARRAYSIZE(LED_LIST_FULL); i++) {
                 rgb_matrix_set_color(LED_LIST_FULL[i], RGB_DRAW1);
             }
@@ -115,7 +115,7 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             rgb_matrix_set_color(LED_STAR, RGB_BLACK);
             rgb_matrix_set_color(LED_MINUS, RGB_LAYERCHANGE);
             break;
-        case _DRAW2: // on Fn layer select what the encoder does when pressed
+        case 3: // on Fn layer select what the encoder does when pressed
             for (uint8_t i = 0; i < ARRAYSIZE(LED_LIST_FULL); i++) {
                 rgb_matrix_set_color(LED_LIST_FULL[i], RGB_BLACK);
             }

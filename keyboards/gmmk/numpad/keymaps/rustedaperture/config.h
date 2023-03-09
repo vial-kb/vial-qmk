@@ -17,11 +17,6 @@
 
 #pragma once
 
-#include "config_common.h"
-
-#define DRIVER_1_LED_TOTAL 31
-#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL)
-
 //enable RGB Matrix Effects for Vial
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
@@ -32,12 +27,5 @@
 #define VIAL_UNLOCK_COMBO_COLS { 0, 3 }
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6
-
-enum custom_user_layers {
-    _BASE,
-    _UTIL,
-    _DRAW1,
-    _DRAW2,
-};
 
 #define ARRAYSIZE(arr)  sizeof(arr)/sizeof(arr[0])
