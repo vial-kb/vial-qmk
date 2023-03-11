@@ -1,4 +1,4 @@
-/* Copyright 2021 @ Keychron (https://www.keychron.com)
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,14 +16,12 @@
 
 #pragma once
 
-#include "quantum.h"
+/* RGB Matrix Configuration */
+#define DRIVER_1_LED_TOTAL 35
+#define DRIVER_2_LED_TOTAL 36
+#define DRIVER_LED_TOTAL (DRIVER_1_LED_TOTAL + DRIVER_2_LED_TOTAL)
 
-#if   defined(KEYBOARD_keychron_q2_ansi)
-#    include "ansi.h"
-#elif defined(KEYBOARD_keychron_q2_ansi_encoder)
-#    include "ansi_encoder.h"
-#elif defined(KEYBOARD_keychron_q2_iso)
-#    include "iso.h"
-#elif defined(KEYBOARD_keychron_q2_iso_encoder)
-#    include "iso_encoder.h"
-#endif
+#define CKLED2001_CURRENT_TUNE { 0xC0, 0xC0, 0x5D, 0xC0, 0xC0, 0x5D, 0xC0, 0xC0, 0x5D, 0xC0, 0xC0, 0x5D }
+
+/* Enable caps-lock LED */
+#define CAPS_LOCK_LED_INDEX 30
