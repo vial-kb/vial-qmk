@@ -1,6 +1,6 @@
 # GMMK NUMPAD
 
-A 17 Key macropad made ans old by Glorious LLC, equiped with a WB32 microcontroller, with support for a rotary encoder.
+A 17 Key macropad made and sold by Glorious LLC, equipped with a WB32 microcontroller, with support for a rotary encoder.
 
 * Keyboard Maintainer: [GloriousThrall](https://github.com/GloriousThrall)
 * Hardware Supported: GMMK Numpad
@@ -22,8 +22,17 @@ Enter the bootloader in 3 ways:
 
 * **Bootmagic reset**: Hold down the Num key and plug in the keyboard
 * **Keycode in layout**: Press the Num+Del key which is mapped to `QK_BOOT`
+* **Physical switch**: Pinhole located ubnde the zero key press while inserting the USB
+* **From Glorious Core Firmware**: Press Enter+Plus at the same time while plugging in the USB
+
+## Slider
+
+The slider is currently setup to use [Midi2Vol](https://github.com/jesusvallejo/Midi2Vol)
+
+## Encoder Button
+
+The Button is set to mute by default
 
 ## Broken
 
-* Slider does not function
-* Rotary input push button (mapped to gpio)
+* Bluetooth functionality

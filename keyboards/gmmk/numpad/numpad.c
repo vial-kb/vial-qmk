@@ -111,15 +111,30 @@ led_config_t g_led_config = {{
 
 #    ifdef DRIVER_1_PW_EN
 
-void matrix_init_kb(void) {
+void keyboard_pre_init_user(void) {
     wait_ms(2000);
     setPinOutput(DRIVER_1_PW_EN);
     writePinHigh(DRIVER_1_PW_EN);
-    matrix_init_user();
 }
 #    endif
 
 #endif
+
+void keyboard_pre_init_kb(void) {
+    // Encoder pins
+    setPinInput(ENCODER_PUSHBUTTON_PIN);
+    keyboard_pre_init_user();
+}
+
+int16_t enc = 1;
+int16_t encPrev = 1;
+
+void matrix_scan_kb(void) {
+    encPrev = enc;
+    enc = readPin(ENCODER_PUSHBUTTON_PIN);
+
+    matrix_scan_user();
+}
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_kb(uint8_t index, bool clockwise) {

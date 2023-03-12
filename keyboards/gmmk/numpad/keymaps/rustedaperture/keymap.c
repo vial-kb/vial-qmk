@@ -15,6 +15,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "analog.h"
 #include "rgb_matrix_map.h"
 #include <math.h>
+#include "qmk_midi.h"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -131,4 +132,31 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             }
             break;
     }
+}
+
+// Potentiometer Slider, MIDI Control
+
+uint8_t divisor = 0;
+
+void slider(void) {
+    if (divisor++) { /* only run the slider function 1/256 times it's called */
+        return;
+    }
+    midi_send_cc(&midi_device, 2, 0x3E, 0x7F + (analogReadPin(SLIDER_PIN) >> 3));
+}
+
+extern int16_t enc;
+extern int16_t encPrev;
+
+void matrix_scan_user(void) {
+    if (enc != encPrev) {
+        if (enc < 1) {
+          register_code16(KC_MUTE);
+        }
+        else {
+          unregister_code16(KC_MUTE);
+        }
+    }
+
+    slider();
 }
