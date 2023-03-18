@@ -18,7 +18,7 @@ typedef struct {
 #define SUPPORTED_MODES_LENGTH (sizeof(supported_modes)/sizeof(*supported_modes))
 
 #ifdef RGB_MATRIX_EFFECT_VIALRGB_DIRECT
-HSV g_direct_mode_colors[DRIVER_LED_TOTAL];
+HSV g_direct_mode_colors[RGB_MATRIX_LED_COUNT];
 #endif
 
 static void get_supported(uint8_t *args, uint8_t length) {
@@ -100,7 +100,7 @@ static void fast_set_leds(uint8_t *args, size_t length) {
     if (num_leds * 3 > length) return;
 
     for (size_t i = 0; i < num_leds; ++i) {
-        if (i + first_index >= DRIVER_LED_TOTAL)
+        if (i + first_index >= RGB_MATRIX_LED_COUNT)
             break;
         g_direct_mode_colors[i + first_index].h = args[i * 3 + 0];
         g_direct_mode_colors[i + first_index].s = args[i * 3 + 1];
@@ -138,13 +138,13 @@ void vialrgb_get_value(uint8_t *data, uint8_t length) {
     }
 #ifdef RGB_MATRIX_EFFECT_VIALRGB_DIRECT
     case vialrgb_get_number_leds: {
-        args[0] = DRIVER_LED_TOTAL & 0xFF;
-        args[1] = DRIVER_LED_TOTAL >> 8;
+        args[0] = RGB_MATRIX_LED_COUNT & 0xFF;
+        args[1] = RGB_MATRIX_LED_COUNT >> 8;
         break;
     }
     case vialrgb_get_led_info: {
         uint16_t led = (args[0] & 0xFF) | (args[1] >> 8);
-        if (led >= DRIVER_LED_TOTAL) return;
+        if (led >= RGB_MATRIX_LED_COUNT) return;
         // x, y
         args[0] = g_led_config.point[led].x;
         args[1] = g_led_config.point[led].y;
