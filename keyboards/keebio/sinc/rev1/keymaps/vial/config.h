@@ -23,3 +23,9 @@
 // Esc + Enter. See: http://www.keyboard-layout-editor.com/#/gists/07a30619c76ab7d7be4932f94b3a7c06
 #define VIAL_UNLOCK_COMBO_ROWS { 5, 8 }
 #define VIAL_UNLOCK_COMBO_COLS { 2, 7 }
+
+// Reducing firmware size: https://get.vial.today/docs/firmware-size.html
+#ifdef DYNAMIC_KEYMAP_LAYER_COUNT
+    #undef DYNAMIC_KEYMAP_LAYER_COUNT
+#endif
+#define DYNAMIC_KEYMAP_LAYER_COUNT 0
