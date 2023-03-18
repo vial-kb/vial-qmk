@@ -16,7 +16,7 @@
 
 #include QMK_KEYBOARD_H
 
-enum layers { _BASE, _FN1};
+enum layers { _BASE, _FN1, _RESERVED1, _RESERVED2 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_numpad_6x4(
@@ -33,5 +33,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         RGB_RMOD,   RGB_VAD, RGB_HUD,
         RGB_SAI,    RGB_SPI, KC_MPRV,   _______,
         RGB_SAD,    RGB_SPD, KC_MPLY,
-        RGB_TOG,             KC_MNXT,   _______)
+        RGB_TOG,             KC_MNXT,   _______),
+
+    [_RESERVED1] = LAYOUT_numpad_6x4(
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,             _______,   _______),
+
+    [_RESERVED2] = LAYOUT_numpad_6x4(
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,    _______, _______,   _______,
+        _______,    _______, _______,
+        _______,             _______,   _______)
 };

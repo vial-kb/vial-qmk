@@ -1,14 +1,14 @@
 {
-    "name": "Keychron Q0",
-    "vendorId": "0x3434",
-    "productId": "0x0130",
-    "lighting": "vialrgb",
-    "matrix": {
-      "rows": 6,
-      "cols": 4
-    },
-    "layouts": {
-      "keymap":[
+  "name": "Keychron Q0",
+  "vendorId": "0x3434",
+  "productId": "0x0130",
+  "lighting": "vialrgb",
+  "matrix": {
+    "rows": 6,
+    "cols": 4
+  },
+  "layouts": {
+    "keymap":[
       [
         "0,0",
         "0,1",
