@@ -13,8 +13,8 @@
 #define VENDOR_ID       0x0002
 #define PRODUCT_ID      0x0002
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    Velocifire
-#define PRODUCT         Sun20pro
+#define MANUFACTURER    "Velocifire"
+#define PRODUCT         "Sun20pro"
 
 /* key matrix size */
 #define MATRIX_ROWS 5
@@ -63,7 +63,7 @@
 #   define RGBLIGHT_ANIMATIONS
 // RGB Matrix
 #   ifdef RGB_MATRIX_ENABLE
-#       define DRIVER_LED_TOTAL RGBLED_NUM
+#       define RGB_MATRIX_LED_COUNT RGBLED_NUM
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:
