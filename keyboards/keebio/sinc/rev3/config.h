@@ -75,8 +75,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGB_MATRIX_KEYPRESSES
 #define SPLIT_TRANSPORT_MIRROR
 
+// Redefine older QMK variable names, as Vial hasn't merged in the newer
+// QMK changes. https://redd.it/z6jwq3
 #define DRIVER_LED_TOTAL RGB_MATRIX_LED_COUNT
 #define RGBLED_NUM RGB_MATRIX_LED_COUNT
+#define RGBLIGHT_SPLIT
+#define RGBLED_SPLIT { 56, 57 }
+#define RGB_MATRIX_SPLIT RGBLED_SPLIT
 
 #define ENCODERS_PAD_A { GP20 }
 #define ENCODERS_PAD_B { GP21 }
