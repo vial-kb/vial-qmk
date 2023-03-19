@@ -36,6 +36,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
+#ifdef RGBLIGHT_ENABLE
 static const rgblight_segment_t PROGMEM mrd_numpad_layer[] = RGBLIGHT_LAYER_SEGMENTS(
     {0, 4, HSV_GREEN}
 );
@@ -68,3 +69,4 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(3, layer_state_cmp(state, _CTRL));
     return state;
 }
+#endif
