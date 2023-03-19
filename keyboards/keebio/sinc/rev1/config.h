@@ -32,3 +32,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define VIA_EEPROM_LAYOUT_OPTIONS_SIZE 2
 #define DYNAMIC_KEYMAP_LAYER_COUNT 3
+
+#define ENCODERS_PAD_A { F5 }
+#define ENCODERS_PAD_B { F6 }
+#define ENCODERS_PAD_A_RIGHT { D6 }
+#define ENCODERS_PAD_B_RIGHT { D4 }
