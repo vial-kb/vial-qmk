@@ -28,7 +28,7 @@ enum layer_names {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_reviung39(
-                            KC_GESC, KC_Q, KC_D, KC_R, KC_W, KC_B, KC_J, KC_F, KC_U, KC_P, KC_SCLN, KC_BSPC, \
+                            QK_GESC, KC_Q, KC_D, KC_R, KC_W, KC_B, KC_J, KC_F, KC_U, KC_P, KC_SCLN, KC_BSPC, \
                             LSFT_T(KC_TAB), KC_A, KC_S, LGUI_T(KC_H), LALT_T(KC_T), KC_G, KC_Y, RALT_T(KC_N), KC_E, KC_O, KC_I, KC_QUOT, \
                             KC_LCTL, KC_Z, KC_X, KC_M, KC_C, KC_V, KC_K, KC_L, KC_COMM, KC_DOT, KC_SLSH, RSFT_T(KC_ENT), \
                             TT(1), KC_SPC, TT(2)
@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                             ),
   
   [_ADJUST] = LAYOUT_reviung39(
-                            KC_GESC, KC_NLCK, KC_P7, KC_P8, KC_P9, KC_P0, KC_NO, KC_PGUP, KC_UP, KC_PGDOWN, KC_NO, KC_DEL, \
+                            QK_GESC, KC_NUM, KC_P7, KC_P8, KC_P9, KC_P0, KC_NO, KC_PGUP, KC_UP, KC_PGDN, KC_NO, KC_DEL, \
                             KC_TRNS, KC_NO, KC_P4, LGUI_T(KC_P5), LALT_T(KC_P6), KC_BRIU, KC_VOLU, KC_LEFT, KC_DOWN, KC_RGHT, KC_NO, KC_NO, \
                             KC_LCTL, KC_NO, KC_P1, KC_P2, KC_P3, KC_BRID, KC_VOLD, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, \
                             KC_TRNS, KC_NO, KC_TRNS
