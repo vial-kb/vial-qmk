@@ -2,8 +2,7 @@
   "name": "Sinc Rev. 3",
   "vendorId": "0xCB10",
   "productId": "0x3267",
-  "keycodes": ["qmk_lighting"],
-  "menus": ["qmk_rgb_matrix"],
+  "lighting": "vialrgb",
   "matrix": {"rows": 12, "cols": 9},
   "layouts": {
     "labels": [
