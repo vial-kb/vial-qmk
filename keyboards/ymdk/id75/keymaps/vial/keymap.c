@@ -50,9 +50,3 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
   )
 };
-#define MAGIC_BOOT 0x544F4F42UL
-#define MAGIC_REG *(volatile uint32_t*)0x20004000
-void bootloader_jump(void) {
-    MAGIC_REG = MAGIC_BOOT;
-    NVIC_SystemReset();
-}
