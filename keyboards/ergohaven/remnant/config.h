@@ -46,7 +46,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define BOOTMAGIC_LITE_COLUMN_RIGHT 0
 
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
-#define DOUBLE_TAP_SHIFT_TURNS_ON_CAPS_WORD
 
 #ifdef RGB_MATRIX_ENABLE
 #define DRIVER_LED_TOTAL 58

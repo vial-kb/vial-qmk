@@ -47,8 +47,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Serial settings */
 #define SERIAL_USART_FULL_DUPLEX
-#define SERIAL_USART_TX_PIN GP0
-#define SERIAL_USART_RX_PIN GP1
+#define SERIAL_USART_TX_PIN GP5
+#define SERIAL_USART_RX_PIN GP6
 #define SPLIT_HAND_PIN GP24
 #define USB_VBUS_PIN GP28
 #define WS2812_PIO_USE_PIO1

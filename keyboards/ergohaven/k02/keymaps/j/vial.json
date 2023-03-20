@@ -23,9 +23,7 @@
         {"name": "PARENTH",
          "title": "This keycode types (, then ), and taps the left arrow to position the cursor between the ().",
          "shortName": "PARENTH"
-        }
-
- 
+        } 
     ],
     "layouts": {
         "keymap":[
