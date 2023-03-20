@@ -16,7 +16,9 @@
  */
 
 #include QMK_KEYBOARD_H
+#ifdef AUDIO_ENABLE
 #include "muse.h"
+#endif
 
 enum preonic_layers {
   _QWERTY,
@@ -167,8 +169,8 @@ bool dip_switch_update_user(uint8_t index, bool active) {
 }
 
 
-void matrix_scan_user(void) {
 #ifdef AUDIO_ENABLE
+void matrix_scan_user(void) {
     if (muse_mode) {
         if (muse_counter == 0) {
             uint8_t muse_note = muse_offset + SCALE[muse_clock_pulse()];
@@ -185,7 +187,6 @@ void matrix_scan_user(void) {
             muse_counter = 0;
         }
     }
-#endif
 }
 
 bool music_mask_user(uint16_t keycode) {
@@ -197,3 +198,4 @@ bool music_mask_user(uint16_t keycode) {
       return true;
   }
 }
+#endif
