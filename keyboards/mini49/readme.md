@@ -1,7 +1,7 @@
 # mini49  
 
 
-![mini49](https://raw.githubusercontent.com/pcs3rd/qmk_firmware/master/keyboards/mini49/resources/keeb.jpg)
+![mini49](https://cloud.stickpile.net/apps/files_sharing/publicpreview/PEiZjeNEC8YNW6j?file=/&fileId=222353&x=1920&y=1080&a=true)
 
 A sub-60% ortholinear keyboard powered by vial-qmk.  
 
@@ -22,8 +22,8 @@ See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_to
 
 Enter the bootloader in 3 ways:
 
-- Bootmagic reset: Hold down the key at (0,0) in the matrix (usually the top left key or Escape) and plug in the keyboard
-- Physical reset button: Briefly press the button on the RP2040
+- Bootmagic reset: Hold down the key at (0,0) in the matrix (usually the top left key or Escape) and plug in the keyboard.
+- Physical reset: Hold the BOOT button down while pressing the RESET button.  
 - Keycode in layout: Press the key mapped to QK_BOOT if it is available
 
 [def]: https://github.com/pcs3rd
