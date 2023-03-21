@@ -3,6 +3,22 @@
 #include QMK_KEYBOARD_H
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+<<<<<<< HEAD
+=======
+    /*
+     * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
+     * │ A │ B │ C │ D │ E │ F │ G │ H │ I │ J │
+     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+     * │ A │ B │ C │ D │ E │ F │ G │ H │ I │ J │
+     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+     * │ A │ B │ C │ D │ E │ F │ G │ H │ I │ J │
+     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+     * │ A │ B │ C │ D │ E │ F │ G │ H │ I │ J │
+     * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
+     * │ A │ B │ C │ D │ E │ F │ G │ H │ I │ J │
+     * └───┴───┴───┴───┴───┴───┴───┴───┴───┴───┘
+     */
+>>>>>>> ce22824b92d45f55a960b0c0e25bdded381202e4
     [0] = LAYOUT(
         KC_ESC,  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_BSPC,
         KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
