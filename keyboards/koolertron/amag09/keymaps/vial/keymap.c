@@ -25,22 +25,22 @@ enum layer_names {
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [BASE] = LAYOUT_all(
+  [BASE] = LAYOUT(
       KC_KP_7, KC_KP_8, KC_KP_9,
       KC_KP_4, KC_KP_5, KC_KP_6,
       MO(FN1), KC_KP_2, KC_KP_3
   ),
-  [FN1] = LAYOUT_all(
+  [FN1] = LAYOUT(
       BL_TOGG, _______, _______,
       _______, _______, _______,
       _______, _______, _______
   ),
-  [FN2] = LAYOUT_all(
+  [FN2] = LAYOUT(
       _______, _______, _______,
       _______, _______, _______,
       _______, _______, _______
   ),
-  [FN3] = LAYOUT_all(
+  [FN3] = LAYOUT(
       _______, _______, _______,
       _______, _______, _______,
       _______, _______, _______

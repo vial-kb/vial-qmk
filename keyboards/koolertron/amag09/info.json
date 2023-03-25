@@ -8,18 +8,40 @@
         "pid": "0x2323",
         "device_version": "0.0.1"
     },
+    "bootloader": "bootloadhid",
+    "processor": "atmega32a",
+    "features": {
+        "backlight": true,
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "extrakey": true,
+        "mousekey": true
+    },
+    "diode_direction": "ROW2COL",
+    "matrix_size": {
+        "cols": 3,
+        "rows": 3
+    },
+    "matrix_pins": {
+        "cols": ["B0", "B1", "B2"],
+        "rows": ["A0", "A1", "A2"]
+    },
+    "backlight": {
+        "pin": "D4"
+    },
     "layouts": {
-        "LAYOUT_all": {
+        "LAYOUT": {
             "layout": [
-              {"label":"K00", "x":0, "y":0},
-              {"label":"K01", "x":1, "y":0},
-              {"label":"K02", "x":2, "y":0},
-              {"label":"K10", "x":0, "y":1},
-              {"label":"K11", "x":1, "y":1},
-              {"label":"K12", "x":2, "y":1},
-              {"label":"K20", "x":0, "y":2},
-              {"label":"K21", "x":1, "y":2},
-              {"label":"K22", "x":2, "y":2} 
+              {"label":"K00", "matrix": [0, 0], "x":0, "y":0},
+              {"label":"K01", "matrix": [0, 1], "x":1, "y":0},
+              {"label":"K02", "matrix": [0, 2], "x":2, "y":0},
+              {"label":"K10", "matrix": [1, 0], "x":0, "y":1},
+              {"label":"K11", "matrix": [1, 1], "x":1, "y":1},
+              {"label":"K12", "matrix": [1, 2], "x":2, "y":1},
+              {"label":"K20", "matrix": [2, 0], "x":0, "y":2},
+              {"label":"K21", "matrix": [2, 1], "x":1, "y":2},
+              {"label":"K22", "matrix": [2, 2], "x":2, "y":2} 
             ]
         }
     }
