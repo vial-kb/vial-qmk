@@ -36,6 +36,7 @@ def main():
             continue
 
         uid = uid[1].split(",")
+        uid.reverse()
         uid = [int(x, 16) for x in uid]
         uid = struct.pack("BBBBBBBB", *uid).hex()
         uid_to_keyboards[uid].add(keyboard)
