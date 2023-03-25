@@ -1,6 +1,6 @@
 // Copyright 2021 Ll3macorn (@ll3macorn)
 // SPDX-License-Identifier: GPL-2.0-or-later
-#include "kb.h"
+#include QMK_KEYBOARD_H
 #include <stdio.h>
 
 enum layers {
@@ -175,3 +175,10 @@ bool oled_task_user(void) {
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) { return OLED_ROTATION_180; };
 #endif
+
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [0] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [1] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [3] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+};

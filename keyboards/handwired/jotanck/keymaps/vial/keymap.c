@@ -77,7 +77,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-  writePin(JOTANCK_LED1, (get_highest_layer(state) == 4));
-  writePin(JOTANCK_LED2, (get_highest_layer(state) == 5));
+  #ifdef JOTANCK_LEDS
+  writePin(JOTANCK_LED2, (IS_LAYER_ON_STATE(state, 3)));
+  #endif
   return state;
+}
+
+bool led_update_user(led_t led_state) {
+  // NumLock allways on
+  if (!led_state.num_lock) {
+    tap_code(KC_NUM_LOCK);
+  }
+  #ifdef JOTANCK_LEDS
+  writePin(JOTANCK_LED1, led_state.caps_lock);
+  #endif
+  return true;
 }

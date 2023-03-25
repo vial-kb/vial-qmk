@@ -20,7 +20,6 @@
 #include "vial.h"
 #endif
 
-#define RTC_BOOTLOADER_FLAG 0x7662 /* Flag whether to jump into bootloader, "vb" */
 #define RTC_INSECURE_FLAG 0x4953 /* Flag to indicate qmk that we want to boot into insecure mode, "IS" */
 
 /**
@@ -61,10 +60,4 @@ void boardInit(void) {
   }
 #endif
   BKP->DR10 = 0;
-}
-
-void bootloader_jump(void) {
-    //Set backup register DR10 to enter bootloader on reset
-    BKP->DR10 = RTC_BOOTLOADER_FLAG;
-    NVIC_SystemReset();
 }

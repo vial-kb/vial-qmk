@@ -2,6 +2,7 @@
 
 #include <inttypes.h>
 #include <stddef.h>
+#include "quantum/action.h"
 
 /* take qmk config macros and set up helper variables for default settings */
 
@@ -125,14 +126,20 @@ typedef struct {
 } qmk_settings_t;
 _Static_assert(sizeof(qmk_settings_t) == 36, "unexpected size of the qmk_settings_t structure");
 
-typedef void (*qmk_setting_callback_t)(void);
+struct qmk_settings_proto_t;
 
-/* setting prototype - describes how to get/set settings, stored in flash */
-typedef struct {
+typedef void (*qmk_settings_notify_t)(void);
+typedef int (*qmk_settings_get_t)(const struct qmk_settings_proto_t *proto, void *setting, size_t maxsz);
+typedef int (*qmk_settings_set_t)(const struct qmk_settings_proto_t *proto, const void *setting, size_t maxsz);
+
+/* setting prototype - describes how to get/set settings; this structure is stored in flash */
+typedef struct qmk_settings_proto_t {
     uint16_t qsid;
     uint16_t sz;
     void *ptr;
-    qmk_setting_callback_t cb;
+    qmk_settings_get_t get;
+    qmk_settings_set_t set;
+    qmk_settings_notify_t notify;
 } qmk_settings_proto_t;
 
 void qmk_settings_init(void);
@@ -140,6 +147,8 @@ void qmk_settings_reset(void);
 void qmk_settings_query(uint16_t qsid_gt, void *buffer, size_t sz);
 int qmk_settings_get(uint16_t qsid, void *setting, size_t maxsz);
 int qmk_settings_set(uint16_t qsid, const void *setting, size_t maxsz);
+
+uint16_t qs_get_tapping_term(uint16_t keycode, keyrecord_t *record);
 
 extern qmk_settings_t QS;
 

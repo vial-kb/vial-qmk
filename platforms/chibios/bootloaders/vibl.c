@@ -16,6 +16,16 @@
 
 #include "bootloader.h"
 
-__attribute__((weak)) void bootloader_jump(void) {}
+#include <ch.h>
 
-__attribute__((weak)) void enter_bootloader_mode_if_requested(void) {}
+#define RTC_BOOTLOADER_FLAG 0x7662 /* Flag whether to jump into bootloader, "vb" */
+
+__attribute__((weak)) void bootloader_jump(void) {
+    BKP->DR10 = RTC_BOOTLOADER_FLAG;
+    NVIC_SystemReset();
+}
+
+__attribute__((weak)) void mcu_reset(void) {
+    BKP->DR10 = 0;
+    NVIC_SystemReset();
+}

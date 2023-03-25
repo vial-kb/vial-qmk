@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    container: qmkfm/base_container
+    container: qmkfm/qmk_cli
 
     steps:
     - uses: actions/checkout@v2
@@ -21,5 +21,6 @@ jobs:
 
     - name: Compile Vial keyboards
       run: |
+        git config --global --add safe.directory $(pwd)
         make git-submodule
         python3 util/ci_compile_vial_keyboards.py

@@ -16,6 +16,7 @@
  */
 
 #include <stdint.h>
+#include <string.h>
 #include "keycode.h"
 #include "host.h"
 #include "timer.h"
@@ -66,11 +67,18 @@ uint8_t mk_time_to_max = MOUSEKEY_TIME_TO_MAX;
 /* milliseconds between the initial key press and first repeated motion event (0-2550) */
 uint8_t mk_wheel_delay = MOUSEKEY_WHEEL_DELAY / 10;
 /* milliseconds between repeated motion events (0-255) */
-uint8_t mk_wheel_interval    = MOUSEKEY_WHEEL_INTERVAL;
+#    ifdef MK_KINETIC_SPEED
+float mk_wheel_interval = 1000.0f / MOUSEKEY_WHEEL_INITIAL_MOVEMENTS;
+#    else
+uint8_t mk_wheel_interval = MOUSEKEY_WHEEL_INTERVAL;
+#    endif
 uint8_t mk_wheel_max_speed   = MOUSEKEY_WHEEL_MAX_SPEED;
 uint8_t mk_wheel_time_to_max = MOUSEKEY_WHEEL_TIME_TO_MAX;
 
 #    ifndef MK_COMBINED
+#        ifndef MK_KINETIC_SPEED
+
+/* Default accelerated mode */
 
 static uint8_t move_unit(void) {
     uint16_t unit;
@@ -108,8 +116,7 @@ static uint8_t wheel_unit(void) {
     return (unit > MOUSEKEY_WHEEL_MAX ? MOUSEKEY_WHEEL_MAX : (unit == 0 ? 1 : unit));
 }
 
-#    else /* #ifndef MK_COMBINED */
-#        ifdef MK_KINETIC_SPEED
+#        else /* #ifndef MK_KINETIC_SPEED */
 
 /*
  * Kinetic movement  acceleration algorithm
@@ -147,27 +154,27 @@ static uint8_t move_unit(void) {
     return speed > MOUSEKEY_MOVE_MAX ? MOUSEKEY_MOVE_MAX : speed;
 }
 
-float mk_wheel_interval = 1000.0f / MOUSEKEY_WHEEL_INITIAL_MOVEMENTS;
-
 static uint8_t wheel_unit(void) {
     float speed = MOUSEKEY_WHEEL_INITIAL_MOVEMENTS;
 
     if (mousekey_accel & ((1 << 0) | (1 << 2))) {
         speed = mousekey_accel & (1 << 2) ? MOUSEKEY_WHEEL_ACCELERATED_MOVEMENTS : MOUSEKEY_WHEEL_DECELERATED_MOVEMENTS;
-    } else if (mousekey_repeat && mouse_timer) {
+    } else if (mousekey_wheel_repeat && mouse_timer) {
         if (mk_wheel_interval != MOUSEKEY_WHEEL_BASE_MOVEMENTS) {
             const float time_elapsed = timer_elapsed(mouse_timer) / 50;
             speed                    = MOUSEKEY_WHEEL_INITIAL_MOVEMENTS + 1 * time_elapsed + 1 * 0.5 * time_elapsed * time_elapsed;
         }
         speed = speed > MOUSEKEY_WHEEL_BASE_MOVEMENTS ? MOUSEKEY_WHEEL_BASE_MOVEMENTS : speed;
     }
-
     mk_wheel_interval = 1000.0f / speed;
 
-    return 1;
+    return (uint8_t)speed > MOUSEKEY_WHEEL_INITIAL_MOVEMENTS ? 2 : 1;
 }
 
-#        else /* #ifndef MK_KINETIC_SPEED */
+#        endif /* #ifndef MK_KINETIC_SPEED */
+#    else      /* #ifndef MK_COMBINED */
+
+/* Combined mode */
 
 static uint8_t move_unit(void) {
     uint16_t unit;
@@ -205,12 +212,11 @@ static uint8_t wheel_unit(void) {
     return (unit > MOUSEKEY_WHEEL_MAX ? MOUSEKEY_WHEEL_MAX : (unit == 0 ? 1 : unit));
 }
 
-#        endif /* #ifndef MK_KINETIC_SPEED */
-#    endif     /* #ifndef MK_COMBINED */
+#    endif /* #ifndef MK_COMBINED */
 
 void mousekey_task(void) {
     // report cursor and scroll movement independently
-    report_mouse_t const tmpmr = mouse_report;
+    report_mouse_t tmpmr = mouse_report;
 
     mouse_report.x = 0;
     mouse_report.y = 0;
@@ -252,8 +258,10 @@ void mousekey_task(void) {
         }
     }
 
-    if (mouse_report.x || mouse_report.y || mouse_report.v || mouse_report.h) mousekey_send();
-    mouse_report = tmpmr;
+    if (has_mouse_report_changed(&mouse_report, &tmpmr) || should_mousekey_report_send(&mouse_report)) {
+        mousekey_send();
+    }
+    memcpy(&mouse_report, &tmpmr, sizeof(tmpmr));
 }
 
 void mousekey_on(uint8_t code) {
@@ -357,11 +365,11 @@ uint16_t        w_intervals[mkspd_COUNT] = {MK_W_INTERVAL_UNMOD, MK_W_INTERVAL_0
 
 void mousekey_task(void) {
     // report cursor and scroll movement independently
-    report_mouse_t const tmpmr = mouse_report;
-    mouse_report.x             = 0;
-    mouse_report.y             = 0;
-    mouse_report.v             = 0;
-    mouse_report.h             = 0;
+    report_mouse_t tmpmr = mouse_report;
+    mouse_report.x       = 0;
+    mouse_report.y       = 0;
+    mouse_report.v       = 0;
+    mouse_report.h       = 0;
 
     if ((tmpmr.x || tmpmr.y) && timer_elapsed(last_timer_c) > c_intervals[mk_speed]) {
         mouse_report.x = tmpmr.x;
@@ -372,8 +380,10 @@ void mousekey_task(void) {
         mouse_report.h = tmpmr.h;
     }
 
-    if (mouse_report.x || mouse_report.y || mouse_report.v || mouse_report.h) mousekey_send();
-    mouse_report = tmpmr;
+    if (has_mouse_report_changed(&mouse_report, &tmpmr) || should_mousekey_report_send(&mouse_report)) {
+        mousekey_send();
+    }
+    memcpy(&mouse_report, &tmpmr, sizeof(tmpmr));
 }
 
 void adjust_speed(void) {
@@ -522,4 +532,8 @@ static void mousekey_debug(void) {
 
 report_mouse_t mousekey_get_report(void) {
     return mouse_report;
+}
+
+bool should_mousekey_report_send(report_mouse_t *mouse_report) {
+    return mouse_report->x || mouse_report->y || mouse_report->v || mouse_report->h;
 }
