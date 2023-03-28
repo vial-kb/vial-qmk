@@ -1,7 +1,7 @@
 {
     "name": "Helix rev2 5rows",
     "vendorId": "0x3265",
-    "productId": "0x0003",
+    "productId": "0x0002",
     "lighting": "qmk_rgblight",
     "matrix": {
         "rows": 10,
