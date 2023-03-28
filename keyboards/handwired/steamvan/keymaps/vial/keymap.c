@@ -15,7 +15,7 @@
  */
 #include QMK_KEYBOARD_H
 
-// This file is based on the default keymap the the MiniVan.
+// This file is based on the default keymap of the MiniVan.
 
 enum layer_names {
     _QW,
