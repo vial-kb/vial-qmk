@@ -1,9 +1,14 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
 
+#include QMK_KEYBOARD_H
+#include "joystick.h"
+#include "analog.h"
+
 #define KC_LSQB S(KC_LBRC) // Left square bracket
 #define KC_RSQB S(KC_RBRC) // Right square bracket
 
-#include QMK_KEYBOARD_H
+static int actuation = 256; // actuation point for arrows (0-511)
+bool arrows[4];
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -35,4 +40,53 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_TRNS, KC_TRNS,  		   KC_TRNS, KC_TRNS,    	 /**/  KC_TRNS, 		 KC_TRNS,				    KC_TRNS, KC_TRNS
 	),
 
+};
+
+void matrix_scan_user(void) {
+	  // Up
+  	if (!arrows[0] && analogReadPin(B6) - 512 > actuation) {
+  			arrows[0] = true;
+  			uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 4,3);
+  			register_code16(keycode);
+  	} else if (arrows[0] &&  analogReadPin(B6) - 512 < actuation) {
+  			arrows[0] = false;
+  			uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 4,3);
+  			unregister_code16(keycode);
+  	}
+		// Down
+  	if (!arrows[1] && analogReadPin(B6) - 512 < -actuation) {
+  			arrows[1] = true;
+  			uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 4,4);
+  			register_code16(keycode);
+  	}	else if (arrows[1] && analogReadPin(B6) - 512 > -actuation) {
+  			arrows[1] = false;
+  			uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 4,4);
+  			unregister_code16(keycode);
+  	}
+    // Left
+  	if (!arrows[2] && analogReadPin(D7) - 512 > actuation) {
+  			arrows[2] = true;
+  			uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 4,6);
+  			register_code16(keycode);
+  	} else if (arrows[2] &&  analogReadPin(D7) - 512 < actuation) {
+  			arrows[2] = false;
+  			uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 4,6);
+  			unregister_code16(keycode);
+  	}
+    // Right
+  	if (!arrows[3] && analogReadPin(D7) - 512 < -actuation) {
+  			arrows[3] = true;
+  			uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 4,7);
+  			register_code16(keycode);
+  	} else if (arrows[3] && analogReadPin(D7) - 512 > -actuation) {
+  			arrows[3] = false;
+  			uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 4,7);
+  			unregister_code16(keycode);
+  	}
+}
+
+// Joystick config
+joystick_config_t joystick_axes[JOYSTICK_AXES_COUNT] = {
+    [0] = JOYSTICK_AXIS_VIRTUAL,
+    [1] = JOYSTICK_AXIS_VIRTUAL
 };
