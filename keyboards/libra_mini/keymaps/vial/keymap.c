@@ -86,7 +86,7 @@ void matrix_scan_user(void) {
 }
 
 // Joystick config
-joystick_config_t joystick_axes[JOYSTICK_AXES_COUNT] = {
+joystick_config_t joystick_axes[JOYSTICK_AXIS_COUNT] = {
     [0] = JOYSTICK_AXIS_VIRTUAL,
     [1] = JOYSTICK_AXIS_VIRTUAL
 };
