@@ -7,12 +7,12 @@ A customizable number keypad.
 * Hardware Availability: [Keychron](https://www.keychron.com)
 
 Make example for this keyboard (after setting up your build environment):
-
-    make keychron/q0/rev_0130:default
+    
+    make keychron/q0/rev_0131:vial (Keychron Q0 Plus)
 
 Flashing example for this keyboard:
-
-    make keychron/q0/rev_0130:default:flash
+    
+    make keychron/q0/rev_0131:vial:flash (Keychron Q0 Plus)
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 

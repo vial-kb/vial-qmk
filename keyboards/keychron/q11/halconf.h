@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2020 QMK
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
 
 #pragma once
 
-#include "quantum.h"
+#define HAL_USE_I2C TRUE
+#define HAL_USE_SERIAL TRUE
+#define HAL_USE_ADC TRUE
 
-#if defined(KEYBOARD_keychron_q0_rev_0130)
-#    include "rev_0130.h"
-#endif
+#include_next <halconf.h>
