@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,8 +16,19 @@
 
 #pragma once
 
-#include "quantum.h"
+/* RGB Matrix Driver Configuration */
+#define DRIVER_COUNT 1
+#define DRIVER_ADDR_1 0b1110111
 
-#if defined(KEYBOARD_keychron_q0_rev_0130)
-#    include "rev_0130.h"
-#endif
+/* RGB Matrix Configuration */
+#define DRIVER_1_LED_TOTAL 26
+#define DRIVER_LED_TOTAL DRIVER_1_LED_TOTAL
+
+/* Scan phase of led driver set as MSKPHASE_9CHANNEL(defined as 0x03 in CKLED2001.h) */
+#define PHASE_CHANNEL MSKPHASE_9CHANNEL
+
+/* Enable num-lock LED */
+#define NUM_LOCK_LED_INDEX 5
+
+/* Encoder Configuration */
+#define ENCODER_DEFAULT_POS 0x3
