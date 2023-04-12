@@ -1,7 +1,7 @@
 # mini49  
 
 
-![mini49](https://cloud.stickpile.net/apps/files_sharing/publicpreview/PEiZjeNEC8YNW6j?file=/&fileId=222353&x=1920&y=1080&a=true)
+![mini49](https://cloud.stickpile.net/apps/files_sharing/publicpreview/YkYfcoeLRmHpfy2?file=/&fileId=225288&x=1080&y=1920&a=true)
 
 A sub-60% ortholinear keyboard powered by vial-qmk.  
 
