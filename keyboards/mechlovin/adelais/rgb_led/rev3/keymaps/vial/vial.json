@@ -3,175 +3,17 @@
   "vendorId": "0x4D4C",
   "productId": "0xAEC4",
   "lighting": "vialrgb",
-  "keycode": "qmk_backlight_rgblight",
-"menus": [
-  {
-    "label": "Lighting",
-    "content": [
-      {
-        "label": "RGB Backlight",
-        "content": [
-          {
-            "label": "Brightness",
-            "type": "range",
-            "options": [0, 255],
-            "content": ["id_qmk_rgb_matrix_brightness", 3, 1]
-          },
-          {
-            "label": "Effect",
-            "type": "dropdown",
-            "content": ["id_qmk_rgb_matrix_effect", 3, 2],
-            "options": [
-              "All Off",
-              "Solid Color",
-              "Alphas Mods",
-              "Gradient Up/Down",
-              "Gradient Left/Right",
-              "Breathing",
-              "Band Sat.",
-              "Band Val.",
-              "Pinwheel Sat.",
-              "Pinwheel Val.",
-              "Spiral Sat.",
-              "Spiral Val.",
-              "Cycle All",
-              "Cycle Left/Right",
-              "Cycle Up/Down",
-              "Rainbow Moving Chevron",
-              "Cycle Out/In",
-              "Cycle Out/In Dual",
-              "Cycle Pinwheel",
-              "Cycle Spiral",
-              "Dual Beacon",
-              "Rainbow Beacon",
-              "Rainbow Pinwheels",
-              "Raindrops",
-              "Jellybean Raindrops",
-              "Hue Breathing",
-              "Hue Pendulum",
-              "Hue Wave",
-              "Pixel Rain",
-              "Pixel Flow",
-              "Pixel Fractal",
-              "Typing Heatmap",
-              "Digital Rain",
-              "Solid Reactive Simple",
-              "Solid Reactive",
-              "Solid Reactive Wide",
-              "Solid Reactive Multi Wide",
-              "Solid Reactive Cross",
-              "Solid Reactive Multi Cross",
-              "Solid Reactive Nexus",
-              "Solid Reactive Multi Nexus",
-              "Spash",
-              "Multi Splash",
-              "Solid Splash",
-              "Solid Multi Splash"
-            ]
-          },
-          {
-            "showIf": "{id_qmk_rgb_matrix_effect} != 0",
-            "label": "Effect Speed",
-            "type": "range",
-            "options": [0, 255],
-            "content": ["id_qmk_rgb_matrix_effect_speed", 3, 3]
-          },
-          {
-            "showIf": "{id_qmk_rgb_matrix_effect} != 0 && {id_qmk_rgb_matrix_effect} != 24 && {id_qmk_rgb_matrix_effect} != 28 && {id_qmk_rgb_matrix_effect} != 29 && {id_qmk_rgb_matrix_effect} != 32",
-            "label": "Color",
-            "type": "color",
-            "content": ["id_qmk_rgb_matrix_color", 3, 4]
-          }
-        ]
-      },
-      {
-        "label": "RGB Underglow",
-        "content": [
-          {
-            "label": "Brightness",
-            "type": "range",
-            "options": [0, 255],
-            "content": ["id_qmk_rgblight_brightness", 2, 1]
-          },
-          {
-            "label": "Effect",
-            "type": "dropdown",
-            "content": ["id_qmk_rgblight_effect", 2, 2],
-            "options": [
-              "All Off",
-              "Solid Color",
-              "Breathing 1",
-              "Breathing 2",
-              "Breathing 3",
-              "Breathing 4",
-              "Rainbow Mood 1",
-              "Rainbow Mood 2",
-              "Rainbow Mood 3",
-              "Rainbow Swirl 1",
-              "Rainbow Swirl 2",
-              "Rainbow Swirl 3",
-              "Rainbow Swirl 4",
-              "Rainbow Swirl 5",
-              "Rainbow Swirl 6",
-              "Snake 1",
-              "Snake 2",
-              "Snake 3",
-              "Snake 4",
-              "Snake 5",
-              "Snake 6",
-              "Knight 1",
-              "Knight 2",
-              "Knight 3",
-              "Christmas",
-              "Gradient 1",
-              "Gradient 2",
-              "Gradient 3",
-              "Gradient 4",
-              "Gradient 5",
-              "Gradient 6",
-              "Gradient 7",
-              "Gradient 8",
-              "Gradient 9",
-              "Gradient 10",
-              "RGB Test",
-              "Alternating",
-              "Twinkle 1",
-              "Twinkle 2",
-              "Twinkle 3",
-              "Twinkle 4",
-              "Twinkle 5",
-              "Twinkle 6"
-            ]
-          },
-          {
-            "showIf": "{id_qmk_rgblight_effect} != 0",
-            "label": "Effect Speed",
-            "type": "range",
-            "options": [0, 3],
-            "content": ["id_qmk_rgblight_effect_speed", 2, 3]
-          },
-          {
-            "showIf": "{id_qmk_rgblight_effect} != 6 && {id_qmk_rgblight_effect} != 7 && {id_qmk_rgblight_effect} != 8 && {id_qmk_rgblight_effect} != 9 && {id_qmk_rgblight_effect} != 10 && {id_qmk_rgblight_effect} != 0 && {id_qmk_rgblight_effect} != 11 && {id_qmk_rgblight_effect} != 12 && {id_qmk_rgblight_effect} != 13 && {id_qmk_rgblight_effect} != 14 && {id_qmk_rgblight_effect} != 35",
-            "label": "Color",
-            "type": "color",
-            "content": ["id_qmk_rgblight_color", 2, 4]
-          }
-        ]
-      }
-    ]
-  }
-],
     "customKeycodes": [
-      {"name": "Backlight Toggle", "title": "BL TOG", "shortName": "BL TOG"},
-      {"name": "Backlight Effect", "title": "Backlight Effect", "shortName": "BL EFF"},
-      {"name": "Backlight Incrase Speed", "title": "Backlight Incrase Speed", "shortName": "BL ISPD"},
-      {"name": "Backlight Decrase Speed", "title": "Backlight Decrase Speed", "shortName": "RGB BL DSPD"},
-      {"name": "Backlight Toggle", "title": "Backlight Toggle", "shortName": "RGB BL TOG"},
-      {"name": "Backlight Toggle", "title": "Backlight Toggle", "shortName": "RGB BL TOG"},
-      {"name": "Backlight Toggle", "title": "Backlight Toggle", "shortName": "RGB BL TOG"},
-      {"name": "Backlight Toggle", "title": "Backlight Toggle", "shortName": "RGB BL TOG"},
-      {"name": "Backlight Toggle", "title": "Backlight Toggle", "shortName": "RGB BL TOG"},
-      {"name": "Backlight Toggle", "title": "Backlight Toggle", "shortName": "RGB BL TOG"}
+      {"name": "Backlight Toggle", "title": "Backlight Toggle", "shortName": "BL_TOG"},
+      {"name": "Backlight Effect", "title": "Backlight Effect", "shortName": "BL_EFFECT"},
+      {"name": "Backlight Increase Speed", "title": "Backlight Increase Speed", "shortName": "BL_ISPD"},
+      {"name": "Backlight Decrease Speed", "title": "Backlight Decrease Speed", "shortName": "BL_DSPD"},
+      {"name": "Backlight Increase Hue", "title": "Backlight Increase Hue", "shortName": "BL_IHUE"},
+      {"name": "Backlight Decrease Hue", "title": "Backlight Decrease Hue", "shortName": "BL_DHUE"},
+      {"name": "Backlight Increase Saturation", "title": "Backlight Increase Saturation", "shortName": "BL_ISAT"},
+      {"name": "Backlight Decrease Saturation", "title": "Backlight Decrease Saturation", "shortName": "BL_DSAT"},
+      {"name": "Backlight Increase Value", "title": "Backlight Increase Value", "shortName": "BL_IVAL"},
+      {"name": "Backlight Decrease Value", "title": "Backlight Decrease Value", "shortName": "BL_DVAL"}
     ],
     "matrix": {"rows": 5, "cols": 15},
     "layouts": {
@@ -187,7 +29,8 @@
             "x": 0.5,
             "c": "#777777"
           },
-          "3,1\n\n\n3,1\n\n\n\n\n\ne0"
+          "3,0\n\n\n\n\n\n\n\n\ne",
+          "3,1\n\n\n\n\n\n\n\n\ne"
         ],
         [
           {
@@ -203,7 +46,7 @@
             "x": 0.55,
             "c": "#777777"
           },
-          "3,1\n\n\n3,0"
+          "3,1"
         ],
         [
           {
