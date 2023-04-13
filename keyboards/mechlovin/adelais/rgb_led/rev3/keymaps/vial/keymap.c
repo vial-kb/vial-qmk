@@ -17,15 +17,15 @@
 
 enum my_keycodes {
   BL_TOG = USER00,
-  BL_EFFECT = USER01,
-  BL_ISPD = USER02,
-  BL_DSPD = USER03,
-  BL_IHUE = USER04,
-  BL_DHUE = USER05,
-  BL_ISAT = USER06,
-  BL_DSAT = USER07,
-  BL_IVAL = USER08,
-  BL_DVAL = USER09
+  BL_EFFECT,
+  BL_ISPD,
+  BL_DSPD,
+  BL_IHUE,
+  BL_DHUE,
+  BL_ISAT,
+  BL_DSAT,
+  BL_IVAL,
+  BL_DVAL
 };
 
 
@@ -57,30 +57,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-#ifdef ENCODER_ENABLE
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) {
-        if (clockwise) {
-            tap_code(KC_VOLD);
-        } else {
-            tap_code(KC_VOLU);
-        }
-    } else if (index == 1) {
-        if (clockwise) {
-            tap_code(KC_LEFT);
-        } else {
-            tap_code(KC_RGHT);
-        }
-    } else if (index == 2) {
-        if (clockwise) {
-            tap_code(KC_UP);
-        } else {
-            tap_code(KC_DOWN);
-        }
-    }
-    return true;
-}
-
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [1] =   { ENCODER_CCW_CW(RGB_HUD, RGB_HUI) },
+    [2] =   { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
+    [3] =   { ENCODER_CCW_CW(RGB_RMOD, RGB_MOD)},
+    //                  Encoder 1                
+};
 #endif
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
