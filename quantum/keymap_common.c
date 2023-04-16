@@ -186,8 +186,19 @@ action_t action_for_keycode(uint16_t keycode) {
     return action;
 }
 
+extern uint16_t g_vial_magic_keycode_override;
+
 // translates key to keycode
 __attribute__((weak)) uint16_t keymap_key_to_keycode(uint8_t layer, keypos_t key) {
+#ifdef VIAL_ENABLE
+    /* Disable any keycode processing while unlocking */
+    if (vial_unlock_in_progress) {
+        return KC_NO;
+    }
+    if (key.row == VIAL_MATRIX_MAGIC && key.col == VIAL_MATRIX_MAGIC) {
+        return g_vial_magic_keycode_override;
+    }
+#endif
     if (key.row < MATRIX_ROWS && key.col < MATRIX_COLS) {
         return keycode_at_keymap_location(layer, key.row, key.col);
     }

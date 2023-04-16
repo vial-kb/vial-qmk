@@ -396,18 +396,7 @@ void dynamic_keymap_set_buffer(uint16_t offset, uint16_t size, uint8_t *data) {
     }
 }
 
-extern uint16_t g_vial_magic_keycode_override;
-
 uint16_t keycode_at_keymap_location(uint8_t layer_num, uint8_t row, uint8_t column) {
-#ifdef VIAL_ENABLE
-    /* Disable any keycode processing while unlocking */
-    if (vial_unlock_in_progress)
-        return KC_NO;
-
-    if (row == VIAL_MATRIX_MAGIC && column == VIAL_MATRIX_MAGIC)
-        return g_vial_magic_keycode_override;
-#endif
-
     if (layer_num < DYNAMIC_KEYMAP_LAYER_COUNT && row < MATRIX_ROWS && column < MATRIX_COLS) {
         return dynamic_keymap_get_keycode(layer_num, row, column);
     }
