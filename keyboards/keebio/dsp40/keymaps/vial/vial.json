@@ -2,12 +2,7 @@
     "name": "DSP40 Rev. 1",
     "vendorId": "0xCB10",
     "productId": "0x144C",
-    "keycodes": [
-      "qmk_lighting"
-    ],
-    "menus": [
-      "qmk_backlight"
-    ],
+    "lighting": "qmk_backlight",
     "matrix": {
       "rows": 4,
       "cols": 12
