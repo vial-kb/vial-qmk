@@ -2,6 +2,7 @@
     "name": "Absinthe",
     "vendorId": "0xB00B",
     "productId": "0xFEED",
+    "lighting": "qmk_backlight",
     "matrix": {
       "rows": 9,
       "cols": 9
