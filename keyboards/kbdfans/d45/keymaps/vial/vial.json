@@ -2,10 +2,7 @@
     "name": "D45",
     "vendorId": "0x4B42",
     "productId": "0x0010",
-    "lighting": {
-        "extends": "none",
-        "keycodes": "qmk"
-    },
+    "lighting": "qmk_backlight",
     "matrix": {
       "rows": 4,
       "cols": 16
