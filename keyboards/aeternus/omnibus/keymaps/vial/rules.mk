@@ -3,3 +3,4 @@ VIAL_ENABLE = yes
 
 QMK_SETTINGS = no
 LTO_ENABLE = yes
+TAP_DANCE_ENABLE = no
