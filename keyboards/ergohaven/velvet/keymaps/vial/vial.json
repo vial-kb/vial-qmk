@@ -2,6 +2,24 @@
   "name": "Remnant",
   "lighting": "none",
     "matrix":{ "rows":8, "cols":5 },
+    "customKeycodes": [
+        {"name": "NEXTSEN",
+         "title": "Add a dot then capitalize the first letter of a new sentence (US layout)",
+         "shortName": "NEXTSEN"
+        },
+        {"name": "PREDL",
+         "title": "Поставить точку и начать новое предложение с заглавной буквы (Русская раскладка)",
+         "shortName": "PREDL"
+        }, 
+        {"name": "BRACES",
+         "title": "This keycode types [, then ], and taps the left arrow to position the cursor between the []. Or if shift is held, it does the same but with curly braces {}.",
+         "shortName": "BRACES"
+        },
+        {"name": "PARENTH",
+         "title": "This keycode types (, then ), and taps the left arrow to position the cursor between the ().",
+         "shortName": "PARENTH"
+        }
+    ],
     "layouts":{
         "keymap":[
             [{"c":"#000000","x":2.25},"0,2",{"x":9},"4,2"],

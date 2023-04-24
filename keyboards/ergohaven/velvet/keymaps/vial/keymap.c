@@ -1,15 +1,29 @@
 #include QMK_KEYBOARD_H
 
-enum layer_names {
-  _BASE,
-  _LOWER,
-  _RAISE,
-  _ADJUST
-};
+#define _BASE 0
+#define _LOWER 1
+#define _RAISE 2
+#define _ADJUST 3
+#define _FOURTH 4
+#define _FIFTH 5
+#define _SIXTH 6
+#define _SEVENTH 7
+#define _EIGHTH 8
+#define _NINTH 9
+#define _TENTH 10
+#define _ELEVENTH 11
+#define _TWELTH 12
+#define _THIRTEENTH 13
+#define _FOURTEENTH 14
+#define _FIFTEENTH 15
+#define _SIXTEENTH 16
 
-#define LOWER  MO(_LOWER)
-#define RAISE  MO(_RAISE)
-
+#define BASE      DF(_BASE)
+#define RAISE     MO(_RAISE)
+#define LOWER     MO(_LOWER)
+#define ADJUST    MO(_ADJUST)
+#define PREVWRD   LCTL(KC_LEFT)
+#define NEXTWRD   LCTL(KC_RIGHT)
 #define CT_Q  LCTL_T(KC_Q)
 #define CT_CM RCTL_T(KC_COMM)
 #define SF_Z  LSFT_T(KC_Z)
@@ -18,6 +32,12 @@ enum layer_names {
 #define AL_DT RALT_T(KC_DOT)
 #define LO_TB LT(LOWER, KC_TAB)
 
+enum custom_keycodes {
+    NEXTSEN = USER00,
+    PREDL, 
+    BRACES,
+    PARENTH
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BASE] = LAYOUT_all(
@@ -48,3 +68,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       _______, _______, _______, _______,      _______, _______, _______, _______
   )
 };
+
+bool process_record_user(uint16_t keycode, keyrecord_t* record) {
+    switch (keycode) {
+    case NEXTSEN:  // Next sentence macro.
+      if (record->event.pressed) {
+        SEND_STRING(". ");
+        add_oneshot_mods(MOD_BIT(KC_LSFT));  // Set one-shot mod for shift.
+      }
+      return false;
+
+    case PREDL:  // Next sentence macro.
+      if (record->event.pressed) {
+        SEND_STRING("/ ");
+        add_oneshot_mods(MOD_BIT(KC_LSFT));  // Set one-shot mod for shift.
+      }
+      return false;
+
+       case BRACES:
+            if (record->event.pressed) {
+                uint8_t shifted = get_mods() & (MOD_MASK_SHIFT);
+                    if (shifted) {
+                        unregister_code(KC_LSFT);
+                        unregister_code(KC_RSFT);
+                        SEND_STRING("{}"SS_TAP(X_LEFT));
+                    }
+                    else {
+                        SEND_STRING("[]"SS_TAP(X_LEFT));
+                    }
+            }
+            break;
+
+        case PARENTH:
+            if (record->event.pressed) {
+                SEND_STRING("()");
+                tap_code(KC_LEFT);
+            }
+            break;
+}
+}
