@@ -46,25 +46,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (index == 0) { /* First encoder */
-          switch(get_highest_layer(layer_state)){
-            case 1:
-                if (clockwise){
-                    tap_code(KC_VOLU);
-                } else{
-                    tap_code(KC_VOLD);
-                }
-                break;
-            default:
-                if (clockwise) {
-                    tap_code(KC_WH_D);
-                } else {
-                    tap_code(KC_WH_U);
-                }
-                break;
-        }
-    }
-    return true;
-}
-
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [0] = { ENCODER_CCW_CW(KC_WH_U, KC_WH_D) },
+    [1] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [2] = { ENCODER_CCW_CW(KC_WH_U, KC_WH_D) },
+    [3] = { ENCODER_CCW_CW(KC_WH_U, KC_WH_D) }
+};
+#endif
