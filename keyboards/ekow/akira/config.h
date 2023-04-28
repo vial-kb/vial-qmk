@@ -24,9 +24,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_COL_PINS \
     { B12, B13, B14, B15, A8, A9, A10, A15, B3, B4, B5, B6, B7, B8, B9 }
 
-// Reset to QMK default for STM32042x6. Vial default is currently 8 pages.
-#define FEE_PAGE_COUNT 2
-
 /*
  * Keyboard Matrix Assignments
  *
