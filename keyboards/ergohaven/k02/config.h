@@ -49,6 +49,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SPLIT_MODS_ENABLE
 #endif
 
+#define USB_SUSPEND_WAKEUP_DELAY 200
+#define NO_USB_STARTUP_CHECK
+
 #define RGBLED_NUM 58
 #define RGB_DI_PIN GP22
 
