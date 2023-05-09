@@ -1,0 +1,249 @@
+{
+  "name": "Drop ALT",
+  "vendorId": "0x04D8",
+  "productId": "0xEED3",
+  "lighting": {
+    "extends": "qmk_rgblight",
+    "underglowEffects": [
+      ["All Off", 0],
+      ["Solid Color", 1],
+      ["Solid Alphas & Mods", 1],
+      ["Gradient 1", 1],
+      ["Gradient 2", 1],
+      ["Breathing", 1],
+      ["Band 1", 1],
+      ["Band 2", 1],
+      ["Band Pinwheel 1", 1],
+      ["Band Pinwheel 2", 1],
+      ["Band Spiral 1", 1],
+      ["Band Spiral 2", 1],
+      ["Rainbow All", 1],
+      ["Rainbow Left/Right", 1],
+      ["Rainbow Up/Down", 1],
+      ["Rainbow Chevron", 1],
+      ["Rainbow Out/In", 1],
+      ["Rainbow Dual Out/In", 1],
+      ["Rainbow Pinwheel", 1],
+      ["Rainbow Spiral", 1],
+      ["Rainbow Dual Beacon", 1],
+      ["Rainbow Beacon", 1],
+      ["Rainbow Pinwheels", 1],
+      ["Raindrops", 1],
+      ["Raindrops Jellybean", 1],
+      ["Hue Breathing", 1],
+      ["Hue Pendulum", 1],
+      ["Hue Wave", 1],
+      ["Pixel Rain", 1],
+      ["Pixel Flow", 1],
+      ["Pixel Fractal", 1],
+      ["Typing Heatmap", 1],
+      ["Digital Rain", 1],
+      ["Reactive Simple", 1],
+      ["Reactive", 1],
+      ["Reactive Wide", 1],
+      ["Reactive Multiwide", 1],
+      ["Reactive Cross", 1],
+      ["Reactive Multicross", 1],
+      ["Reactive Nexus", 1],
+      ["Reactive Multinexus", 1],
+      ["Reactive Rainbow Splash", 1],
+      ["Reactive Rainbow Multisplash", 1],
+      ["Reactive Splash", 1],
+      ["Reactive Multisplash", 1]
+    ],
+    "supportedLightingValues": [7, 8, 128, 129, 130, 131]
+  },
+  "customKeycodes": [
+    {
+      "name": "USB Extra Port Detect",
+      "title": "USB Extra Port Toggle Auto Detect / Always Active",
+      "shortName": "U_T_AUTO"
+    },
+    {
+      "name": "USB GCR Control",
+      "title": "USB Toggle Automatic GCR control",
+      "shortName": "U_T_AGCR"
+    },
+    {
+      "name": "Debug Toggle",
+      "title": "Toggle Debug Mode",
+      "shortName": "DBG_TOG"
+    },
+    {
+      "name": "Debug Matrix",
+      "title": "Toggle Matrix Debug Prints",
+      "shortName": "DBG_MTRX"
+    },
+    {
+      "name": "Debug Keyboard",
+      "title": "Toggle Keyboard Debug Prints",
+      "shortName": "DBG_KBD"
+    },
+    {
+      "name": "Debug Mouse",
+      "title": "Toggle Mouse Debug Prints",
+      "shortName": "DBG_MOU"
+    },
+    {
+      "name": "Bootloader",
+      "title": "Restart into bootloader after holding for 3 seconds",
+      "shortName": "MD_BOOT"
+    }
+  ],
+  "matrix": {"rows": 5, "cols": 15},
+  "layouts": {
+    "keymap": [
+      [
+        {
+          "t": "#000000\n#ffffff"
+        },
+        "0,0",
+        "0,1\n1",
+        "0,2\n2",
+        "0,3\n3",
+        "0,4\n4",
+        "0,5\n5",
+        "0,6\n6",
+        "0,7\n7",
+        "0,8\n8",
+        "0,9\n9",
+        "0,10\n0",
+        "0,11\n-",
+        "0,12\n=",
+        {
+          "t": "#000000",
+          "w": 2
+        },
+        "0,13",
+        {
+          "c": "#aaaaaa"
+        },
+        "0,14"
+      ],
+      [
+        {
+          "w": 1.5
+        },
+        "1,0",
+        {
+          "c": "#cccccc"
+        },
+        "1,1",
+        "1,2",
+        "1,3",
+        "1,4",
+        "1,5",
+        "1,6",
+        "1,7",
+        "1,8",
+        "1,9",
+        "1,10",
+        "1,11",
+        "1,12",
+        {
+          "w": 1.5
+        },
+        "1,13",
+        {
+          "c": "#aaaaaa"
+        },
+        "1,14"
+      ],
+      [
+        {
+          "w": 1.75
+        },
+        "2,0",
+        {
+          "c": "#cccccc"
+        },
+        "2,1",
+        "2,2",
+        "2,3",
+        "2,4",
+        "2,5",
+        "2,6",
+        "2,7",
+        "2,8",
+        "2,9",
+        "2,10",
+        "2,11",
+        {
+          "w": 2.25
+        },
+        "2,13",
+        {
+          "c": "#aaaaaa"
+        },
+        "2,14"
+      ],
+      [
+        {
+          "w": 2.25
+        },
+        "3,0",
+        {
+          "c": "#cccccc"
+        },
+        "3,2",
+        "3,3",
+        "3,4",
+        "3,5",
+        "3,6",
+        "3,7",
+        "3,8",
+        "3,9",
+        "3,10",
+        "3,11",
+        {
+          "c": "#aaaaaa",
+          "w": 1.75
+        },
+        "3,12",
+        {
+          "c": "#cccccc"
+        },
+        "3,13",
+        {
+          "c": "#aaaaaa"
+        },
+        "3,14"
+      ],
+      [
+        {
+          "w": 1.25
+        },
+        "4,0",
+        {
+          "w": 1.25
+        },
+        "4,1",
+        {
+          "w": 1.25
+        },
+        "4,2",
+        {
+          "c": "#cccccc",
+          "w": 6.25
+        },
+        "4,6",
+        {
+          "c": "#aaaaaa",
+          "w": 1.25
+        },
+        "4,10",
+        {
+          "w": 1.25
+        },
+        "4,11",
+        {
+          "x": 0.5,
+          "c": "#cccccc"
+        },
+        "4,12",
+        "4,13",
+        "4,14"
+      ]
+    ]
+  }
+}
