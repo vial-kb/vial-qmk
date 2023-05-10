@@ -23,7 +23,12 @@
         {"name": "PARENTH",
          "title": "This keycode types (, then ), and taps the left arrow to position the cursor between the ().",
          "shortName": "PARENTH"
+        },
+        {"name": "GAME",
+         "title": "S and D to move left or right, Space to shoot, let's go!",
+         "shortName": "GM_INV"
         }
+
     ],
     "layouts": {
         "keymap":[

@@ -1,6 +1,9 @@
 #include QMK_KEYBOARD_H
-/* #include "oled/bongocat.c" */
-#include "oled/luna.c"
+#include "oled/bongocat.c"
+/* #include "oled/luna.c" */
+#include "font_block.h"
+#include "game/game.h"
+#include "layers.c"
 
 #define _BASE 0
 #define _LOWER 1
@@ -32,6 +35,7 @@ enum custom_keycodes {
     PREDL, 
     BRACES,
     PARENTH,
+    GM_INV,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -60,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ),
     
       [_ADJUST] = LAYOUT_all(
-        _______, _______, _______, _______, _______, _______,                           _______, _______, _______, _______, _______, _______,
+        _______, _______, _______, _______, _______, GM_INV,                            _______, _______, _______, _______, _______, _______,
         _______, _______, _______, _______, _______, _______,                           _______, _______, _______, _______, DM_PLY1, DM_REC1,
         RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, _______, _______,                           _______, KC_VOLD, KC_MUTE, KC_VOLU, DM_PLY2, DM_REC2,
         RGB_MOD, RGB_HUD, RGB_SAD, RGB_VAD, _______, CG_TOGG,                           _______, KC_MPRV, KC_MPLY, KC_MNXT, _______, DM_RSTP,
@@ -69,19 +73,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        ),
 };
 
-
-
-
-
 #ifdef OLED_ENABLE
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
-    /* return OLED_ROTATION_180;  // bongocat */
-    return OLED_ROTATION_270;  // luna
+    return OLED_ROTATION_180;  // bongocat
+    /* return OLED_ROTATION_270;  // luna */
   }
     else {
-    return OLED_ROTATION_270;  // flips the display 180 degrees if offhand
+    set_rotation(1);
+    return OLED_ROTATION_270; 
     }
   return rotation;
 }
@@ -167,19 +168,26 @@ void render_layer_state(void) {
 // Used to draw on to the oled screen
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_layer_state();
+        /* render_layer_state(); */
+         if (!isGamingMode()) {
+             render_layer_state();
+         }
     } else {
-    /* render_bongocat();  // bongocat */
-    render_luna_status();  // luna
+    render_bongocat();  // bongocat
+    /* render_luna_status();  // luna */
 }
-
     return false;
 }
 
+void matrix_scan_user(void) {
+    if (isGamingMode()) {
+        if (countMainTimer() > 0) {
+            game_main();
+        }
+    }
+}
+
 #endif
-
-
-
 
 
 
@@ -222,6 +230,50 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
             if (record->event.pressed) {
                 SEND_STRING("()");
                 tap_code(KC_LEFT);
+            }
+            break;
+        case GM_INV:
+            // Toggle gaming mode & clear OLED display
+            if (!record->event.pressed) {
+                toggleGamingMode();
+                if (isGamingMode()) {
+                    readMainTimer();
+                    initGame();
+                    startGame();
+                }
+                oled_clear();
+            }
+            break;
+        case KC_S:
+            if (record->event.pressed) {
+                if (isGamingMode()) {
+                    movePlayer(1); // 1 = isLeft
+                    return false;
+                }
+            }
+            break;
+        case KC_F:
+            if (record->event.pressed) {
+                if (isGamingMode()) {
+                    movePlayer(0); // 0 = isRight
+                    return false;
+                }
+            }
+            break;
+        case KC_SPC:
+            if (record->event.pressed) {
+                if (isGamingMode()) {
+                    firePlayerBeam();
+                    return false;
+                }
+            }
+            break;
+        case KC_ENT:
+        case KC_LGUI:
+            if (record->event.pressed) {
+                if (isGamingMode()) {
+                    return false;
+                }
             }
             break;
     }
