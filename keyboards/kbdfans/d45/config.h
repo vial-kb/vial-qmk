@@ -22,7 +22,6 @@
 #define LOCKING_SUPPORT_ENABLE
 /* Locking resynchronize hack */
 #define LOCKING_RESYNC_ENABLE
-#define VIAL_KEYBOARD_UID {0xC0, 0x17, 0xF0, 0x89, 0xD6, 0x68, 0xC4, 0xEA}
 
 #define RGB_DI_PIN B6
 #ifdef RGB_DI_PIN
