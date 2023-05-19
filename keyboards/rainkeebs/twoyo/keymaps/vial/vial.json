@@ -9,6 +9,13 @@
                 "1u Right Shift"
         ],
         "keymap": [
+          [
+            { "y": 0.25},
+            "0,0\n\n\n\n\n\n\n\n\ne",
+            "0,1\n\n\n\n\n\n\n\n\ne",
+            { "x": 10},
+            "1,0\n\n\n\n\n\n\n\n\ne",
+            "1,1\n\n\n\n\n\n\n\n\ne"],
             [
               "0,0",
               "0,1",
