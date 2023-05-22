@@ -15,6 +15,16 @@
  */
 #include QMK_KEYBOARD_H
 
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+    [0] =   { ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN), ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
+    [1] =   { ENCODER_CCW_CW(RGB_HUD, RGB_HUI),           ENCODER_CCW_CW(RGB_SAD, RGB_SAI)  },
+    [2] =   { ENCODER_CCW_CW(RGB_VAD, RGB_VAI),           ENCODER_CCW_CW(RGB_SPD, RGB_SPI)  },
+    [3] =   { ENCODER_CCW_CW(RGB_RMOD, RGB_MOD),          ENCODER_CCW_CW(KC_RIGHT, KC_LEFT) },
+    //                  Encoder 1                                     Encoder 2
+};
+#endif
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	LAYOUT(
@@ -44,74 +54,4 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
     )
-};
-
-void encoder_update_user(uint8_t index, bool clockwise) {
-
-	switch (get_highest_layer(layer_state)) {
-        case 0:
-             if (index == 0) {
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
-        }
-    }
-    else if (index == 1) {
-        if (clockwise) {
-            tap_code(KC_MS_WH_DOWN);
-        } else {
-            tap_code(KC_MS_WH_UP);
-        }
-    }
-            break;
-        case 1:
-            if (index == 0) {
-        if (clockwise) {
-            tap_code(KC_MNXT);
-        } else {
-            tap_code(KC_MPRV);
-        }
-    }
-    else if (index == 1) {
-        if (clockwise) {
-            tap_code(KC_WH_R);
-        } else {
-            tap_code(KC_WH_L);
-        }
-    }
-            break;
-		case 2:
-			if (index == 0) {
-        if (clockwise) {
-            tap_code(KC_PGUP);
-        } else {
-            tap_code(KC_PGDOWN);
-        }
-    }
-    else if (index == 1) {
-        if (clockwise) {
-            tap_code(KC_END);
-        } else {
-            tap_code(KC_HOME);
-        }
-    }
-            break;
-        case 3:
-            if (index == 0) {
-        if (clockwise) {
-            tap_code(KC_PGUP);
-        } else {
-            tap_code(KC_PGDOWN);
-        }
-    }
-    else if (index == 1) {
-        if (clockwise) {
-            tap_code(KC_END);
-        } else {
-            tap_code(KC_HOME);
-        }
-    }
-            break;
-    }
 };
