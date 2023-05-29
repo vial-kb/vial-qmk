@@ -31,8 +31,8 @@
 #define DEBOUNCE 5
 
 /* Enable encoder */
-#define ENCODERS_PAD_A { B1 }
-#define ENCODERS_PAD_B { B0 }
+#define ENCODERS_PAD_A { B0 }
+#define ENCODERS_PAD_B { B1 }
 
 #define ENCODERS 1
 
