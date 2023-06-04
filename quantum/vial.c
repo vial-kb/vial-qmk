@@ -299,6 +299,7 @@ void vial_keycode_down(uint16_t keycode) {
         register_code16(keycode);
     } else {
         action_exec((keyevent_t){
+            .type = KEY_EVENT,
             .key = (keypos_t){.row = VIAL_MATRIX_MAGIC, .col = VIAL_MATRIX_MAGIC}, .pressed = 1, .time = (timer_read() | 1) /* time should not be 0 */
         });
     }
@@ -311,6 +312,7 @@ void vial_keycode_up(uint16_t keycode) {
         unregister_code16(keycode);
     } else {
         action_exec((keyevent_t){
+            .type = KEY_EVENT,
             .key = (keypos_t){.row = VIAL_MATRIX_MAGIC, .col = VIAL_MATRIX_MAGIC}, .pressed = 0, .time = (timer_read() | 1) /* time should not be 0 */
         });
     }
