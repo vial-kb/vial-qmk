@@ -32,7 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROW_PINS { A9, A8, A3, A5 }
 #define DIODE_DIRECTION COL2ROW
 
-#define RGB_DI_PIN B15
+#define WS2812_DI_PIN B15
 #define RGB_MATRIX_LED_COUNT 51
 #define RGBLED_NUM 51
 #define WS2812_SPI SPID2
