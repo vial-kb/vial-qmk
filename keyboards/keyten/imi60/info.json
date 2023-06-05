@@ -1,7 +1,7 @@
 {
     "manufacturer": "keyten",
     "keyboard_name": "imi60",
-    "maintainer": "qmk",
+    "maintainer": "key10iq",
     "processor": "atmega32u4",
     "bootloader": "atmel-dfu",
     "usb": {
