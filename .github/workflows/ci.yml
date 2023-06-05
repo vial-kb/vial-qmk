@@ -13,7 +13,7 @@ permissions: {}
 
 jobs:
   check-uid:
-    name: Check Vial UIDs for all keyboards
+    name: Check Vial UIDs
     runs-on: ubuntu-latest
 
     steps:
@@ -22,7 +22,7 @@ jobs:
       with:
         persist-credentials: false
 
-    - name: Verify Vial UID is unique
+    - name: Verify Vial UID is unique per-keyboard
       run: python3 util/ci_vial_verify_uid.py
 
   build-default:
@@ -43,14 +43,18 @@ jobs:
       id: build
       run: |
         git config --global --add safe.directory $(pwd)
-        qmk mass-compile -j $(nproc) $(qmk find -km vial | sed "s/:vial$/:${KEYMAP}/")
+        if ! qmk mass-compile -j $(nproc) $(qmk find -km vial | sed "s/:vial$/:${KEYMAP}/");
+          then
+          echo "::error::$(ls -1 .build/failed.log.* | wc -l) keymaps failed to build. See logs and/or job summary for details."
+          exit 1
+        fi
 
     - name: Dump failure logs
       if: ${{ failure() && steps.build.conclusion == 'failure' }}
       run: |
         echo '### Failure logs' | tee -a "${GITHUB_STEP_SUMMARY}"
 
-        cd .build || exit
+        cd .build || exit 1
         for log in failed.log.*; do
           pretty_logname="$(echo "${log}" | sed "s/^failed\.log\.[0-9]\+\.// ; s/\.${KEYMAP}$//")"
 
@@ -77,14 +81,18 @@ jobs:
       id: build
       run: |
         git config --global --add safe.directory $(pwd)
-        qmk mass-compile -km "${KEYMAP}" -j $(nproc)
+        if ! qmk mass-compile -km "${KEYMAP}" -j $(nproc);
+          then
+          echo "::error::$(ls -1 .build/failed.log.* | wc -l) keymaps failed to build. See logs and/or job summary for details."
+          exit 1
+        fi
 
     - name: Dump failure logs
       if: ${{ failure() && steps.build.conclusion == 'failure' }}
       run: |
         echo '### Failure logs' | tee -a "${GITHUB_STEP_SUMMARY}"
 
-        cd .build || exit
+        cd .build || exit 1
         for log in failed.log.*; do
           pretty_logname="$(echo "${log}" | sed "s/^failed\.log\.[0-9]\+\.// ; s/\.${KEYMAP}$//")"
 
