@@ -187,6 +187,12 @@ uint8_t matrix_scan(void)
 }
 
 inline
+bool matrix_is_on(uint8_t row, uint8_t col)
+{
+    return (matrix[row] & (1<<col));
+}
+
+inline
 matrix_row_t matrix_get_row(uint8_t row) {
     return matrix[row];
 }
