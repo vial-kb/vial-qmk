@@ -33,10 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, KC_APP, _______, KC_HOME, KC_PGDN, KC_END, _______, _______),
 };
 
-static matrix_row_t *matrix;
-
-inline
 bool matrix_is_on(uint8_t row, uint8_t col)
 {
-    return (matrix[row] & (1<<col));
+    return (matrix_get_row(row) & (1<<col));
 }
