@@ -26,7 +26,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #if defined(LED_ANIMATIONS)
    #define RGBLIGHT_EFFECT_BREATHING
-   #define RGBLIGHT_EFFECT_STATIC_GRADIENT
 
    #undef RGBLIGHT_EFFECT_RGB_TEST
    #undef RGBLIGHT_EFFECT_ALTERNATING
