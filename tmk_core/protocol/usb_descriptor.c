@@ -120,19 +120,15 @@ const USB_Descriptor_HIDReport_Datatype_t PROGMEM SharedReport[] = {
 #    endif
         HID_RI_USAGE(8, 0x01),             // Pointer
         HID_RI_COLLECTION(8, 0x00),        // Physical
-            // Buttons (5 bits)
+            // Buttons (8 bits)
             HID_RI_USAGE_PAGE(8, 0x09),    // Button
             HID_RI_USAGE_MINIMUM(8, 0x01), // Button 1
-            HID_RI_USAGE_MAXIMUM(8, 0x05), // Button 5
+            HID_RI_USAGE_MAXIMUM(8, 0x08), // Button 8
             HID_RI_LOGICAL_MINIMUM(8, 0x00),
             HID_RI_LOGICAL_MAXIMUM(8, 0x01),
-            HID_RI_REPORT_COUNT(8, 0x05),
+            HID_RI_REPORT_COUNT(8, 0x08),
             HID_RI_REPORT_SIZE(8, 0x01),
             HID_RI_INPUT(8, HID_IOF_DATA | HID_IOF_VARIABLE | HID_IOF_ABSOLUTE),
-            // Button padding (3 bits)
-            HID_RI_REPORT_COUNT(8, 0x01),
-            HID_RI_REPORT_SIZE(8, 0x03),
-            HID_RI_INPUT(8, HID_IOF_CONSTANT),
 
 #    ifdef MOUSE_EXTENDED_REPORT
             // Boot protocol XY ignored in Report protocol

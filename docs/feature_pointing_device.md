@@ -382,7 +382,7 @@ The report_mouse_t (here "mouseReport") has the following properties:
 * `mouseReport.y` - this is a signed int from -127 to 127 (not 128, this is defined in USB HID spec) representing movement (+ upward, - downward) on the y axis.
 * `mouseReport.v` - this is a signed int from -127 to 127 (not 128, this is defined in USB HID spec) representing vertical scrolling (+ upward, - downward).
 * `mouseReport.h` - this is a signed int from -127 to 127 (not 128, this is defined in USB HID spec) representing horizontal scrolling (+ right, - left).
-* `mouseReport.buttons` - this is a uint8_t in which the last 5 bits are used.  These bits represent the mouse button state - bit 3 is mouse button 5, and bit 7 is mouse button 1.
+* `mouseReport.buttons` - this is a uint8_t in which all 8 bits are used.  These bits represent the mouse button state - bit 0 is mouse button 1, and bit 7 is mouse button 8.
 
 To manually manipulate the mouse reports outside of the `pointing_device_task_*` functions, you can use:
 
