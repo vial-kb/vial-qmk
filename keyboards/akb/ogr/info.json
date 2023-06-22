@@ -1,6 +1,6 @@
 {
     "manufacturer": "AKB",
-    "keyboard_name": "akb/ogr",
+    "keyboard_name": "OGR",
     "maintainer": "arnstadm",
     "bootloader": "atmel-dfu",
     "diode_direction": "COL2ROW",
@@ -110,6 +110,6 @@
                 { "matrix": [4, 16], "x": 17.5, "y": 4.0 }
             ]
         }
-   
+
     }
 }
