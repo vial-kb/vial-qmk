@@ -5,7 +5,6 @@
         "cols": 13
     },
     "layouts": {
-        "labels": ["BASE", "NUM", "FN"],
         "keymap":[
   [
     "0,0",
