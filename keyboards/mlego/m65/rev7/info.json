@@ -34,18 +34,14 @@
         "mousekey": true,
         "nkro": true,
         "oled": false,
-        "rgblight": true,
+        "rgblight": false,
         "wpm": false
     },
     "indicators": {
         "caps_lock": "GP25",
         "on_state": 0
     },
-    "ws2812": {
-        "driver": "vendor",
-        "pin": "GP12"
-    },
-    "rgblight": {
+	"rgblight": {
         "hue_steps": 10,
         "saturation_steps": 17,
         "brightness_steps": 17,
