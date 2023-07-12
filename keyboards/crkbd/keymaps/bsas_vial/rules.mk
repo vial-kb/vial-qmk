@@ -1,0 +1,37 @@
+#MOUSEKEY_ENABLE     = no      # Mouse keys
+RGBLIGHT_ENABLE     = yes     # Enable WS2812 RGB underlight.
+#VIA_ENABLE          = yes     # Enable VIA
+#VIAL_ENABLE         = yes     # Enable VIAL
+#OLED_ENABLE         = no
+#OLED_DRIVER         = SSD1306
+#EXTRAKEY_ENABLE     = yes
+#LTO_ENABLE          = yes
+#QMK_SETTINGS        = no
+#COMBO_ENABLE        = no
+
+VIA_ENABLE = yes
+VIAL_ENABLE = yes
+OLED_ENABLE = yes
+OLED_DRIVER = SSD1306
+MOUSEKEY_ENABLE = yes
+EXTRAKEY_ENABLE = yes
+WPM_ENABLE = yes
+TAP_DANCE_ENABLE = yes
+COMBO_ENABLE = yes
+GRAVE_ESC_ENABLE = yes
+MAGIC_ENABLE = yes
+BOOTMAGIC_ENABLE = yes
+
+COMMAND_ENABLE = no
+CONSOLE_ENABLE = no
+
+QMK_SETTINGS = yes
+LTO_ENABLE = no
+
+KEY_OVERRIDE_ENABLE = yes
+
+#BACKLIGHT_ENABLE = no
+NKRO_ENABLE = yes
+
+BOOTLOADER = rp2040
+CONVERT_TO = kb2040
