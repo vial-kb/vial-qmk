@@ -33,7 +33,9 @@
             "snake": true,
             "static_gradient": true,
             "twinkle": true
-        },
+        }
+    },
+    "ws2812": {
         "pin": "B7"
     },
     "url": "",
