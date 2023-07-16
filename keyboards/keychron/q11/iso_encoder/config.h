@@ -1,4 +1,4 @@
-/* Copyright 2020 QMK
+/* Copyright 2023 @ Keychron(https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,8 +16,8 @@
 
 #pragma once
 
-#define HAL_USE_I2C TRUE
-#define HAL_USE_SERIAL TRUE
-#define HAL_USE_ADC TRUE
+/* RGB Matrix Configuration */
+#define RGB_MATRIX_LED_COUNT 90
 
-#include_next <halconf.h>
+/* Enable caps-lock LED */
+#define CAPS_LOCK_LED_INDEX 23
