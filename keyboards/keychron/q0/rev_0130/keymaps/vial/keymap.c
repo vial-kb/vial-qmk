@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,6 +15,7 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "keychron_common.h"
 
 enum layers { _BASE, _FN1, _RESERVED1, _RESERVED2 };
 
@@ -51,3 +52,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,    _______, _______,
         _______,             _______,   _______)
 };
+
+void housekeeping_task_user(void) {
+    housekeeping_task_keychron();
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_record_keychron(keycode, record)) {
+        return false;
+    }
+    return true;
+}

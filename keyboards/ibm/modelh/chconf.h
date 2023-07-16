@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2020 QMK
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,23 +16,16 @@
 
 #pragma once
 
-#include "quantum.h"
+#define CH_CFG_ST_TIMEDELTA                 0
+#define CH_CFG_USE_TM                       TRUE
+#define CH_CFG_USE_REGISTRY                 TRUE
+#define CH_CFG_USE_WAITEXIT                 TRUE
+#define CH_CFG_USE_CONDVARS                 TRUE
+#define CH_CFG_USE_CONDVARS_TIMEOUT         FALSE
+#define CH_CFG_USE_MESSAGES                 TRUE
+#define CH_CFG_USE_MAILBOXES                TRUE
+#define CH_CFG_USE_HEAP                     TRUE
+#define CH_CFG_USE_OBJ_CACHES               TRUE
+#define CH_CFG_USE_DELEGATES                TRUE
 
-#define XXX KC_NO
-
-#define LAYOUT_numpad_6x4( \
-       K00, K01, K02, K03, \
-       K10, K11, K12, K13, \
-       K20, K21, K22,      \
-       K30, K31, K32, K23, \
-       K40, K41, K42,      \
-       K50,      K52, K43  \
-) \
-{ \
-    { K00, K01, K02, K03 }, \
-    { K10, K11, K12, K13 }, \
-    { K20, K21, K22, K23 }, \
-    { K30, K31, K32, XXX }, \
-    { K40, K41, K42, K43 }, \
-    { K50, XXX, K52, XXX }, \
-}
+#include_next <chconf.h>

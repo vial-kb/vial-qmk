@@ -26,7 +26,7 @@ static void auto_shift_timeout_apply(void) {
     set_autoshift_timeout(QS.auto_shift_timeout);
 }
 
-#ifdef MOUSEKEY_ENABLE
+#if defined(MOUSEKEY_ENABLE) && !defined(MK_3_SPEED)
 static void mousekey_apply(void) {
     mk_delay = QS.mousekey_delay / 10;
     mk_interval = QS.mousekey_interval;
@@ -48,7 +48,7 @@ static const qmk_settings_proto_t protos[] PROGMEM = {
    DECLARE_STATIC_SETTING(6, osk_timeout),
    DECLARE_STATIC_SETTING(7, tapping_term),
    DECLARE_STATIC_SETTING(8, tapping),
-#ifdef MOUSEKEY_ENABLE
+#if defined(MOUSEKEY_ENABLE) && !defined(MK_3_SPEED)
    DECLARE_STATIC_SETTING_NOTIFY(9, mousekey_delay, mousekey_apply),
    DECLARE_STATIC_SETTING_NOTIFY(10, mousekey_interval, mousekey_apply),
    DECLARE_STATIC_SETTING_NOTIFY(11, mousekey_move_delta, mousekey_apply),
@@ -166,7 +166,7 @@ void qmk_settings_reset(void) {
     QS.osk_tap_toggle = ONESHOT_TAP_TOGGLE;
     QS.osk_timeout = ONESHOT_TIMEOUT;
 
-#ifdef MOUSEKEY_ENABLE
+#if defined(MOUSEKEY_ENABLE) && !defined(MK_3_SPEED)
     QS.mousekey_delay = MOUSEKEY_DELAY;
     QS.mousekey_interval = MOUSEKEY_INTERVAL;
     QS.mousekey_move_delta = MOUSEKEY_MOVE_DELTA;
