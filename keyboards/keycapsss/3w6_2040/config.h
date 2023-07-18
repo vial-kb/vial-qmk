@@ -2,8 +2,6 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 #pragma once
 
-#include "config_common.h"
-
 #define SERIAL_USART_FULL_DUPLEX  // Enable full duplex operation mode.
 #define SERIAL_USART_TX_PIN GP0   // USART TX pin
 #define SERIAL_USART_RX_PIN GP1   // USART RX pin
@@ -22,8 +20,5 @@
 #define RGBLIGHT_DEFAULT_SAT 232
 #define RGBLIGHT_DEFAULT_VAR 255
 #define RGBLIGHT_DEFAULT_SPD 2
-
-#define BOOTMAGIC_LITE_ROW 0
-#define BOOTMAGIC_LITE_COLUMN 0
 
 #define DYNAMIC_KEYMAP_LAYER_COUNT 9

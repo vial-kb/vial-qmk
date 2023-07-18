@@ -17,9 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "config_common.h"
-
-
 /* key matrix size */
 #define MATRIX_ROWS 5
 #define MATRIX_COLS 15
@@ -45,9 +42,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 5
 
-#define RGB_DI_PIN B7
+#define WS2812_DI_PIN B7
 
-#ifdef RGB_DI_PIN
+#ifdef WS2812_DI_PIN
 	#define RGBLED_NUM 23
 	#define RGBLIGHT_HUE_STEP 8
 	#define RGBLIGHT_SAT_STEP 8
