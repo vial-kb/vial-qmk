@@ -47,6 +47,12 @@ static uint8_t oneshot_locked_mods = 0;
 uint8_t        get_oneshot_locked_mods(void) {
     return oneshot_locked_mods;
 }
+void add_oneshot_locked_mods(uint8_t mods) {
+    if ((oneshot_locked_mods & mods) != mods) {
+        oneshot_locked_mods |= mods;
+        oneshot_locked_mods_changed_kb(oneshot_locked_mods);
+    }
+}
 void set_oneshot_locked_mods(uint8_t mods) {
     if (mods != oneshot_locked_mods) {
         oneshot_locked_mods = mods;
@@ -56,6 +62,12 @@ void set_oneshot_locked_mods(uint8_t mods) {
 void clear_oneshot_locked_mods(void) {
     if (oneshot_locked_mods) {
         oneshot_locked_mods = 0;
+        oneshot_locked_mods_changed_kb(oneshot_locked_mods);
+    }
+}
+void del_oneshot_locked_mods(uint8_t mods) {
+    if (oneshot_locked_mods & mods) {
+        oneshot_locked_mods &= ~mods;
         oneshot_locked_mods_changed_kb(oneshot_locked_mods);
     }
 }
@@ -73,7 +85,7 @@ bool            has_oneshot_mods_timed_out(void) {
  *   L => are layer bits
  *   S => oneshot state bits
  */
-static int8_t oneshot_layer_data = 0;
+static uint8_t oneshot_layer_data = 0;
 
 inline uint8_t get_oneshot_layer(void) {
     return oneshot_layer_data >> 3;
@@ -92,12 +104,12 @@ enum {
 #    endif
 
 static uint16_t oneshot_layer_time = 0;
-inline bool     has_oneshot_layer_timed_out() {
+inline bool     has_oneshot_layer_timed_out(void) {
     return TIMER_DIFF_16(timer_read(), oneshot_layer_time) >= QS_oneshot_timeout && !(get_oneshot_layer_state() & ONESHOT_TOGGLED);
 }
 #        ifdef SWAP_HANDS_ENABLE
 static uint16_t oneshot_swaphands_time = 0;
-inline bool     has_oneshot_swaphands_timed_out() {
+inline bool     has_oneshot_swaphands_timed_out(void) {
     return TIMER_DIFF_16(timer_read(), oneshot_swaphands_time) >= QS_oneshot_timeout && (swap_hands_oneshot == SHO_ACTIVE);
 }
 #        endif
