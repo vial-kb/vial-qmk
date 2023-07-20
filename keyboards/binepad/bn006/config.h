@@ -20,15 +20,12 @@
      * PLEASE NOTE:  Because the BN006 only has 6 keys, not all the animations are visually viable
      * =========================================================================================== */
 
-    #define RGB_DI_PIN B15
     #define RGB_MATRIX_LED_COUNT 6
-    #define DRIVER_LED_TOTAL (RGB_MATRIX_LED_COUNT)  // legacy, needed for Vial
-    #define RGB_MATRIX_KEYPRESSES  // reacts to keypresses
-    #define RGB_DISABLE_WHEN_USB_SUSPENDED  // turn off effects when suspended
-    #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200  // limits maximum brightness of LEDs to 200 out of 255. If not defined maximum brightness is set to 255
-    #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_BREATHING  // Sets the default mode, if none has been set
-    #define RGB_MATRIX_STARTUP_MODE (RGB_MATRIX_DEFAULT_MODE)  // legacy, used by Vial
-    #define RGB_TRIGGER_ON_KEYDOWN  // Triggers RGB keypress events on key down. This makes RGB control feel more responsive. This may cause RGB to not function properly on some boards
+    #define RGB_MATRIX_KEYPRESSES // reacts to keypresses
+    #define RGB_DISABLE_WHEN_USB_SUSPENDED // turn off effects when suspended
+    #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200 // limits maximum brightness of LEDs to 200 out of 255. If not defined maximum brightness is set to 255
+    #define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_BREATHING // Sets the default mode, if none has been set
+    #define RGB_TRIGGER_ON_KEYDOWN      // Triggers RGB keypress events on key down. This makes RGB control feel more responsive. This may cause RGB to not function properly on some boards
 
     // RGB Matrix Animation modes. Explicitly enabled
     // For full list of effects, see: https://docs.qmk.fm/#/feature_rgb_matrix?id=rgb-matrix-effects
@@ -62,10 +59,10 @@
     // #define ENABLE_RGB_MATRIX_PIXEL_RAIN
     // #define ENABLE_RGB_MATRIX_PIXEL_FLOW
     // #define ENABLE_RGB_MATRIX_PIXEL_FRACTAL
-    /* enabled only if RGB_MATRIX_FRAMEBUFFER_EFFECTS is defined */
+    // enabled only if RGB_MATRIX_FRAMEBUFFER_EFFECTS is defined
     // #define ENABLE_RGB_MATRIX_TYPING_HEATMAP
     // #define ENABLE_RGB_MATRIX_DIGITAL_RAIN
-    /* enabled only of RGB_MATRIX_KEYPRESSES or RGB_MATRIX_KEYRELEASES is defined */
+    // enabled only of RGB_MATRIX_KEYPRESSES or RGB_MATRIX_KEYRELEASES is defined
     #define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
     #define ENABLE_RGB_MATRIX_SOLID_REACTIVE
     // #define ENABLE_RGB_MATRIX_SOLID_REACTIVE_WIDE

@@ -15,7 +15,4 @@
 // Max 32
 #define JOYSTICK_BUTTON_COUNT 0
 // Max 6: X, Y, Z, Rx, Ry, Rz
-#define JOYSTICK_AXES_COUNT 2
-
-/* Use 1000hz polling */
-#define USB_POLLING_INTERVAL_MS 1
+#define JOYSTICK_AXIS_COUNT 2

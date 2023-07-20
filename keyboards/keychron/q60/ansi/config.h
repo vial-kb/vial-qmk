@@ -17,4 +17,4 @@
 #pragma once
 
 /* RGB Matrix Configuration */
-#define DRIVER_LED_TOTAL 60
+#define RGB_MATRIX_LED_COUNT 60

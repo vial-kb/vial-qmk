@@ -25,7 +25,7 @@
 
 #define DRIVER_COUNT 1
 #define DRIVER_ADDR_1 0b0110000
-#define DRIVER_LED_TOTAL 64
+#define RGB_MATRIX_LED_COUNT 64
 
 /* turn off effects when suspended */
 #define RGB_DISABLE_WHEN_USB_SUSPENDED

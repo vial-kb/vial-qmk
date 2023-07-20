@@ -23,24 +23,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [1] = LAYOUT(
              _______,
-    RGB_MOD, KC_UP,   RESET,
+    RGB_MOD, KC_UP,   QK_BOOT,
     KC_LEFT, KC_DOWN, KC_RGHT
-  ),
-  [2] = LAYOUT(
-             _______,
-    _______, _______, _______,
-    _______, _______, _______
-  ),
-  [3] = LAYOUT(
-             _______,
-    _______, _______, _______,
-    _______, _______, _______
-  ),
+  )
 };
 
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [0] = { ENCODER_CCW_CW(KC_NO, KC_NO) },
-    [1] = { ENCODER_CCW_CW(KC_NO, KC_NO) },
-    [2] = { ENCODER_CCW_CW(KC_NO, KC_NO) },
-    [3] = { ENCODER_CCW_CW(KC_NO, KC_NO) },
+    [1] = { ENCODER_CCW_CW(KC_NO, KC_NO) }
 };

@@ -31,6 +31,9 @@ quantum/version.h
 *.uf2
 *.vfw
 
+# DD config at wrong location
+/keyboards/**/keymaps/*/info.json
+
 # Old-style QMK Makefiles
 /keyboards/**/Makefile
 
@@ -46,7 +49,6 @@ quantum/version.h
 .idea/
 .project
 .settings/
-.vagrant/
 
 # ?
 .dep
@@ -54,6 +56,7 @@ quantum/version.h
 build/
 cmake-build-debug
 CMakeLists.txt
+*.pdf
 
 # Let these ones be user specific, since we have so many different configurations
 *.code-workspace
@@ -68,9 +71,20 @@ CMakeLists.txt
 tags
 
 # Ignore image/font files
+*.bmp
+*.wbmp
 *.gif
 *.jpg
+*.jpeg
 *.png
+*.apng
+*.mng
+*.svg
+*.webp
+*.webm
+*.avi
+*.mp4
+*.mpeg
 *.ttf
 *.otf
 
