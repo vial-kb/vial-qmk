@@ -1,6 +1,7 @@
 {
     "usb": {
         "pid": "0x6062",
+		"vid": "0xBABA",
         "device_version": "0.0.1"
     }
 }
