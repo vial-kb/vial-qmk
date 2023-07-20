@@ -18,13 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "config_common.h"
-
 #define VIAL_KEYBOARD_UID {0x8D, 0x57, 0x95, 0x93, 0xF2, 0x7A, 0x1A, 0x8E}
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 1 }
-#define DYNAMIC_KEYMAP_LAYER_COUNT 17
-#define DYNAMIC_KEYMAP_MACRO_COUNT 32
+#define DYNAMIC_KEYMAP_LAYER_COUNT 16
+#define DYNAMIC_KEYMAP_MACRO_COUNT 109
 
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET // Activates the double-tap behavior
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 200U // Timeout window in ms in which the double tap can occur.
@@ -36,7 +34,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SERIAL_USART_RX_PIN GP1
 #define USB_VBUS_PIN        GP28
 #define SPLIT_HAND_PIN      GP24
-#define RGB_DI_PIN GP22
 #define RGBLED_NUM 58
 #define WS2812_PIO_USE_PIO1
 
@@ -48,6 +45,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
 
 #ifdef RGB_MATRIX_ENABLE
+#define RGB_MATRIX_LED_COUNT 58
 #define DRIVER_LED_TOTAL 58
 #define RGB_MATRIX_SPLIT { 29, 29 }
 #define SPLIT_LAYER_STATE_ENABLE

@@ -7,11 +7,10 @@ BOOTLOADER = rp2040
 ALLOW_WARNINGS = yes
 PICO_INTRINSICS_ENABLED = no
 
+
 # Build Options
-#   change yes to no to disable
-#
-SPLIT_KEYBOARD = yes
-SERIAL_DRIVER = vendor
+AUDIO_ENABLE = yes           # Audio output
+AUDIO_DRIVER = pwm_hardware
 LTO_ENABLE = no
 VIA_ENABLE = yes
 TAP_DANCE_ENABLE = yes

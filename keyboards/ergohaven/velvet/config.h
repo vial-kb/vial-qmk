@@ -18,13 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "config_common.h"
-
 #define VIAL_KEYBOARD_UID {0xD2, 0x79, 0x71, 0xCF, 0x57, 0x27, 0xA0, 0x6C}
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 1 }
-#define DYNAMIC_KEYMAP_LAYER_COUNT 17
-#define DYNAMIC_KEYMAP_MACRO_COUNT 32
+#define DYNAMIC_KEYMAP_LAYER_COUNT 16
+#define DYNAMIC_KEYMAP_MACRO_COUNT 109
 
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET // Activates the double-tap behavior
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 200U // Timeout window in ms in which the double tap can occur.

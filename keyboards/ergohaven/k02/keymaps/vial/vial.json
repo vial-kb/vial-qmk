@@ -2,7 +2,6 @@
     "name": "k:02",
     "vendorId": "0x444D",
     "productId": "0x3636",
-    "lighting": "vialrgb",
     "matrix": {
         "rows": 10,
         "cols": 6

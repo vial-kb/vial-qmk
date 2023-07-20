@@ -7,6 +7,7 @@
     "features": {
         "bootmagic": true,
         "command": false,
+        "rgblight": true,
         "console": false,
         "extrakey": true,
         "mousekey": true,
@@ -16,6 +17,14 @@
         "cols": ["GP15", "GP14", "GP13", "GP12", "GP11", "GP10"],
         "rows": ["GP16", "GP17", "GP18", "GP19", "GP20"]
     },
+    "rgblight": {
+        "led_count": 58,
+        "split": true,
+        "split_count": [29, 29],
+        "sleep": true,
+        "max_brightness": 125
+    },
+    "ws2812": { "pin": "GP22" },
     "processor": "RP2040",
     "url": "https://ergohaven.xyz",
     "usb": {
@@ -24,7 +33,7 @@
         "device_version": "1.0.0"
     },
     "layouts": {
-        "LAYOUT_all": {
+        "LAYOUT": {
             "layout": [
 
                 {"matrix": [0, 0], "x": 0, "y": 0.5, "label": "Esc"},

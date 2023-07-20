@@ -24,7 +24,7 @@
         "device_version": "1.0.0"
     },
     "layouts": {
-        "LAYOUT_all": {
+        "LAYOUT": {
             "layout": [
 
                 {"matrix": [0, 0], "x": 0.25, "y": 0.3, "label": "Q"},
