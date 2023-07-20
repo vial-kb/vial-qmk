@@ -1,5 +1,7 @@
 /*
-Copyright 2021-2022 Alin M Elena <alinm.elena@gmail.com>
+Copyright 2023 Pedro Quaresma <pedro.quaresma@gmail.com>
+With special thanks to Markus Knutsson <markus.knutsson@tweety.se> 
+and original creator Alin M Elena <alinm.elena@gmail.com>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
