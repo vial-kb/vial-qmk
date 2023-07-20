@@ -1,0 +1,50 @@
+{
+    "keyboard_name": "Macropad",
+    "manufacturer": "Ergohaven",
+    "url": "https://ergohaven.xyz",
+    "maintainer": "Ergohaven",
+    "usb": {
+        "vid": "0x3393",
+        "pid": "0x0138",
+        "device_version": "1.0.0"
+    },
+    "encoder": {
+        "rotary": [
+            {"pin_a": "GP27", "pin_b": "GP28"}
+        ]
+    },
+    "bootmagic": {
+        "matrix": [1, 0]
+    },
+    "processor": "RP2040",
+    "bootloader": "rp2040",
+    "matrix_pins": {
+        "direct": [
+            [null, null, "GP0"],
+            ["GP1",  "GP2",  "GP3"],
+            ["GP4",  "GP5",  "GP6"],
+            ["GP7",  "GP8",  "GP9"],
+            ["GP12", "GP13", "GP14"]
+        ]
+    },
+    "layouts": {
+        "LAYOUT": {
+            "layout": [
+                {"x": 2, "y": 0, "matrix": [0, 2]},
+                {"x": 0, "y": 1, "matrix": [1, 0]},
+                {"x": 1, "y": 1, "matrix": [1, 1]},
+                {"x": 2, "y": 1, "matrix": [1, 2]},
+                {"x": 0, "y": 2, "matrix": [2, 0]},
+                {"x": 1, "y": 2, "matrix": [2, 1]},
+                {"x": 2, "y": 2, "matrix": [2, 2]},
+                {"x": 0, "y": 3, "matrix": [3, 0]},
+                {"x": 1, "y": 3, "matrix": [3, 1]},
+                {"x": 2, "y": 3, "matrix": [3, 2]},
+                {"x": 0, "y": 4, "matrix": [4, 0]},
+                {"x": 1, "y": 4, "matrix": [4, 1]},
+                {"x": 2, "y": 4, "matrix": [4, 2]}
+            ]
+        }
+    }
+}
+
