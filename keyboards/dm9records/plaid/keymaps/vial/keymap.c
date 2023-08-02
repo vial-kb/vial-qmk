@@ -23,8 +23,8 @@ enum plaid_layers {
   _ADJUST
 };
 
-#define LOWER FN_MO13
-#define RAISE FN_MO23
+#define LOWER TL_LOWR
+#define RAISE TL_UPPR
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = LAYOUT_plaid_grid(
     QK_BOOT, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_DEL,
-    _______, _______, MU_MOD,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, _______, _______, _______, _______, _______,
+    _______, _______, MU_NEXT,  AU_ON,   AU_OFF,  AG_NORM, AG_SWAP, _______, _______, _______, _______, _______,
     _______, _______, _______,  MU_ON,  MU_OFF,  _______, _______, _______, _______, _______, _______, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 )

@@ -14,7 +14,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include QMK_KEYBOARD_H
+#include "quantum.h"
 
 #ifdef OLED_ENABLE
 static void render_logo(void) {
@@ -30,7 +30,10 @@ static void render_logo(void) {
 
 
 bool oled_task_kb(void) {
-        render_logo();
-    return false;
+    if (!oled_task_user()) {
+        return false;
+        }
+    render_logo();
+    return true;
 }
 #endif

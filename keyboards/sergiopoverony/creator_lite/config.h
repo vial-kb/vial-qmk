@@ -1,12 +1,11 @@
 #pragma once
-#include "config_common.h"
 
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x8b1e // "AR"
 #define PRODUCT_ID      0x0D00 // "OF"
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    SergioPoverony
-#define PRODUCT         Creator Lite 
+#define MANUFACTURER    "SergioPoverony"
+#define PRODUCT         "Creator Lite"
 
 #define VIAL_KEYBOARD_UID {0x1D, 0x91, 0xC3, 0x9B, 0x4D, 0xEF, 0x8B, 0x58}
 

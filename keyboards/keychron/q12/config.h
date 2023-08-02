@@ -54,8 +54,8 @@
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
 /* EEPROM Driver Configuration */
-#define WEAR_LEVELING_LOGICAL_SIZE 2048 // default
-#define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2) // default
+// #define WEAR_LEVELING_LOGICAL_SIZE 2048 // default
+// #define WEAR_LEVELING_BACKING_SIZE (WEAR_LEVELING_LOGICAL_SIZE * 2) // default
 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:

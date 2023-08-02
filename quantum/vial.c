@@ -299,6 +299,7 @@ void vial_keycode_down(uint16_t keycode) {
         register_code16(keycode);
     } else {
         action_exec((keyevent_t){
+            .type = KEY_EVENT,
             .key = (keypos_t){.row = VIAL_MATRIX_MAGIC, .col = VIAL_MATRIX_MAGIC}, .pressed = 1, .time = (timer_read() | 1) /* time should not be 0 */
         });
     }
@@ -311,6 +312,7 @@ void vial_keycode_up(uint16_t keycode) {
         unregister_code16(keycode);
     } else {
         action_exec((keyevent_t){
+            .type = KEY_EVENT,
             .key = (keypos_t){.row = VIAL_MATRIX_MAGIC, .col = VIAL_MATRIX_MAGIC}, .pressed = 0, .time = (timer_read() | 1) /* time should not be 0 */
         });
     }
@@ -339,7 +341,7 @@ enum {
 static uint8_t dance_state[VIAL_TAP_DANCE_ENTRIES];
 static vial_tap_dance_entry_t td_entry;
 
-static uint8_t dance_step(qk_tap_dance_state_t *state) {
+static uint8_t dance_step(tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->interrupted || !state->pressed) return SINGLE_TAP;
         else return SINGLE_HOLD;
@@ -351,7 +353,7 @@ static uint8_t dance_step(qk_tap_dance_state_t *state) {
     return MORE_TAPS;
 }
 
-static void on_dance(qk_tap_dance_state_t *state, void *user_data) {
+static void on_dance(tap_dance_state_t *state, void *user_data) {
     uint8_t index = (uintptr_t)user_data;
     if (dynamic_keymap_get_tap_dance(index, &td_entry) != 0)
         return;
@@ -367,7 +369,7 @@ static void on_dance(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-static void on_dance_finished(qk_tap_dance_state_t *state, void *user_data) {
+static void on_dance_finished(tap_dance_state_t *state, void *user_data) {
     uint8_t index = (uintptr_t)user_data;
     if (dynamic_keymap_get_tap_dance(index, &td_entry) != 0)
         return;
@@ -420,7 +422,7 @@ static void on_dance_finished(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-static void on_dance_reset(qk_tap_dance_state_t *state, void *user_data) {
+static void on_dance_reset(tap_dance_state_t *state, void *user_data) {
     uint8_t index = (uintptr_t)user_data;
     if (dynamic_keymap_get_tap_dance(index, &td_entry) != 0)
         return;
@@ -473,7 +475,7 @@ static void on_dance_reset(qk_tap_dance_state_t *state, void *user_data) {
     }
 }
 
-qk_tap_dance_action_t tap_dance_actions[VIAL_TAP_DANCE_ENTRIES] = { };
+tap_dance_action_t tap_dance_actions[VIAL_TAP_DANCE_ENTRIES] = { };
 
 /* Load timings from eeprom into custom_tapping_term */
 static void reload_tap_dance(void) {
@@ -527,7 +529,7 @@ static void reload_combo(void) {
 #endif
 
 #ifdef VIAL_TAP_DANCE_ENABLE
-void process_tap_dance_action_on_dance_finished(qk_tap_dance_action_t *action);
+void process_tap_dance_action_on_dance_finished(tap_dance_action_t *action);
 #endif
 
 bool process_record_vial(uint16_t keycode, keyrecord_t *record) {
@@ -538,7 +540,7 @@ bool process_record_vial(uint16_t keycode, keyrecord_t *record) {
         if (dynamic_keymap_get_tap_dance(idx, &td_entry) != 0)
             return true;
 
-        qk_tap_dance_action_t *action = &tap_dance_actions[idx];
+        tap_dance_action_t *action = &tap_dance_actions[idx];
 
         /* only care about 2 possibilities here
            - tap and hold set, everything else unset: process first release early (count == 1)

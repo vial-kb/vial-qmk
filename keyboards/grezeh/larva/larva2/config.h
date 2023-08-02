@@ -17,14 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "config_common.h"
-
 /* USB Device descriptor parameter */
 #define VENDOR_ID    0x0444
 #define PRODUCT_ID   0x0002
 #define DEVICE_VER   0x0002
-#define MANUFACTURER grezeh
-#define PRODUCT      larva mk.2
+#define MANUFACTURER "grezeh"
+#define PRODUCT      "larva mk.2"
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -65,7 +63,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #undef RGBLED_NUM
 //#define RGBLIGHT_EFFECT_STATIC_GRADIENT
 //#define RGBLIGHT_EFFECT_RAINBOW_SWIRL
-#define RGB_DI_PIN B5
+#define WS2812_DI_PIN B5
 #define RGBLED_NUM 2
 #define RGBLIGHT_DEFAULT_MODE	RGBLIGHT_MODE_STATIC_LIGHT
 #define RGBLIGHT_DEFAULT_HUE 222

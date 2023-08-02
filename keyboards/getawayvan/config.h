@@ -21,8 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VENDOR_ID       0xE5CA
 #define PRODUCT_ID      0x0401
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    esca
-#define PRODUCT         GetawayVan
+#define MANUFACTURER    "esca"
+#define PRODUCT         "GetawayVan"
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -32,8 +32,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROW_PINS { A9, A8, A3, A5 }
 #define DIODE_DIRECTION COL2ROW
 
-#define RGB_DI_PIN B15
-#define DRIVER_LED_TOTAL 51
+#define WS2812_DI_PIN B15
+#define RGB_MATRIX_LED_COUNT 51
 #define RGBLED_NUM 51
 #define WS2812_SPI SPID2
 #define WS2812_SPI_MOSI_PAL_MODE 0
