@@ -93,7 +93,7 @@ led_config_t g_led_config = {
 #endif
 
 // Alpha flagged layer indicator
-//void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+//bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 //    for (uint8_t i = led_min; i < led_max; i++) {
 //		if (g_led_config.flags[i] & LED_FLAG_MODIFIER) {
 //			switch(get_highest_layer(layer_state|default_layer_state)) {
@@ -111,4 +111,5 @@ led_config_t g_led_config = {
 //			}
 //        }
 //    }
+//	return false;
 //}
