@@ -1,4 +1,4 @@
-/* Copyright 2022 @ Keychron (https://www.keychron.com)
+/* Copyright 2023 @ Keychron (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,13 +15,14 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "keychron_common.h"
 
 enum layers { _BASE, _FN1, _RESERVED1, _RESERVED2 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_BASE] = LAYOUT_numpad_6x4(
-        MO(_FN1), KC_ESC,  KC_BSPACE, KC_TAB,
-        KC_NUMLOCK, KC_PSLS, KC_PAST,   KC_PMNS,
+        MO(_FN1), KC_ESC,  KC_BSPC, KC_TAB,
+        KC_NUM, KC_PSLS, KC_PAST,   KC_PMNS,
         KC_P7,      KC_P8,   KC_P9,
         KC_P4,      KC_P5,   KC_P6,     KC_PPLS,
         KC_P1,      KC_P2,   KC_P3,
@@ -51,3 +52,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,    _______, _______,
         _______,             _______,   _______)
 };
+
+void housekeeping_task_user(void) {
+    housekeeping_task_keychron();
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_record_keychron(keycode, record)) {
+        return false;
+    }
+    return true;
+}

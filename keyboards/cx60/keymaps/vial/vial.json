@@ -4,6 +4,13 @@
   "productId": "0x3630",
   "lighting": "qmk_backlight_rgblight",
   "matrix": { "rows": 5, "cols": 14 },
+  "customKeycodes": [
+	  {
+		  "name": "Toggle ind.",
+		  "title": "Enable/Disable the caps lock indicator LED.",
+		  "shortName": "CX_TOG"
+	  }
+  ],
   "layouts": {
     "keymap": [
       [
