@@ -263,8 +263,8 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record) {
     return QS.tapping & 1;
 }
 
-bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
-    return QS.tapping & 2;
+bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record) {
+    return !(QS.tapping & 2);
 }
 
 bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {

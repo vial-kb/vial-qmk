@@ -20,7 +20,9 @@
 #        if defined(STM32_FLASH_LINE_SIZE) // from some family's stm32_registry.h file
 #            define BACKING_STORE_WRITE_SIZE (STM32_FLASH_LINE_SIZE)
 #        else
-#            if defined(QMK_MCU_SERIES_STM32F1XX)
+#            if defined(QMK_MCU_SERIES_STM32F0XX)
+#                define BACKING_STORE_WRITE_SIZE 2 // from hal_efl_lld.c
+#            elif defined(QMK_MCU_SERIES_STM32F1XX)
 #                define BACKING_STORE_WRITE_SIZE 2 // from hal_efl_lld.c
 #            elif defined(QMK_MCU_SERIES_STM32F3XX)
 #                define BACKING_STORE_WRITE_SIZE 2 // from hal_efl_lld.c
@@ -41,12 +43,12 @@
 #    endif
 #endif
 
-// 2kB backing space allocated
+// 8kB backing space allocated
 #ifndef WEAR_LEVELING_BACKING_SIZE
-#    define WEAR_LEVELING_BACKING_SIZE 2048
+#    define WEAR_LEVELING_BACKING_SIZE 8192
 #endif // WEAR_LEVELING_BACKING_SIZE
 
-// 1kB logical EEPROM
+// 4kB logical EEPROM
 #ifndef WEAR_LEVELING_LOGICAL_SIZE
-#    define WEAR_LEVELING_LOGICAL_SIZE 1024
+#    define WEAR_LEVELING_LOGICAL_SIZE 4096
 #endif // WEAR_LEVELING_LOGICAL_SIZE

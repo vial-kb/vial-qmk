@@ -54,7 +54,6 @@
 #include "dynamic_keymap.h"
 #include "eeprom.h"
 #include "version.h" // for QMK_BUILDDATE used in EEPROM magic
-#include "via_ensure_keycode.h"
 
 #ifdef VIAL_ENABLE
 #include "vial.h"
@@ -183,38 +182,13 @@ void via_set_layout_options(uint32_t value) {
 bool process_record_via(uint16_t keycode, keyrecord_t *record) {
     // Handle macros
     if (record->event.pressed) {
-        if (keycode >= MACRO00 && keycode <= MACRO00 + DYNAMIC_KEYMAP_MACRO_COUNT - 1) {
-            uint8_t id = keycode - MACRO00;
+        if (keycode >= QK_MACRO && keycode <= QK_MACRO_MAX) {
+            uint8_t id = keycode - QK_MACRO;
             dynamic_keymap_macro_send(id);
             return false;
         }
     }
 
-    // TODO: ideally this would be generalized and refactored into
-    // QMK core as advanced keycodes, until then, the simple case
-    // can be available here to keyboards using VIA
-    switch (keycode) {
-        case FN_MO13:
-            if (record->event.pressed) {
-                layer_on(1);
-                update_tri_layer(1, 2, 3);
-            } else {
-                layer_off(1);
-                update_tri_layer(1, 2, 3);
-            }
-            return false;
-            break;
-        case FN_MO23:
-            if (record->event.pressed) {
-                layer_on(2);
-                update_tri_layer(1, 2, 3);
-            } else {
-                layer_off(2);
-                update_tri_layer(1, 2, 3);
-            }
-            return false;
-            break;
-    }
     return true;
 }
 

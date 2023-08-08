@@ -16,8 +16,6 @@
 
 #pragma once
 
-#include "config_common.h"
-
 /* key matrix size */
 #define MATRIX_ROWS 1
 #define MATRIX_COLS 8
@@ -38,8 +36,8 @@
 
 #ifdef RGB_MATRIX_ENABLE
     /* RGB Matrix config */
-    #define RGB_DI_PIN A10
-    #define DRIVER_LED_TOTAL 8
+    #define WS2812_DI_PIN A10
+    #define RGB_MATRIX_LED_COUNT 8
     #define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200
     #define RGB_MATRIX_STARTUP_SPD 30
     #define RGB_MATRIX_STARTUP_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS
