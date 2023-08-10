@@ -22,6 +22,7 @@ AUDIO_ENABLE = no           # Audio output
 # RGB Matrix enabled
 RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_DRIVER = WS2812
+SIGNALRGB_SUPPORT_ENABLE = yes
 WS2812_DRIVER = pwm
 
 # Additional thing to reduce compiled size

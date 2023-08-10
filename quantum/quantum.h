@@ -15,6 +15,7 @@
  */
 #pragma once
 
+#include "qmk_version.h"
 #include "platform_deps.h"
 #include "wait.h"
 #include "matrix.h"
@@ -153,6 +154,12 @@ extern layer_state_t layer_state;
 
 #ifdef JOYSTICK_ENABLE
 #    include "process_joystick.h"
+#endif
+
+#ifdef SIGNALRGB_SUPPORT_ENABLE
+#    ifndef VIA_ENABLE
+#    include "signalrgb.h"
+#    endif
 #endif
 
 #ifdef PROGRAMMABLE_BUTTON_ENABLE
