@@ -6,3 +6,4 @@ VIAL_ENABLE = yes		   # Enable vial support
 LTO_ENABLE = yes
 
 QMK_SETTINGS = no
+ENCODER_MAP_ENABLE = yes
