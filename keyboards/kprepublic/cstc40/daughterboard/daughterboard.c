@@ -16,7 +16,7 @@
 #include "quantum.h"
 
 #ifdef RGB_MATRIX_ENABLE
-const is31_led g_is31_leds[DRIVER_LED_TOTAL] = {
+const is31_led g_is31_leds[RGB_MATRIX_LED_COUNT] = {
     { 0, L_1,  K_1,  J_1 },
     { 0, L_2,  K_2,  J_2 },
     { 0, L_3,  K_3,  J_3 },
@@ -68,48 +68,4 @@ const is31_led g_is31_leds[DRIVER_LED_TOTAL] = {
     { 0, C_11, B_11, A_11 },
     { 0, C_12, B_12, A_12 }
 };
-
-led_config_t g_led_config = {
-    {
-        // Key Matrix to LED Index
-        { 0,  1,  2,  3,  4,  5,      6,  7,  8,  9, 10, 11},
-        {12, 13, 14, 15, 16, 17,     18, 19, 20, 21, 22, 23},
-        {24, 25, 26, 27, 28, 29,     30, 31, 32, 33, 34, 35},
-        {36, 37, 38, 39, 40, 41, NO_LED, 42, 43, 44, 45, 46}
-    }, {
-        // LED Index to Physical Position
-        {  0,  0}, { 20,  0}, { 40,  0}, {61,  0}, {81,  0}, {101,  0}, {122,  0}, {142,  0}, {162,  0}, {183,  0}, {203,  0}, {224,  0},
-        {  0, 21}, { 20, 21}, { 40, 21}, {61, 21}, {81, 21}, {101, 21}, {122, 21}, {142, 21}, {162, 21}, {183, 21}, {203, 21}, {224, 21},
-        {  0, 42}, { 20, 42}, { 40, 42}, {61, 42}, {81, 42}, {101, 42}, {122, 42}, {142, 42}, {162, 42}, {183, 42}, {203, 42}, {224, 42},
-        {  0, 64}, { 20, 64}, { 40, 64}, {61, 64}, {81, 64},       {111, 64},      {142, 64}, {162, 64}, {183, 64}, {203, 64}, {224, 64},
-    }, {
-        // LED Index to Flag
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,
-        1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1,
-        1, 1, 1, 1, 1,   1,  1, 1, 1, 1, 1
-    }
-};
 #endif
-
-// Alpha flagged layer indicator
-//bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-//    for (uint8_t i = led_min; i < led_max; i++) {
-//		if (g_led_config.flags[i] & LED_FLAG_MODIFIER) {
-//			switch(get_highest_layer(layer_state|default_layer_state)) {
-//				case 1:
-//					rgb_matrix_set_color(i, RGB_ORANGE);
-//					break;
-//				case 2:
-//					rgb_matrix_set_color(i, RGB_PURPLE);
-//					break;
-//				case 3:
-//					rgb_matrix_set_color(i, RGB_RED);
-//					break;
-//				default:
-//					break;
-//			}
-//        }
-//    }
-//	return false;
-//}

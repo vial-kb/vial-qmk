@@ -6,6 +6,8 @@ A 40% hotswap ortholinear RGB keyboard from KP Republic.
 * Hardware Supported: CSTC40
 * Hardware Availability: kprepublic.com
 
+The differences between the two versions are just the rows and columns pins and the additional small pcb for the daughterboard version.
+
 Make example for this keyboard (after setting up your build environment):
 
     for daughterboard version: make kprepublic/cstc40/daughterboard:default

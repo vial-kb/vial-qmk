@@ -3,33 +3,12 @@
 
 #pragma once
 
-/*
- * Feature disable options
- *  These options are also useful to firmware size reduction.
- */
-
-/* disable debug print */
-//#define NO_DEBUG
-
-/* disable print */
-//#define NO_PRINT
-
-/* disable action features */
-//#define NO_ACTION_LAYER
-//#define NO_ACTION_TAPPING
-//#define NO_ACTION_ONESHOT
-
-#define FORCE_NKRO
-
 #define I2C1_SDA_PIN B9
 #define I2C1_SCL_PIN B8
 #define DRIVER_ADDR_1 0b1010000
 #define DRIVER_COUNT 1
 #define DRIVER_1_LED_TOTAL 47
-#define DRIVER_LED_TOTAL DRIVER_1_LED_TOTAL
 #define RGB_MATRIX_LED_COUNT DRIVER_1_LED_TOTAL
-
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 200 // Limit to vendor-recommended value
 
 #define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 #define RGB_MATRIX_KEYPRESSES
