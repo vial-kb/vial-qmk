@@ -52,7 +52,8 @@ void __early_init(void) {
  */
 void boardInit(void) {
    //JTAG-DP Disabled and SW-DP Enabled
-   AFIO->MAPR |= AFIO_MAPR_SWJ_CFG_JTAGDISABLE;
+  //  AFIO->MAPR |= AFIO_MAPR_SWJ_CFG_JTAGDISABLE;
+   AFIO->MAPR |= AFIO_MAPR_SWJ_CFG_DISABLE;
    //Set backup register DR10 to enter bootloader on reset
    BKP->DR10 = RTC_BOOTLOADER_FLAG;
 }

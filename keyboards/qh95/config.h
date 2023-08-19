@@ -31,4 +31,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGB_MATRIX_LED_COUNT 95
 #define DRIVER_LED_TOTAL RGB_MATRIX_LED_COUNT
 #define RGBLED_NUM 95
+
+// oled
+#define OLED_DISPLAY_128X64
+
 #endif

@@ -19,16 +19,21 @@ COMMAND_ENABLE = no         # Commands for debug and configuration
 BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 AUDIO_ENABLE = no           # Audio output
+
+# oled
+OLED_ENABLE = yes
+OLED_DRIVER = SSD1306
+OLED_TRANSPORT = i2c
+
 # RGB Matrix enabled
 RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_DRIVER = WS2812
 SIGNALRGB_SUPPORT_ENABLE = yes
-WS2812_DRIVER = pwm
+# WS2812_DRIVER = pwm
 
 # Additional thing to reduce compiled size
 LTO_ENABLE = yes
 
 
 # Enter lower-power sleep mode when on the ChibiOS idle thread
-# OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE
-
+OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE

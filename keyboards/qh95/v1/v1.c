@@ -15,13 +15,24 @@
  */
 
 #include "v1.h"
+#include "hal.h"
 
 /*
  * Board-specific initialization code.
  */
-void board_init(void) {
-   //JTAG-DP Disabled and SW-DP Enabled
-   AFIO->MAPR |= AFIO_MAPR_SWJ_CFG_DISABLE;
-   //Set backup register DR10 to enter bootloader on reset
+// void boardInit(void) {
+//    //JTAG-DP Disabled and SW-DP Enabled
+//    AFIO->MAPR |= AFIO_MAPR_SWJ_CFG_DISABLE;
+//    //Set backup register DR10 to enter bootloader on reset
 //    BKP->DR10 = RTC_BOOTLOADER_FLAG;
+// }
+
+void keyboard_pre_init_kb(void) {
+  setPinOutput(A13);
+  setPinOutput(A14);
+  keyboard_pre_init_user();
+}
+
+oled_rotation_t oled_init_kb(oled_rotation_t rotation) {
+    return OLED_ROTATION_180;
 }

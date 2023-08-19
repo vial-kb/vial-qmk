@@ -27,20 +27,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
  *
  */
-#define MATRIX_ROW_PINS { B7, B5, B9, B12, B12, B12 }
-#define MATRIX_COL_PINS { A7, B0, B1, B10, B11, A6, B12, B12, B12, B12, B12, B12, B12, B12, B12, B12, B12, B12 }
+#define MATRIX_ROW_PINS { A13, A14, A15, B3, B4, B5 }
+#define MATRIX_COL_PINS { A3, A4, A5, A6, B11, A7, B10, A10, B0, A9, A8, B13, B1, B12, B14, B15, B9, B8 }
+// #define MATRIX_COL_PINS { A3, A4, A5, A6, B11, A7, B10, A10, B0, A9, A8, B13, B1, B12, B14, B15, B9, B8 }
+
+#define ENCODERS_PAD_A { A2 }
+#define ENCODERS_PAD_B { A1 }
 
 #define COMBO_ONLY_FROM_LAYER 0
 #define LAYER_STATE_16BIT
 
-#define WS2812_DI_PIN B13
-#define WS2812_PWM_COMPLEMENTARY_OUTPUT
-#define WS2812_PWM_DRIVER PWMD1
-#define WS2812_PWM_CHANNEL 1
-#define WS2812_PWM_PAL_MODE 1
-#define WS2812_DMA_STREAM STM32_DMA1_STREAM5
-#define WS2812_DMA_CHANNEL 1
-// #define WS2812_PWM_TARGET_PERIOD 800000
+#define WS2812_DI_PIN A0
 
 #ifdef RGB_MATRIX_ENABLE
 #   define ENABLE_RGB_MATRIX_ALPHAS_MODS
