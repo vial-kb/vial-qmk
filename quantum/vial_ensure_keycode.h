@@ -765,7 +765,9 @@ _Static_assert(RESET == 0x7C00, "");
 _Static_assert(FN_MO13 == 0x7C77, "");
 _Static_assert(FN_MO23 == 0x7C78, "");
 
+/* Ensure that we have 64 USERxx keycodes */
 _Static_assert(QK_KB == 0x7E00, "");
+_Static_assert(QK_KB_MAX == 0x7E3F, "");
 
 
 #undef C_S
