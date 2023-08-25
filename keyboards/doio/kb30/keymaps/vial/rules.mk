@@ -1,0 +1,6 @@
+VIA_ENABLE = yes
+VIAL_ENABLE = yes
+
+ENCODER_ENABLE = yes
+
+VIALRGB_ENABLE = yes
