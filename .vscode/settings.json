@@ -30,5 +30,12 @@
     },
     "clangd.arguments": [
         "--header-insertion=never"
-    ]
+    ],
+    "workbench.colorTheme": "Tokyo Night Horizon",
+    "cSpell.words": [
+        "oled",
+        "PROGMEM"
+    ],
+    "C_Cpp.dimInactiveRegions": false,
+    "cmake.sourceDirectory": "N:/_GIT/vile-qmk/lib/googletest"
 }
