@@ -114,15 +114,15 @@ enum via_channel_id {
 };
 
 enum via_qmk_backlight_value {
-    id_qmk_backlight_brightness = 1,
-    id_qmk_backlight_effect     = 2,
+    id_qmk_backlight_brightness = 0x09,
+    id_qmk_backlight_effect     = 0x0A,
 };
 
 enum via_qmk_rgblight_value {
-    id_qmk_rgblight_brightness   = 1,
-    id_qmk_rgblight_effect       = 2,
-    id_qmk_rgblight_effect_speed = 3,
-    id_qmk_rgblight_color        = 4,
+    id_qmk_rgblight_brightness   = 0x80,
+    id_qmk_rgblight_effect       = 0x81,
+    id_qmk_rgblight_effect_speed = 0x82,
+    id_qmk_rgblight_color        = 0x83,
 };
 
 enum via_qmk_rgb_matrix_value {
