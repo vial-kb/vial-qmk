@@ -20,7 +20,7 @@
 
 #pragma once
 
-// Hai
+// Resolves USB connected half as master
 #define SPLIT_USB_DETECT
 
 // Vial Support
