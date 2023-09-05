@@ -20,6 +20,9 @@
 
 #pragma once
 
+// Hai
+#define SPLIT_USB_DETECT
+
 // Vial Support
 #define VIAL_KEYBOARD_UID { 0x05, 0xCD, 0x9F, 0x8A, 0xF4, 0xDF, 0xDE, 0xB2 }
 
