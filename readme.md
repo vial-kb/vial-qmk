@@ -1,16 +1,15 @@
-# Quantum Mechanical Keyboard Firmware
+# Vial
 
-[![Current Version](https://img.shields.io/github/tag/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/tags)
-[![Discord](https://img.shields.io/discord/440868230475677696.svg)](https://discord.gg/Uq7gcHh)
-[![Docs Status](https://img.shields.io/badge/docs-ready-orange.svg)](https://docs.qmk.fm)
-[![GitHub contributors](https://img.shields.io/github/contributors/qmk/qmk_firmware.svg)](https://github.com/qmk/qmk_firmware/pulse/monthly)
-[![GitHub forks](https://img.shields.io/github/forks/qmk/qmk_firmware.svg?style=social&label=Fork)](https://github.com/qmk/qmk_firmware/)
+[![Docs Status](https://img.shields.io/badge/docs-ready-orange.svg)](https://get.vial.today/)
+[![GitHub contributors](https://img.shields.io/github/contributors/qmk/qmk_firmware.svg)](https://github.com/vial-kb/vial-qmk/pulse/monthly)
+[![GitHub forks](https://img.shields.io/badge/discord-5865F2?link=https%3A%2F%2Fdiscord.com%2Finvite%2FzNKEUXTKwF
+)](https://discord.com/invite/zNKEUXTKwF)
 
-This is a keyboard firmware based on the [tmk\_keyboard firmware](https://github.com/tmk/tmk_keyboard) with some useful features for Atmel AVR and ARM controllers, and more specifically, the [OLKB product line](https://olkb.com), the [ErgoDox EZ](https://ergodox-ez.com) keyboard, and the [Clueboard product line](https://clueboard.co).
+This is a keyboard firmware forked from [QMK](https://github.com/qmk/qmk_firmware) with some useful features such as [Tap Dance](https://get.vial.today/manual/tap-dance.html) and [Combos](https://get.vial.today/manual/combos.html). It allows you to remap your keyboard in real time and addapt your keyboard to your needs. It can be downloaded or used via browser, being a open-source cross platform (Windows, Linux and Mac).
 
 ## Documentation
 
-* [See the official documentation on docs.qmk.fm](https://docs.qmk.fm)
+* [See the official  QMK documentation on docs.qmk.fm](https://docs.qmk.fm)
 
 The docs are powered by [Docsify](https://docsify.js.org/) and hosted on [GitHub](/docs/). They are also viewable offline; see [Previewing the Documentation](https://docs.qmk.fm/#/contributing?id=previewing-the-documentation) for more details.
 
@@ -18,19 +17,16 @@ You can request changes by making a fork and opening a [pull request](https://gi
 
 ## Supported Keyboards
 
-* [Planck](/keyboards/planck/)
-* [Preonic](/keyboards/preonic/)
-* [ErgoDox EZ](/keyboards/ergodox_ez/)
-* [Clueboard](/keyboards/clueboard/)
-* [Cluepad](/keyboards/clueboard/17/)
-* [Atreus](/keyboards/atreus/)
+The project includes support for [lots of keyboards](/keyboards/).
 
-The project also includes community support for [lots of other keyboards](/keyboards/).
+If your keyboard isn't working, your are probably using a firmware that is not intended for VIAL. For troubleshooting, please refer to the section 4 of [First Time Use](https://get.vial.today/manual/first-use.html)
 
-## Maintainers
 
-QMK is developed and maintained by Jack Humbert of OLKB with contributions from the community, and of course, [Hasu](https://github.com/tmk). The OLKB product firmwares are maintained by [Jack Humbert](https://github.com/jackhumbert), the Ergodox EZ by [ZSA Technology Labs](https://github.com/zsa), the Clueboard by [Zach White](https://github.com/skullydazed), and the Atreus by [Phil Hagelberg](https://github.com/technomancy).
+If your keyboard isn't ported yet, you can contribute to VIAL's repository by creating your own firmware and porting it! 
+
+For tips on how to do it, follow the [porting guide](https://get.vial.today/manual/first-use.html).
+
 
 ## Official Website
 
-[qmk.fm](https://qmk.fm) is the official website of QMK, where you can find links to this page, the documentation, and the keyboards supported by QMK.
+[VIAL](https://get.vial.today/) is the official website of VIAL, where you can find articles to help you download and use the VIAL's interface, VIAL's license and its Changelog.
