@@ -14,11 +14,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "keymap_common.h"
-#include "print.h"
 #include "process_combo.h"
+#include <stddef.h>
+#include "process_auto_shift.h"
+#include "caps_word.h"
+#include "timer.h"
+#include "wait.h"
+#include "keyboard.h"
+#include "keymap_common.h"
+#include "action_layer.h"
 #include "action_tapping.h"
+#include "action_util.h"
 #include "action.h"
+
+#ifdef VIAL_ENABLE
+#include "vial.h"
+#endif
 
 #ifdef VIAL_COMBO_ENABLE
 #include "dynamic_keymap.h"

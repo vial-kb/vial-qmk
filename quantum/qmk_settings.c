@@ -9,6 +9,7 @@
 #include "mousekey.h"
 #include "process_combo.h"
 #include "action_tapping.h"
+#include "keycode_config.h"
 
 static int eeprom_settings_get(const qmk_settings_proto_t *proto, void *setting, size_t maxsz);
 static int eeprom_settings_set(const qmk_settings_proto_t *proto, const void *setting, size_t maxsz);

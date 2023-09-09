@@ -1,6 +1,6 @@
 # Artemis/Paragon
 
-* Keyboard Maintainer: [Sleepdealer](https://github.com/Sleepdealr) - [Yak](https://github.com/yakMM)
+* Keyboard Maintainer: [Sleepdealer](https://github.com/Sleepdealr)
 * Hardware Supported: Paragon PCB
 * Hardware Availability: GB
 
