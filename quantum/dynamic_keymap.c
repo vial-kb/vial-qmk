@@ -23,6 +23,7 @@
 #include "keycodes.h"
 #include "action_tapping.h"
 #include "wait.h"
+#include <string.h>
 
 #ifdef VIA_ENABLE
 #    include "via.h"
