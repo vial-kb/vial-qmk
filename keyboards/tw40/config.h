@@ -18,4 +18,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #define LOCKING_SUPPORT_ENABLE
+
 #define LOCKING_RESYNC_ENABLE
