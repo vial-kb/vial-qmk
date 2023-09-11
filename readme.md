@@ -31,4 +31,4 @@ For tips on how to do it, follow the [porting guide](https://get.vial.today/manu
 
 ## Official Website
 
-[Vial](https://get.vial.today/) is the official website of Vial, where you can find articles to help you download and use the Vial's interface, license and its Changelog.
+[Vial](https://get.vial.today/) is the official website of Vial, where you can find articles to help you download and use Vial's interface, license and its Changelog.
