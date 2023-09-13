@@ -1,6 +1,6 @@
 /* Copyright 2019 MechMerlin
- * Copyright 2020 @ben_roe (keycapsss.com)
  * Copyright 2023 @Ex3c4Def
+ * Copyright 2023 @ben_roe (keycapsss.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -39,18 +39,6 @@
 //------------------------------------------
 
 
-// OLED definitions
-//------------------------------------------
-#ifdef OLED_ENABLE
-#define OLED_FONT_H "keyboards/keycapsss/kimiko/keymaps/default/glcdfont.c"
-// #define OLED_FONT_WIDTH 5
-// #define OLED_FONT_HEIGHT 7
-// #define OLED_DISPLAY_128X64 //128x64 needs this define, for  128x32 display no extra define is needed and this can be removed/commented
-
-#endif
-//------------------------------------------
-
-
 // 'new' RGB Matrix definitions, used when RGB_MATRIX_ENABLE = yes in rules.mk
 //------------------------------------------
 #ifdef RGB_MATRIX_ENABLE
@@ -59,15 +47,15 @@
 	// #define RGB_MATRIX_KEYRELEASES
 
 	// These modes don’t require any additional defines.
-	#define	   ENABLE_RGB_MATRIX_NONE 
-	#define    ENABLE_RGB_MATRIX_SOLID_COLOR     // Static single hue, no speed support
+	#define	   ENABLE_RGB_MATRIX_NONE
+	#define    ENABLE_RGB_MATRIX_SOLID_COLOR         // Static single hue, no speed support
 
-	// #define    ENABLE_RGB_MATRIX_ALPHAS_MODS        // Static dual hue, speed is hue for secondary hue
-	// #define    ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN    // Static gradient top to bottom, speed controls how much gradient changes
-	// #define    ENABLE_RGB_MATRIX_GRADIENT_LEFT_RIGHT    // Static gradient left to right, speed controls how much gradient changes
+	#define    ENABLE_RGB_MATRIX_ALPHAS_MODS         // Static dual hue, speed is hue for secondary hue
+	#define    ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN    // Static gradient top to bottom, speed controls how much gradient changes
+	// #define    ENABLE_RGB_MATRIX_GRADIENT_LEFT_RIGHT // Static gradient left to right, speed controls how much gradient changes
 	// #define    ENABLE_RGB_MATRIX_BREATHING           // Single hue brightness cycling animation
-	// #define    ENABLE_RGB_MATRIX_BAND_SAT        // Single hue band fading saturation scrolling left to right
-	// #define    ENABLE_RGB_MATRIX_BAND_VAL        // Single hue band fading brightness scrolling left to right
+	// #define    ENABLE_RGB_MATRIX_BAND_SAT            // Single hue band fading saturation scrolling left to right
+	// #define    ENABLE_RGB_MATRIX_BAND_VAL            // Single hue band fading brightness scrolling left to right
 	// #define    ENABLE_RGB_MATRIX_BAND_PINWHEEL_SAT   // Single hue 3 blade spinning pinwheel fades saturation
 	// #define    ENABLE_RGB_MATRIX_BAND_PINWHEEL_VAL   // Single hue 3 blade spinning pinwheel fades brightness
 	// #define    ENABLE_RGB_MATRIX_BAND_SPIRAL_SAT     // Single hue spinning spiral fades saturation
@@ -109,7 +97,7 @@
 	// #define    ENABLE_RGB_MATRIX_MULTISPLASH         // Full gradient & value pulse away from multiple key hits then fades value out
 	// #define    ENABLE_RGB_MATRIX_SOLID_SPLASH        // Hue & value pulse away from a single key hit then fades value out
 	// #define    ENABLE_RGB_MATRIX_SOLID_MULTISPLASH   // Hue & value pulse away from multiple key hits then fades value out
-	
+
 	#define RGB_MATRIX_VAL_STEP 4
 	#define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_SOLID_COLOR
 	#define RGB_MATRIX_DEFAULT_HUE 0 // Sets the default hue value, if none has been set
@@ -138,26 +126,4 @@
 #    define RGBLIGHT_EFFECT_ALTERNATING
 #    define RGBLIGHT_EFFECT_TWINKLE
 #endif
-//------------------------------------------
-
-
-// pointing device definitions
-//------------------------------------------
-#ifdef POINTING_DEVICE_ENABLE
-	// #define SPLIT_POINTING_ENABLE // Enable use of pointing device on slave split.
-	// #define POINTING_DEVICE_RIGHT
-
-	#if defined(POINTING_DEVICE_DRIVER_pimoroni_trackball)
-	//Pimoroni Trackball
-		// #define POINTING_DEVICE_ROTATION_180 // may be used for trackball in 2nd position
-	#endif
-#endif
-//------------------------------------------
-
-
-// additional split keyboard definitions
-//------------------------------------------
-// #define SPLIT_LAYER_STATE_ENABLE  //syncs state information to the secondary side
-// #define SPLIT_LED_STATE_ENABLE
-// #define SPLIT_MODS_ENABLE
 //------------------------------------------
