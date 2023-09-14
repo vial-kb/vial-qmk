@@ -1,0 +1,14 @@
+{
+  "keyboard_name": "qazfold",
+  "manufacturer": "whydobearsxplod",
+  "url": "",
+  "maintainer": "whydobearsxplod",
+  "usb": {
+    "vid": "0x7431",
+    "pid": "0x0001",
+    "device_version": "1.0.0"
+  },
+  "processor": "atmega32u4",
+  "bootloader": "caterina"
+  
+}
