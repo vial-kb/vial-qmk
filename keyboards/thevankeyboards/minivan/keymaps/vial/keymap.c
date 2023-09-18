@@ -42,11 +42,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           KC_TRNS, KC_TRNS, QK_BOOT, KC_NO, KC_NO, KC_NO, KC_UNDS, KC_TRNS, KC_TRNS, KC_NO, KC_TRNS)
 };
 
-void process_indicator_update(layer_state_t state, uint8_t usb_led) {
+void process_indicator_update(layer_state_t state, led_t led_state) {
   for (int i = 0; i < 3; i++) {
     setrgb(0, 0, 0, (LED_TYPE *)&led[i]);
   }
-  if (usb_led & (1<<USB_LED_CAPS_LOCK)) {
+  if (led_state.caps_lock) {
   setrgb(255, 0, 0, (LED_TYPE *)&led[0]);
 }
 
@@ -71,15 +71,15 @@ void process_indicator_update(layer_state_t state, uint8_t usb_led) {
 };
 
 void keyboard_post_init_user(void) {
-  process_indicator_update(layer_state, host_keyboard_leds());
+  process_indicator_update(layer_state, host_keyboard_led_state());
 };
 
 void led_set_user(uint8_t usb_led) {
-  process_indicator_update(layer_state, host_keyboard_leds());
+  process_indicator_update(layer_state, host_keyboard_led_state());
 };
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-  process_indicator_update(state, host_keyboard_leds());
+  process_indicator_update(state, host_keyboard_led_state());
     return state;
 };
 
