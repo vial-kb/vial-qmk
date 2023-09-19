@@ -6,7 +6,7 @@ VIALRGB_ENABLE = yes
 LTO_ENABLE   = yes # make the compiler work harder
 
 # Vial optimization
-QMK_SETTINGS = no # enables the tab to change QMK settings from the GUI1~# enables the tab to change QMK settings from the GUI1~ # enables the tab to change QMK settings from the GUI
+QMK_SETTINGS = no # enables the tab to change QMK settings from the GUI1
 TAP_DANCE_ENABLE = yes
 COMBO_ENABLE = no
 
