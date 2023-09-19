@@ -2,54 +2,7 @@
   "name": "IDOBAO Montex V2",
   "vendorId": "0x6964",
   "productId": "0x0227",
-  "lighting": {
-    "extends": "qmk_rgblight",
-    "supportedLightingValues": [128, 129, 131],
-    "underglowEffects": [
-      ["00. None", 0],
-      ["01. Solid Color", 1],
-      ["02. Alphas Mods", 1],
-      ["03. Gradient U&D", 1],
-      ["04. Gradient L&R", 1],
-      ["05. Breathing", 1],
-      ["06. Cycle Solid Color", 1],
-      ["07. Cycle LR", 1],
-      ["08. Cycle TB", 1],
-      ["09. Rainbow Beacon", 1],
-      ["10. Spinning Pinwheel", 1],
-      ["11. Spinning Spiral", 1],
-      ["12. Cycle Pinwheel", 1],
-      ["13. Raindrops", 1],
-      ["14. Jellybean Raindrops", 1],
-      ["15. Hue Breathing", 1],
-      ["16. Hue Pendulum", 1],
-      ["17. Hue Wave", 1],
-      ["18. Pixel Rain", 1],
-      ["19. Pixel Flow", 1],
-      ["20. Reactive Simple", 1],
-      ["21. Reactive Solid", 1],
-      ["22. Reactive Wide", 1],
-      ["23. Reactive Multi-wide", 1],
-      ["24. Splash", 1],
-      ["25. Solid Splash", 1]
-    ]
-  },
-  "customKeycodes": [
-    {"name": "", "title": "{undefined}", "shortName": ""},
-    {"name": "", "title": "{undefined}", "shortName": ""},
-    {"name": "Toggle Per-key", "title": "RGB_TPK", "shortName": "RGB T/PK"},
-    {"name": "Toggle Under Glow", "title": "RGB_TUG", "shortName": "RGB T/UG"},
-    {"name": "", "title": "{undefined}", "shortName": ""},
-    {"name": "", "title": "{undefined}", "shortName": ""},
-    {"name": "", "title": "{undefined}", "shortName": ""},
-    {"name": "", "title": "{undefined}", "shortName": ""},
-    {
-      "name": "Toggle NumLk LED",
-      "title": "Toggle NumLock LED Feature",
-      "shortName": "NumLk LED"
-    },
-    {"name": "Version", "title": "Type Firmware Version", "shortName": "Ver?"}
-  ],
+  "lighting": "vialrgb",
   "matrix": {"rows": 6, "cols": 5},
   "layouts": {
     "keymap": [
