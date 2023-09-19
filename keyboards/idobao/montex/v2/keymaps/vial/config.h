@@ -7,3 +7,12 @@
 
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 4 }
+
+// Enable all available RGB Matrix effects
+#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+#define RGB_MATRIX_KEYPRESSES
+
+// Firmware size optimization
+// disable Lock Key support
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
