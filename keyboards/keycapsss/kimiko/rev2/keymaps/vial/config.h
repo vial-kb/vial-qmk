@@ -20,8 +20,8 @@
 
 /* SPDX-License-Identifier: GPL-2.0-or-later */
 #define VIAL_KEYBOARD_UID {0x95, 0x67, 0x21, 0xB7, 0x4B, 0x3A, 0x85, 0xE5}
-#define VIAL_UNLOCK_COMBO_ROWS { 0, 9 }
-#define VIAL_UNLOCK_COMBO_COLS { 0, 4 }
+#define VIAL_UNLOCK_COMBO_ROWS { 0, 6 }
+#define VIAL_UNLOCK_COMBO_COLS { 0, 0 }
 #define VIALRGB_NO_DIRECT
 
 /* Select hand configuration */
