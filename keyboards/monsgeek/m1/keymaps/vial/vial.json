@@ -4,9 +4,6 @@
     "productId": "0x0005",
     "lighting": "vialrgb",
     "matrix": { "rows": 6, "cols": 16 },
-    "customKeycodes":[
-      {"name":"RESET","title":"RESET EEPROM","shortName":"RESET"}
-    ],
     "layouts": {
       "presets": {"Default": [0,0]},
       "labels": [
