@@ -32,15 +32,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROW_PINS_RIGHT { B1, A4, A2, A3 }
 #define MATRIX_COL_PINS_RIGHT { B8, B9, B3, B4, B5, B7 }
 
-// #define EE_HANDS
+#define EE_HANDS
 // qmk flash -kb qh40/v4 -km vial -bl dfu-util-split-left
 // qmk flash -kb qh40/v4 -km vial -bl dfu-util-split-right
+// qmk flash -kb qh40/v4 -km vial -bl uf2-split-left
+// qmk flash -kb qh40/v4 -km vial -bl uf2-split-right
 
 /*
  * Split Keyboard specific options, make sure you have 'SPLIT_KEYBOARD = yes' in your rules.mk, and define SOFT_SERIAL_PIN.
  */
 // #define SPLIT_HAND_PIN B1
 // #define SPLIT_HAND_MATRIX_GRID B11,B7
+
+// #define SPLIT_USB_DETECT
+// #define MASTER_LEFT
+// #define MASTER_RIGHT
+
 // #define EE_HANDS
 #define SOFT_SERIAL_PIN B6
 // #define SERIAL_USART_TX_PIN B6
