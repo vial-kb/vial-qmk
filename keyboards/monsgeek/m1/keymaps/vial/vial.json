@@ -5,7 +5,6 @@
     "lighting": "vialrgb",
     "matrix": { "rows": 6, "cols": 16 },
     "layouts": {
-      "presets": {"Default": [0,0]},
       "labels": [
         "ISO Enter",
         "Split Left Shift"       
