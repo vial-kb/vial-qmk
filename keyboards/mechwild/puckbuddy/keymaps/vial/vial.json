@@ -1,0 +1,57 @@
+{
+  "lighting": "qmk_rgblight",
+  "matrix": { "rows": 4, "cols": 4 },
+  "customKeycodes": [
+  {
+    "name": "DPI_UP",
+    "title": "Increase the DPI of the touchpad.",
+    "shortName": "DPI\nDown"
+  },
+  {
+    "name": "DPI_DN",
+    "title": "Decrease the DPI of the touchpad.",
+    "shortName": "DPI\nUp"
+  },
+  {
+    "name": "DPI_FINE",
+    "title": "While held, drops the DPI to minimum.",
+    "shortName": "Sniper\nMode"
+  },
+  {
+    "name": "TAP_UP",
+    "title": "Increase the tapping term. This affects mod/layer-tap timing.",
+    "shortname": "Tap Term\nUp"
+  },
+  {
+    "name": "TAP_DN",
+    "title": "Decrease the tapping term. This affects mod/layer-tap timing.",
+    "shortname": "Tap Term\nDown"
+  },
+  {
+    "name": "TAP_ON",
+    "title": "Enable tap to click on touchpad.",
+    "shortname": "Tap-Click\nOn"
+  },
+  {
+    "name": "TP_OFF",
+    "title": "Disable tap to click on touchpad.",
+    "shortname": "Tap-Click\nOff"
+  },
+  {
+    "name": "TAP_TOG",
+    "title": "Toggle touchpad tap clicking on/off.",
+    "shortname": "Tap-Click\nToggle"
+  }
+  ],
+  "layouts": {
+    "keymap": [
+        ["0,1\n\n\n\n\n\n\n\n\ne",{"x":6.5},"1,1\n\n\n\n\n\n\n\n\ne"],
+        [{"y":-0.5,"x":1.25},"0,0",{"x":0.5},"0,1","1,1","2,1",{"x":0.5},"0,2"],
+        [{"y":-0.5},"0,0\n\n\n\n\n\n\n\n\ne",{"x":6.5},"1,0\n\n\n\n\n\n\n\n\ne"],
+        [{"y":-0.25,"x":1.25},"1,0",{"x":4},"1,2"],
+        [{"x":1.25},"2,0",{"x":4},"2,2"],
+        [{"x":1.25},"3,0",{"x":4},"3,2"],
+        [{"y":0.25,"x":2.25},"0,3","1,3","2,3","3,3"]
+    ]
+  }
+}
