@@ -11,7 +11,3 @@
 #define VIAL_UNLOCK_COMBO_COLS { 0, 11 }
 
 
-// Firmware size optimization
-// disable Lock Key support
-#undef LOCKING_SUPPORT_ENABLE
-#undef LOCKING_RESYNC_ENABLE
