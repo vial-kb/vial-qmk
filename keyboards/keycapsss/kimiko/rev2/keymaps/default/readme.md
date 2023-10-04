@@ -1,8 +1,6 @@
-# Kimiko
+# Kimiko Rev2
 
-## Rev2
-
-A split keyboard with 4x6 vertically staggered keys and a Kyria style thumb thumb cluster.
+A split keyboard with 4x6 vertically staggered keys and thumb keys.
 
 ![Kimiko Rev2](https://i.imgur.com/TBP8Bcrh.jpg)
 
@@ -10,7 +8,7 @@ A split keyboard with 4x6 vertically staggered keys and a Kyria style thumb thum
 - Hardware Supported: Pro Micro 5V/16Mhz and compatible
 - Hardware Availability: [Keycapsss.com](https://keycapsss.com)
 
-### Features (Rev2)
+## Features
 
 - 62 Per key RGB led's (SK6812 Mini-E)
   - RGB Matrix is enabled as default in rules.mk
@@ -26,32 +24,6 @@ Make firmware .hex for this keyboard (after setting up your build environment):
 
 ```bash
 qmk compile -kb keycapsss/kimiko/rev2 -km rev2
-```
-
-Use [QMK Toolbox](https://github.com/qmk/qmk_toolbox) to flash the firmware hex file to the keyboard controller.
-
-See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
-
-## Rev1
-
-A split keyboard with 4x6 vertically staggered keys and thumb keys.
-
-![Kimiko Rev1](https://i.imgur.com/md6V6Eoh.jpg)
-
-- Keyboard Maintainer: [BenRoe](https://github.com/BenRoe/) [@keycapsss](https://twitter.com/keycapsss)
-- Hardware Supported: Pro Micro 5V/16Mhz and compatible
-- Hardware Availability: [Keycapsss.com](https://keycapsss.com)
-
-### Features (Rev1)
-
-- Per key RGB led's (SK6812 Mini-E)
-- 6 underglow RGB led's per side (SK6812 Mini)
-- Support for 1 rotary encoder per side (two possible positions)
-
-Make firmware .hex for this keyboard (after setting up your build environment):
-
-```bash
-qmk compile -kb keycapsss/kimiko/rev1 -km default
 ```
 
 Use [QMK Toolbox](https://github.com/qmk/qmk_toolbox) to flash the firmware hex file to the keyboard controller.

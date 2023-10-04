@@ -23,6 +23,9 @@
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
+#define OLED_FONT_H "keyboards/keycapsss/kimiko/rev1/keymaps/vial/glcdfont.c"
+
+
 #ifdef RGBLIGHT_ENABLE
 #   define RGBLIGHT_HUE_STEP 8
 #   define RGBLIGHT_SAT_STEP 8

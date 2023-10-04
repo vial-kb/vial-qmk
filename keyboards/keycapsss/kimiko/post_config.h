@@ -1,4 +1,6 @@
-/* Copyright 2023 @ben_roe (keycapsss.com)
+/* Copyright 2019 MechMerlin
+ * Copyright 2023 @Ex3c4Def
+ * Copyright 2023 @BenRoe (keycapsss.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,18 +18,8 @@
 
 #pragma once
 
-/* SK6812 RGB LED are used for lightning*/
+// OLED definitions
+#ifndef OLED_FONT_H
+#   define OLED_FONT_H "keyboards/keycapsss/kimiko/glcdfont.c"
+#endif
 
-// Limit the power draw
-#define RGBLIGHT_LIMIT_VAL 80
-
-// Not yet available in `info.json`
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 80
-#define RGB_MATRIX_LED_COUNT 62
-#define SPLIT_TRANSPORT_MIRROR
-
-
-/* Mechanical locking support. Use KC_LCAP, KC_LNUM or KC_LSCR instead in keymap */
-#define LOCKING_SUPPORT_ENABLE
-/* Locking resynchronize hack */
-#define LOCKING_RESYNC_ENABLE
