@@ -2,7 +2,7 @@ name: CI
 on: [ pull_request, push, workflow_dispatch ]
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 env:
