@@ -4,7 +4,7 @@
     "maintainer": "itsvar8",
     "bootloader": "stm32-dfu",
     "diode_direction": "ROW2COL",
-	"debounce": 2,
+        "debounce": 2,
     "features": {
         "bootmagic": true,
         "command": false,
@@ -12,7 +12,7 @@
         "extrakey": true,
         "mousekey": true,
         "nkro": true,
-		"rgb_matrix": true
+        "rgb_matrix": true
     },
     "processor": "STM32F401",
     "url": "",
@@ -74,8 +74,8 @@
             ]
         }
     },
-	    "rgb_matrix": {
-        "driver": "IS31FL3733",
+    "rgb_matrix": {
+        "driver": "is31fl3733",
         "layout": [
             {"matrix": [0, 0], "x": 0, "y": 0, "flags": 1},
             {"matrix": [0, 1], "x": 20, "y": 0, "flags": 4},
