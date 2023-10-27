@@ -5,8 +5,8 @@
 This is a handdwired split 44 key keyboard. the two sides are connectd via a custom 2x8P pin header cable.
 
 * Keyboard Maintainer: [Marek128b](https://github.com/Marek128b)
-* Hardware Supported: *The PCBs, controllers supported*
-* Hardware Availability: *Links to where you can find this hardware*
+* Hardware Supported: RP2040
+* Hardware Availability: https://github.com/Marek128b/Split40/tree/main/hardware
 
 Make example for this keyboard (after setting up your build environment):
 
