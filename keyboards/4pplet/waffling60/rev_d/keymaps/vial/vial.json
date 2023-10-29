@@ -1,7 +1,4 @@
 {
-  "name": "waffling60 Rev D",
-  "vendorId": "0x4444",
-  "productId": "0x000E",
   "lighting": "qmk_rgblight",
   "matrix": {"rows": 5, "cols": 14},
   "layouts": {
