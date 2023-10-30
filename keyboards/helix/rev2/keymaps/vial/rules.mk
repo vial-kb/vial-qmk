@@ -13,9 +13,5 @@ LTO_ENABLE = yes
 
 KEY_OVERRIDE_ENABLE = no
 
-ifneq ($(strip $(KEYBOARD)), helix/rev2)
-   TAP_DANCE_ENABLE = no
-endif
-ifeq ($(strip $(KEYBOARD)), helix/rev2/qmk_conf)
-   QMK_SETTINGS = no
-endif
+TAP_DANCE_ENABLE = no
+QMK_SETTINGS = no

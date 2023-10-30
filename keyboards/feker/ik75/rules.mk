@@ -20,4 +20,3 @@ RGB_MATRIX_ENABLE = yes
 
 # Encoder enabled
 ENCODER_ENABLE = yes
-ENCODER_MAP_ENABLE = yes

@@ -31,6 +31,7 @@ bool process_record_vial(uint16_t keycode, keyrecord_t *record);
 
 extern int vial_unlocked;
 extern int vial_unlock_in_progress;
+extern uint16_t g_vial_magic_keycode_override;
 
 enum {
     vial_get_keyboard_id = 0x00,

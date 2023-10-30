@@ -14,29 +14,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_HOME, KC_UP,   KC_PGUP,
         KC_LEFT, KC_NO,   KC_RGHT, _______,
         KC_END,  KC_DOWN, KC_PGDN,
-        KC_INS,  KC_DEL,  _______),
-
-    LAYOUT(
-        _______, _______, _______, _______, _______,
-        _______, _______, _______,
-        _______, _______, _______, _______,
-        _______, _______, _______,
-        _______, _______, _______),
-
-    LAYOUT(
-        _______, _______, _______, _______, _______,
-        _______, _______, _______,
-        _______, _______, _______, _______,
-        _______, _______, _______,
-        _______, _______, _______),
+        KC_INS,  KC_DEL,  _______)
 
 };
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [1] = { ENCODER_CCW_CW(_______, _______) },
-    [2] = { ENCODER_CCW_CW(_______, _______) },
-    [3] = { ENCODER_CCW_CW(_______, _______) },
+    [1] = { ENCODER_CCW_CW(_______, _______) }
 };
 #endif

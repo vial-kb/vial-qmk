@@ -22,7 +22,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "action_layer.h"
 #include "action.h"
 #include "debug.h"
-#include "quantum.h"
+#include "keycode_config.h"
+#include "quantum_keycodes.h"
+
+#ifdef ENCODER_MAP_ENABLE
+#    include "encoder.h"
+#endif
 
 #ifdef BACKLIGHT_ENABLE
 #    include "backlight.h"
@@ -30,6 +35,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef MIDI_ENABLE
 #    include "process_midi.h"
+#endif
+
+#ifdef VIAL_ENABLE
+#    include "vial.h"
 #endif
 
 extern keymap_config_t keymap_config;
@@ -186,8 +195,6 @@ action_t action_for_keycode(uint16_t keycode) {
     }
     return action;
 }
-
-extern uint16_t g_vial_magic_keycode_override;
 
 // translates key to keycode
 __attribute__((weak)) uint16_t keymap_key_to_keycode(uint8_t layer, keypos_t key) {
