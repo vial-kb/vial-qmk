@@ -1,2 +1,1 @@
-#undef USB_VBUS_PIN
 #define USB_VBUS_PIN GP29

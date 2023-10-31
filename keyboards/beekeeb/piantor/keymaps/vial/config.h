@@ -6,5 +6,3 @@
 
 /* default layer count */
 #define DYNAMIC_KEYMAP_LAYER_COUNT 10
-
-
