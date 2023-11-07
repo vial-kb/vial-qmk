@@ -19,4 +19,4 @@
 #undef ENCODERS_PAD_B
 #define ENCODERS_PAD_A { B5, A1, A4 }
 #define ENCODERS_PAD_B { B6, A2, A3 }
-#define ENCODER_RESOLUTIONS { 1, 1, 4 }
+#define ENCODER_RESOLUTIONS { 4, 4, 4 }

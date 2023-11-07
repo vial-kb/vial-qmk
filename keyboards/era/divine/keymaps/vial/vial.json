@@ -2,7 +2,7 @@
 	"name": "DIVINE",
 	"vendorId": "0x4552",
 	"productId": "0x0002",
-	"lighting": "none",
+	"lighting": "qmk_backlight",
 	"matrix":
 	{
 		"rows": 5,
