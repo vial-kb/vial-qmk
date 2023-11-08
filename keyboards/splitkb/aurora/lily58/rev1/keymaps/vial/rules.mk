@@ -4,11 +4,13 @@ ENCODER_MAP_ENABLE = yes
 VIA_ENABLE = yes
 VIAL_ENABLE = yes
 
-# Saving space for the default build, remove all/any of these when using a controller with a RP2040 controller
-OLED_ENABLE = no
-MOUSEKEY_ENABLE = no
-COMBO_ENABLE = no
-KEY_OVERRIDE_ENABLE = no
+# Saving space on atmega32u4
+ifeq ($(strip $(MCU)), atmega32u4)
+    OLED_ENABLE = no
+    MOUSEKEY_ENABLE = no
+    COMBO_ENABLE = no
+    KEY_OVERRIDE_ENABLE = no
+endif
 
 ## build targets
 # Liatris
