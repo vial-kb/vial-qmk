@@ -14,35 +14,35 @@ void keyboard_post_init_user(void) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [0] = LAYOUT(
-    QK_GESC, 	KC_1,	KC_2,	KC_3,	KC_4,	KC_5,	KC_MPLY,	KC_MPLY,	KC_6,	KC_7,	KC_8,		KC_9,		KC_0,		KC_MINS,
-    KC_TAB, 	KC_Q,	KC_W,   KC_E,   KC_R,   KC_T,                       	KC_Y, 	KC_U,   KC_I,   	KC_O,   	KC_P,   	KC_LBRC,
-	KC_NUHS, 	KC_A, 	KC_S,   KC_D,   KC_F,   KC_G,                      	 	KC_H, 	KC_J,   KC_K,   	KC_L,	   	KC_SCLN,	KC_QUOT,
-	LCTL_T(KC_LEFT), 	KC_Z, 	KC_X,   KC_C,   KC_V,   KC_B, 	KC_DOWN,		KC_UP,  KC_N, 	KC_M,   KC_COMM,	KC_DOT, 	KC_SLSH, 	RCTL_T(KC_RIGHT),
-						KC_DEL, TG(1), 		LALT_T(KC_LGUI),	LSFT_T(KC_SPACE),    	RSFT_T(KC_ENTER), 	RALT_T(KC_APP), 		TG(2), 			KC_BSPC
+		QK_GESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_MPLY, KC_MPLY, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINS,
+		KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRC,
+		KC_NUHS, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN,	KC_QUOT,
+		LCTL_T(KC_LEFT), KC_Z, KC_X, KC_C, KC_V, KC_B, KC_DOWN, KC_UP,  KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, RCTL_T(KC_RIGHT),
+		KC_DEL, TG(1), LALT_T(KC_LGUI),	LSFT_T(KC_SPACE), RSFT_T(KC_ENTER), RALT_T(KC_APP), TG(2), KC_BSPC
 	),
- 
-    [1] = LAYOUT(
-    ____, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, ____,        ____, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
-	____, ____, ____, ____, ____, ____,                    ____, ____, ____, ____, ____, ____,
-	____, ____, ____, ____, ____, ____,                    ____, ____, ____, ____, ____, ____,
-	____, ____, ____, ____, ____, ____, KC_PGDN,        KC_PGUP, ____, ____, ____, ____, ____, ____,
-					  ____, ____, ____, ____,      	 ____, ____, ____, ____
-    ),
 
-    [2] = LAYOUT(
-    ____, ____, ____, ____, ____, ____, ____,        ____, ____, ____, ____, ____, ____, ____,
-	____, ____, ____, ____, ____, ____,                    ____, ____, ____, ____, ____, ____,
-	____, ____, ____, ____, ____, ____,                    ____, ____, ____, ____, ____, ____,
-	____, ____, ____, ____, ____, ____, ____,        ____, ____, ____, ____, ____, ____, ____,
-					  ____, ____, ____, ____,      	 ____, ____, ____, ____
-    ),
+	[1] = LAYOUT(
+		____, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, ____, ____, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
+		____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
+		____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
+		____, ____, ____, ____, ____, ____, KC_PGDN, KC_PGUP, ____, ____, ____, ____, ____, ____,
+		____, ____, ____, ____, ____, ____, ____, ____
+	),
 
-    [3] = LAYOUT(
-    QK_BOOT, ____, ____, ____, NK_TOGG, AC_TOGG, ____,        ____, ____, ____, ____, RGB_VAI, RGB_VAD, RGB_TOG,
-	QK_RBT, ____, ____, ____, ____, ____,                    ____, ____, ____, RGB_HUI, RGB_HUD, RGB_M_P,
-	____, ____, ____, ____, ____, ____,                    ____, ____, ____, RGB_SAI, RGB_SAD, RGB_M_B,
-	____, ____, ____, ____, ____, ____, ____,        ____, ____, ____, ____, RGB_SPI, RGB_SPD, RGB_M_R,
-					  ____, ____, ____, ____,      	 ____, ____, ____, ____
+	[2] = LAYOUT(
+		____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
+		____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
+		____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
+		____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____,
+		____, ____, ____, ____, ____, ____, ____, ____
+	),
+
+	[3] = LAYOUT(
+		QK_BOOT, ____, ____, ____, NK_TOGG, AC_TOGG, ____, ____, ____, ____, ____, RGB_VAI, RGB_VAD, RGB_TOG,
+		QK_RBT, ____, ____, ____, ____, ____, ____, ____, ____, RGB_HUI, RGB_HUD, RGB_M_P,
+		____, ____, ____, ____, ____, ____, ____, ____, ____, RGB_SAI, RGB_SAD, RGB_M_B,
+		____, ____, ____, ____, ____, ____, ____, ____, ____, ____, ____, RGB_SPI, RGB_SPD, RGB_M_R,
+		____, ____, ____, ____, ____, ____, ____, ____
     ),
 };
 
@@ -99,14 +99,8 @@ static void print_status_narrow(void) {
 
 }
 
-oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-	return OLED_ROTATION_270;
-}
-
 bool oled_task_user(void) {
-    if (is_keyboard_master()) {
-        print_status_narrow();
-    }
+    print_status_narrow();
 	return false;
 }
 
