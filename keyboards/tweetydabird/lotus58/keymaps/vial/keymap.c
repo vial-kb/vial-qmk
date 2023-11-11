@@ -84,7 +84,7 @@ static void print_status_narrow(void) {
     }
 	
 	// Display capslock
-    oled_write_P(PSTR("\n"), false);
+    oled_advance_page(true);
     led_t led_usb_state = host_keyboard_led_state();
     oled_write_ln_P(PSTR("Caps- lock"), led_usb_state.caps_lock);
 	
