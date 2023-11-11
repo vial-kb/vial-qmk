@@ -59,10 +59,9 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 
 static void print_status_narrow(void) {
 	// Create OLED content
-    oled_write_P(PSTR("\n"), false);
-	oled_write_P(PSTR(""), false);
+    oled_advance_page(true);
     oled_write_P(PSTR("Lotus -58-"), false);
-	oled_write_P(PSTR("\n"), false);
+    oled_advance_page(true);
 
     // Print current layer
     oled_write_P(PSTR("Layer"), false);
