@@ -59,10 +59,9 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 
 static void print_status_narrow(void) {
 	// Create OLED content
-    oled_write_P(PSTR("\n"), false);
-	oled_write_P(PSTR(""), false);
+    oled_advance_page(true);
     oled_write_P(PSTR("Lotus -58-"), false);
-	oled_write_P(PSTR("\n"), false);
+    oled_advance_page(true);
 
     // Print current layer
     oled_write_P(PSTR("Layer"), false);
@@ -84,16 +83,16 @@ static void print_status_narrow(void) {
     }
 	
 	// Display capslock
-    oled_write_P(PSTR("\n"), false);
+    oled_advance_page(true);
     led_t led_usb_state = host_keyboard_led_state();
     oled_write_ln_P(PSTR("Caps- lock"), led_usb_state.caps_lock);
 	
 #ifdef AUTO_SHIFT_ENABLE
 
 	bool autoshift = get_autoshift_state();
-	oled_write_P(PSTR("\n"), false);
+	oled_advance_page(true);
 	oled_write_P(PSTR("Auto-Shift"), autoshift);
-	oled_write_P(PSTR("\n"), false);
+	oled_advance_page(true);
 	
 #endif
 
