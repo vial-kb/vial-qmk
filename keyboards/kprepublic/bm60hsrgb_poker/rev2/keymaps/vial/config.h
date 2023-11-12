@@ -25,7 +25,7 @@
 #undef LOCKING_SUPPORT_ENABLE
 #undef LOCKING_RESYNC_ENABLE
 
-//commenting out undef animations in order to load them.  Firmware size will need consideration
+//commenting out undef animations prior to compiling to make them available in the firmware GUI.  Firmware size will need consideration
 
 #undef ENABLE_RGB_MATRIX_ALPHAS_MODS
 #undef ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN
