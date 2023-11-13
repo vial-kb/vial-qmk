@@ -33,11 +33,6 @@
 #define NO_ACTION_ONESHOT
 #define VIALRGB_NO_DIRECT
 
-#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 180
-#define RGBLIGHT_DEFAULT_MODE RGBLIGHT_MODE_RAINBOW_MOOD
-#    define RGB_DISABLE_WHEN_USB_SUSPENDED true // turn off effects when suspended
-#    define RGB_MATRIX_KEYPRESSES
-
 //prior to compiling commenting out the undef lighting animations will add them to the firmware, final size of the firmware will be affected
 
 #undef ENABLE_RGB_MATRIX_ALPHAS_MODS
