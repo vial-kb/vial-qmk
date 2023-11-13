@@ -25,7 +25,6 @@
 #define VIAL_UNLOCK_COMBO_COLS {0, 1}
 
 // tweaks to firmware size
-#define DYNAMIC_KEYMAP_LAYER_COUNT 4
 #define VIAL_TAP_DANCE_ENTRIES 4
 #define VIAL_COMBO_ENTRIES 2
 #define VIAL_KEY_OVERRIDE_ENTRIES 2

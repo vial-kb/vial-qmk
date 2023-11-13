@@ -1,7 +1,4 @@
 {
-  "name": "BM60v2_poker",
-  "vendorId": "0x4B50",
-  "productId": "0x1122",
   "lighting": "vialrgb",
   "matrix": {
     "rows": 5,
