@@ -1,7 +1,4 @@
 {
-  "name": "Cornelius",
-  "vendorId": "0x3265",
-  "productId": "0x0005",
   "lighting": "none",
   "matrix": {"rows": 4, "cols": 12},
   "layouts": {
