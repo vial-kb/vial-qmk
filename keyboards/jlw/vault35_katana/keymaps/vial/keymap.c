@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
-#include "../../rgb.c"
 
 #define HM_A	LSFT_T(KC_A)
 #define HM_S	LALT_T(KC_S)
@@ -40,11 +39,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 #ifdef ENCODER_MAP_ENABLE
-#undef BLANK_LAYER
-#define BLANK_LAYER { ENCODER_CCW_CW(_______, _______) }
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [0] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [1] =   BLANK_LAYER,
-    [2] =   BLANK_LAYER
+    [1] =   { ENCODER_CCW_CW(_______, _______) },
+    [2] =   { ENCODER_CCW_CW(_______, _______) }
 };
 #endif

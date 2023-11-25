@@ -1,10 +1,4 @@
-#ifdef RGB_MATRIX_ENABLE
-// LED index
-// 9    10    2    3
-//         1
-//         0
-//   8 7   6   5 4
-
+#include "quantum.h"
 led_config_t g_led_config = {
     // Key Matrix to LED Index
     {
@@ -32,7 +26,3 @@ led_config_t g_led_config = {
     //  https://docs.qmk.fm/#/feature_rgb_matrix?id=flags
     { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 }
 };
-
-
-#endif
-
