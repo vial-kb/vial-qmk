@@ -17,7 +17,9 @@
     },
     "encoder": {
       "rotary": [
-        {"pin_a": ["B2", "A14"], "pin_b": ["B2", "A8"] }
+        {"pin_a": "B2", "pin_b": "B1"},
+        {"pin_a": "A14", "pin_b": "A8"}
+
       ]
     },
     "features": {
@@ -74,6 +76,20 @@
             "splash": true,
             "typing_heatmap": true
         },
+        "layout": [
+            {"flags": 4, "matrix": [0, 0], "x": 18, "y": 24},
+            {"flags": 4, "matrix": [0, 2], "x": 51, "y": 24},
+            {"flags": 4, "matrix": [0, 4], "x": 80, "y": 24},
+            {"flags": 4, "matrix": [0, 6], "x": 116, "y": 24},
+            {"flags": 4, "matrix": [0, 8], "x": 149, "y": 24},
+            {"flags": 4, "matrix": [0, 9], "x": 175, "y": 24},
+            {"flags": 4, "matrix": [2, 9], "x": 175, "y": 62},
+            {"flags": 4, "matrix": [2, 8], "x": 149, "y": 67},
+            {"flags": 4, "matrix": [2, 6], "x": 121, "y": 67},
+            {"flags": 4, "matrix": [2, 4], "x": 76, "y": 67},
+            {"flags": 4, "matrix": [2, 2], "x": 51, "y": 67},
+            {"flags": 4, "matrix": [2, 0], "x": 18, "y": 62}
+        ],
         "driver": "ws2812",
         "hue_steps": 4,
         "max_brightness": 255,
@@ -84,7 +100,7 @@
         "pin": "A10"
     },
     "layouts": {
-        "ORTHO": {                                  // cain bars
+        "LAYOUT_ortho": {                                  // cain bars
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0}, // voak
                 {"matrix": [0, 1], "x": 1, "y": 0},
@@ -125,11 +141,11 @@
                 {"matrix": [3, 2], "x": 1.5, "y": 3, "w":1.25},
                 {"matrix": [3, 3], "x": 2.75, "y": 3, "w": 1.25},
                 {"matrix": [3, 6], "x": 4, "y": 3, "w": 3},
-                {"matrix": [3, 6], "x": 7, "y": 3, "w": 1.25},
-                {"matrix": [3, 7], "x": 8.25, "y": 3, "w": 1.25}
+                {"matrix": [3, 7], "x": 7, "y": 3, "w": 1.25},
+                {"matrix": [3, 8], "x": 8.25, "y": 3, "w": 1.25}
             ]
         },
-        "ROW": {
+        "LAYOUT_row": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0}, // voak
                 {"matrix": [0, 1], "x": 1, "y": 0},
@@ -168,11 +184,11 @@
                 {"matrix": [3, 2], "x": 1.5, "y": 3, "w":1.25},
                 {"matrix": [3, 3], "x": 2.75, "y": 3, "w": 1.25},
                 {"matrix": [3, 6], "x": 4, "y": 3, "w": 3},
-                {"matrix": [3, 6], "x": 7, "y": 3, "w": 1.25},
-                {"matrix": [3, 7], "x": 8.25, "y": 3, "w": 1.25}
+                {"matrix": [3, 7], "x": 7, "y": 3, "w": 1.25},
+                {"matrix": [3, 8], "x": 8.25, "y": 3, "w": 1.25}
             ]
         },
-        "ALPHA": {
+        "LAYOUT_alpha": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0}, // voak
                 {"matrix": [0, 1], "x": 1, "y": 0},
@@ -212,11 +228,11 @@
                 {"matrix": [3, 2], "x": 1.5, "y": 3, "w":1.25},
                 {"matrix": [3, 3], "x": 2.75, "y": 3, "w": 1.25},
                 {"matrix": [3, 6], "x": 4, "y": 3, "w": 3},
-                {"matrix": [3, 6], "x": 7, "y": 3, "w": 1.25},
-                {"matrix": [3, 7], "x": 8.25, "y": 3, "w": 1.25}
+                {"matrix": [3, 7], "x": 7, "y": 3, "w": 1.25},
+                {"matrix": [3, 8], "x": 8.25, "y": 3, "w": 1.25}
             ]
         },
-        "KATANA": {
+        "LAYOUT_katana": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0, "w":1.5},
                 {"matrix": [0, 1], "x": 1.5, "y": 0},
@@ -255,11 +271,11 @@
                 {"matrix": [3, 2], "x": 1.5, "y": 3, "w":1.25},
                 {"matrix": [3, 3], "x": 2.75, "y": 3, "w": 1.25},
                 {"matrix": [3, 6], "x": 4, "y": 3, "w": 3},
-                {"matrix": [3, 6], "x": 7, "y": 3, "w": 1.25},
-                {"matrix": [3, 7], "x": 8.25, "y": 3, "w": 1.25}
+                {"matrix": [3, 7], "x": 7, "y": 3, "w": 1.25},
+                {"matrix": [3, 8], "x": 8.25, "y": 3, "w": 1.25}
             ]
         },
-        "KATANA_ISO": {
+        "LAYOUT_katana_iso": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0, "w":1.5},
                 {"matrix": [0, 1], "x": 1.5, "y": 0},
@@ -297,11 +313,11 @@
                 {"matrix": [3, 2], "x": 1.5, "y": 3, "w":1.25},
                 {"matrix": [3, 3], "x": 2.75, "y": 3, "w": 1.25},
                 {"matrix": [3, 6], "x": 4, "y": 3, "w": 3},
-                {"matrix": [3, 6], "x": 7, "y": 3, "w": 1.25},
-                {"matrix": [3, 7], "x": 8.25, "y": 3, "w": 1.25}
+                {"matrix": [3, 7], "x": 7, "y": 3, "w": 1.25},
+                {"matrix": [3, 8], "x": 8.25, "y": 3, "w": 1.25}
             ]
         },
-        "UNIFORM": {
+        "LAYOUT_uniform": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0}, // voak
                 {"matrix": [0, 1], "x": 1, "y": 0},
@@ -340,11 +356,11 @@
                 {"matrix": [3, 2], "x": 1.5, "y": 3, "w":1.25},
                 {"matrix": [3, 3], "x": 2.75, "y": 3, "w": 1.25},
                 {"matrix": [3, 6], "x": 4, "y": 3, "w": 3},
-                {"matrix": [3, 6], "x": 7, "y": 3, "w": 1.25},
-                {"matrix": [3, 7], "x": 8.25, "y": 3, "w": 1.25}
+                {"matrix": [3, 7], "x": 7, "y": 3, "w": 1.25},
+                {"matrix": [3, 8], "x": 8.25, "y": 3, "w": 1.25}
             ]
         },
-        "TREADSTONE": {
+        "LAYOUT_treadstone": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0}, // voak
                 {"matrix": [0, 1], "x": 1, "y": 0},
@@ -384,11 +400,11 @@
                 {"matrix": [3, 2], "x": 1.5, "y": 3, "w":1.25},
                 {"matrix": [3, 3], "x": 2.75, "y": 3, "w": 1.25},
                 {"matrix": [3, 6], "x": 4, "y": 3, "w": 3},
-                {"matrix": [3, 6], "x": 7, "y": 3, "w": 1.25},
-                {"matrix": [3, 7], "x": 8.25, "y": 3, "w": 1.25}
+                {"matrix": [3, 7], "x": 7, "y": 3, "w": 1.25},
+                {"matrix": [3, 8], "x": 8.25, "y": 3, "w": 1.25}
             ]
         },
-        "ORTHO_cain_bars": {
+        "LAYOUT_ortho_cain_bars": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0}, // voak
                 {"matrix": [0, 1], "x": 1, "y": 0},
@@ -434,7 +450,7 @@
                 {"matrix": [3, 8], "x": 8.5, "y": 3}
             ]
         },
-        "ORTHO_2u_bars": {
+        "LAYOUT_ortho_2u_bars": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0}, // voak
                 {"matrix": [0, 1], "x": 1, "y": 0},
@@ -480,7 +496,7 @@
                 {"matrix": [3, 8], "x": 8.5, "y": 3}
             ]
         },
-        "ORTHO_3u_bars": {
+        "LAYOUT_ortho_3u_bars": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0}, // voak
                 {"matrix": [0, 1], "x": 1, "y": 0},
@@ -524,7 +540,7 @@
                 {"matrix": [3, 8], "x": 8.5, "y": 3}
             ]
         },
-        "ORTHO_6u_bar": {
+        "LAYOUT_ortho_6u_bar": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0}, // voak
                 {"matrix": [0, 1], "x": 1, "y": 0},
