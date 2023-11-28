@@ -74,6 +74,20 @@
             "splash": true,
             "typing_heatmap": true
         },
+        "layout": [
+            {"matrix": [0, 6], "x": 132, "y": 16, "flags": 2},
+            {"matrix": [0, 9], "x": 172, "y": 16, "flags": 2},
+            {"matrix": [0, 10], "x": 216, "y": 16, "flags": 2},
+            {"matrix": [2, 10], "x": 216, "y": 32, "flags": 2},
+            {"matrix": [2, 9], "x": 173, "y": 44, "flags": 2},
+            {"matrix": [2, 6], "x": 132, "y": 44, "flags": 2},
+            {"matrix": [2, 4], "x": 91, "y": 44, "flags": 2},
+            {"matrix": [2, 2], "x": 50, "y": 44, "flags": 2},
+            {"matrix": [2, 0], "x": 8, "y": 32, "flags": 2},
+            {"matrix": [0, 0], "x": 8, "y": 16, "flags": 2},
+            {"matrix": [0, 2], "x": 51, "y": 16, "flags": 2},
+            {"matrix": [0, 4], "x": 91, "y": 16, "flags": 2}
+        ],
         "driver": "ws2812",
         "hue_steps": 4,
         "max_brightness": 69,
