@@ -5,12 +5,12 @@
   {
     "name": "DPI_UP",
     "title": "Increase the DPI of the touchpad.",
-    "shortName": "DPI\nDown"
+    "shortName": "DPI\nUp"
   },
   {
     "name": "DPI_DN",
     "title": "Decrease the DPI of the touchpad.",
-    "shortName": "DPI\nUp"
+    "shortName": "DPI\nDown"
   },
   {
     "name": "DPI_FINE",
