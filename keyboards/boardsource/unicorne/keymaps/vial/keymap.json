@@ -5,7 +5,8 @@
     "config": {
         "features": {
             "via": true,
-            "vial": true
+            "vial": true,
+	    "vialrgb": true
         }
     },
     "layers": [

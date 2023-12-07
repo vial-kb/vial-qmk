@@ -13,7 +13,7 @@
         "nkro": true,
         "oled": true,
         "pointing_device": true,
-        "rgb_matrix": true
+        "rgb_matrix": true,
     },
     "indicators": {
         "caps": "GP24"
