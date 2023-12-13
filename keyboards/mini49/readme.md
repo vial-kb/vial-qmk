@@ -1,7 +1,7 @@
 # mini49  
 
 
-![mini49](https://cloud.stickpile.net/apps/files_sharing/publicpreview/YkYfcoeLRmHpfy2?file=/&fileId=225288&x=1080&y=1920&a=true)
+![mini49](https://csg.tinkercad.com/things/97V6ZOuubXu/t725.png?rev=1699055533406000000&s=&v=1&cb=1699056451789)
 
 A sub-60% ortholinear keyboard powered by vial-qmk.  
 
