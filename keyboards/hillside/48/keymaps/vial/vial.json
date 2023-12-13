@@ -1,7 +1,4 @@
 {
-  "name": "Hillside 48",
-  "vendorId": "0xFEED",
-  "productId": "0x67C0",
   "matrix": {
       "rows": 8,
       "cols": 6

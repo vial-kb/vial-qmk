@@ -1,7 +1,4 @@
 {
-  "name": "Hillside 46",
-  "vendorId": "0x4D4D",
-  "productId": "0x4846",
   "matrix": {
     "rows": 8,
     "cols": 6
