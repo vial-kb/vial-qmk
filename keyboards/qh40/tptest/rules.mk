@@ -1,0 +1,19 @@
+# MCU name
+MCU = STM32F103
+
+# Bootloader selection
+BOOTLOADER = uf2boot
+# BOOTLOADER = stm32duino
+BOARD = STM32_F103_STM32DUINO
+
+
+TAP_DANCE_ENABLE = yes
+WS2812_DRIVER = pwm
+SERIAL_DRIVER = usart
+
+
+SIGNALRGB_SUPPORT_ENABLE = yes
+
+PS2_MOUSE_ENABLE = yes
+PS2_ENABLE = yes
+PS2_DRIVER = interrupt
