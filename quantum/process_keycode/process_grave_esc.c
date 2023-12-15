@@ -15,6 +15,9 @@
  */
 #include "process_grave_esc.h"
 #include "qmk_settings.h"
+#include "keycodes.h"
+#include "modifiers.h"
+#include "action_util.h"
 
 /* true if the last press of QK_GRAVE_ESCAPE was shifted (i.e. GUI or SHIFT were pressed), false otherwise.
  * Used to ensure that the correct keycode is released if the key is released.

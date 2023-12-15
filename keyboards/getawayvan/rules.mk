@@ -1,14 +1,10 @@
 # MCU name
-MCU = STM32F072
 
 # Bootloader selection
-BOOTLOADER = stm32-dfu
 
 # Build Options
 #   change yes to no to disable
 #
-BOOTMAGIC_ENABLE = yes
-MOUSEKEY_ENABLE = yes       # Mouse keys
 EXTRAKEY_ENABLE = yes       # Audio control and System control
 CONSOLE_ENABLE = no        # Console for debug
 COMMAND_ENABLE = no        # Commands for debug and configuration
@@ -22,8 +18,6 @@ BLUETOOTH_ENABLE = no       # Enable Bluetooth
 AUDIO_ENABLE = no           # Audio output
 
 RGB_MATRIX_ENABLE = yes
-RGB_MATRIX_DRIVER = WS2812
-WS2812_DRIVER = spi
 
 # Enter lower-power sleep mode when on the ChibiOS idle thread
 OPT_DEFS += -DCORTEX_ENABLE_WFI_IDLE=TRUE
