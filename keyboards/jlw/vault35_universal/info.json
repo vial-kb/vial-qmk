@@ -97,7 +97,8 @@
         "val_steps": 4
     },
     "ws2812": {
-        "pin": "A10"
+        "pin": "A10",
+        "driver": "pwm"
     },
     "layouts": {
         "LAYOUT_ortho": {                                  // cain bars
