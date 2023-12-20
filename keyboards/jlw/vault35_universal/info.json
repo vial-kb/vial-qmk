@@ -12,13 +12,15 @@
     "bootloader": "stm32-dfu",
     "diode_direction": "COL2ROW",
     "matrix_pins": {
-        "cols": ["A3", "F1", "F0", "B9", "B8", "A6", "A5", "B5", "B4", "B3", "A15"],
-        "rows": ["B0", "B13", "A4", "A7"]
+        "cols": ["A0", "F1", "F0", "B9", "B8", "B7", "B6", "B5", "B4", "B3", "A15"],
+        "rows": ["B0", "B13", "A2", "A5"]
     },
     "encoder": {
       "rotary": [
-        {"pin_a": "B2", "pin_b": "B1"},
-        {"pin_a": "A14", "pin_b": "A8"}
+        {"pin_a": "B1", "pin_b": "B2"},
+        {"pin_a": "A14", "pin_b": "A8"},
+        {"pin_a": "A7", "pin_b": "A6"},
+        {"pin_a": "A4", "pin_b": "A3"}
 
       ]
     },
