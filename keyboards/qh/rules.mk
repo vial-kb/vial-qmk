@@ -26,5 +26,10 @@ BACKLIGHT_ENABLE = no       # Enable keyboard backlight functionality
 RGBLIGHT_ENABLE = no        # Enable keyboard RGB underglow
 # RGB Matrix enabled
 RGB_MATRIX_ENABLE = yes
-RGB_MATRIX_DRIVER = WS2812
+RGB_MATRIX_DRIVER = ws2812
+# Configure for 128K flash
+MCU_LDSCRIPT = STM32F103xB
+
+# Wildcard to allow APM32 MCU
+DFU_SUFFIX_ARGS = -p FFFF -v FFFF
 

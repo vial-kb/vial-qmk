@@ -28,9 +28,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
 #define MATRIX_ROW_PINS { C13, C14, C15, A0 }
-#define MATRIX_COL_PINS { B15, B14, B13, B12, A2, A1 }
+#define MATRIX_COL_PINS { B15, B14, B6, B12, A2, A1 }
 #define MATRIX_ROW_PINS_RIGHT { C13, C14, C15, A0 }
-#define MATRIX_COL_PINS_RIGHT { B15, B14, B13, B12, A2, A1 }
+#define MATRIX_COL_PINS_RIGHT { B15, B14, B6, B12, A2, A1 }
 
 #define EE_HANDS
 // qmk flash -kb qh40/v4 -km vial -bl dfu-util-split-left
@@ -131,19 +131,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #endif
 
 #ifdef PS2_DRIVER_INTERRUPT
+// #define PS2_MOUSE_INVERT_BUTTONS
+/* Use remote mode instead of the default stream mode (see link) */
+// #define PS2_MOUSE_USE_REMOTE_MODE
+
+/* Enable the scrollwheel or scroll gesture on your mouse or touchpad */
+// #define PS2_MOUSE_ENABLE_SCROLLING
+
+/* Some mice will need a scroll mask to be configured. The default is 0xFF. */
+// #define PS2_MOUSE_SCROLL_MASK 0x0F
+
+/* Applies a transformation to the movement before sending to the host (see link) */
+// #define PS2_MOUSE_USE_2_1_SCALING
+// #define PS2_MOUSE_X_MULTIPLIER 3
+// #define PS2_MOUSE_Y_MULTIPLIER 3
+// #define PS2_MOUSE_V_MULTIPLIER 1
+#define PS2_MOUSE_BTN_LEFT      0
+#define PS2_MOUSE_BTN_RIGHT     1
+#define PS2_MOUSE_BTN_MIDDLE    2
 #define PS2_CLOCK_PIN A8
 #define PS2_DATA_PIN  A9
-
-#define PS2_INT_INIT()  do {    \
-    EICRB |= ((1<<ISC61) |      \
-              (0<<ISC60));      \
-    } while (0)
-#define PS2_INT_ON()  do {      \
-     EIMSK |= (1<<INT6);        \
-} while (0)
-#define PS2_INT_OFF() do {      \
-    EIMSK &= ~(1<<INT6);        \
-} while (0)
-#define PS2_INT_VECT   INT6_vect
-#define PS2_MOUSE_ROTATE 270 /* Compensate for East-facing device orientation. */
 #endif

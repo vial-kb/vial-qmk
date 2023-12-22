@@ -14,4 +14,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "tptest.h"
+#pragma once
+
+#include "quantum.h"
