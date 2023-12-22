@@ -18,27 +18,29 @@
 
 #ifdef RGB_MATRIX_ENABLE
 led_config_t g_led_config = { {
-    {  20,  19,  18,  17,  16,   15 },
-    {  9,  10,  11,  12,  13,   14 },
-    {  8,  7,  6,  5,  4,   3 },
+    {  18,  17,  16,  15,  14,   13 },
+    {  19,  8,  9,  10,  11,   12 },
+    {  20,  7,  6,  5,  4,   3 },
     { NO_LED, NO_LED, NO_LED,  0,  1,   2 },
-    {  36,  37,  38,  39,  40,  41 },
-    {  35,  34,  33,  32,  31,  30 },
-    {  24,  25,  26,  27,  28,  29 },
+    {  34,  35,  36,  37,  38,  39 },
+    {  33,  32,  31,  30,  29,  40 },
+    {  24,  25,  26,  27,  28,  41 },
     { 23, 22, 21,  NO_LED,  NO_LED,  NO_LED }
 }, {
     // left LED_FLAG_KEYLIGHT
-                                              {  60,  55 }, {  80,  58 }, {  95,  63 },
-    {  85,  39 }, {  68,  37 }, {  50,  35 }, {  33,  37 }, {  16,  42 }, {   0,  41 }, 
-    {   0,  24 }, {  16,  24 }, {  33,  20 }, {  50,  13 }, {  68,  19 }, {  85,  21 },
-    {  85,   4 }, {  68,   2 }, {  50,   0 }, {  33,   3 }, {  16,   7 }, {   0,   7 }, 
+    {  60,  55 }, {  80,  58 }, {  95,  63 },
+    {  85,  39 }, {  68,  37 }, {  50,  35 }, {  33,  37 }, {  16,  42 },             
+    {  16,  24 }, {  33,  20 }, {  50,  13 }, {  68,  19 }, {  85,  21 },
+    {  85,   4 }, {  68,   2 }, {  50,   0 }, {  33,   3 }, {  16,   7 },  
+    {   0,   7 }, {   0,  24 }, {   0,  41 },
     
     
     // right LED_FLAG_KEYLIGHT
     { 164,  55 }, { 144,  58 }, { 129,  63 }, 
-    { 139,  39 }, { 156,  37 }, { 174,  35 }, { 191,  37 }, { 208,  42 }, { 224,  41 },
-    { 224,  24 }, { 208,  24 }, { 191,  20 }, { 174,  13 }, { 156,  19 }, { 139,  21 }, 
-    { 139,   4 }, { 156,   2 }, { 174,   0 }, { 191,   3 }, { 208,   7 }, { 224,   7 }
+    { 139,  39 }, { 156,  37 }, { 174,  35 }, { 191,  37 }, { 208,  42 },      
+    { 208,  24 }, { 191,  20 }, { 174,  13 }, { 156,  19 }, { 139,  21 }, 
+    { 139,   4 }, { 156,   2 }, { 174,   0 }, { 191,   3 }, { 208,   7 },       
+    { 224,   7 }, { 224,  24 }, { 224,  41 }
     
     
 }, {
@@ -46,7 +48,7 @@ led_config_t g_led_config = { {
     LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
-                      LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
+    LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     // right LED_FLAG_KEYLIGHT
     LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,
     LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT, LED_FLAG_KEYLIGHT,

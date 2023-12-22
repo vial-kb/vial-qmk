@@ -150,9 +150,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PS2_MOUSE_BTN_RIGHT     1
 #define PS2_MOUSE_BTN_MIDDLE    2
 // left
-#define PS2_CLOCK_PIN A15
-#define PS2_DATA_PIN  B3
+// #define PS2_CLOCK_PIN A15
+// #define PS2_DATA_PIN  B3
 // right
-// #define PS2_CLOCK_PIN B0
-// #define PS2_DATA_PIN  B1
+#define PS2_CLOCK_PIN B0
+#define PS2_DATA_PIN  B1
 #endif
