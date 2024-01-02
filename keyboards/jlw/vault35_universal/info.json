@@ -13,7 +13,7 @@
     "diode_direction": "COL2ROW",
     "matrix_pins": {
         "cols": ["A0", "F1", "F0", "B9", "B8", "B7", "B6", "B5", "B4", "B3", "A15"],
-        "rows": ["B0", "B13", "A2", "A5"]
+        "rows": ["B0", "A13", "A2", "A5"]
     },
     "encoder": {
       "rotary": [
@@ -99,7 +99,7 @@
         "val_steps": 4
     },
     "ws2812": {
-        "pin": "A10",
+        "pin": "A1",
         "driver": "pwm"
     },
     "layouts": {
