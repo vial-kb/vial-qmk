@@ -17,14 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "config_common.h"
-
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0x4C44 // "LD"
 #define PRODUCT_ID      0x0043
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    LAZYDESIGNERS
-#define PRODUCT         Cloud
+#define MANUFACTURER    "LAZYDESIGNERS"
+#define PRODUCT         "Cloud"
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -39,8 +37,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define DIODE_DIRECTION COL2ROW
 
 /* RBG underglow */
-#define RGB_DI_PIN D0
-#ifdef RGB_DI_PIN
+#define WS2812_DI_PIN D0
+#ifdef WS2812_DI_PIN
 	#define RGBLIGHT_SLEEP
 	#define RGBLED_NUM 15
 	#define RGBLIGHT_HUE_STEP 8
