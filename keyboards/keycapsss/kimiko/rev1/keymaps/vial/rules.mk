@@ -4,7 +4,7 @@ ENCODER_MAP_ENABLE	= yes
 VIA_ENABLE			= yes
 VIAL_ENABLE 		= yes
 
-RGBLIGHT_ENABLE		= yes  # Enable keyboard 'old' RGB lightning
+RGBLIGHT_ENABLE		= no  # Enable keyboard 'old' RGB lightning
 
 MOUSEKEY_ENABLE		= yes
 # Disabled, because firmware size is to big for Pro Micros

@@ -70,10 +70,6 @@
 #    include "process_unicode_common.h"
 #endif
 
-#ifdef VELOCIKEY_ENABLE
-#    include "velocikey.h"
-#endif
-
 #ifdef VIAL_ENABLE
 #    include "vial.h"
 #endif
