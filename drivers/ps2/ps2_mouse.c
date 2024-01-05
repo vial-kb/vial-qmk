@@ -103,6 +103,7 @@ void ps2_mouse_task(void) {
 #endif
 
     mouse_report.buttons |= tp_buttons;
+    ps2_mouse_moved_user(&mouse_report);
     /* if mouse moves or buttons state changes */
     if (mouse_report.x || mouse_report.y || mouse_report.v || ((mouse_report.buttons ^ buttons_prev) & PS2_MOUSE_BTN_MASK)) {
 #ifdef PS2_MOUSE_DEBUG_RAW
@@ -114,9 +115,9 @@ void ps2_mouse_task(void) {
 #if PS2_MOUSE_SCROLL_BTN_MASK
         ps2_mouse_scroll_button_task(&mouse_report);
 #endif
-        if (mouse_report.x || mouse_report.y || mouse_report.v) {
-            ps2_mouse_moved_user(&mouse_report);
-        }
+        // if (mouse_report.x || mouse_report.y || mouse_report.v) {
+        //     ps2_mouse_moved_user(&mouse_report);
+        // }
 #ifdef PS2_MOUSE_DEBUG_HID
         // Used to debug the bytes sent to the host
         ps2_mouse_print_report(&mouse_report);

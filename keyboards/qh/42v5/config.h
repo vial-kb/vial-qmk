@@ -31,6 +31,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_COL_PINS { B14, B15, A8, B0, A5, A7 }
 #define MATRIX_ROW_PINS_RIGHT { B12, B13, B14, B5 }
 #define MATRIX_COL_PINS_RIGHT { B4, B7, B3, B15, A8, A9 }
+// oo
+// #define MATRIX_ROW_PINS { B1, B0, A7, A6 }
+// #define MATRIX_COL_PINS { A9, A8, B15, B14, B13, B12 }
+// #define MATRIX_ROW_PINS_RIGHT { A2, A1, A0, C15 }
+// #define MATRIX_COL_PINS_RIGHT { A9, A8, B15, B14, B13, B12 }
 
 #define EE_HANDS
 // qmk flash -kb qh/42v5 -km vial -bl dfu-util-split-left
@@ -58,10 +63,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define COMBO_ONLY_FROM_LAYER 0
 #define LAYER_STATE_16BIT
 
-#define WS2812_DI_PIN B13
-#define WS2812_PWM_COMPLEMENTARY_OUTPUT
+
+#ifdef RGB_MATRIX_ENABLE
+
+#undef RGB_MATRIX_LED_COUNT
+#undef DRIVER_LED_TOTAL
+#undef RGB_MATRIX_SPLIT
+#undef RGBLED_NUM
+#undef RGBLED_SPLIT
+// The number of LEDs connected
+#    define RGB_MATRIX_LED_COUNT 42
+#    define DRIVER_LED_TOTAL RGB_MATRIX_LED_COUNT
+#    define RGB_MATRIX_SPLIT \
+        { 21, 21 }
+#define RGBLED_NUM RGB_MATRIX_LED_COUNT
+#define RGBLED_SPLIT { 21, 21 }
+
+#endif
+
+// #define WS2812_DI_PIN B13
+#define WS2812_DI_PIN A10
+// #define WS2812_PWM_COMPLEMENTARY_OUTPUT
 #define WS2812_PWM_DRIVER PWMD1
-#define WS2812_PWM_CHANNEL 1
+#define WS2812_PWM_CHANNEL 3
 #define WS2812_PWM_PAL_MODE 1
 #define WS2812_DMA_STREAM STM32_DMA1_STREAM5
 #define WS2812_DMA_CHANNEL 1
@@ -155,4 +179,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // right
 #define PS2_CLOCK_PIN B0
 #define PS2_DATA_PIN  B1
+#define PS2_MOUSE_ROTATE 90
 #endif
