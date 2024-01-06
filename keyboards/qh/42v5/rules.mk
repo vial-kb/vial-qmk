@@ -14,6 +14,6 @@ SERIAL_DRIVER = usart
 
 SIGNALRGB_SUPPORT_ENABLE = yes
 
-PS2_MOUSE_ENABLE = yes
-PS2_ENABLE = yes
-PS2_DRIVER = interrupt
+# PS2_MOUSE_ENABLE = yes
+# PS2_ENABLE = yes
+# PS2_DRIVER = interrupt
