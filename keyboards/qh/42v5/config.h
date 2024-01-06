@@ -27,11 +27,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *                  ROW2COL = ROW = Anode (+), COL = Cathode (-, marked on diode)
  *
  */
+ // v5.2 with trackpoint
 #define MATRIX_ROW_PINS { B4, B5, B7, A6 }
 #define MATRIX_COL_PINS { B14, B15, A8, B0, A5, A7 }
 #define MATRIX_ROW_PINS_RIGHT { B12, B13, B14, B5 }
 #define MATRIX_COL_PINS_RIGHT { B4, B7, B3, B15, A8, A9 }
-// oo
+// v5.1 no trackpoint
 // #define MATRIX_ROW_PINS { B1, B0, A7, A6 }
 // #define MATRIX_COL_PINS { A9, A8, B15, B14, B13, B12 }
 // #define MATRIX_ROW_PINS_RIGHT { A2, A1, A0, C15 }
@@ -167,12 +168,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Applies a transformation to the movement before sending to the host (see link) */
 // #define PS2_MOUSE_USE_2_1_SCALING
-// #define PS2_MOUSE_X_MULTIPLIER 3
-// #define PS2_MOUSE_Y_MULTIPLIER 3
+
+// #define PS2_MOUSE_MULTIPLIER 0.5
+
+// #define PS2_MOUSE_X_MULTIPLIER 0.4
+// #define PS2_MOUSE_Y_MULTIPLIER 0.4
 // #define PS2_MOUSE_V_MULTIPLIER 1
-#define PS2_MOUSE_BTN_LEFT      0
-#define PS2_MOUSE_BTN_RIGHT     1
-#define PS2_MOUSE_BTN_MIDDLE    2
+// #define PS2_MOUSE_BTN_LEFT      0
+// #define PS2_MOUSE_BTN_RIGHT     1
+// #define PS2_MOUSE_BTN_MIDDLE    2
 // left
 // #define PS2_CLOCK_PIN A15
 // #define PS2_DATA_PIN  B3

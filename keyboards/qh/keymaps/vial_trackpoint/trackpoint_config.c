@@ -33,25 +33,45 @@ void ps2_mouse_init_user(void) {
         set_trackpoint_auto_mouse_enable(true);
     #endif
 }
-
+int8_t moving = 0;
+// override
 void ps2_mouse_moved_user(report_mouse_t *mouse_report) {
-    // uprintf("ps2_mouse_moved_user>>>x:%d, y:%d, v:%d, h:%d", mouse_report->x, mouse_report->y, mouse_report->v, mouse_report->h);
+    if (moving == 0) {
+        if(abs(mouse_report-> x) < 2 && abs(mouse_report-> y) < 2) {
+            mouse_report-> x = 0;
+            mouse_report-> y = 0;
+        } else {
+            moving ++;
+        }
+    } else {
+        if (mouse_report-> x == 0 && mouse_report-> y == 0) {
+            if(moving > 0) moving --;
+        } else {
+            if(moving < 100) moving ++;
+        }
+    }
+    if(abs(mouse_report->x) > 0 || abs(mouse_report->y) > 0) {
+        uprintf("ps2_mouse_moved_user>>>x:%d, y:%d, v:%d, h:%d", mouse_report->x, mouse_report->y, mouse_report->v, mouse_report->h);
+    }
+
     #ifdef TRACKPOINT_TAP_ENABLE 
         trackpoint_tap(mouse_report);
     #endif
     #ifdef TRACKPOINT_AUTO_MOUSE_ENABLE 
         trackpoint_auto_mouse(*mouse_report);
     #endif
-}
 
-report_mouse_t empty_mouse = {};
-void trackpoint_matrix_scan_user(void) {
-    #ifdef TRACKPOINT_TAP_ENABLE 
-        trackpoint_tap(&empty_mouse);
-    #endif
-    #ifdef TRACKPOINT_AUTO_MOUSE_ENABLE 
-        trackpoint_auto_mouse(empty_mouse);
-    #endif
+    // int16_t x = abs(mouse_report->x);
+    // int16_t y = abs(mouse_report->y);
+
+    // if((x > 2 && y > 2) || (x > 2 && y == 0) || (x == 0 && y > 2)) {
+    //     mouse_report->x *= PS2_MOUSE_MULTIPLIER;
+    //     mouse_report->y *= PS2_MOUSE_MULTIPLIER;
+    // }
+    // if(mouse_report->x != 0 || mouse_report->y != 0) {
+    //     uprintf("zzzz>>>xo:%d, yo:%d, x:%d, y:%d", x, y, mouse_report->x, mouse_report->y);
+    // }
+
 }
 
 #endif // TRACKPOINT_TAP_ENABLE || TRACKPOINT_AUTO_MOUSE_ENABLE

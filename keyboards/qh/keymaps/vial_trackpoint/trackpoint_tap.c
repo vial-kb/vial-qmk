@@ -91,7 +91,9 @@ static inline void context_tap_set_timer_current(void) {
 //     // return 0;
 // }
 
-#define DEBOUNCE_THRESHOLD 20
+#define DEBOUNCE_THRESHOLD 400
+// use console
+// #define DEBOUNCE_THRESHOLD 20
 
 // 0 不变
 // 5 debounce
@@ -221,6 +223,10 @@ void trackpoint_tap(report_mouse_t *mouse_report) {
         if(i_tap == 10) {
             context_tap_set_timer_current();
         }
+    }
+    if (trackpoint_tap_context.status.td && context_timer_in_tap_term() && abs(mouse_report-> x) < 5 && abs(mouse_report-> y) < 5) {
+            mouse_report-> x = 0;
+            mouse_report-> y = 0;
     }
 
     // if (flag != 0) {

@@ -13,7 +13,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#if (defined(TRACKPOINT_TAP_ENABLE)) || (defined(TRACKPOINT_AUTO_MOUSE_ENABLE))
-void trackpoint_matrix_scan_user(void);
-#endif // TRACKPOINT_TAP_ENABLE || TRACKPOINT_AUTO_MOUSE_ENABLE
+// #ifndef PS2_MOUSE_MULTIPLIER
+// #   define PS2_MOUSE_MULTIPLIER 1
+// #endif

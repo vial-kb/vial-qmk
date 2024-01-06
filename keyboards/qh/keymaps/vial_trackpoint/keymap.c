@@ -152,17 +152,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 
 // track point
-# define TRACKPOINT_TAP_ENABLE
-# define TRACKPOINT_AUTO_MOUSE_ENABLE
-#if (defined(TRACKPOINT_TAP_ENABLE)) || (defined(TRACKPOINT_AUTO_MOUSE_ENABLE))
-# define TRACKPOINT_AUTO_MOUSE_DEFAULT_LAYER _MOUSE_KEY
-# include "trackpoint_config.c"
-#endif
-// void matrix_scan_user(void) {
-//   #if (defined(TRACKPOINT_TAP_ENABLE)) || (defined(TRACKPOINT_AUTO_MOUSE_ENABLE))
-//     trackpoint_matrix_scan_user();
-//   #endif
-// }
+#ifdef PS2_MOUSE_ENABLE
+  # define TRACKPOINT_TAP_ENABLE
+  # define TRACKPOINT_AUTO_MOUSE_ENABLE
+
+  #if (defined(TRACKPOINT_TAP_ENABLE)) || (defined(TRACKPOINT_AUTO_MOUSE_ENABLE))
+  # define TRACKPOINT_AUTO_MOUSE_DEFAULT_LAYER _MOUSE_KEY
+  # include "trackpoint_config.c"
+  #endif
+  
+#endif // PS2_MOUSE_ENABLE
 
 
 #define PS2_MOUSE_DEBUG_RAW
