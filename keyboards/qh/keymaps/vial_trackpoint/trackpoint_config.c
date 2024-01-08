@@ -25,14 +25,29 @@
 #ifdef TRACKPOINT_AUTO_MOUSE_ENABLE 
 #   include "trackpoint_auto_mouse.c"
 #endif
-void ps2_mouse_init_user(void) {
-    #ifdef TRACKPOINT_TAP_ENABLE 
-        set_trackpoint_tap_enable(true);
-    #endif
-    #ifdef TRACKPOINT_AUTO_MOUSE_ENABLE 
-        set_trackpoint_auto_mouse_enable(true);
-    #endif
+
+
+void toggle_trackpoint(bool status) {
+  #ifdef TRACKPOINT_TAP_ENABLE 
+      set_trackpoint_tap_enable(status);
+  #endif
+  #ifdef TRACKPOINT_AUTO_MOUSE_ENABLE 
+      set_trackpoint_auto_mouse_enable(status);
+  #endif
 }
+
+void ps2_mouse_init_user(void) {
+  toggle_trackpoint(false);
+}
+
+// void ps2_mouse_init_user(void) {
+//     #ifdef TRACKPOINT_TAP_ENABLE 
+//         set_trackpoint_tap_enable(true);
+//     #endif
+//     #ifdef TRACKPOINT_AUTO_MOUSE_ENABLE 
+//         set_trackpoint_auto_mouse_enable(true);
+//     #endif
+// }
 int8_t moving = 0;
 // override
 void ps2_mouse_moved_user(report_mouse_t *mouse_report) {

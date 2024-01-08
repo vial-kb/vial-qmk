@@ -69,6 +69,12 @@ void set_trackpoint_auto_mouse_enable(bool enable) {
     trackpoint_auto_mouse_reset();
 }
 
+void auto_mouse_layer_off(void) {
+    if (layer_state_is((context_layer())) && context_auto_mouse_is_enabled()) {
+        layer_off((context_layer()));
+    }
+}
+
 // static report_mouse_t static_mouse_report = {};
 /**
  * void pointing_device_task_auto_mouse(report_mouse_t mouse_report);

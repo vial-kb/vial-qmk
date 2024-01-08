@@ -25,13 +25,16 @@ enum layer_number {
     _RAISE,
     _ADJUST,
     _MOUSE_KEY,
+    _TP_TOGGLE,
 };
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   COLEMAK,
   DVORAK,
+  TP_Toggle,
 };
+// 0x7e43
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_3x6(
@@ -109,6 +112,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_BTN2, KC_BTN3,  KC_BTN1,     KC_BTN1, KC_BTN3, KC_BTN2
                                       //`--------------------------'  `--------------------------'
+  ),
+
+  [_TP_TOGGLE] = LAYOUT_3x6(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+        _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+      _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                          TP_Toggle, TP_Toggle,  TP_Toggle,     TP_Toggle, TP_Toggle, TP_Toggle
+                                      //`--------------------------'  `--------------------------'
   )
 };
 
@@ -116,6 +131,20 @@ void persistent_default_layer_set(uint16_t default_layer) {
   eeconfig_update_default_layer(default_layer);
   default_layer_set(default_layer);
 }
+
+// track point
+#ifdef PS2_MOUSE_ENABLE
+  # define TRACKPOINT_TAP_ENABLE
+  # define TRACKPOINT_AUTO_MOUSE_ENABLE
+
+  #if (defined(TRACKPOINT_TAP_ENABLE)) || (defined(TRACKPOINT_AUTO_MOUSE_ENABLE))
+  # define TRACKPOINT_AUTO_MOUSE_DEFAULT_LAYER _MOUSE_KEY
+  # include "trackpoint_config.c"
+  #endif
+
+#endif // PS2_MOUSE_ENABLE
+
+bool trackpoint_feature = false;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
@@ -146,24 +175,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+      // toggle auto mouse enable key
+    case TP_Toggle:
+      if(record->event.pressed) { // key down
+        if(trackpoint_feature) {
+          auto_mouse_layer_off();
+        }
+        toggle_trackpoint(!trackpoint_feature);
+        trackpoint_feature = !trackpoint_feature;
+      } // do nothing on key up
+      return false; // prevent further processing of keycode
+      break;
   }
   return true;
 }
 
-
-// track point
-#ifdef PS2_MOUSE_ENABLE
-  // # define TRACKPOINT_TAP_ENABLE
-  # define TRACKPOINT_AUTO_MOUSE_ENABLE
-
-  #if (defined(TRACKPOINT_TAP_ENABLE)) || (defined(TRACKPOINT_AUTO_MOUSE_ENABLE))
-  # define TRACKPOINT_AUTO_MOUSE_DEFAULT_LAYER _MOUSE_KEY
-  # include "trackpoint_config.c"
-  #endif
-  
-#endif // PS2_MOUSE_ENABLE
-
-
+// 0x7e43
 // #define PS2_MOUSE_DEBUG_RAW
 // void keyboard_post_init_user(void) {
 //   // Customise these values to desired behaviour
