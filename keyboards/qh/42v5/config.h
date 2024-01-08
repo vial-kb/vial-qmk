@@ -157,11 +157,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #ifdef PS2_DRIVER_INTERRUPT
 // #define PS2_MOUSE_INVERT_BUTTONS
-/* Use remote mode instead of the default stream mode (see link) */
-// #define PS2_MOUSE_USE_REMOTE_MODE
-
-/* Enable the scrollwheel or scroll gesture on your mouse or touchpad */
-// #define PS2_MOUSE_ENABLE_SCROLLING
 
 /* Some mice will need a scroll mask to be configured. The default is 0xFF. */
 // #define PS2_MOUSE_SCROLL_MASK 0x0F
@@ -183,5 +178,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // right
 // #define PS2_CLOCK_PIN B0
 // #define PS2_DATA_PIN  B1
+
 #define PS2_MOUSE_ROTATE 90
+/* Use remote mode instead of the default stream mode (see link) */
+// #define PS2_MOUSE_USE_REMOTE_MODE
+/* Enable the scrollwheel or scroll gesture on your mouse or touchpad */
+// #define PS2_MOUSE_ENABLE_SCROLLING
+#define PS2_MOUSE_SCROLL_DIVISOR_H 6
+#define PS2_MOUSE_SCROLL_DIVISOR_V 6
 #endif

@@ -91,7 +91,10 @@ static inline void context_tap_set_timer_current(void) {
 //     // return 0;
 // }
 
-#define DEBOUNCE_THRESHOLD 400
+// single
+// #define DEBOUNCE_THRESHOLD 400
+// split
+#define DEBOUNCE_THRESHOLD 160
 // use console
 // #define DEBOUNCE_THRESHOLD 20
 
@@ -101,6 +104,7 @@ static inline void context_tap_set_timer_current(void) {
 // 20 抬起
 uint8_t is_tap(report_mouse_t mouse_report) {
     bool current_touch_down = trackpoint_touch_down(mouse_report);
+    uint16_t delta = abs(mouse_report.x) + abs(mouse_report.y);
     if (!trackpoint_tap_context.status.td) {
         uprintf("ps2_mouse_moved_user>>3_1");
         // 当前没有按下
@@ -109,13 +113,20 @@ uint8_t is_tap(report_mouse_t mouse_report) {
             uprintf("ps2_mouse_moved_user>>3_1_1");
             trackpoint_tap_context.status.td = true;
             trackpoint_tap_context.status.ldt = 0;
+            trackpoint_tap_context.status.total_delta = 0;
             // 按下
             return 10;
         } else {
+            if(delta < TRACKPOINT_MIN_DELTA) {
+                trackpoint_tap_context.status.total_delta += delta;
+            }
             uprintf("ps2_mouse_moved_user>>3_1_2");
             return 0;
         }
     } else {
+        if(delta < TRACKPOINT_MIN_DELTA) {
+            trackpoint_tap_context.status.total_delta += delta;
+        }
         uprintf("ps2_mouse_moved_user>>3_2");
         // 当前是按下
         // 需要debounce，连续的几个都不是 touch_down才认为是抬起
@@ -212,6 +223,7 @@ void trackpoint_tap(report_mouse_t *mouse_report) {
         if(i_tap == 20) {
             uprintf("ps2_mouse_moved_user>>2ccc, %d, %d", TRACKPOINT_TAPPING_TERM, timer_elapsed(trackpoint_tap_context.timer.active));
             if (context_timer_in_tap_term()) {
+            // if (context_timer_in_tap_term() && trackpoint_tap_context.status.total_delta >= TRACKPOINT_MIN_DELTA) {
                 // uprintf("ps2_mouse_moved_user>>trackpoint_tap in term1, %d, %d", TRACKPOINT_TAPPING_TERM, mouse_report->buttons);
                 mouse_report->buttons = trackpoint_handle_buttons(mouse_report->buttons, true, TRACKPOINT_BUTTON1);
                 uprintf("ps2_mouse_moved_user>>2bbb, %d, %d", TRACKPOINT_TAPPING_TERM, mouse_report->buttons);

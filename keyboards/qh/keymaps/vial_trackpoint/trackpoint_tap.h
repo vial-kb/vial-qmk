@@ -22,6 +22,9 @@
 #ifndef TRACKPOINT_MAX_TAP_OFFSET
 #    define TRACKPOINT_MAX_TAP_OFFSET 5
 #endif
+#ifndef TRACKPOINT_MIN_DELTA
+#    define TRACKPOINT_MIN_DELTA 100
+#endif
 
 /* track_point structure */
 typedef struct {
@@ -39,6 +42,7 @@ typedef struct {
         uint16_t touch_status_diff_times;
         bool td;
         uint16_t ldt;
+        uint16_t total_delta;
     } status;
 } trackpoint_tap_context_t;
 
