@@ -4,6 +4,7 @@
         "rows": 4,
         "cols": 11
     },
+    "lighting": "vialrgb",
     "layouts": {
         "labels":[
             [
