@@ -1,9 +1,4 @@
 {
-    "name": "DROP Planck rev7",
-    "vendorId": "0x03A8",
-    "productId": "0xA4F9",
-    "keycodes": ["qmk_lighting"],
-    "menus": ["qmk_rgblight"],
     "matrix": {"rows": 8, "cols": 6},
     "layouts": {
         "labels": [["Layout", "MIT (1x2u)", "Grid (2x1u)", "2x2u", "3x3u"]],
