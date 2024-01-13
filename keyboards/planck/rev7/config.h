@@ -35,7 +35,6 @@
 
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
 
-
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.
@@ -51,3 +50,4 @@
 //#define NO_ACTION_LAYER
 //#define NO_ACTION_TAPPING
 //#define NO_ACTION_ONESHOT
+
