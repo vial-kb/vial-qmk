@@ -155,7 +155,7 @@
     },
     "ws2812": {
         "pin": "A10",
-        "driver": "pwm"
+        "driver": "bitbang"
     },
     "layouts": {
         "LAYOUT_cain_bars": {
