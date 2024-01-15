@@ -12,7 +12,7 @@ https://github.com/flehrad/Big-Switch-PCB
 * Via: `make flehrad/bigswitch:default` 
 * Vial: `make flehrad/bigswitch:vial` 
 
-Note that you probably want to uncomment `VIAL_INSECURE=yes` in keymaps/vial/rules.mk.
+Note that you probably want to set `VIAL_INSECURE=yes` in keymaps/vial/rules.mk.
 With the configured single-button keymap it is _impossible_ to have a multi-key combo to unlock the keyboard for Vial GUI.
 (`VIAL_UNLOCK_COMBO_ROWS` and `VIAL_UNLOCK_COMBO_COLS` are set to bogus values to enable compilation when secure mode is enabled and are ignored if insecure.)
 
