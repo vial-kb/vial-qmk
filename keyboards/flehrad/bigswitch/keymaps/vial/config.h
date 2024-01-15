@@ -6,3 +6,8 @@
 
 /* no sense having layers with a single key */
 #define DYNAMIC_KEYMAP_LAYER_COUNT 1
+
+/* these are bogus values to allow compilation. 
+ * Set to appropriate values if you have more than one switch defined */
+#define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
+#define VIAL_UNLOCK_COMBO_COLS { 1, 1 }

@@ -2,7 +2,8 @@ VIA_ENABLE = yes
 VIAL_ENABLE = yes
 
 # it is impossible to define a key combo to unlock in vial with a single button
-VIAL_INSECURE = yes
+# so you probably want to change this to `yes`
+VIAL_INSECURE = no
 
 # These options reduce firmware size to something flashable
 # tap-dance, combos, and key overrides don't make sense with a single button
