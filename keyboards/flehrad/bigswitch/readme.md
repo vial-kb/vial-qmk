@@ -7,7 +7,15 @@ Designed by Don of the Board Podcast and sold as a kit by [keeb.io](https://keeb
 
 https://github.com/flehrad/Big-Switch-PCB
 
-make: flehrad/bigswitch:default
+### Building Firmware
+
+* Via: `make flehrad/bigswitch:default` 
+* Vial: `make flehrad/bigswitch:vial` 
+
+### Flashing Firmware
+Flash with `qmk flash -kb flehrad/bigswitch -mk <vial or default>` or flash hex file to board with QMK Toolbox+Auto Flash.
+Quickly short GND and RST (2 pins right below TX) to get Pro Micro into bootloader mode. 
+Note that resetting the microcontroller may take a couple of tries.
 
 ### Technical Specifications
 
