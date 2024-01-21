@@ -1,7 +1,4 @@
 {
-    "name": "bully",
-    "vendorId": "0x0777",
-    "productId": "0x0001",
     "lighting": "none",
     "matrix": {
       "rows": 4,
