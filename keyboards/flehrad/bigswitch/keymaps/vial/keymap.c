@@ -16,9 +16,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
-#define KC_OSX_EJECT 0x66
-#define LOCK_OSX LSFT(LCTL(KC_OSX_EJECT))
-#define SLEEP_OSX LALT(LGUI(KC_OSX_EJECT))
+#define LOCK_OSX LSFT(LCTL(KC_KB_POWER))
+#define SLEEP_OSX LALT(LGUI(KC_KB_POWER))
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
