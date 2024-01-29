@@ -1,0 +1,21 @@
+{
+  "name": "Big Switch",
+  "vendorId": "0x1209",
+  "productId": "0xB195",
+  "lighting": "qmk_rgblight",
+  "matrix": {
+    "rows": 1,
+    "cols": 1
+  },
+  "layouts": {
+    "keymap": [
+      [
+        {
+          "w": 4,
+          "h": 4
+        },
+        "0,0"
+      ]
+    ]
+  }
+}
