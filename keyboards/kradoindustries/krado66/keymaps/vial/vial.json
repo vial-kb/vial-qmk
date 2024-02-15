@@ -1,15 +1,5 @@
 {
-  "name": "Krado66",
-  "vendorId": "0x4B72",
-  "productId": "0x6664",
   "lighting": "qmk_rgblight",
-  "menus": [
-    "via/keymap",
-    "via/layouts",
-    "via/macros",
-    "via/save_load",
-    "core/qmk_rgblight"
-  ],
   "matrix": {"rows": 10, "cols": 8},
   "layouts": {
     "labels": [
