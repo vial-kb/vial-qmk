@@ -67,6 +67,9 @@
             "solid_reactive_wide": true,
             "solid_splash": true,
             "splash": true,
+            "starlight": true,
+            "starlight_dual_hue": true,
+            "starlight_dual_sat": true,
             "typing_heatmap": true,
             "twinkle": true
         },
