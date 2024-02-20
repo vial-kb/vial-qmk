@@ -18,6 +18,7 @@
         "extrakey": true,
         "mousekey": true,
         "nkro": true,
+        "rgb_matrix": true
     },
     "ws2812": {
         "driver": "bitbang",
