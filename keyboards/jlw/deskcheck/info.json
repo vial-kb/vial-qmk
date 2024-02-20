@@ -21,7 +21,6 @@
         "rgb_matrix": true
     },
     "ws2812": {
-        "driver": "bitbang",
         "pin": "B4"
     },
     "rgb_matrix": {
