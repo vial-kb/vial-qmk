@@ -8,7 +8,7 @@ TAP_DANCE_ENABLE = yes
 GRAVE_ESC_ENABLE = yes
 SPACE_CADET_ENABLE = yes
 
-ifeq ($(strip $(MCU)), atmega32u4)
+ifeq ($(strip $(CONVERT_TO)), )
     QMK_SETTINGS = no
     
     KEY_OVERRIDE_ENABLE = no
