@@ -3,7 +3,11 @@
 DIVINE PCB
 
 * Keyboard Maintainer: [ERA](https://github.com/eerraa)
+<<<<<<< HEAD
 * Hardware Supported: DIVINE
+=======
+* Hardware Supported: DIVINE 1.0.0 PCB
+>>>>>>> qmk/master
 * Hardware Availability: [ERA](https://github.com/eerraa)
 
 Make example for this keyboard (after setting up your build environment):

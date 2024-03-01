@@ -1,7 +1,7 @@
 {
     "manufacturer": "Keycapsss",
-    "keyboard_name": "3w6 RP2040",
-    "maintainer": "Keycapsss",
+    "keyboard_name": "3w6_2040",
+    "maintainer": "@keyboard_magpie",
     "bootloader": "rp2040",
     "bootloader_instructions": "Press and hold the boot button while plugging in the keyboard",
     "diode_direction": "COL2ROW",
@@ -37,6 +37,11 @@
             "twinkle": true
         },
         "brightness_steps": 8,
+        "default": {
+            "hue": 152,
+            "sat": 232,
+            "speed": 2
+        },
         "hue_steps": 8,
         "led_count": 2,
         "max_brightness": 100,
@@ -46,7 +51,10 @@
     "split": {
         "enabled": true,
         "transport": {
-            "protocol": "serial"
+            "sync": {
+                "indicators": true,
+                "layer_state": true
+            }
         }
     },
     "url": "https://keycapsss.com",
@@ -59,6 +67,10 @@
         "driver": "vendor",
         "pin": "GP25"
     },
+    "dynamic_keymap": {
+        "layer_count": 6
+    },
+    "community_layouts": ["split_3x5_3"],
     "layouts": {
         "LAYOUT_split_3x5_3": {
             "layout": [
