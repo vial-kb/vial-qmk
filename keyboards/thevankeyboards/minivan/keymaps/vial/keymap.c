@@ -44,26 +44,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 void process_indicator_update(layer_state_t state, led_t led_state) {
   for (int i = 0; i < 3; i++) {
-    setrgb(0, 0, 0, (LED_TYPE *)&led[i]);
+    setrgb(0, 0, 0, (rgb_led_t *)&led[i]);
   }
   if (led_state.caps_lock) {
-  setrgb(255, 0, 0, (LED_TYPE *)&led[0]);
+  setrgb(255, 0, 0, (rgb_led_t *)&led[0]);
 }
 
     if (state & (1<<1)) {
-  setrgb(255, 0, 255, (LED_TYPE *)&led[0]);
+  setrgb(255, 0, 255, (rgb_led_t *)&led[0]);
 }
 
   if (state & (1<<2)) {
-  setrgb(0, 0, 255, (LED_TYPE *)&led[1]);
+  setrgb(0, 0, 255, (rgb_led_t *)&led[1]);
 }
 
     if (state & (1<<3)) {
-  setrgb(255, 255, 0, (LED_TYPE *)&led[1]);
+  setrgb(255, 255, 0, (rgb_led_t *)&led[1]);
 }
 
   if (state & (1<<1)) {
-  setrgb(10, 255, 125, (LED_TYPE *)&led[2]);
+  setrgb(10, 255, 125, (rgb_led_t *)&led[2]);
 }
 
 
