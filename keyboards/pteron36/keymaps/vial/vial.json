@@ -8,7 +8,7 @@
         "cols": 5
     },
     "layouts": {
-      "labels":["No Outter Thumbs","No Inner Thumbs"],
+      "labels":["No Outer Thumbs","No Inner Thumbs"],
         "keymap":[
           [
             {
