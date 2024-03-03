@@ -1,6 +1,6 @@
 # Duodecimal
 
-![Duodecimal](https://i.imgur.com/example.jpg)
+![Duodecimal](https://i.imgur.com/XNVNMgZ.jpg)
 
 *A Base-Kit compatible, 12u, 5-row, WKL, 50% keyboard conceptualized by SwearWolf, with the PCB designed by Noah Kiser*
 * Keyboard Maintainer: [NCKiser](https://github.com/NCKiser)
