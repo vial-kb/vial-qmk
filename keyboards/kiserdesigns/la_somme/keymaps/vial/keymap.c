@@ -44,3 +44,30 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [1] =   { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }
 };
 #endif
+
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (rgb_matrix_is_enabled()){
+        HSV layer_hsv = {rgb_matrix_get_hue(), ((int)rgb_matrix_get_sat()>>1)+128, rgb_matrix_get_val()}; //get the matrix hue, sat (minimum 50%), and value
+        HSV mod_hsv = {rgb_matrix_get_hue(), ((int)rgb_matrix_get_sat()>>1)+128, rgb_matrix_get_val()};
+
+        layer_hsv.h += 16*get_highest_layer(layer_state|default_layer_state); //hue-shift the layer indicator based on highest layer (of 0-15 layers)
+        layer_hsv.h = layer_hsv.h % 256; //modulo 256
+
+        int mods = get_mods() | get_oneshot_mods(); //get all modifiers, either held or OSM
+        mods = ((mods>>4)|mods) & 0x0F;  //combine left and right mods, and take just the bottom 4 bits (0-15)
+
+        mod_hsv.h += 16*mods; //hue-shift the modifier indicator based on the modifiers held (of 0-15 combinations)
+        mod_hsv.h = mod_hsv.h % 256; //modulo 256
+
+        if (host_keyboard_led_state().caps_lock) { //if capslock is active
+            layer_hsv.s = 0; //turn both indicators white
+            mod_hsv.s = 0;
+        };
+
+        RGB layer_rgb = hsv_to_rgb(layer_hsv);
+        RGB mod_rgb = hsv_to_rgb(mod_hsv);
+        rgb_matrix_set_color(0, layer_rgb.r, layer_rgb.g, layer_rgb.b);
+        rgb_matrix_set_color(1, mod_rgb.r, mod_rgb.g, mod_rgb.b);
+    }
+	return true;
+}

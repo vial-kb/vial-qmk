@@ -16,7 +16,8 @@
         "console": false,
         "extrakey": true,
         "mousekey": true,
-        "nkro": true
+        "nkro": true,
+        "rgb_matrix": true
     },
     "matrix_pins": {
         "cols": ["GP22", "GP23", "GP24", "GP26", "GP27", "GP3", "GP4", "GP5", "GP6", "GP7"],
@@ -26,11 +27,23 @@
     "qmk": {
         "tap_keycode_delay": 10
     },
+    "rgb_matrix": {
+        "driver": "ws2812",
+        "led_count": 2,
+        "layout": [
+            {"flags": 4, "matrix": [3, 3], "x": 92, "y": 32},
+            {"flags": 4, "matrix": [3, 6], "x": 132, "y": 32}
+        ]
+    },
     "url": "https://qmk.fm/keyboards",
     "usb": {
         "device_version": "0.0.1",
-        "pid": "0x6D64",
-        "vid": "0x5242"
+        "pid": "0x1503",
+        "vid": "0x4B44"
+    },
+    "ws2812": {
+        "pin": "GP17",
+        "driver": "vendor"
     },
     "layouts": {
         "LAYOUT": {

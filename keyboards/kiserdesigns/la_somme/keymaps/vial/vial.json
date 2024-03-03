@@ -3,6 +3,7 @@
         "rows": 4,
         "cols": 10
     },
+    "lighting": "vialrgb",
     "layouts": {
         "labels": [
             "2u Left Space",
