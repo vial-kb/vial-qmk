@@ -1,6 +1,6 @@
 # La Somme
 
-![La Somme](https://i.imgur.com/example.jpg)
+![La Somme](https://i.imgur.com/E9JGFkX.jpg)
 
 *A unibody-split col-stag 10u board by [rubybuilds](https://github.com/onisage) with the PCB designed by [NoahK](https://github.com/NCKiser)*
 * Keyboard Maintainer: [NCKiser](https://github.com/NCKiser)
