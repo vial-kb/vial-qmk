@@ -17,7 +17,8 @@
         "extrakey": true,
         "mousekey": true,
         "nkro": true,
-        "rgb_matrix": true
+        "rgb_matrix": true,
+        "oled": true
     },
     "matrix_pins": {
         "cols": ["GP22", "GP23", "GP24", "GP26", "GP27", "GP3", "GP4", "GP5", "GP6", "GP7"],
