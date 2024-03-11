@@ -1,0 +1,25 @@
+{
+    "name": "deskcheck",
+    "lighting": "vialrgb",
+    "matrix": {
+        "rows": 4,
+        "cols": 10
+    },
+    "layouts": {
+        "keymap":
+        [
+  [
+    "0,0"
+  ],
+  [
+    "0,1",
+    "0,2",
+    {
+      "w": 1.75
+    },
+    "0,3"
+  ]
+]
+
+}
+}
