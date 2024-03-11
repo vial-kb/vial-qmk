@@ -1,7 +1,6 @@
 {
     "pin_compatible": "promicro",
     "processor": "atmega32u4",
-    "bootloader": "caterina"
     "encoder": {
         "rotary": [
             {"pin_a": "F5", "pin_b": "F4", "resolution": 2}
@@ -21,7 +20,7 @@
         },
         "soft_serial_pin": "D2",
         "transport": {
-            "protocol": "serial"
+            "protocol": "serial",
         },
     },
     "ws2812": {
