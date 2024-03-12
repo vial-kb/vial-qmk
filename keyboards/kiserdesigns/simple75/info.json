@@ -6,7 +6,7 @@
     "encoder": {
         "enabled": true,
         "rotary": [
-            {"pin_a": "F7", "pin_b": "F6", "resolution": 2}
+            {"pin_a": "F6", "pin_b": "F7", "resolution": 2}
         ]
     },
     "features": {
