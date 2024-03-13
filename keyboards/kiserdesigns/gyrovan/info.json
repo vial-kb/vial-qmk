@@ -1,0 +1,122 @@
+{
+    "manufacturer": "Kiser Designs",
+    "keyboard_name": "Gyrovan",
+    "maintainer": "NCKiser",
+    "bootloader": "stm32-dfu",
+    "diode_direction": "COL2ROW",
+    "encoder": {
+        "enabled": true,
+        "rotary": [
+            {"pin_a": "A10", "pin_b": "B3"},
+            {"pin_a": "A15", "pin_b": "A14"},
+            {"pin_a": "A8", "pin_b": "B15"},
+            {"pin_a": "C15", "pin_b": "F0"}
+        ]
+    },
+    "features": {
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true,
+        "rgb_matrix": true
+    },
+    "matrix_pins": {
+        "cols": ["B11", "B10", "B2", "B1", "B0", "A7", "A6", "A5", "A4", "A3", "A1", "F1"],
+        "rows": ["C13", "B12", "A2", "A0", "C14"]
+    },
+    "processor": "STM32F072",
+    "rgb_matrix": {
+        "driver": "ws2812",
+        "led_count": 6,
+        "layout": [
+            {"flags": 4, "matrix": [0, 0], "x": 132, "y": 32},
+            {"flags": 4, "matrix": [0, 1], "x": 172, "y": 32},
+            {"flags": 4, "matrix": [0, 2], "x": 212, "y": 32},
+            {"flags": 4, "matrix": [4, 0], "x": 12, "y": 32},
+            {"flags": 4, "matrix": [4, 1], "x": 52, "y": 32},
+            {"flags": 4, "matrix": [4, 2], "x": 92, "y": 32}
+        ],
+        "animations": {
+            "gradient_left_right": true,
+            "breathing": true,
+            "cycle_all": true,
+            "cycle_left_right": true
+        }
+    },
+    "url": "https://qmk.fm/keyboards",
+    "usb": {
+        "device_version": "0.0.1",
+        "pid": "0x4776",
+        "vid": "0x4B44"
+    },
+    "ws2812": {
+        "pin": "A9",
+        "driver": "bitbang"
+    },
+    "layouts": {
+        "LAYOUT": {
+            "layout": [
+                { "matrix": [4, 0], "x": 0.5, "y": 0.25 },
+                { "matrix": [4, 1], "x": 1.5, "y": 0.25 },
+                { "matrix": [4, 2], "x": 2.5, "y": 0.25 },
+                { "matrix": [4, 3], "x": 3.5, "y": 0.25 },
+                { "matrix": [4, 4], "x": 4.5, "y": 0.25 },
+                { "matrix": [4, 5], "x": 5.5, "y": 0.25 },
+
+                { "matrix": [4, 9], "x": 11.75, "y": 0 },
+
+                { "matrix": [0, 0], "x": 0, "y": 1.25 },
+                { "matrix": [0, 1], "x": 1, "y": 1.25 },
+                { "matrix": [0, 2], "x": 2, "y": 1.25 },
+                { "matrix": [0, 3], "x": 3, "y": 1.25 },
+                { "matrix": [0, 4], "x": 4, "y": 1.25 },
+                { "matrix": [0, 5], "x": 5, "y": 1.25 },
+                { "matrix": [0, 6], "x": 6, "y": 1.25 },
+                { "matrix": [0, 7], "x": 7, "y": 1.25 },
+                { "matrix": [0, 8], "x": 8, "y": 1.25 },
+                { "matrix": [0, 9], "x": 9, "y": 1.25 },
+                { "matrix": [0, 10], "x": 10, "y": 1.25 },
+                { "matrix": [0, 11], "w": 1.75, "x": 11, "y": 1.25 },
+
+                { "matrix": [1, 0], "w": 1.25, "x": 0, "y": 2.25 },
+                { "matrix": [1, 1], "x": 1.25, "y": 2.25 },
+                { "matrix": [1, 2], "x": 2.25, "y": 2.25 },
+                { "matrix": [1, 3], "x": 3.25, "y": 2.25 },
+                { "matrix": [1, 4], "x": 4.25, "y": 2.25 },
+                { "matrix": [1, 5], "x": 5.25, "y": 2.25 },
+                { "matrix": [1, 6], "x": 6.25, "y": 2.25 },
+                { "matrix": [1, 7], "x": 7.25, "y": 2.25 },
+                { "matrix": [1, 8], "x": 8.25, "y": 2.25 },
+                { "matrix": [1, 9], "x": 9.25, "y": 2.25 },
+                { "matrix": [1, 10], "x": 10.25, "y": 2.25 },
+                { "matrix": [1, 11], "w": 1.5, "x": 11.25, "y": 2.25 },
+
+                { "matrix": [2, 0], "w": 1.75, "x": 0, "y": 3.25 },
+                { "matrix": [2, 1], "x": 1.75, "y": 3.25 },
+                { "matrix": [2, 2], "x": 2.75, "y": 3.25 },
+                { "matrix": [2, 3], "x": 3.75, "y": 3.25 },
+                { "matrix": [2, 4], "x": 4.75, "y": 3.25 },
+                { "matrix": [2, 5], "x": 5.75, "y": 3.25 },
+                { "matrix": [2, 6], "x": 6.75, "y": 3.25 },
+                { "matrix": [2, 7], "x": 7.75, "y": 3.25 },
+                { "matrix": [2, 8], "x": 8.75, "y": 3.25 },
+                { "matrix": [2, 9], "x": 9.75, "y": 3.25 },
+                { "matrix": [2, 10], "x": 10.75, "y": 3.25 },
+                { "matrix": [2, 11], "x": 11.75, "y": 3.25 },
+
+                { "matrix": [3, 0], "w": 1.25, "x": 0, "y": 4.25 },
+                { "matrix": [3, 1], "x": 1.25, "y": 4.25 },
+                { "matrix": [3, 2], "w": 1.25, "x": 2.25, "y": 4.25 },
+                { "matrix": [3, 4], "w": 2.75, "x": 3.5, "y": 4.25 },
+                { "matrix": [3, 5], "w": 6.25, "x": 3.5, "y": 5.25 },
+                { "matrix": [3, 6], "w": 2.25, "x": 6.25, "y": 4.25 },
+                { "matrix": [3, 8], "w": 1.25, "x": 8.5, "y": 4.25 },
+                { "matrix": [3, 9], "x": 9.75, "y": 4.25 },
+                { "matrix": [3, 10], "x": 10.75, "y": 4.25 },
+                { "matrix": [3, 11], "x": 11.75, "y": 4.25 }
+            ]
+        }
+    }
+}
