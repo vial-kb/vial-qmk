@@ -9,5 +9,4 @@
 #define VIAL_UNLOCK_COMBO_COLS { 0, 11 }
 
 // number of layers
-#define DYNAMIC_KEYMAP_LAYER_COUNT 6
-
+#define DYNAMIC_KEYMAP_LAYER_COUNT 4
