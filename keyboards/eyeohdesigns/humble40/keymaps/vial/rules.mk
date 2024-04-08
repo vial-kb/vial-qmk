@@ -1,4 +1,0 @@
-VIA_ENABLE = yes
-VIAL_ENABLE = yes
-
-BACKLIGHT_ENABLE = yes
