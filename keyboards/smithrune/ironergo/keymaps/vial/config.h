@@ -6,3 +6,5 @@
 
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 7 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 14 }
+
+#define BACKLIGHT_BREATHING
