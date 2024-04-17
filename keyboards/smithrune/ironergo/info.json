@@ -10,7 +10,6 @@
     },
     "features": {
         "extrakey": true,
-        "lto": true,
         "mousekey": true,
         "nkro": true,
         "backlight": true
