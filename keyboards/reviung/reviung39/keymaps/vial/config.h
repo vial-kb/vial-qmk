@@ -15,17 +15,10 @@
  */
 
 #pragma once
-#ifndef CONFIG_USER_H
-#define CONFIG_USER_H
+
 #define VIAL_KEYBOARD_UID {0xC0, 0xED, 0x8D, 0x24, 0x88, 0x5F, 0xD0, 0x9F}
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 5 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 5 }
 
-#include "../../config.h"
-
 #define TAPPING_TERM 175
 #define TAPPING_TOGGLE 3
-
-#endif
-
-// place overrides here

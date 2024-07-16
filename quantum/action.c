@@ -655,7 +655,6 @@ if (QS_oneshot_tap_toggle > 1) {
                                 layer_off(action.layer_tap.val);
                                 break;
                             } else if (tap_count < QS_oneshot_tap_toggle) {
-                                layer_on(action.layer_tap.val);
                                 set_oneshot_layer(action.layer_tap.val, ONESHOT_START);
                             }
                         } else {
@@ -668,7 +667,6 @@ if (QS_oneshot_tap_toggle > 1) {
                         }
 } else {
                         if (event.pressed) {
-                            layer_on(action.layer_tap.val);
                             set_oneshot_layer(action.layer_tap.val, ONESHOT_START);
                         } else {
                             clear_oneshot_layer_state(ONESHOT_PRESSED);
