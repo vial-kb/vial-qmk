@@ -11,10 +11,10 @@ This conversion kit allows you to replace your IBM Model M's original internal c
 
 Make example for this keyboard (after setting up your build environment):
 
-    make ibm/model_m/modelh:default
+    make ibm/model_m/modelh:vial
 
 Flashing example for this keyboard:
 
-    make ibm/model_m/modelh:default:flash
+    make ibm/model_m/modelh:vial:flash
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
