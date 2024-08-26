@@ -14,8 +14,8 @@
     },
     "features": {
         "bootmagic": true,
-        "command": false,
-        "console": false,
+        "command": true,
+        "console": true,
         "extrakey": true,
         "mousekey": true
     },
