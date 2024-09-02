@@ -1,7 +1,7 @@
 {
   "name": "imi60",
   "vendorId": "0xEB69",
-  "productId": "0x6002",
+  "productId": "0x6005",
   "lighting": "none",
   "matrix": {
     "rows": 5,

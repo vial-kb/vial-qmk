@@ -4,21 +4,68 @@
     "productId": "0x01E0",
     "lighting": "vialrgb",
     "customKeycodes": [
-      {"name": "Mission Control", "title": "Mission Control in macOS", "shortName": "MCtrl"},
-      {"name": "Launch Pad",      "title": "Launch Pad in macOS",      "shortName": "LPad"},
-      {"name": "Left Option",     "title": "Left Option in macOS",     "shortName": "LOpt"},
-      {"name": "Right Option",    "title": "Right Option in macOS",    "shortName": "ROpt"},
-      {"name": "Left Cmd",        "title": "Left Command in macOS",    "shortName": "LCmd"},
-      {"name": "Right Cmd",       "title": "Right Command in macOS",   "shortName": "RCmd"},
-      {"name": "Siri",            "title": "Siri in macOS",            "shortName": "Siri"},
-      {"name": "Task View",       "title": "Task View in windows",     "shortName": "Task"},
-      {"name": "File Explorer",   "title": "File Explorer in windows", "shortName": "File"},
-      {"name": "Screen Shot",     "title": "Screenshot in macOS",      "shortName": "SShot"},
-      {"name": "Cortana",         "title": "Cortana in windows",       "shortName": "Cortana"}
+        {
+            "name": "Mission Control",
+            "title": "Mission Control in macOS",
+            "shortName": "MCtrl"
+        },
+        {
+            "name": "Launch Pad",
+            "title": "Launch Pad in macOS",
+            "shortName": "LPad"
+        },
+        {
+            "name": "Left Option",
+            "title": "Left Option in macOS",
+            "shortName": "LOpt"
+        },
+        {
+            "name": "Right Option",
+            "title": "Right Option in macOS",
+            "shortName": "ROpt"
+        },
+        {
+            "name": "Left Cmd",
+            "title": "Left Command in macOS",
+            "shortName": "LCmd"
+        },
+        {
+            "name": "Right Cmd",
+            "title": "Right Command in macOS",
+            "shortName": "RCmd"
+        },
+        {
+            "name": "Siri",
+            "title": "Siri in macOS",
+            "shortName": "Siri"
+        },
+        {
+            "name": "Task View",
+            "title": "Task View in windows",
+            "shortName": "Task"
+        },
+        {
+            "name": "File Explorer",
+            "title": "File Explorer in windows",
+            "shortName": "File"
+        },
+        {
+            "name": "Screen Shot",
+            "title": "Screenshot in macOS",
+            "shortName": "SShot"
+        },
+        {
+            "name": "Cortana",
+            "title": "Cortana in windows",
+            "shortName": "Cortana"
+        }
     ],
-    "matrix": {"rows": 12, "cols": 9},
+    "matrix": {
+        "rows": 12,
+        "cols": 9
+    },
     "layouts": {
-      "keymap": [
+        "keymap": [
             [
                 {
                     "x": 0.25
@@ -26,7 +73,7 @@
                 "0,0\n\n\n\n\n\n\n\n\ne",
                 "0,1\n\n\n\n\n\n\n\n\ne",
                 {
-                    "x": 14.5
+                    "x": 15
                 },
                 "1,0\n\n\n\n\n\n\n\n\ne",
                 "1,1\n\n\n\n\n\n\n\n\ne"
@@ -53,6 +100,9 @@
                 },
                 "0,6",
                 "0,7",
+                {
+                    "x": 0.5
+                },
                 "6,0",
                 "6,1",
                 {
@@ -89,6 +139,9 @@
                 "1,5",
                 "1,6",
                 "1,7",
+                {
+                    "x": 0.5
+                },
                 "7,0",
                 "7,1",
                 "7,2",
@@ -125,6 +178,9 @@
                 "2,4",
                 "2,6",
                 "2,7",
+                {
+                    "x": 0.5
+                },
                 "8,0",
                 "8,1",
                 "8,2",
@@ -162,6 +218,9 @@
                 "3,4",
                 "3,5",
                 "3,6",
+                {
+                    "x": 0.5
+                },
                 "9,0",
                 "9,1",
                 "9,2",
@@ -199,6 +258,9 @@
                 "4,5",
                 "4,6",
                 "4,7",
+                {
+                    "x": 0.5
+                },
                 "10,0",
                 "10,1",
                 "10,2",
@@ -245,6 +307,7 @@
                 },
                 "5,6",
                 {
+                    "x": 0.5,
                     "w": 2.75
                 },
                 "11,1",
@@ -265,4 +328,3 @@
         ]
     }
 }
-  

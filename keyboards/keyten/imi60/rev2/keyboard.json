@@ -1,7 +1,4 @@
 {
-    "manufacturer": "keyten",
-    "keyboard_name": "imi60",
-    "maintainer": "key10iq",
     "bootloader": "stm32-dfu",
     "diode_direction": "COL2ROW",	
     "features": {
@@ -16,9 +13,7 @@
     },
     "processor": "STM32F072",
     "usb": {
-        "device_version": "0.0.1",
-        "pid": "0x6005",
-        "vid": "0xEB69"
+        "device_version": "0.0.2"
     },
     "community_layouts": ["60_tsangan_hhkb"],
     "layouts": {
