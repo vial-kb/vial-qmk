@@ -33,4 +33,4 @@
 // #define EE_HANDS
 
 #define RGBLIGHT_SLEEP  // enable rgblight_suspend() and rgblight_wakeup() in keymap.c
-#define RGBLIGHT_TIMEOUT 900000  // ms to wait until rgblight time out, 900K ms is 15min.
+#define RGBLIGHT_TIMEOUT 600000  // ms to wait until rgblight time out, 600K ms is 10min.
