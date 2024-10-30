@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LAYER_FN_COLOR HSV_PURPLE
 #define LAYER_MEDIA_COLOR HSV_ORANGE
 #define LAYER_GAMING_COLOR HSV_CYAN
-#define LAYER_MAC_COLOR HSV_GOLD
+#define LAYER_MAC_COLOR HSV_RED
 
 enum layers {
     _BASE = 0,
