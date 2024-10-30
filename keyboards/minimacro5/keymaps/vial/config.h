@@ -1,3 +1,6 @@
+// Copyright 2024 JP Roemer (@0rax)
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 #pragma once
 
 #define VIAL_KEYBOARD_UID {0xFE, 0x06, 0xBF, 0x52, 0x18, 0xBA, 0x4F, 0x8A}
