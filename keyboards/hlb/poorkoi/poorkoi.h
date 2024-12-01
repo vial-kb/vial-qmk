@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LAYER_MEDIA_COLOR HSV_ORANGE
 #define LAYER_GAMING_COLOR HSV_CYAN
 #define LAYER_MAC_COLOR HSV_RED
+#define LAYER_INDIC_COLOR HSV_WHITE
 
 enum layers {
     _BASE = 0,
