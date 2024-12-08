@@ -31,11 +31,11 @@
 #define TAP_CODE_DELAY 1 // without a slight delay, the RP2040 doesn't register instant taps
 
 /* Encoder Configuration */
-#define ENCODERS_PAD_A { GP7, GP27, GP4 }
-#define ENCODERS_PAD_A_RIGHT { GP27, GP7, GP5 }
+#define ENCODER_A_PINS { GP7, GP27, GP4 }
+#define ENCODER_A_PINS_RIGHT { GP27, GP7, GP5 }
 
-#define ENCODERS_PAD_B { GP6, GP28, GP5 }
-#define ENCODERS_PAD_B_RIGHT { GP26, GP6, GP4 }
+#define ENCODER_B_PINS { GP6, GP28, GP5 }
+#define ENCODER_B_PINS_RIGHT { GP26, GP6, GP4 }
 
 /* COL2ROW or ROW2COL */
 #define DIODE_DIRECTION COL2ROW

@@ -3,21 +3,12 @@
 
 #include QMK_KEYBOARD_H
 
-#define HM_A	LGUI_T(KC_A)
-#define HM_R	LALT_T(KC_R)
-#define HM_S	LCTL_T(KC_S)
-
-#define HM_E	RCTL_T(KC_E)
-#define HM_I	LALT_T(KC_I)
-#define HM_O	LGUI_T(KC_O)
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
-         KC_Q,   KC_W,   KC_F,   KC_P,   KC_B,    QK_BOOT,       KC_J,   KC_L,   KC_U,    KC_Y,   KC_QUOT,
-         HM_A,   HM_R,   HM_S,   KC_T,   KC_G,                   KC_M,   KC_N,   HM_E,    HM_I,   HM_O,
-         KC_Z,   KC_X,   KC_C,   KC_D,   KC_V,                   KC_K,   KC_H,   KC_COMM, KC_DOT, KC_SLSH,
-                         LT(3, KC_TAB), SFT_T(KC_BSPC),          LT(1, KC_SPC),  LT(2,KC_ENT)
+         KC_Q,          KC_W,           KC_F,           KC_P,   KC_B,    QK_BOOT,   KC_J,   KC_L,   KC_U,           KC_Y,           KC_QUOT,
+         LGUI_T(KC_A),  LALT_T(KC_R),   LCTL_T(KC_S),   KC_T,   KC_G,               KC_M,   KC_N,   RCTL_T(KC_E),   LALT_T(KC_I),   LGUI_T(KC_O),
+         KC_Z,          KC_X,           KC_C,           KC_D,   KC_V,               KC_K,   KC_H,   KC_COMM,        KC_DOT,         KC_SLSH,
+                                        LT(3, KC_TAB), SFT_T(KC_BSPC),              LT(1, KC_SPC),  LT(2,KC_ENT)
     ),
 
     [1] = LAYOUT(

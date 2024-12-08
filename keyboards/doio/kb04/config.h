@@ -31,8 +31,8 @@
 #define DEBOUNCE 5
 
 /* Encoder pins */
-#define ENCODERS_PAD_A { B5 }
-#define ENCODERS_PAD_B { B6 }
+#define ENCODER_A_PINS { B5 }
+#define ENCODER_B_PINS { B6 }
 
 #ifdef RGB_MATRIX_ENABLE
     /* RGB Matrix config */

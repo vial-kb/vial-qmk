@@ -11,3 +11,5 @@ COMMAND_ENABLE = no
 ifeq ($(strip $(CONVERT_TO)), )
     QMK_SETTINGS = no
 endif
+
+COMBO_ENABLE = no

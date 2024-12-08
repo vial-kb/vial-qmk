@@ -16,8 +16,8 @@
 /* key matrix pins */
 #define MATRIX_ROW_PINS { B0, B1, B2, B3, B7 }
 #define MATRIX_COL_PINS { F7, F6, F5, F4 }
-#define ENCODERS_PAD_A { D6 }
-#define ENCODERS_PAD_B { D7 }
+#define ENCODER_A_PINS { D6 }
+#define ENCODER_B_PINS { D7 }
 
 /* COL2ROW or ROW2COL */
 

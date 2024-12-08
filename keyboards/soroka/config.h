@@ -3,5 +3,5 @@
 
 #pragma once
 
-#define ENCODERS_PAD_A { GP0 }
-#define ENCODERS_PAD_B { GP1 }
+#define ENCODER_A_PINS { GP0 }
+#define ENCODER_B_PINS { GP1 }

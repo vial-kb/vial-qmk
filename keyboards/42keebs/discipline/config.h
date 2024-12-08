@@ -35,8 +35,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define USB_MAX_POWER_CONSUMPTION 100
 
-#define ENCODERS_PAD_A { D0 }
-#define ENCODERS_PAD_B { D1 }
+#define ENCODER_A_PINS { D0 }
+#define ENCODER_B_PINS { D1 }
 #define ENCODER_DIRECTION_FLIP
 #define ENCODER_RESOLUTION 4
 #define TAP_CODE_DELAY 10

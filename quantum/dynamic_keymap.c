@@ -494,8 +494,8 @@ void dynamic_keymap_macro_send(uint8_t id) {
     // We already checked there was a null at the end of
     // the buffer, so this cannot go past the end
     while (1) {
+        memset(data, 0, sizeof(data));
         data[0] = eeprom_read_byte(p++);
-        data[1] = 0;
         // Stop at the null terminator of this macro string
         if (data[0] == 0) {
             break;

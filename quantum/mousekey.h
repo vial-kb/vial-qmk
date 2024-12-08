@@ -174,6 +174,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #endif /* #ifndef MK_3_SPEED */
 
+#ifndef MOUSEKEY_OVERLAP_MOVE_DELTA
+#    define MOUSEKEY_OVERLAP_MOVE_DELTA MOUSEKEY_MOVE_DELTA
+#endif
+#ifndef MOUSEKEY_OVERLAP_WHEEL_DELTA
+#    define MOUSEKEY_OVERLAP_WHEEL_DELTA MOUSEKEY_WHEEL_DELTA
+#endif
+#ifndef MOUSEKEY_OVERLAP_INTERVAL
+#    define MOUSEKEY_OVERLAP_INTERVAL MOUSEKEY_INTERVAL
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -183,7 +193,11 @@ extern uint8_t mk_interval;
 extern uint8_t mk_max_speed;
 extern uint8_t mk_time_to_max;
 extern uint8_t mk_wheel_delay;
+#ifdef MK_KINETIC_SPEED
+extern uint16_t mk_wheel_interval;
+#else
 extern uint8_t mk_wheel_interval;
+#endif
 extern uint8_t mk_wheel_max_speed;
 extern uint8_t mk_wheel_time_to_max;
 

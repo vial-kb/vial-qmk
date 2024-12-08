@@ -24,8 +24,8 @@
 #define UNUSED_PINS
 
 /* encoder */
-#define ENCODERS_PAD_A { D3 }
-#define ENCODERS_PAD_B { D2 }
+#define ENCODER_A_PINS { D3 }
+#define ENCODER_B_PINS { D2 }
 #define ENCODER_RESOLUTION 1
 
 #define USB_POLLING_INTERVAL_MS 1

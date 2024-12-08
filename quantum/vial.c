@@ -503,6 +503,16 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     return TAPPING_TERM;
 #endif
 }
+
+uint16_t tap_dance_count(void) {
+    return VIAL_TAP_DANCE_ENTRIES;
+}
+
+tap_dance_action_t* tap_dance_get(uint16_t tap_dance_idx) {
+    if (tap_dance_idx >= VIAL_TAP_DANCE_ENTRIES)
+        return NULL;
+    return &tap_dance_actions[tap_dance_idx];
+}
 #endif
 
 #ifdef VIAL_COMBO_ENABLE
@@ -560,9 +570,7 @@ bool process_record_vial(uint16_t keycode, keyrecord_t *record) {
 
 #ifdef VIAL_KEY_OVERRIDE_ENABLE
 static bool vial_key_override_disabled = 0;
-static key_override_t overrides[VIAL_KEY_OVERRIDE_ENTRIES] = { 0 };
-static key_override_t *override_ptrs[VIAL_KEY_OVERRIDE_ENTRIES + 1] = { 0 };
-const key_override_t **key_overrides = (const key_override_t**)override_ptrs;
+static key_override_t vial_key_overrides[VIAL_KEY_OVERRIDE_ENTRIES] = { 0 };
 
 static int vial_get_key_override(uint8_t index, key_override_t *out) {
     vial_key_override_entry_t entry;
@@ -596,9 +604,17 @@ static int vial_get_key_override(uint8_t index, key_override_t *out) {
 }
 
 static void reload_key_override(void) {
-    for (size_t i = 0; i < VIAL_KEY_OVERRIDE_ENTRIES; ++i) {
-        override_ptrs[i] = &overrides[i];
-        vial_get_key_override(i, &overrides[i]);
-    }
+    for (size_t i = 0; i < VIAL_KEY_OVERRIDE_ENTRIES; ++i)
+        vial_get_key_override(i, &vial_key_overrides[i]);
+}
+
+uint16_t key_override_count(void) {
+    return VIAL_KEY_OVERRIDE_ENTRIES;
+}
+
+const key_override_t* key_override_get(uint16_t key_override_idx) {
+    if (key_override_idx >= VIAL_KEY_OVERRIDE_ENTRIES)
+        return NULL;
+    return &vial_key_overrides[key_override_idx];
 }
 #endif

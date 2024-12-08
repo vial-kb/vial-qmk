@@ -15,8 +15,8 @@
 #undef OLED_TIMEOUT
 #define OLED_TIMEOUT 60000
 
-#undef ENCODERS_PAD_A
-#undef ENCODERS_PAD_B
-#define ENCODERS_PAD_A { B5, A1, A4 }
-#define ENCODERS_PAD_B { B6, A2, A3 }
+#undef ENCODER_A_PINS
+#undef ENCODER_B_PINS
+#define ENCODER_A_PINS { B5, A1, A4 }
+#define ENCODER_B_PINS { B6, A2, A3 }
 #define ENCODER_RESOLUTIONS { 4, 4, 4 }
