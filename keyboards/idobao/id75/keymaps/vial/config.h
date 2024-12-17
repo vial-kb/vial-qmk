@@ -1,0 +1,35 @@
+#pragma once
+
+#define VIAL_KEYBOARD_UID {0xDC, 0x0B, 0x71, 0xF9, 0x24, 0xBD, 0x07, 0xB4}
+#define VIAL_UNLOCK_COMBO_ROWS {0, 1}
+#define VIAL_UNLOCK_COMBO_COLS {0, 1}
+
+//#define DYNAMIC_KEYMAP_LAYER_COUNT 4
+//#define DYNAMIC_KEYMAP_MACRO_COUNT 8
+//#define VIAL_COMBO_ENTRIES 8               // number of combos used, each entry take 10 byte in EEPROM
+//#define VIAL_TAP_DANCE_ENTRIES 8           // number of tap dances used, each entry take 10 byte in EEPROM
+//#define VIAL_KEY_OVERRIDE_ENTRIES 8         // number of key override used, each entry take 10 byte in EEPROM
+//#define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+//#define RGB_MATRIX_KEYPRESSES
+
+#undef LOCKING_SUPPORT_ENABLE
+#undef LOCKING_RESYNC_ENABLE
+
+#define NO_ACTION_ONESHOT
+#define NO_ACTION_TAPPING
+
+#define NO_MUSIC_MODE
+
+#define LAYER_STATE_8BIT
+
+#undef RGBLIGHT_EFFECT_BREATHING
+#undef RGBLIGHT_EFFECT_SNAKE
+#undef RGBLIGHT_EFFECT_KNIGHT
+#undef RGBLIGHT_EFFECT_CHRISTMAS
+#undef RGBLIGHT_EFFECT_STATIC_GRADIENT
+#undef RGBLIGHT_EFFECT_RGB_TEST
+#undef RGBLIGHT_EFFECT_ALTERNATING
+#undef RGBLIGHT_EFFECT_TWINKLE
+
+//#define RGB_MATRIX_LED_COUNT 16
+//#define DRIVER_LED_TOTAL 48
