@@ -1,18 +1,16 @@
 {
     "keyboard_name": "Elora rev1",
     "bootloader": "rp2040",
-    "encoder": {
-        "driver": "quadrature",
-        "enabled": true
-    },
     "features": {
         "pointing_device": true,
         "rgb_matrix": true,
-        "rgblight": false
-    },
-    "matrix_size": {
-        "cols": 8,
-        "rows": 12
+        "rgblight": false,
+        "encoder": true,
+        "oled": true,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true,
+        "audio": false
     },
     "processor": "RP2040",
     "rgb_matrix": {
@@ -93,7 +91,9 @@
             "driver": "usart"
         },
         "transport": {
-            "protocol": "serial",
+            "sync": {
+                "matrix_state": true
+            },
             "watchdog": true,
             "watchdog_timeout": 3000
         }
