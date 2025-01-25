@@ -14,6 +14,8 @@ Flashing example for this keyboard:
 
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
+For Vial, please see the README inside keymaps/vial.
+
 ## Bootloader
 
 Enter the bootloader in 2 ways:
