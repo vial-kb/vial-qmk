@@ -6,18 +6,13 @@
       "rows": 6,
       "cols": 17
     },
+    "lighting": "vialrgb",
     "customKeycodes": [
       {
         "name": "NK_ Retro RGB",
         "title": "NK_ Retro RGB",
         "shortName": "RETRO_RGB"
       }
-    ],
-    "keycodes": [
-      "qmk_lighting"
-    ],
-    "menus": [
-      "qmk_rgb_matrix"
     ],
     "layouts": {
       "keymap": [

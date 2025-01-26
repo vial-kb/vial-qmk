@@ -5,3 +5,6 @@ VIA_ENABLE 			= yes
 # Enable VIAL
 VIAL_ENABLE 		= yes
 LTO_ENABLE 			= yes
+
+# Enable RGB
+VIALRGB_ENABLE = yes
