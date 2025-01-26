@@ -6,3 +6,6 @@
 // Escape + Enter to unlock
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 3 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 13 }
+
+// Uncomment to customize the color of the caps lock indicator
+// #define CAPS_LOCK_COLORS {0, 255, 0}

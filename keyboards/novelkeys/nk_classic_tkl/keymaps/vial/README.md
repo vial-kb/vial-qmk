@@ -2,10 +2,11 @@
 
 To change the color of the Caps Lock indicator:
 
-1. change this line with whatever RGB values you want
+1. Uncomment line 11 in `config.h` and change the RGB values:
 
 ```c
-rgb_matrix_set_color(i, 255, 86, 0);
+// Uncomment to customize the color of the caps lock indicator
+// #define CAPS_LOCK_COLORS {0, 255, 0}
 ```
 
 2. rebuild the firmware using

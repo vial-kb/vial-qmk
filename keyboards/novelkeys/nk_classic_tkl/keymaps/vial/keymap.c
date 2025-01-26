@@ -38,10 +38,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 };
 
+#ifdef CAPS_LOCK_COLORS
+static uint8_t caps_lock_colors[] = CAPS_LOCK_COLORS;
+#else
+static uint8_t caps_lock_colors[] = {255, 86, 0};
+#endif
+
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (host_keyboard_led_state().caps_lock) {
         for (uint8_t i = 50; i <= 55; i++) {
-            rgb_matrix_set_color(i, 255, 86, 0);
+            rgb_matrix_set_color(i, caps_lock_colors[0], caps_lock_colors[1], caps_lock_colors[2]);
         }
     }
     return false;
