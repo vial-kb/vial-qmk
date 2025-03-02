@@ -7,7 +7,7 @@
 // the non split version
 #define WS2812_DI_PIN D3
 #ifdef WS2812_DI_PIN
-  #define RGBLED_NUM 9
+  #define RGBLIGHT_LED_COUNT 9
   #define RGBLIGHT_HUE_STEP 16
   #define RGBLIGHT_SAT_STEP 16
   #define RGBLIGHT_VAL_STEP 16
