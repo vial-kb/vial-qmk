@@ -33,7 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define WS2812_DI_PIN D0
 #ifdef WS2812_DI_PIN
 	#define RGBLIGHT_SLEEP
-	#define RGBLED_NUM 15
+	#define RGBLIGHT_LED_COUNT 15
 	#define RGBLIGHT_HUE_STEP 8
 	#define RGBLIGHT_SAT_STEP 8 
 	#define RGBLIGHT_VAL_STEP 8
