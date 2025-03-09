@@ -1,7 +1,7 @@
 {
-    "name": "Keychron C2 Pro V2 RGB",
+    "name": "Keychron C2 Pro v1 RGB",
     "vendorId": "0x3434",
-    "productId": "0x0526",
+    "productId": "0x0520",
     "lighting": "vialrgb",
     "matrix": {
         "rows": 6,
