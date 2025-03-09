@@ -1,7 +1,7 @@
 {
-    "name": "Keychron C2 Pro V2",
+    "name": "Keychron C2 Pro V2 White",
     "vendorId": "0x3434",
-    "productId": "0x0526",
+    "productId": "0x0529",
     "lighting": "vialrgb",
     "matrix": {
         "rows": 6,
