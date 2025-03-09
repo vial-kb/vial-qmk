@@ -10,13 +10,13 @@ A customizable 100% keyboard.
 
 Make example for this keyboard (after setting up your build environment):
 
-    make keychron/c2/ansi/rgb:default
-    make keychron/c2/ansi/white:default
+    make keychron/c2_pro/ansi/rgb:default
+    make keychron/c2_pro/ansi/white:default
 
 Flashing example for this keyboard:
 
-    make keychron/c2/ansi/rgb:default:flash
-    make keychron/c2/ansi/white:default:flash
+    make keychron/c2_pro/ansi/rgb:default:flash
+    make keychron/c2_pro/ansi/white:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 
