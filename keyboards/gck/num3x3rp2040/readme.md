@@ -5,7 +5,7 @@
 *A short description of the keyboard/project*
 
 * Keyboard Maintainer: [Alex](https://github.com/Giliy666)
-* Hardware Supported: *The PCBs, controllers supported*
+* Hardware Supported: *rp2040*
 * Hardware Availability: *Links to where you can find this hardware*
 
 Make example for this keyboard (after setting up your build environment):
