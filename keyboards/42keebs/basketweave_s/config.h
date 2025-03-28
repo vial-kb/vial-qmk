@@ -16,13 +16,11 @@
 
 #pragma once
 
-#include "config_common.h"
-
 #define VENDOR_ID       0x6B62
 #define PRODUCT_ID      0x6869
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    42. Keebs
-#define PRODUCT         Basketweave-S
+#define MANUFACTURER    "42. Keebs"
+#define PRODUCT         "Basketweave-S"
 
 /* key matrix size */
 #define MATRIX_ROWS 5
@@ -50,8 +48,8 @@
  */
 // #define GRAVE_ESC_CTRL_OVERRIDE
 
-#define ENCODERS_PAD_A { B3, D1 }
-#define ENCODERS_PAD_B { B4, D0 }
+#define ENCODER_A_PINS { B3, D1 }
+#define ENCODER_B_PINS { B4, D0 }
 #define ENCODER_RESOLUTION 4
 #define TAP_CODE_DELAY 10
 

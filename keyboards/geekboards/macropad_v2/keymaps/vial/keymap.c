@@ -20,8 +20,8 @@ bool is_alt_tab_active = false;
 uint16_t alt_tab_timer = 0;
 
 enum custom_keycodes {
-  ALT_TAB = USER00,
-  SHIFT_ALT_TAB = USER01,
+  ALT_TAB = QK_KB_0,
+  SHIFT_ALT_TAB,
 };
 
 const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS] = {

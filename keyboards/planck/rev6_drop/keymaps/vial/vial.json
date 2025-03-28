@@ -2,17 +2,8 @@
   "name": "OLKB PLANCK REV6.1",
   "vendorId": "0x03A8",
   "productId": "0xA4F9",
-  "firmwareVersion": 0,
-  "keycodes": ["via/keycodes", "via/qmk_lighting"],
-  "lighting": "vialrgb",
-  "menus": [
-    "via/keymap",
-    "via/layouts",
-    "via/macros",
-    "via/save_load",
-    "core/qmk_rgblight"
-  ],
   "matrix": {"rows": 8, "cols": 6},
+  "lighting": "vialrgb",
   "layouts": {
     "labels": [["Layout", "MIT (1x2u)", "Grid (2x1u)", "2x2u", "3x3u"]],
     "keymap": [

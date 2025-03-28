@@ -1,7 +1,7 @@
 # mini36
 
-![mini36](https://i.imgur.com/JwhiE9l.png)
-![mini36PCB](https://i.imgur.com/6NjZ8Cq.jpg)
+![mini36](https://i.imgur.com/JwhiE9ll.png)
+![mini36PCB](https://i.imgur.com/6NjZ8Cql.jpg)
 
 *A pre-built, low profile, split mechanical keyboard with 36 keys based on the RP2040 processor*
 
@@ -12,13 +12,13 @@
 Make example for this keyboard (after setting up your build environment):
 
 ```sh
-    make controllerworks/mini36:vial
+    make controllerworks/mini36:default
 ```
 
 Flashing example for this keyboard:
 
 ```sh
-    make controllerworks/mini36:vial:flash
+    make controllerworks/mini36:default:flash
 ```
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
@@ -33,8 +33,7 @@ See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_to
 - Reset and boot tactile switches
 - USB C host connection
 - Hot swap connectors for Kailh Chocolate PG1350 switches
-- Chocolate key spacing (18mm horizontal x 17mm vertical)
-
+- Chocolate key spacing (18mm horizontal x 17mm vertical) 
 ## Bootloader
 
 Enter the bootloader in 3 ways:

@@ -16,13 +16,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#include "config_common.h"
-
 #define VENDOR_ID       0x6B62
 #define PRODUCT_ID      0x6869
 #define DEVICE_VER      0x0001
-#define MANUFACTURER    coseyfannitutti
-#define PRODUCT         DISCIPLINE
+#define MANUFACTURER    "coseyfannitutti"
+#define PRODUCT         "DISCIPLINE"
 
 /* key matrix size */
 #define MATRIX_ROWS 5
@@ -37,8 +35,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define USB_MAX_POWER_CONSUMPTION 100
 
-#define ENCODERS_PAD_A { D0 }
-#define ENCODERS_PAD_B { D1 }
+#define ENCODER_A_PINS { D0 }
+#define ENCODER_B_PINS { D1 }
 #define ENCODER_DIRECTION_FLIP
 #define ENCODER_RESOLUTION 4
 #define TAP_CODE_DELAY 10

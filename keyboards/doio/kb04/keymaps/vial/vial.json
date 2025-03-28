@@ -1,0 +1,15 @@
+{
+    "name": "KB04-01",
+    "vendorId": "0xD010",
+    "productId": "0x0401",
+    "lighting": "qmk_rgblight",
+    "matrix": { "rows": 1, "cols": 8 },
+    "layouts": {
+        "labels": [ "Inverted" ],
+        "keymap": [
+            ["0,0\n\n\n0,0","0,1\n\n\n0,0","0,2\n\n\n0,0","0,3\n\n\n0,0"],
+            [{"y":0.25,"x":0.5},"0,0\n\n\n0,0\n\n\n\n\n\ne","0,4\n\n\n0,0","0,1\n\n\n0,0\n\n\n\n\n\ne"],
+            [{"x":0.5},"0,1\n\n\n0,1\n\n\n\n\n\ne","0,4\n\n\n0,1","0,0\n\n\n0,1\n\n\n\n\n\ne"],
+            [{"y":0.25},"0,3\n\n\n0,1","0,2\n\n\n0,1","0,1\n\n\n0,1","0,0\n\n\n0,1"]]
+    }
+}

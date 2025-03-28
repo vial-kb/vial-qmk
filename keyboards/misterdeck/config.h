@@ -1,13 +1,11 @@
 #pragma once
 
-#include "config_common.h"
-
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xEEEE
 #define PRODUCT_ID      0x2019
 #define DEVICE_VER      0x0002
-#define MANUFACTURER    Michael Weber
-#define PRODUCT         MisteRDeck
+#define MANUFACTURER    "Michael Weber"
+#define PRODUCT         "MisteRDeck"
 
 /* key matrix size */
 #define MATRIX_ROWS 3

@@ -1,0 +1,33 @@
+{
+    "manufacturer": "Vial",
+    "keyboard_name": "STM32F103-vibl example",
+    "maintainer": "xyz",
+    "bootloader": "vibl",
+    "diode_direction": "COL2ROW",
+    "features": {
+        "bootmagic": true,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true
+    },
+    "matrix_pins": {
+        "cols": ["B1", "B0"],
+        "rows": ["B10", "B11"]
+    },
+    "processor": "STM32F103",
+    "usb": {
+        "device_version": "0.0.1",
+        "pid": "0x0000",
+        "vid": "0xFEED"
+    },
+    "layouts": {
+        "LAYOUT": {
+            "layout": [
+                {"label": "K00", "matrix": [0, 0], "x": 0, "y": 0},
+                {"label": "K01", "matrix": [0, 1], "x": 1, "y": 0},
+                {"label": "K10", "matrix": [1, 0], "x": 2, "y": 0},
+                {"label": "K11", "matrix": [1, 1], "x": 3, "y": 0}
+            ]
+        }
+    }
+}

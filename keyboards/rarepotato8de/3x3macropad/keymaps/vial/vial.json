@@ -1,0 +1,21 @@
+{
+    "name": "3x3macropad",
+    "vendorId": "0x5353",
+    "productId": "0x0001",
+    "lighting": "qmk_rgblight",
+    "matrix": {
+        "rows": 3,
+        "cols": 3
+    },
+    "layouts": {
+		"labels":[
+			"OLED",
+			"Encoder"
+		],
+		"keymap": [
+			[{"x":-2},{"d":true},"0,0\n\n\n0,1",{"d":true},"0,1\n\n\n0,1","0,0\n\n\n0,0","0,1\n\n\n0,0","0,2",{"x":-1},"0,1\n\n\n1,1\n\n\n\n\n\ne",{"d":true},"0,1\n\n\n1,0\n\n\n\n\n\ne"],
+			["1,0","1,1","1,2",{"x":-1},"0,0\n\n\n1,1\n\n\n\n\n\ne",{"d":true},"0,0\n\n\n1,0\n\n\n\n\n\ne"],
+			["2,0","2,1","2,2"]
+		]
+    }
+}

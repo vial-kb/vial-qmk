@@ -1,8 +1,5 @@
-SRC += muse.c 
-
 VIA_ENABLE = yes
 VIAL_ENABLE = yes
 MOUSEKEY_ENABLE = yes
 AUDIO_ENABLE = no
-LTO_ENABLE = yes
-QMK_SETTINGS = no
+QMK_SETTINGS = yes

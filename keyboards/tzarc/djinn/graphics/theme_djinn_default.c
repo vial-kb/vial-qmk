@@ -1,6 +1,5 @@
 // Copyright 2018-2022 Nick Brassel (@tzarc)
 // SPDX-License-Identifier: GPL-2.0-or-later
-#include QMK_KEYBOARD_H
 #include <hal.h>
 #include <string.h>
 #include <ctype.h>
@@ -44,13 +43,13 @@ static painter_font_handle_t  thintel;
 enum {
     RGB_MATRIX_EFFECT_NONE,
 #    include "rgb_matrix_effects.inc"
-#    undef RGB_MATRIX_EFFECT
 #    ifdef RGB_MATRIX_CUSTOM_KB
 #        include "rgb_matrix_kb.inc"
 #    endif
 #    ifdef RGB_MATRIX_CUSTOM_USER
 #        include "rgb_matrix_user.inc"
 #    endif
+#    undef RGB_MATRIX_EFFECT
 };
 
 #    define RGB_MATRIX_EFFECT(x)    \
@@ -61,13 +60,13 @@ const char *rgb_matrix_name(uint8_t effect) {
         case RGB_MATRIX_EFFECT_NONE:
             return "NONE";
 #    include "rgb_matrix_effects.inc"
-#    undef RGB_MATRIX_EFFECT
 #    ifdef RGB_MATRIX_CUSTOM_KB
 #        include "rgb_matrix_kb.inc"
 #    endif
 #    ifdef RGB_MATRIX_CUSTOM_USER
 #        include "rgb_matrix_user.inc"
 #    endif
+#    undef RGB_MATRIX_EFFECT
         default:
             return "UNKNOWN";
     }
@@ -89,8 +88,8 @@ void keyboard_post_init_display(void) {
 
 //----------------------------------------------------------
 // UI Drawing
-void draw_ui_user(void) {
-    bool            hue_redraw = false;
+void draw_ui_user(bool force_redraw) {
+    bool            hue_redraw = force_redraw;
     static uint16_t last_hue   = 0xFFFF;
 #if defined(RGB_MATRIX_ENABLE)
     uint16_t curr_hue = rgb_matrix_get_hue();

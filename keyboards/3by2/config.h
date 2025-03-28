@@ -1,13 +1,11 @@
 #pragma once
 
-#include "config_common.h"
-
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xEEEE
 #define PRODUCT_ID      0x2019
 #define DEVICE_VER		0x0001
-#define MANUFACTURER    Jan Lunge
-#define PRODUCT         3by2
+#define MANUFACTURER    "Jan Lunge"
+#define PRODUCT         "3by2"
 
 /* key matrix size */
 #define MATRIX_ROWS 2

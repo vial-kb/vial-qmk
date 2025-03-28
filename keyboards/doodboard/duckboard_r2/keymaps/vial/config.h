@@ -14,7 +14,7 @@
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6
 
 #ifdef RGB_MATRIX_ENABLE
-#    define DRIVER_LED_TOTAL 8
+#    define RGB_MATRIX_LED_COUNT 8
 #    define RGB_DISABLE_WHEN_USB_SUSPENDED true 
 // RGB Matrix Animation modes. Explicitly enabled
 // For full list of effects, see:

@@ -35,8 +35,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_TRNS, RGB_TOG, RGB_MOD, KC_TRNS,
                  RGB_HUI, RGB_SAI, RGB_VAI, KC_TRNS,
                  RGB_HUD, RGB_SAD, RGB_VAD, KC_TRNS,
-        RESET,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        TG(2),   RESET,   KC_TRNS, KC_TRNS, KC_TRNS),
+        QK_BOOT,   KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        TG(2),   QK_BOOT,   KC_TRNS, KC_TRNS, KC_TRNS),
 
     [3] = LAYOUT(
                  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -74,21 +74,21 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
 #ifdef RGB_MATRIX_ENABLE
 #define XX NO_LED
 
-led_config_t g_led_config = { 
+led_config_t g_led_config = {
     {
         // Key Matrix to LED Index
         { XX, 7,  XX, 6,  XX },
         { 0,  XX, XX, XX, 5  },
         { XX, XX, XX, XX, XX },
         { 1,  XX, XX, XX, 4  },
-        { XX, 2,  XX, 3,  XX } 
+        { XX, 2,  XX, 3,  XX }
     }, {
         // LED Index to Physical Position
         { 0, 16 }, { 0, 48 }, { 56, 64 }, { 168, 64 }, { 224, 48 }, {  224, 16 }, { 168, 0 }, { 56, 0 }
     }, {
         // LED Index to Flag
         2, 2, 2, 2, 2, 2, 2, 2
-    } 
+    }
 };
 #endif
 

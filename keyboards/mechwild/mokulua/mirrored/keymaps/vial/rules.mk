@@ -4,7 +4,7 @@ VIAL_ENABLE          = yes
 
 ENCODER_MAP_ENABLE   = yes
 
-ifeq ($(strip $(MCU)), atmega32u4)
+ifeq ($(strip $(CONVERT_TO)), )
     QMK_SETTINGS         = no
 
 	MAGIC_ENABLE         = no

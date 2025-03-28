@@ -1,0 +1,9 @@
+{
+    "manufacturer": "keyten",
+    "keyboard_name": "imi60",
+    "maintainer": "key10iq",
+    "usb": {
+        "vid": "0xEB69",
+        "pid": "0x6005"
+    }
+}

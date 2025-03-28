@@ -16,8 +16,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#define ENCODERS_PAD_A { C0 }
-#define ENCODERS_PAD_B { C1 }
+#define ENCODER_A_PINS { C0 }
+#define ENCODER_B_PINS { C1 }
 #define ENCODER_DIRECTION_FLIP
 #define ENCODER_RESOLUTION 4
 #define TAP_CODE_DELAY 10

@@ -1,0 +1,13 @@
+{
+  "name": "spaceman_2_milk",
+  "vendorId": "0x5342",
+  "productId": "0x3225",
+  "lighting": "qmk_rgblight",
+  "matrix": {
+    "rows": 2,
+    "cols": 1
+  },
+  "layouts": {
+    "keymap": [["0,0"], ["1,0"]]
+  }
+}
