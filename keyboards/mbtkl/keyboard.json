@@ -10,7 +10,8 @@
         "console": false,
         "extrakey": true,
         "mousekey": true,
-        "nkro": true
+        "nkro": true,
+        "rgblight": true
     },
     "matrix_pins": {
         "cols": [
@@ -38,7 +39,24 @@
         "pid": "0x0000",
         "vid": "0xFEED"
     },
-    "lighting": "qmk_rgblight",
+    "rgblight": {
+        "led_count": 5,
+        "animations": {
+            "breathing": true,
+            "rainbow_mood": true,
+            "rainbow_swirl": true,
+            "snake": true,
+            "knight": true,
+            "christmas": false,
+            "static_gradient": true,
+            "rgb_test": false,
+            "alternating": true,
+            "twinkle": true
+        }
+    },
+    "ws2812": {
+        "pin": "D0"
+    },
     "layouts": {
         "LAYOUT_default": {
             "layout": [
