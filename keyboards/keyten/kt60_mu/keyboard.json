@@ -21,13 +21,6 @@
         "rows": ["B2", "B1", "B7", "B6", "B5"],
         "cols": ["A15", "A4", "F1", "A5", "F0", "A6", "C15", "A7", "C14", "B0", "C13", "B10", "B4", "B3"]
     },
-    "indicators": {
-        "caps_lock": "A14"
-    },
-    "backlight": {
-        "pin": "B11",
-        "levels": 15
-    },
     "community_layouts": [
         "60_ansi_wkl_split_bs_rshift",
         "60_hhkb",
