@@ -13,8 +13,7 @@
         "bootmagic": true,
         "extrakey": true,
         "mousekey": true,
-        "nkro": true,
-        "backlight": true
+        "nkro": true
     },
     "diode_direction": "COL2ROW",
     "matrix_pins": {
