@@ -817,6 +817,19 @@ _Static_assert(FN_MO23 == 0x7C78, "");
 _Static_assert(QK_KB == 0x7E00, "");
 _Static_assert(QK_KB_MAX == 0x7E3F, "");
 
+_Static_assert(RM_ON == 0x7840, "");
+_Static_assert(RM_OFF == 0x7841, "");
+_Static_assert(RM_TOGG == 0x7842, "");
+_Static_assert(RM_NEXT == 0x7843, "");
+_Static_assert(RM_PREV == 0x7844, "");
+_Static_assert(RM_HUEU == 0x7845, "");
+_Static_assert(RM_HUED == 0x7846, "");
+_Static_assert(RM_SATU == 0x7847, "");
+_Static_assert(RM_SATD == 0x7848, "");
+_Static_assert(RM_VALU == 0x7849, "");
+_Static_assert(RM_VALD == 0x784A, "");
+_Static_assert(RM_SPDU == 0x784B, "");
+_Static_assert(RM_SPDD == 0x784C, "");
 
 #undef C_S
 #undef LCG_T

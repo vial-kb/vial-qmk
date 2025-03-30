@@ -441,6 +441,17 @@ void dynamic_keymap_macro_set_buffer(uint16_t offset, uint16_t size, uint8_t *da
     }
 }
 
+typedef struct send_string_eeprom_state_t {
+    const uint8_t *ptr;
+} send_string_eeprom_state_t;
+
+char send_string_get_next_eeprom(void *arg) {
+    send_string_eeprom_state_t *state = (send_string_eeprom_state_t *)arg;
+    char                        ret   = eeprom_read_byte(state->ptr);
+    state->ptr++;
+    return ret;
+}
+
 void dynamic_keymap_macro_reset(void) {
     void *p   = (void *)(DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR);
     void *end = (void *)(DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR + DYNAMIC_KEYMAP_MACRO_EEPROM_SIZE);

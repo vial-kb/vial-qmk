@@ -6,7 +6,7 @@ VIAL_ENABLE 		= yes
 
 RGBLIGHT_ENABLE		= no  # Enable keyboard 'old' RGB lightning
 
-MOUSEKEY_ENABLE		= yes
+MOUSEKEY_ENABLE		= no
 # Disabled, because firmware size is to big for Pro Micros
 QMK_SETTINGS		= no
 TAP_DANCE_ENABLE	= no

@@ -8,13 +8,15 @@ Silakka54 is a RP2040 Zero based 54-key column staggered split keyboard. PCB use
 * Hardware Supported: Silakka54 PCB
 * Hardware Availability: https://github.com/Squalius-cephalus/silakka54
 
-Make example for this keyboard (after setting up your vial build environment):
+Make example for this keyboard (after setting up your build environment):
 
-    make silakka54:vial
+    make silakka54:default
 
 Flashing example for this keyboard:
 
-    make silakka54:vial:flash
+    make silakka54:default:flash
+
+See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
 ## Bootloader
 
