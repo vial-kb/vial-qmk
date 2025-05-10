@@ -1,0 +1,28 @@
+#pragma once
+
+#define VIAL_KEYBOARD_UID {0xBB, 0xBB, 0xAD, 0x3D, 0x70, 0x81, 0xF6, 0x41}
+#define VIAL_UNLOCK_COMBO_ROWS {0, 0}
+#define VIAL_UNLOCK_COMBO_COLS {0, 1}
+
+#define VENDOR_ID 0xCB10
+#define PRODUCT_ID 0x5156
+
+#undef DYNAMIC_KEYMAP_LAYER_COUNT
+#define DYNAMIC_KEYMAP_LAYER_COUNT 8
+#define TAPPING_TERM 180
+
+#define MASTER_LEFT
+// #define MASTER_RIGHT
+// #define EE_HANDS
+
+#ifdef RGBLIGHT_ENABLE
+#    undef RGBLIGHT_LED_COUNT
+#    define RGBLIGHT_ANIMATIONS
+#    define RGBLIGHT_LED_COUNT 60
+#    undef RGBLED_SPLIT
+#    define RGBLED_SPLIT { 30, 30 }
+#    define RGBLIGHT_LIMIT_VAL 120
+#    define RGBLIGHT_HUE_STEP  10
+#    define RGBLIGHT_SAT_STEP  17
+#    define RGBLIGHT_VAL_STEP  17
+#endif
