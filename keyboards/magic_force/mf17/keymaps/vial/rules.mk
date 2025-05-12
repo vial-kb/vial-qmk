@@ -3,7 +3,7 @@ VIAL_ENABLE         = yes
 LTO_ENABLE          = yes
 
 ENCODER_MAP_ENABLE  = no
-MOUSEKEY_ENABLE     = no
+MOUSEKEY_ENABLE     = yes
 MUSIC_ENABLE        = no
 CONSOLE_ENABLE      = no
 COMMAND_ENABLE      = no
