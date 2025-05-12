@@ -16,14 +16,12 @@ enum layer_names {
     _ADJUST
 };
 
-enum custom_keycodes {
-  QWERTY = SAFE_RANGE,
-  COLEMAK,
-  DVORAK,
-  LOWER,
-  RAISE,
-  ADJUST,
-};
+#define QWERTY DF(_QWERTY)
+#define COLEMAK DF(_COLEMAK)
+#define DVORAK DF(_DVORAK)
+#define RAISE MO(_RAISE)
+#define LOWER MO(_LOWER)
+#define ADJUST MO(_ADJUST)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
