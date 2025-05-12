@@ -38,3 +38,13 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     },
 };
 #endif
+
+#ifndef MAGIC_ENABLE
+uint16_t keycode_config(uint16_t keycode) {
+    return keycode;
+}
+
+uint8_t mod_config(uint8_t mod) {
+    return mod;
+}
+#endif
