@@ -2,7 +2,7 @@
     "name": "MonsGeek M3",
     "vendorId": "0xFFFE",
     "productId": "0x0009",
-    "lightning": "qmk_backlight",
+    "lighting": "vialrgb",
     "matrix": {
         "rows": 6,
         "cols": 17
