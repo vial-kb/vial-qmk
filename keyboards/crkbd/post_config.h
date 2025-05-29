@@ -15,7 +15,7 @@
  */
 
 #pragma once
-
+#define SPLIT_USB_DETECT
 #ifndef OLED_FONT_H
 #    define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
 #endif

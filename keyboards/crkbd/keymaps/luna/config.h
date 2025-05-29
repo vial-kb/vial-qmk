@@ -20,8 +20,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#define VIAL_KEYBOARD_UID {0xC8, 0xDD, 0xCD, 0x5C, 0x5D, 0x58, 0xF6, 0x04}
-
 //#define USE_MATRIX_I2C
 #define SPLIT_USB_DETECT
 //#define QUICK_TAP_TERM 0

@@ -20,17 +20,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#define VIAL_KEYBOARD_UID {0xC8, 0xDD, 0xCD, 0x5C, 0x5D, 0x58, 0xF6, 0x04}
-
 //#define USE_MATRIX_I2C
 #define SPLIT_USB_DETECT
 //#define QUICK_TAP_TERM 0
-#define TAPPING_TERM 250
-#pragma once
+//#define TAPPING_TERM 100
 
-#define OLED_TIMEOUT 120000
-#define OLED_BRIGHTNESS 120
-#define SPLIT_WPM_ENABLE
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_BREATHING
     #define RGBLIGHT_EFFECT_RAINBOW_MOOD
