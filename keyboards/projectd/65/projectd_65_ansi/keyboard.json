@@ -8,7 +8,7 @@
     },
     "diode_direction": "COL2ROW",
     "dynamic_keymap": {
-        "layer_count": 13
+        "layer_count": 4
     },
     "eeprom": {
         "driver": "wear_leveling",
