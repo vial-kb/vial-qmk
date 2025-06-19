@@ -169,8 +169,6 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
     return true;
 }
 
-#endif
-
 #ifdef QUANTUM_PAINTER_ENABLE
 
 #include "bao.qgf.c"
