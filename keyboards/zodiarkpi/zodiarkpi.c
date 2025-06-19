@@ -179,7 +179,7 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
 #include "mouse.qgf.c"
 
 painter_device_t display;
-static painter_image_handle_t image;
+painter_image_handle_t image;
 
 // st7789 enable, comment out the following line if not using a st7789
 painter_device_t qp_st7789_make_spi_device(uint16_t panel_width, uint16_t panel_height, pin_t chip_select_pin, pin_t dc_pin, pin_t reset_pin, uint16_t spi_divisor, int spi_mode);
