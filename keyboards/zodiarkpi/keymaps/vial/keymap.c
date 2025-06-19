@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // if we can't load, exit without drawing
         painter_image_handle_t image = qp_load_image_mem(gfx);
         if (image != NULL) {
-            qp_drawimage(display, 0, 0,  gfx_bao); // fill up the arguments
+            qp_drawimage(display, 0, 0,  image); // fill up the arguments
             qp_load_image_mem(image);
         }
 
