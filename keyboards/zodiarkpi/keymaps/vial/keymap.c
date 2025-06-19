@@ -16,7 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "nyanners.qgf.h"
 #include "mouse.qgf.h"
 
-#define display = qp_st7789_make_spi_device(320, 240, LCD_CS_PIN, LCD_DC_PIN, LCD_RST_PIN, LCD_SPI_DIVISOR, 3)
+#define display qp_st7789_make_spi_device(320, 240, LCD_CS_PIN, LCD_DC_PIN, LCD_RST_PIN, LCD_SPI_DIVISOR, 3)
 
 #include QMK_KEYBOARD_H
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -85,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         // if we can't load, exit without drawing
         painter_image_handle_t image = qp_load_image_mem(gfx);
         if (image != NULL) {
-            qp_drawimage(display, 0, 0, bao); // fill up the arguments
+            qp_drawimage(display, 0, 0,  gfx_bao); // fill up the arguments
             qp_load_image_mem(image);
         }
 
