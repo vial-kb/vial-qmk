@@ -179,10 +179,8 @@ bool encoder_update_kb(uint8_t index, bool clockwise) {
 static painter_device_t display;
 static painter_image_handle_t image;
 
-// st7789 enable, comment out the following line if not using a st7789
 painter_device_t qp_st7789_make_spi_device(uint16_t panel_width, uint16_t panel_height, pin_t chip_select_pin, pin_t dc_pin, pin_t reset_pin, uint16_t spi_divisor, int spi_mode);
-// gc9a01 enable, comment out the following line if not using a gc9a01
-// painter_device_t qp_gc9a01_make_spi_device(uint16_t panel_width, uint16_t panel_height, pin_t chip_select_pin, pin_t dc_pin, pin_t reset_pin, uint16_t spi_divisor, int spi_mode);
+
 
 void keyboard_post_init_user(void) {
   // Customise these values to desired behaviour
@@ -206,41 +204,13 @@ reen support, comment out this section if not using a st7789 screen
     if (is_keyboard_left()) {
         qp_init(display, QP_ROTATION_270);
         }
-// If using pointing device on right side, comment out following 3 lines
-        // else {
-        // qp_init(display, QP_ROTATION_0);
-        // }
+
     if (is_keyboard_left()) {
         image = qp_load_image_mem(gfx_bao);
         image = qp_load_image_mem(gfx_nyanners);
         image = qp_load_image_mem(gfx_mouse);
         image = qp_load_image_mem(gfx_numi);
     }
-// If using pointing device on right side, comment out following 3 lines
-   // else {
-    //     image = qp_load_image_mem(gfx_ZodiarkPiLogoSTpink);
-    // }
-   //S  ##end st7789 screen support
-
-    // ##gc9a01 screeen support, comment out this section if not using a gc9a01 screen
-    // display = qp_gc9a01_make_spi_device(240, 240, LCD_CS_PIN, LCD_DC_PIN, LCD_RST_PIN, LCD_SPI_DIVISOR, 0);
-    // qp_power(display, true);
-    // if (is_keyboard_left()) {
-    //     qp_init(display, QP_ROTATION_0);
-    //     }
-    // If using pointing device on right side, comment out following 3 lines
-    //     else {
-    //     qp_init(display, QP_ROTATION_0);
-    //     }
-
-    //     if (is_keyboard_left()) {
-    //     image = qp_load_image_mem(gfx_ZodiarkPiLogoGC);
-    //      }
-    // If using pointing device on right side, comment out following 3 lines
-    //     else {
-    //     image = qp_load_image_mem(gfx_ZodiarkPiLogoGC);
-    // }
-    // ##end GC9A01 screeen support
 
     if (image != NULL) {
         print("image was not null\n");
@@ -249,10 +219,6 @@ reen support, comment out this section if not using a st7789 screen
             #endif
             _drawimage(display, 0, 0, image);
         }
-    // If using pointing device on right side, comment out following 3 lines
-        // else {
-        //     qp_drawimage(display, 0, 0, image);
-        // }
     }
 
 
