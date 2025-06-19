@@ -16,6 +16,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "nyanners.qgf.h"
 #include "mouse.qgf.h"
 
+#define display = qp_st7789_make_spi_device(320, 240, LCD_CS_PIN, LCD_DC_PIN, LCD_RST_PIN, LCD_SPI_DIVISOR, 3)
+
 #include QMK_KEYBOARD_H
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -52,3 +54,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       )
 
 };
+    // this function is called whenever there's a layer change
+    layer_state_t layer_state_set_user(layer_state_t state) {
+        // lets load a different image based on the current layer
+        //
+        // needless to say, change the layer->image mapping as you like
+        // i've put some random things here
+        const uint8_t *gfx = NULL;
+        switch (get_highest_layer(default_layer_state | state)) {
+            case 0:
+                gfx = gfx_bao;
+                break;
+
+            case 1:
+                gfx = gfx_nyanners;
+                break;
+
+            case 2:
+                gfx = gfx_numi;
+                break;
+
+            case 3:
+                gfx = gfx_mouse;
+                break;
+
+            default:
+                break;
+        }
+
+        // if we can't load, exit without drawing
+        painter_image_handle_t image = qp_load_image_mem(gfx);
+        if (image != NULL) {
+            qp_drawimage(display, 0, 0, bao); // fill up the arguments
+            qp_load_image_mem(image);
+        }
+
+        return state;
+    }

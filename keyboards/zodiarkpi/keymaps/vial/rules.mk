@@ -6,3 +6,7 @@ QUANTUM_PAINTER_DRIVERS += st7789_spi
 POINTING_DEVICE_DRIVER = cirque_pinnacle_spi
 POINTING_DEVICE_ENABLE = yes
 VIALRGB_ENABLE = yes
+SRC += bao.qgf.c
+SRC += numi.qgf.c
+SRC += mouse.qgf.c
+SRC += nyanners.qgf.c
