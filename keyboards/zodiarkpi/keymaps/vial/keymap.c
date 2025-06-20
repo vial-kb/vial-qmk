@@ -15,8 +15,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "numi.qgf.h"
 #include "nyanners.qgf.h"
 #include "mouse.qgf.h"
-
 extern painter_device_t display;
+
+
+
+
 
 #include QMK_KEYBOARD_H
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -91,3 +94,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
         return state;
     }
+void housekeeping_task_user(void) {
+    static layer_state_t last = 0;
+    if (layer_state != last) {
+        layer_state_set(layer_state);
+    }
+    last = layer_state;
+}

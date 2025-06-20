@@ -13,6 +13,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include "quantum.h"
 #include "print.h"
+#define SPLIT_LAYER_STATE_ENABLE
 
 #ifdef RGB_MATRIX_ENABLE
 led_config_t g_led_config = { {
@@ -195,8 +196,6 @@ void keyboard_post_init_user(void) {
 uint32_t deferred_init(uint32_t trigger_time, void *cb_arg) {
 
     print("doing stuff\n");
-
-// ##st7789 sc
 
 #endif
 
