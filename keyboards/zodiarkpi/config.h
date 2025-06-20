@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define SPI_SCK_PIN GP14
 #define SPI_MOSI_PIN GP15
 #define SPI_MISO_PIN GP12
-
+#define QUANTUM_PAINTER_DEBUG
 // SplitHands config
 #define SPLIT_HAND_PIN GP13
 
