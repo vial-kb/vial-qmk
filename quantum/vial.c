@@ -224,6 +224,16 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 msg[0] = VIAL_TAP_DANCE_ENTRIES;
                 msg[1] = VIAL_COMBO_ENTRIES;
                 msg[2] = VIAL_KEY_OVERRIDE_ENTRIES;
+
+                // The last byte of msg indicates optionally supported features.
+                msg[length - 1] = (0
+#ifdef CAPS_WORD_ENABLE
+                        | (1 << 0)  // Bit 0: Caps Word.
+#endif
+#ifdef LAYER_LOCK_ENABLE
+                        | (1 << 1)  // Bit 1: Layer Lock.
+#endif
+                        );
                 break;
             }
 #ifdef VIAL_TAP_DANCE_ENABLE
