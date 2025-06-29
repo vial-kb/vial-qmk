@@ -1,0 +1,32 @@
+{
+  "name": "picot_cs36",
+  "vendorId": "0x1727",
+  "productId": "0x0017",
+  "lighting": "qmk_rgblight",
+  "matrix": { "rows":2, "cols": 3 },
+  "customKeycodes": [
+    {"name": "CPI_SW", "title": "Change CPI of trackball", "shortName": "CPI_SW"},
+    {"name": "SCRL_SW", "title": "Change sensitivity of scroll mode", "shortName": "SCRL_SW"},
+    {"name": "ROT_R15", "title": "Rotate sensor Y-axis by 15 degrees clockwise", "shortName": "ROT_R15"},
+    {"name": "ROT_L15", "title": "Rotate sensor Y-axis by 15 degrees counterclockwise", "shortName": "ROT_L15"},
+    {"name": "SCRL_MO", "title": "Enable scroll mode while being pressed", "shortName": "SCRL_MO"},
+    {"name": "SCRL_TO", "title": "Toggle scroll and cursor mode each time pressed", "shortName": "SCRL_TO"},
+    {"name": "SCRL_IN", "title": "Invert scroll direction", "shortName": "SCRL_IN"},
+    {"name": "AM_TOG", "title": "Toggle auto mouse layer", "shortName": "AM_TOG"}
+  ],
+  "layouts": {
+    "keymap": [
+      [
+        "0,0",
+        "0,1",
+        "0,2",
+        {
+          "x": 0.25
+        },
+        "1,0",
+        "1,1",
+        "1,2"
+      ]
+      ]
+  }
+}

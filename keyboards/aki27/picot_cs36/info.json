@@ -1,0 +1,65 @@
+{
+    "keyboard_name": "picot_cs36",
+    "manufacturer": "aki27",
+    "maintainer": "aki27",
+    "url": "",
+    "usb": {
+        "device_version": "1.0.0",
+        "pid": "0x0017",
+        "vid": "0x1727"
+    },
+    "processor": "RP2040",
+    "bootloader": "rp2040",
+    "features": {
+        "bootmagic": true,
+        "extrakey": true,
+        "nkro": true,
+        "oled": false,
+        "rgblight": false,
+        "rgb_matrix": false,
+        "mousekey": true,
+        "encoder": false
+    },
+    "build": {
+        "lto": true
+    },
+    "diode_direction": "COL2ROW",
+    "matrix_pins": {
+        "direct":[
+            ["GP27", "GP26", "GP25"]
+        ]
+    },
+    "bootmagic": {
+        "enabled": true,
+        "matrix": [ 0, 1 ]
+    },
+    "split": {
+        "enabled": true,
+        "bootmagic": {
+            "matrix": [ 1, 1 ]
+        },
+        "matrix_pins": {
+            "right": {
+                "direct": [
+                    ["GP27", "GP26", "GP25"]
+                ]
+            }
+        },
+        "transport": {
+            "protocol": "serial_usart",
+            "watchdog": true
+        }
+    },
+    "layouts": {
+        "LAYOUT": {
+            "layout": [
+                {"matrix": [0, 0], "x": 0, "y": 0},
+                {"matrix": [0, 1], "x": 1, "y": 0},
+                {"matrix": [0, 2], "x": 2, "y": 0},
+                {"matrix": [1, 0], "x": 3.25, "y": 0},
+                {"matrix": [1, 1], "x": 4.25, "y": 0},
+                {"matrix": [1, 2], "x": 5.25, "y": 0}
+            ]
+        }
+    }
+}
