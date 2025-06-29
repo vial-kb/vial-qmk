@@ -58,6 +58,8 @@ enum {
     dynamic_vial_combo_set = 0x04,
     dynamic_vial_key_override_get = 0x05,
     dynamic_vial_key_override_set = 0x06,
+    dynamic_vial_alt_repeat_key_get = 0x07,
+    dynamic_vial_alt_repeat_key_set = 0x08,
 };
 
 #define VIAL_MACRO_EXT_TAP 5
@@ -180,4 +182,41 @@ enum {
 #else
 #undef VIAL_KEY_OVERRIDE_ENTRIES
 #define VIAL_KEY_OVERRIDE_ENTRIES 0
+#endif
+
+
+#if defined(REPEAT_KEY_ENABLE) && !defined(NO_ALT_REPEAT_KEY)
+#define VIAL_ALT_REPEAT_KEY_ENABLE
+
+#ifndef VIAL_ALT_REPEAT_KEY_ENTRIES
+    #if TOTAL_EEPROM_BYTE_COUNT > 4000
+        #define VIAL_ALT_REPEAT_KEY_ENTRIES 32
+    #elif TOTAL_EEPROM_BYTE_COUNT > 2000
+        #define VIAL_ALT_REPEAT_KEY_ENTRIES 16
+    #elif TOTAL_EEPROM_BYTE_COUNT > 1000
+        #define VIAL_ALT_REPEAT_KEY_ENTRIES 8
+    #else
+        #define VIAL_ALT_REPEAT_KEY_ENTRIES 4
+    #endif
+#endif
+
+/* alt repeat key struct as it is stored in eeprom and transferred to vial-gui */
+typedef struct {
+    uint16_t keycode;
+    uint16_t alt_keycode;
+    uint8_t allowed_mods;
+    uint8_t options;
+} vial_alt_repeat_key_entry_t;
+_Static_assert(sizeof(vial_alt_repeat_key_entry_t) == 6, "Unexpected size of the vial_alt_repeat_key_entry_t structure");
+
+enum {
+    vial_arep_option_default_to_this_alt_key = (1 << 0),
+    vial_arep_option_bidirectional = (1 << 1),
+    vial_arep_option_ignore_mod_handedness = (1 << 2),
+    vial_arep_enabled = (1 << 3),
+};
+
+#else
+#undef VIAL_ALT_REPEAT_KEY_ENTRIES
+#define VIAL_ALT_REPEAT_KEY_ENTRIES 0
 #endif

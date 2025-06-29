@@ -103,6 +103,16 @@ int dynamic_keymap_set_key_override(uint8_t index, const vial_key_override_entry
 }
 #endif
 
+#ifdef VIAL_ALT_REPEAT_KEY_ENABLE
+int dynamic_keymap_get_alt_repeat_key(uint8_t index, vial_alt_repeat_key_entry_t *entry) {
+    return nvm_dynamic_keymap_get_alt_repeat_key(index, entry);
+}
+
+int dynamic_keymap_set_alt_repeat_key(uint8_t index, const vial_alt_repeat_key_entry_t *entry) {
+    return nvm_dynamic_keymap_set_alt_repeat_key(index, entry);
+}
+#endif
+
 void dynamic_keymap_reset(void) {
 #ifdef VIAL_ENABLE
     /* temporarily unlock the keyboard so we can set hardcoded QK_BOOT keycode */
@@ -133,24 +143,38 @@ void dynamic_keymap_reset(void) {
 #endif
 
 #ifdef VIAL_TAP_DANCE_ENABLE
-    vial_tap_dance_entry_t td = { KC_NO, KC_NO, KC_NO, KC_NO, TAPPING_TERM };
-    for (size_t i = 0; i < VIAL_TAP_DANCE_ENTRIES; ++i) {
-        dynamic_keymap_set_tap_dance(i, &td);
+    {
+        vial_tap_dance_entry_t td = { KC_NO, KC_NO, KC_NO, KC_NO, TAPPING_TERM };
+        for (size_t i = 0; i < VIAL_TAP_DANCE_ENTRIES; ++i) {
+            dynamic_keymap_set_tap_dance(i, &td);
+        }
     }
 #endif
 
 #ifdef VIAL_COMBO_ENABLE
-    vial_combo_entry_t combo = { 0 };
-    for (size_t i = 0; i < VIAL_COMBO_ENTRIES; ++i)
-        dynamic_keymap_set_combo(i, &combo);
+    {
+        vial_combo_entry_t combo = { 0 };
+        for (size_t i = 0; i < VIAL_COMBO_ENTRIES; ++i)
+            dynamic_keymap_set_combo(i, &combo);
+    }
 #endif
 
 #ifdef VIAL_KEY_OVERRIDE_ENABLE
-    vial_key_override_entry_t ko = { 0 };
-    ko.layers = ~0;
-    ko.options = vial_ko_option_activation_negative_mod_up | vial_ko_option_activation_required_mod_down | vial_ko_option_activation_trigger_down;
-    for (size_t i = 0; i < VIAL_KEY_OVERRIDE_ENTRIES; ++i)
-        dynamic_keymap_set_key_override(i, &ko);
+    {
+        vial_key_override_entry_t ko = { 0 };
+        ko.layers = ~0;
+        ko.options = vial_ko_option_activation_negative_mod_up | vial_ko_option_activation_required_mod_down | vial_ko_option_activation_trigger_down;
+        for (size_t i = 0; i < VIAL_KEY_OVERRIDE_ENTRIES; ++i)
+            dynamic_keymap_set_key_override(i, &ko);
+    }
+#endif
+
+#ifdef VIAL_ALT_REPEAT_KEY_ENABLE
+    {
+        vial_alt_repeat_key_entry_t arep = { 0 };
+        for (size_t i = 0; i < VIAL_ALT_REPEAT_KEY_ENTRIES; ++i)
+            dynamic_keymap_set_alt_repeat_key(i, &arep);
+    }
 #endif
 
 #ifdef VIAL_ENABLE

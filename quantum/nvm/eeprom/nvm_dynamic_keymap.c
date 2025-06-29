@@ -81,9 +81,18 @@ STATIC_ASSERT(DYNAMIC_KEYMAP_EEPROM_MAX_ADDR <= 65535, "DYNAMIC_KEYMAP_EEPROM_MA
 #define VIAL_KEY_OVERRIDE_SIZE 0
 #endif
 
+// Alt Repeat Key
+#define VIAL_ALT_REPEAT_KEY_EEPROM_ADDR (VIAL_KEY_OVERRIDE_EEPROM_ADDR + VIAL_KEY_OVERRIDE_SIZE)
+
+#ifdef VIAL_ALT_REPEAT_KEY_ENABLE
+#define VIAL_ALT_REPEAT_KEY_SIZE (sizeof(vial_alt_repeat_key_entry_t) * VIAL_ALT_REPEAT_KEY_ENTRIES)
+#else
+#define VIAL_ALT_REPEAT_KEY_SIZE 0
+#endif
+
 // Dynamic macro
 #ifndef DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
-#    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (VIAL_KEY_OVERRIDE_EEPROM_ADDR + VIAL_KEY_OVERRIDE_SIZE)
+#    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (VIAL_ALT_REPEAT_KEY_EEPROM_ADDR + VIAL_ALT_REPEAT_KEY_SIZE)
 #endif
 
 // Sanity check that dynamic keymaps fit in available EEPROM
@@ -351,6 +360,28 @@ int nvm_dynamic_keymap_set_key_override(uint8_t index, const vial_key_override_e
 
     void *address = (void*)(VIAL_KEY_OVERRIDE_EEPROM_ADDR + index * sizeof(vial_key_override_entry_t));
     eeprom_write_block(entry, address, sizeof(vial_key_override_entry_t));
+
+    return 0;
+}
+#endif
+
+#ifdef VIAL_ALT_REPEAT_KEY_ENABLE
+int nvm_dynamic_keymap_get_alt_repeat_key(uint8_t index, vial_alt_repeat_key_entry_t *entry) {
+    if (index >= VIAL_ALT_REPEAT_KEY_ENTRIES)
+        return -1;
+
+    void *address = (void*)(VIAL_ALT_REPEAT_KEY_EEPROM_ADDR + index * sizeof(vial_alt_repeat_key_entry_t));
+    eeprom_read_block(entry, address, sizeof(vial_alt_repeat_key_entry_t));
+
+    return 0;
+}
+
+int nvm_dynamic_keymap_set_alt_repeat_key(uint8_t index, const vial_alt_repeat_key_entry_t *entry) {
+    if (index >= VIAL_ALT_REPEAT_KEY_ENTRIES)
+        return -1;
+
+    void *address = (void*)(VIAL_ALT_REPEAT_KEY_EEPROM_ADDR + index * sizeof(vial_alt_repeat_key_entry_t));
+    eeprom_write_block(entry, address, sizeof(vial_alt_repeat_key_entry_t));
 
     return 0;
 }

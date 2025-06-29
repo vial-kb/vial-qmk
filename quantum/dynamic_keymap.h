@@ -53,6 +53,10 @@ int dynamic_keymap_set_combo(uint8_t index, const vial_combo_entry_t *entry);
 int dynamic_keymap_get_key_override(uint8_t index, vial_key_override_entry_t *entry);
 int dynamic_keymap_set_key_override(uint8_t index, const vial_key_override_entry_t *entry);
 #endif
+#ifdef VIAL_ALT_REPEAT_KEY_ENABLE
+int dynamic_keymap_get_alt_repeat_key(uint8_t index, vial_alt_repeat_key_entry_t *entry);
+int dynamic_keymap_set_alt_repeat_key(uint8_t index, const vial_alt_repeat_key_entry_t *entry);
+#endif
 void     dynamic_keymap_reset(void);
 // These get/set the keycodes as stored in the EEPROM buffer
 // Data is big-endian 16-bit values (the keycodes)
