@@ -765,7 +765,8 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 
         // If this entry is the default alt key and allowed mods are satisfied,
         // use it if no there is no other match.
-        if ((options & vial_arep_option_default_to_this_alt_key) != 0 && best_fit < 0 &&
+        if ((options & vial_arep_option_default_to_this_alt_key) != 0 &&
+                best_fit == -1 && alt_keycode == KC_TRNS &&
                 alt_repeat_key_mods_match(mods, 0, entry->allowed_mods, options)) {
             alt_keycode = (entry->alt_required_mods << 8) | entry->alt_keycode;
         }

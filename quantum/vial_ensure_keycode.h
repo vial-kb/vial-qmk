@@ -815,7 +815,8 @@ _Static_assert(QK_CAPS_WORD_TOGGLE == 0x7C73, "");
 
 _Static_assert(FN_MO13 == 0x7C77, "");
 _Static_assert(FN_MO23 == 0x7C78, "");
-
+_Static_assert(QK_REPEAT_KEY == 0x7C79, "");
+_Static_assert(QK_ALT_REPEAT_KEY == 0x7C7A, "");
 _Static_assert(QK_LAYER_LOCK == 0x7C7B, "");
 
 /* Ensure that we have 64 USERxx keycodes */
