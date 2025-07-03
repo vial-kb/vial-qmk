@@ -2,6 +2,4 @@ VIA_ENABLE = yes
 VIAL_ENABLE = yes
 VIALRGB_ENABLE = yes
 QMK_SETTINGS = no # I need more space, sorry!
-CAPS_WORD_ENABLE = no
-LAYER_LOCK_ENABLE = no
 REPEAT_KEY_ENABLE = no
