@@ -11,6 +11,5 @@ else
 	# Enable Mouse Keys when when not using a ProMicro as there will be space:
 	MOUSEKEY_ENABLE = yes
 endif
-CAPS_WORD_ENABLE = no
 LAYER_LOCK_ENABLE = no
 REPEAT_KEY_ENABLE = no
