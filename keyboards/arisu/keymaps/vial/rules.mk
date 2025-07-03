@@ -4,6 +4,4 @@ VIAL_ENABLE = yes
 # must reduce EEPROM usage
 LTO_ENABLE = yes
 QMK_SETTINGS = no
-CAPS_WORD_ENABLE = no
-LAYER_LOCK_ENABLE = no
 REPEAT_KEY_ENABLE = no
