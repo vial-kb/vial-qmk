@@ -70,15 +70,15 @@
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [MAC_BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [WIN_BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [_FN1]     = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
-    [_FN2]     = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
+    [_FN1]     = { ENCODER_CCW_CW(KC_BRID, KC_BRIU) },
+    [_FN2]     = { ENCODER_CCW_CW(KC_BRID, KC_BRIU) },
     [_FN3]     = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }
 };
 #endif
 
 void housekeeping_task_user(void) {
-     housekeeping_task_keychron();
- }
+    housekeeping_task_keychron();
+}
  
  bool process_record_user(uint16_t keycode, keyrecord_t *record) {
      if (!process_record_keychron(keycode, record)) {

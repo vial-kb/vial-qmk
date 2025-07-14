@@ -19,6 +19,7 @@
 #define _CHIBIOS_HAL_CONF_VER_8_0_
 
 #define HAL_USE_SPI TRUE
+#define HAL_USE_I2C TRUE
 
 #ifdef LK_WIRELESS_ENABLE
 #    define HAL_USE_RTC TRUE

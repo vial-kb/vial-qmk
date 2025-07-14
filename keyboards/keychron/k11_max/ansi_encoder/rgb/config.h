@@ -21,14 +21,16 @@
 #    define DRIVER_COUNT 2
 #    define RGB_MATRIX_LED_COUNT 68
 
-#    define SPI_SCK_PIN A5
-#    define SPI_MISO_PIN A6
-#    define SPI_MOSI_PIN A7
+/* RGB Matrix Driver Configuration - using I2C like Q8 */
+#    define SNLED27351_I2C_ADDRESS_1 SNLED27351_I2C_ADDRESS_VDDIO
+#    define SNLED27351_I2C_ADDRESS_2 SNLED27351_I2C_ADDRESS_GND
 
-#    define DRIVER_CS_PINS \
-        { B8, B9 }
-#    define SNLED27351_SPI_DIVISOR 16
-#    define SPI_DRIVER SPID1
+/* Increase I2C speed to 1000 KHz */
+#    define I2C1_TIMINGR_PRESC 0U
+#    define I2C1_TIMINGR_SCLDEL 3U
+#    define I2C1_TIMINGR_SDADEL 0U
+#    define I2C1_TIMINGR_SCLH 15U
+#    define I2C1_TIMINGR_SCLL 51U
 
 /* Scan phase of led driver set as MSKPHASE_12CHANNEL(defined as 0x03 in snled27351.h) */
 #    define SNLED27351_PHASE_CHANNEL MSKPHASE_12CHANNEL
