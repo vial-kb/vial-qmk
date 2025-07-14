@@ -27,7 +27,7 @@
 
 #    define DRIVER_CS_PINS \
         { B8, B9 }
-#    define SNLED23751_SPI_DIVISOR 16
+#    define SNLED27351_SPI_DIVISOR 16
 #    define SPI_DRIVER SPID1
 
 /* Scan phase of led driver set as MSKPHASE_12CHANNEL(defined as 0x03 in snled27351.h) */
