@@ -1,54 +1,8 @@
-{
-    "name": "Protagonist PRO-H",
-    "manufacturer": "WiredIn",
-    "maintainer": "Gondolindrim",
-    "usb": {
-        "vid": "0x5749",
-        "pid": "0x5048",
-        "device_version": "0.0.1"
-    },
     "matrix": {
         "rows": 6,
         "cols": 14
     },
-    "matrix_pins": {
-        "cols": ["A4" , "A3" , "A2" , "A10", "A8" , "B12", "A15", "B3" , "B4" , "B5" , "C15", "C14", "B9" , "C13"],
-        "rows": ["B1" , "B10", "B14", "B8" , "A0", "A1"]
-    },
-    "features": {
-        "bootmagic": true,
-        "mousekey":  true,
-        "extrakey":  true,
-        "rgblight":  true,
-        "backlight": false,
-        "nkro":      true
-    },
-    "build": {
-        "lto": true
-    },
-    "diode_direction": "COL2ROW",
     "lighting": "qmk_rgblight",
-    "rgblight": {
-        "led_count": 22,
-        "animations": {
-            "breathing": true,
-            "rainbow_mood": true,
-            "rainbow_swirl": true,
-            "snake": true,
-            "knight": true,
-            "christmas": true,
-            "static_gradient": true,
-            "rgb_test": true,
-            "alternating": true,
-            "twinkle": true
-        }
-    },
-    "ws2812": {
-        "pin": "B15",
-        "driver": "pwm"
-    },
-    "processor": "STM32F411",
-    "bootloader": "stm32-dfu",
     "layouts": {
         "labels":[
             "Split Backspace",
