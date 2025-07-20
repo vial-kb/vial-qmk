@@ -1,59 +1,9 @@
 {
-    "name": "Protagonist PRO-H",
-    "manufacturer": "WiredIn",
-    "maintainer": "Gondolindrim",
-    "usb": {
-        "vid": "0x5749",
-        "pid": "0x5048",
-        "device_version": "0.0.1"
-    },
     "matrix": {
-        "rows": 7,
+        "rows": 6,
         "cols": 14
     },
-    "matrix_pins": {
-        "cols": ["A3" , "A2" , "A1" , "B14", "B12", "A10", "A8" , "B4" , "B3" , "A15", "C15", "C14", "C13", "B8"],
-        "rows": ["A4" , "A7" , "B0" , "B5" , "B9" , "A0" , "B10"]
-    },
-    "features": {
-        "bootmagic": true,
-        "mousekey":  true,
-        "extrakey":  true,
-        "rgblight":  true,
-        "backlight": true,
-        "nkro":      true
-    },
-    "build": {
-        "lto": true
-    },
-    "diode_direction": "COL2ROW",
-    "backlight": {
-        "pin": "B1",
-        "levels": 20,
-        "as_caps_lock": true
-    },
     "lighting": "qmk_rgblight",
-    "rgblight": {
-        "led_count": 22,
-        "animations": {
-            "breathing": true,
-            "rainbow_mood": true,
-            "rainbow_swirl": true,
-            "snake": true,
-            "knight": true,
-            "christmas": true,
-            "static_gradient": true,
-            "rgb_test": true,
-            "alternating": true,
-            "twinkle": true
-        }
-    },
-    "ws2812": {
-        "pin": "B15",
-        "driver": "pwm"
-    },
-    "processor": "STM32F411",
-    "bootloader": "stm32-dfu",
     "layouts": {
         "labels":[
             "Split Backspace",
