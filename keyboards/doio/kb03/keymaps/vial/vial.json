@@ -1,7 +1,4 @@
 {
-  "name": "KB03-01",
-  "vendorId": "0xD010",
-  "productId": "0x3011",
   "lighting": "vialrgb",
   "matrix": {"rows": 1, "cols": 5},
   "layouts": {
