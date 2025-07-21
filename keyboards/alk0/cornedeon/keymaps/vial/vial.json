@@ -1,7 +1,4 @@
 {
-  "name": "Cornedeon",
-  "vendorId": "0x4653",
-  "productId": "0x0005",
   "lighting": "vialrgb",
   "matrix": { "rows": 8, "cols": 6 },
   "layouts": {
