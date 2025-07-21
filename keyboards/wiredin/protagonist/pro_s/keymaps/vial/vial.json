@@ -1,6 +1,6 @@
 {
     "matrix": {
-        "rows": 6,
+        "rows": 7,
         "cols": 14
     },
     "lighting": "qmk_rgblight",
