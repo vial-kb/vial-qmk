@@ -33,9 +33,12 @@
         "enabled": true,
         "bootmagic": {
             "matrix": [4, 1]
-        }
+        },
+        "handedness": {
+            "pin": "GP8"
+        },
         "serial": {
-            "driver": "vendor"        
+            "driver": "vendor"
         },
         "transport": {
             "sync": {
@@ -128,10 +131,6 @@
         }
     },
     "rgb_matrix": {
-        "driver": "ws2812",
-        "led_count": 60,
-        "split_count": [30, 30],
-        "max_brightness": 120,
         "animations": {
             "alphas_mods": true,
             "gradient_up_down": true,

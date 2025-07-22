@@ -3,13 +3,14 @@
 
 #pragma once
 
-#define SERIAL_USART_FULL_DUPLEX
+//#define SERIAL_USART_FULL_DUPLEX
+//#define SERIAL_USART_RX_PIN GP2
 #define SERIAL_USART_TX_PIN GP1
-#define SERIAL_USART_RX_PIN GP2
+//#define SOFT_SERIAL_PIN GP1
 
 /* RP2040- and hardware-specific config */
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET // Activates the double-tap behavior
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 500U
 #define PICO_XOSC_STARTUP_DELAY_MULTIPLIER 64
 
-#define SPLIT_HAND_PIN GP8
+//#define SPLIT_HAND_PIN GP8

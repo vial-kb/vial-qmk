@@ -1,7 +1,5 @@
 {
-  "lighting": {
-      "extends": "qmk_rgblight"
-  },
+  "lighting": "vialrgb",
   "matrix": { "rows": 8, "cols": 6 },
   "layouts": {
       "keymap": [
