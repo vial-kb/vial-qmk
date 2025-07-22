@@ -1,7 +1,8 @@
 {
-    "manufacturer": "ALK0",
+    "maintainer": "alko",
+    "manufacturer": "alko",
+    "keyboard_name": "Cornedeon",
     "url": "https://github.com/alko-kbd/qmk-vial",
-    "maintainer": "qmk",
     "usb": {
         "vid": "0x4653"
     },
@@ -22,12 +23,8 @@
             "matrix": [4, 1]
         }
     },
-    "layout_aliases": {
-        "LAYOUT": "LAYOUT_split_3x6"
-    },
-    "community_layouts": [ "split_3x6" ],
     "layouts": {
-        "LAYOUT_split_3x6": {
+        "LAYOUT": {
             "layout": [
                 {"matrix": [0, 0], "x": 0, "y": 0.3},
                 {"matrix": [0, 1], "x": 1, "y": 0.3},

@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT_split_3x6(
+  [0] = LAYOUT(
   //,-----------------------------------------------------.    ,-----------------------------------------------------.
        KC_ESC,    KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|    |--------+--------+--------+--------+--------+--------|
@@ -30,7 +30,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_LCTL,KC_LEFT,KC_RIGHT, KC_LALT, TL_LOWR,  KC_SPC,        KC_SPC, TL_UPPR, KC_RGUI, KC_DOWN,   KC_UP, KC_RCTL
   //`------------------------------------------------------'   `-----------------------------------------------------'
   ),
-  [1] = LAYOUT_split_3x6(
+  [1] = LAYOUT(
   //,-----------------------------------------------------.    ,-----------------------------------------------------.
        KC_TAB, KC_TILD, KC_LPRN, KC_RPRN, KC_PLUS,KC_MINUS,         KC_7,    KC_8,    KC_9,    KC_0,  KC_INS,  KC_DEL,
   //|--------+--------+--------+--------+--------+--------|    |--------+--------+--------+--------+--------+--------|
