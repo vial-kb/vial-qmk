@@ -6,3 +6,5 @@ Keyboard Maintainer: [alk0](https://github.com/alk0-kbd/) [alko-kbd@alk0.ru](mai
 Hardware Supported: Corne 3 PCB, Handwired
 
 ![Corne3-based Cornedeon](https://cornedeon.ru/img/cornedeon_3_overviev.jpg)
+
+qmk compile -kb alko/cornedeon/rev2 -km vial
