@@ -23,7 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define VIAL_UNLOCK_COMBO_COLS {0, 1}
 
 // For master half only when MASTER_LEFT/MASTER_RIGHT using
-#define WAIT_FOR_USB
+//#define WAIT_FOR_USB
 
 /* Select hand configuration */
 

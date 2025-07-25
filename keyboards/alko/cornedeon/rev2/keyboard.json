@@ -38,7 +38,8 @@
             "pin": "GP8"
         },
         "serial": {
-            "driver": "vendor"
+            "driver": "vendor",
+            "pin": "GP1"
         },
         "transport": {
             "sync": {
