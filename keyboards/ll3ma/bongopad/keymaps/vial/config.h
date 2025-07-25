@@ -1,4 +1,4 @@
-// Copyright 2021 Ll3macorn (@ll3macorn)
+// Copyright 2025 Ll3ma (@ll3ma)
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #define VIAL_KEYBOARD_UID {0x08, 0xDB, 0x6F, 0x28, 0x40, 0xFD, 0x6F, 0x58}
