@@ -9,6 +9,7 @@
         "nkro": true
     },
     "processor": "STM32F411",
+    "bootloader": "stm32-dfu",
     "url": "https://github.com/H3lli0n/CantorMx-3DP-case",
     "usb": {
         "device_version": "1.0.0",
