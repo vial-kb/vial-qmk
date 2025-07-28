@@ -1,0 +1,58 @@
+#pragma once
+
+#define VIAL_KEYBOARD_UID {0xBB, 0xBB, 0xAD, 0x3D, 0x70, 0x81, 0xF6, 0x41}
+#define VIAL_UNLOCK_COMBO_ROWS {0, 0}
+#define VIAL_UNLOCK_COMBO_COLS {0, 1}
+
+#if defined(NYQUIST_REV1)
+    #define DYNAMIC_KEYMAP_LAYER_COUNT 6
+    #define VIAL_MACRO_ENTRIES 16
+    #define DYNAMIC_KEYMAP_MACRO_COUNT 16
+    #define VIAL_TAP_DANCE_ENTRIES 8
+
+#elif defined(NYQUIST_REV2)
+    #define DYNAMIC_KEYMAP_LAYER_COUNT 6
+    #define VIAL_MACRO_ENTRIES 16
+    #define DYNAMIC_KEYMAP_MACRO_COUNT 16
+    #define VIAL_TAP_DANCE_ENTRIES 8
+
+#elif defined(NYQUIST_REV3)
+    #define DYNAMIC_KEYMAP_LAYER_COUNT 6
+    #define VIAL_MACRO_ENTRIES 32
+    #define DYNAMIC_KEYMAP_MACRO_COUNT 32
+    #define VIAL_COMBO_ENTRIES 16
+    #define VIAL_TAP_DANCE_ENTRIES 8
+
+#elif defined(NYQUIST_REV4)
+    #define DYNAMIC_KEYMAP_LAYER_COUNT 8
+    #define VIAL_MACRO_ENTRIES 64
+    #define DYNAMIC_KEYMAP_MACRO_COUNT 64
+    #define VIAL_COMBO_ENTRIES 64
+    #define VIAL_TAP_DANCE_ENTRIES 32
+
+#elif defined(NYQUIST_REV5)
+    #define DYNAMIC_KEYMAP_LAYER_COUNT 8
+    #define VIAL_MACRO_ENTRIES 64
+    #define DYNAMIC_KEYMAP_MACRO_COUNT 64
+    #define VIAL_COMBO_ENTRIES 64
+    #define VIAL_TAP_DANCE_ENTRIES 32
+
+#else
+    #error "Unknown revision - missing OPT_DEFS?"
+#endif
+
+#define MASTER_LEFT
+// #define MASTER_RIGHT
+// #define EE_HANDS
+
+#ifdef RGBLIGHT_ENABLE
+#    undef RGBLIGHT_LED_COUNT
+#    define RGBLIGHT_ANIMATIONS
+#    define RGBLIGHT_LED_COUNT 60
+#    undef RGBLED_SPLIT
+#    define RGBLED_SPLIT { 30, 30 }
+#    define RGBLIGHT_LIMIT_VAL 120
+#    define RGBLIGHT_HUE_STEP  10
+#    define RGBLIGHT_SAT_STEP  17
+#    define RGBLIGHT_VAL_STEP  17
+#endif

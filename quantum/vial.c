@@ -58,6 +58,10 @@ static void reload_combo(void);
 static void reload_key_override(void);
 #endif
 
+#ifdef VIAL_ALT_REPEAT_KEY_ENABLE
+static void reload_alt_repeat_key(void);
+#endif
+
 void vial_init(void) {
 #ifdef VIAL_TAP_DANCE_ENABLE
     reload_tap_dance();
@@ -67,6 +71,9 @@ void vial_init(void) {
 #endif
 #ifdef VIAL_KEY_OVERRIDE_ENABLE
     reload_key_override();
+#endif
+#ifdef VIAL_ALT_REPEAT_KEY_ENABLE
+    reload_alt_repeat_key();
 #endif
 }
 
@@ -224,6 +231,17 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 msg[0] = VIAL_TAP_DANCE_ENTRIES;
                 msg[1] = VIAL_COMBO_ENTRIES;
                 msg[2] = VIAL_KEY_OVERRIDE_ENTRIES;
+                msg[3] = VIAL_ALT_REPEAT_KEY_ENTRIES;
+
+                // The last byte of msg indicates optionally supported features.
+                msg[length - 1] = (0
+#ifdef CAPS_WORD_ENABLE
+                        | (1 << 0)  // Bit 0: Caps Word.
+#endif
+#ifdef LAYER_LOCK_ENABLE
+                        | (1 << 1)  // Bit 1: Layer Lock.
+#endif
+                        );
                 break;
             }
 #ifdef VIAL_TAP_DANCE_ENABLE
@@ -280,6 +298,25 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 entry.replacement = vial_keycode_firewall(entry.replacement);
                 msg[0] = dynamic_keymap_set_key_override(idx, &entry);
                 reload_key_override();
+                break;
+            }
+#endif
+#ifdef VIAL_ALT_REPEAT_KEY_ENABLE
+            case dynamic_vial_alt_repeat_key_get: {
+                uint8_t idx = msg[3];
+                vial_alt_repeat_key_entry_t entry = { 0 };
+                msg[0] = dynamic_keymap_get_alt_repeat_key(idx, &entry);
+                memcpy(&msg[1], &entry, sizeof(entry));
+                break;
+            }
+            case dynamic_vial_alt_repeat_key_set: {
+                uint8_t idx = msg[3];
+                vial_alt_repeat_key_entry_t entry;
+                memcpy(&entry, &msg[4], sizeof(entry));
+                entry.keycode = vial_keycode_firewall(entry.keycode);
+                entry.alt_keycode = vial_keycode_firewall(entry.alt_keycode);
+                msg[0] = dynamic_keymap_set_alt_repeat_key(idx, &entry);
+                reload_alt_repeat_key();
                 break;
             }
 #endif
@@ -616,5 +653,125 @@ const key_override_t* key_override_get(uint16_t key_override_idx) {
     if (key_override_idx >= VIAL_KEY_OVERRIDE_ENTRIES)
         return NULL;
     return &vial_key_overrides[key_override_idx];
+}
+#endif
+
+#ifdef VIAL_ALT_REPEAT_KEY_ENABLE
+typedef struct {
+    uint16_t keycode;
+    uint16_t alt_keycode;
+    uint8_t required_mods;
+    uint8_t alt_required_mods;
+    uint8_t allowed_mods;
+    uint8_t options;
+} alt_repeat_key_t;
+
+static alt_repeat_key_t vial_alt_repeat_key[VIAL_ALT_REPEAT_KEY_ENTRIES] = { 0 };
+
+static uint8_t unpack_mods5(uint8_t mods5) {
+  return (mods5 & 0x10) != 0 ? (mods5 << 4) : mods5;
+}
+
+static uint16_t alt_repeat_key_normalize_keycode(uint16_t keycode, uint8_t *mods) {
+    switch (keycode) {
+        case QK_MODS ... QK_MODS_MAX: // Unpack modifier + basic key.
+            *mods |= unpack_mods5(QK_MODS_GET_MODS(keycode));
+            keycode = QK_MODS_GET_BASIC_KEYCODE(keycode);
+            break;
+        case QK_MOD_TAP ... QK_MOD_TAP_MAX:
+            keycode = QK_MOD_TAP_GET_TAP_KEYCODE(keycode);
+            break;
+        case QK_LAYER_TAP ... QK_LAYER_TAP_MAX:
+            keycode = QK_LAYER_TAP_GET_TAP_KEYCODE(keycode);
+            break;
+    }
+    return keycode;
+}
+
+static int vial_get_alt_repeat_key(uint8_t index, alt_repeat_key_t *out) {
+    vial_alt_repeat_key_entry_t entry;
+    int ret;
+    if ((ret = dynamic_keymap_get_alt_repeat_key(index, &entry)) != 0) {
+        return ret;
+    }
+
+    memset(out, 0, sizeof(*out));
+    out->keycode = alt_repeat_key_normalize_keycode(entry.keycode, &out->required_mods);
+    out->alt_keycode = alt_repeat_key_normalize_keycode(entry.alt_keycode, &out->alt_required_mods);
+    out->allowed_mods = entry.allowed_mods;
+    out->options = entry.options;
+
+    return 0;
+}
+
+static void reload_alt_repeat_key(void) {
+    for (size_t i = 0; i < VIAL_ALT_REPEAT_KEY_ENTRIES; ++i) {
+        vial_get_alt_repeat_key(i, &vial_alt_repeat_key[i]);
+    }
+}
+
+uint16_t alt_repeat_key_count(void) {
+    return VIAL_ALT_REPEAT_KEY_ENTRIES;
+}
+
+static bool alt_repeat_key_mods_match(uint8_t mods, uint8_t required_mods, uint8_t allowed_mods, uint8_t options) {
+    allowed_mods |= required_mods; // Required mods, if any, are allowed.
+
+    // If ignoring mod handedness, bitwise-or low (lhs) 4 bits with upper (rhs) 4 bits.
+    if ((options & vial_arep_option_ignore_mod_handedness)) {
+        mods = (mods & 0xf) | (mods >> 4);
+        required_mods = (required_mods & 0xf) | (required_mods >> 4);
+        allowed_mods = (allowed_mods & 0xf) | (allowed_mods >> 4);
+    }
+
+    // Check that all required mods are set and all disallowed mods are unset.
+    return (mods & required_mods) == required_mods && (mods & ~allowed_mods) == 0;
+}
+
+uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
+    uint16_t alt_keycode = KC_TRNS;
+    int8_t best_fit = -1;
+
+    keycode = alt_repeat_key_normalize_keycode(keycode, &mods);
+
+    for (size_t i = 0; i < VIAL_ALT_REPEAT_KEY_ENTRIES; ++i) {
+        const alt_repeat_key_t* entry = &vial_alt_repeat_key[i];
+        const uint8_t options = entry->options;
+        if (!(options & vial_arep_enabled)) { // Skip disabled entries.
+            continue;
+        }
+
+        // Search for an entry with matching keycode and mods. If there is more
+        // than one match, the entry with the most mods wins.
+        if (entry->keycode == keycode &&
+                alt_repeat_key_mods_match(mods, entry->required_mods, entry->allowed_mods, options)) {
+            const int8_t fit = bitpop(entry->required_mods);
+            if (fit > best_fit) {
+                alt_keycode = (entry->alt_required_mods << 8) | entry->alt_keycode;
+                best_fit = fit;
+            }
+        }
+
+        // If the entry is bidirectional, check for match with the alt keycode.
+        if (entry->alt_keycode == keycode &&
+                (options & vial_arep_option_bidirectional) != 0 &&
+                alt_repeat_key_mods_match(mods, entry->alt_required_mods, entry->allowed_mods, options)) {
+            const int8_t fit = bitpop(entry->alt_required_mods);
+            if (fit > best_fit) {
+                alt_keycode = (entry->required_mods << 8) | entry->keycode;
+                best_fit = fit;
+            }
+        }
+
+        // If this entry is the default alt key and allowed mods are satisfied,
+        // use it if no there is no other match.
+        if ((options & vial_arep_option_default_to_this_alt_key) != 0 &&
+                best_fit == -1 && alt_keycode == KC_TRNS &&
+                alt_repeat_key_mods_match(mods, 0, entry->allowed_mods, options)) {
+            alt_keycode = (entry->alt_required_mods << 8) | entry->alt_keycode;
+        }
+    }
+
+    return alt_keycode;
 }
 #endif

@@ -11,3 +11,7 @@ MOUSEKEY_ENABLE = no      # Mouse keys
 EXTRAKEY_ENABLE = no      # Audio control and System control
 
 QMK_SETTINGS        = no
+
+CAPS_WORD_ENABLE = no
+LAYER_LOCK_ENABLE = no
+REPEAT_KEY_ENABLE = no

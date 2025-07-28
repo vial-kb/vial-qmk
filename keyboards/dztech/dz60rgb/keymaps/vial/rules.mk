@@ -7,3 +7,7 @@ QMK_SETTINGS = no        # enables the tab to change QMK settings from the GUI
 TAP_DANCE_ENABLE = no    # enables "key tap" functionality
 KEY_OVERRIDE_ENABLE = no # enables the ability to add custom keys
 COMBO_ENABLE = no
+
+CAPS_WORD_ENABLE = no
+LAYER_LOCK_ENABLE = no
+REPEAT_KEY_ENABLE = no

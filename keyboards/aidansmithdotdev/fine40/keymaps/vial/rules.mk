@@ -6,3 +6,6 @@ ENCODER_MAP_ENABLE = yes
 LTO_ENABLE = yes  # make the compiler work harder
 QMK_SETTINGS = no # enables the tab to change QMK settings from the GUI
 TAP_DANCE_ENABLE = no
+CAPS_WORD_ENABLE = no
+LAYER_LOCK_ENABLE = no
+REPEAT_KEY_ENABLE = no

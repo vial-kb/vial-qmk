@@ -75,7 +75,7 @@ COMBO_ENABLE = no
 # You can enable auto shift feature. E.g. press 2 longer than 200ms gives @
 # Enable it and go to Vial to see more features
 # Disabling it frees 3300 bytes
-QMK_SETTINGS = yes
+QMK_SETTINGS = no
 
 
 # set to no to disable RGB

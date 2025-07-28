@@ -31,7 +31,6 @@
 #endif
 
 uint8_t  dynamic_keymap_get_layer_count(void);
-void *   dynamic_keymap_key_to_eeprom_address(uint8_t layer, uint8_t row, uint8_t column);
 uint16_t dynamic_keymap_get_keycode(uint8_t layer, uint8_t row, uint8_t column);
 void     dynamic_keymap_set_keycode(uint8_t layer, uint8_t row, uint8_t column, uint16_t keycode);
 #ifdef ENCODER_MAP_ENABLE
@@ -53,6 +52,10 @@ int dynamic_keymap_set_combo(uint8_t index, const vial_combo_entry_t *entry);
 #ifdef VIAL_KEY_OVERRIDE_ENABLE
 int dynamic_keymap_get_key_override(uint8_t index, vial_key_override_entry_t *entry);
 int dynamic_keymap_set_key_override(uint8_t index, const vial_key_override_entry_t *entry);
+#endif
+#ifdef VIAL_ALT_REPEAT_KEY_ENABLE
+int dynamic_keymap_get_alt_repeat_key(uint8_t index, vial_alt_repeat_key_entry_t *entry);
+int dynamic_keymap_set_alt_repeat_key(uint8_t index, const vial_alt_repeat_key_entry_t *entry);
 #endif
 void     dynamic_keymap_reset(void);
 // These get/set the keycodes as stored in the EEPROM buffer

@@ -17,3 +17,5 @@ endif
 # CONVERT_TO = liatris
 # promicro
 # BOOTLOADER = caterina
+
+QMK_SETTINGS = no

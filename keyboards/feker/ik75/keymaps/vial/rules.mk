@@ -11,3 +11,7 @@ KEY_OVERRIDE_ENABLE = no
 
 # Keyboard Turn Off when PC Turned Off
 NO_USB_STARTUP_CHECK = yes
+
+CAPS_WORD_ENABLE = no
+LAYER_LOCK_ENABLE = no
+REPEAT_KEY_ENABLE = no

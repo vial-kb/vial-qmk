@@ -185,5 +185,5 @@ void vialrgb_save(uint8_t *data, uint8_t length) {
     (void)data;
     (void)length;
 
-    eeconfig_update_rgb_matrix();
+    eeconfig_force_flush_rgb_matrix();
 }

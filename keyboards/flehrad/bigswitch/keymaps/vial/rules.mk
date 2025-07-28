@@ -9,3 +9,7 @@ KEY_OVERRIDE_ENABLE = no
 
 # reduces firmware size from 95% to 80%
 LTO_ENABLE = yes
+
+CAPS_WORD_ENABLE = no
+LAYER_LOCK_ENABLE = no
+REPEAT_KEY_ENABLE = no

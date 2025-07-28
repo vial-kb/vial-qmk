@@ -7,3 +7,5 @@ ifeq ($(strip $(KEYBOARD)), keycapsss/plaid_pad/rev3)
    KEY_OVERRIDE_ENABLE = no
    MAGIC_ENABLE = no
 endif
+
+QMK_SETTINGS = no

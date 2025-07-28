@@ -19,3 +19,7 @@ ifeq ($(strip $(CONVERT_TO)), )
         MOUSEKEY_ENABLE = no
     endif
 endif
+
+CAPS_WORD_ENABLE = no
+LAYER_LOCK_ENABLE = no
+REPEAT_KEY_ENABLE = no

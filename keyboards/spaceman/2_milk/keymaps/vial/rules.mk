@@ -6,3 +6,4 @@ OLED_ENABLE         = no
 LTO_ENABLE          = yes
 QMK_SETTINGS        = no
 COMBO_ENABLE        = yes
+REPEAT_KEY_ENABLE = no
