@@ -1,5 +1,4 @@
 {
-  "name": "PoorKoi",
   "lighting": "qmk_rgblight",
   "customKeycodes": [
 	{"name": "LAY_INDIC_RGB",

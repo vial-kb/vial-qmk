@@ -1,7 +1,16 @@
-# PoorKoi
+# HLB PoorKoi
 
-A 60% PCB for HLB PoorKoi based on 4pplet/waffling60/rev_e (https://github.com/4pplet/waffling60).
-PCB features tsangan layout with ansi/iso layouts as well as split spacebar, split left/right shift, stepped capslock.
+60% HLB PoorKoi's pcb is based on 4pplet/waffling60/rev_e (https://github.com/4pplet/waffling60).
+* PCB features tsangan layout with ansi/iso layouts as well as split spacebar, split left/right shift, stepped capslock.
+* PCB feature dedicated graphic art and flex cut were removed.
+
+Regarding source code we added extra features with dedicated custom keycode **L_INDIC**: 
+
+* LED indicator and capslock indicator are managed through lightning layers
+* Layer indicator is shown even if rgb underglow is off
+* Added a led indicator when custom keycode L_INDIC is on/off
+  * Blink on top when off
+  * Blink on bottom when on
 
 Make example for this keyboard (after setting up your build environment):
 

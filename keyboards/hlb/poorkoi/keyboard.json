@@ -1,7 +1,7 @@
 {
     "manufacturer": "HLB",
     "keyboard_name": "PoorKoi",
-    "maintainer": "HLB",
+    "maintainer": "H3lli0n",
     "bootloader": "stm32-dfu",
     "diode_direction": "COL2ROW",
     "encoder": {
@@ -38,7 +38,8 @@
             "static_gradient": true,
             "twinkle": true
         },
-        "led_count": 17
+        "led_count": 17,
+        "driver": "ws2812"
     },
     "usb": {
         "device_version": "0.0.5",
