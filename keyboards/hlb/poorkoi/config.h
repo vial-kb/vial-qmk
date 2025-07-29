@@ -19,3 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define WS2812_EXTERNAL_PULLUP
 
+#define RGBLIGHT_LAYERS
+#define RGBLIGHT_LAYER_BLINK
+#define RGBLIGHT_LAYERS_OVERRIDE_RGB_OFF
