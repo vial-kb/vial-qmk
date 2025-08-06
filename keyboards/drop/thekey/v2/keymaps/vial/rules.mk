@@ -1,8 +1,0 @@
-VIA_ENABLE      = yes # Enable VIA
-VIAL_ENABLE     = yes # Enable VIAL
-LTO_ENABLE      = yes
-RGBLIGHT_ENABLE = no
-
-CAPS_WORD_ENABLE = no
-LAYER_LOCK_ENABLE = no
-REPEAT_KEY_ENABLE = no

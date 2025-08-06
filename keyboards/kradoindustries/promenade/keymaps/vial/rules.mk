@@ -1,8 +1,0 @@
-COMMAND_ENABLE      = no
-VIA_ENABLE          = yes
-VIAL_ENABLE         = yes
-LTO_ENABLE          = yes
-QMK_SETTINGS        = no
-TAP_DANCE_ENABLE    = no
-KEY_OVERRIDE_ENABLE = no
-REPEAT_KEY_ENABLE = no

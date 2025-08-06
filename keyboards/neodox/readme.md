@@ -1,3 +1,0 @@
-# The Neodox keyboard
-
-WIP
