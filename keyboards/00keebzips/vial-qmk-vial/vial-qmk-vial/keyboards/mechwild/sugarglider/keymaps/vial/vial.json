@@ -1,0 +1,55 @@
+{
+    "customKeycodes": [
+        {"name": "Touchpad DPI+", "title": "Increase Touchpad DPI", "shortName": "DPI+"},
+        {"name": "Touchpad DPI-", "title": "Decrease Touchpad DPI", "shortName": "DPI-"},
+        {"name": "Touchpad Temp DPI", "title": "Temporary Lowest DPI", "shortName": "DPIF"},
+        {"name": "Touch Tap+", "title": "Increase Touch Tap Time", "shortName": "TAP+"},
+        {"name": "Touch Tap-", "title": "Decrease Touch Tap Time", "shortName": "TAP-"},
+        {"name": "Touch Tap On", "title": "Turn On Touch Tap", "shortName": "T_ON"},
+        {"name": "Touch Tap Off", "title": "Turn Off Touch Tap", "shortName": "T_OFF"},
+        {"name": "Touch Tap Toggle", "title": "Toggle Touch Tap", "shortName": "T_TOG"}
+    ],
+    "lighting": ["qmk_rgblight"],
+    "matrix": {
+        "rows": 9,
+        "cols": 6
+    },
+    "layouts": {
+        "labels": [
+            "Middle Encoder",
+            "Bottom Encoder"
+        ],
+        "keymap": [
+            [{"x":9.75,"c":"#777777"},"8,0"],
+            [{"x":9.75},"8,1"],
+            [{"x":9.75},"8,2"],
+            [{"x":7.25,"c":"#cccccc"},"1,0\n\n\n0,1\n\n\n\n\n\ne","8,5\n\n\n0,1","1,1\n\n\n0,1\n\n\n\n\n\ne"],
+            [{"x":0.5},"0,0\n\n\n\n\n\n\n\n\ne","0,1\n\n\n\n\n\n\n\n\ne",{"x":4.75,"w":3,"d":true},"\n\n\n0,0",{"x":4.5},"2,0\n\n\n\n\n\n\n\n\ne","2,1\n\n\n\n\n\n\n\n\ne"],
+            [{"x":1,"c":"#777777"},"3,0",{"x":13.25},"7,5"],
+            [{"y":-0.75,"x":7.75,"c":"#cccccc","w":2,"d":true},"\n\n\n1,0","3,0\n\n\n1,1\n\n\n\n\n\ne","3,1\n\n\n1,1\n\n\n\n\n\ne"],
+            [{"x":7.25},"3,4","7,0","7,1"],
+            [{"r":10,"y":-7.12,"x":3.5},"0,3"],
+            [{"y":-0.88,"x":2.5},"0,2",{"x":1},"0,4","0,5"],
+            [{"y":-0.75,"x":0.5,"c":"#777777"},"0,0",{"c":"#cccccc"},"0,1"],
+            [{"y":-0.37,"x":3.5},"1,3"],
+            [{"y":-0.88,"x":2.5},"1,2",{"x":1},"1,4","1,5"],
+            [{"y":-0.75,"x":0.5,"c":"#aaaaaa"},"1,0",{"c":"#cccccc"},"1,1"],
+            [{"y":-0.37,"x":3.5},"2,3"],
+            [{"y":-0.88,"x":2.5},"2,2",{"x":1},"2,4","2,5"],
+            [{"y":-0.75,"x":0.5,"c":"#aaaaaa"},"2,0",{"c":"#cccccc"},"2,1"],
+            [{"y":0.5,"x":6.25,"c":"#aaaaaa","h":1.5},"3,3"],
+            [{"y":-0.75,"x":4.25,"h":1.5},"3,1",{"h":1.5},"3,2"],
+            [{"r":-10,"rx":14.5,"y":4.5,"x":-4.5,"h":1.5},"7,2"],
+            [{"y":-0.75,"x":-3.5,"h":1.5},"7,3",{"h":1.5},"7,4"],
+            [{"rx":15.75,"y":0.38,"x":-3,"c":"#cccccc"},"4,2"],
+            [{"y":-0.88,"x":-5},"4,0","4,1",{"x":1},"4,3"],
+            [{"y":-0.75,"x":-1},"4,4",{"c":"#aaaaaa"},"4,5"],
+            [{"y":-0.37,"x":-3,"c":"#cccccc"},"5,2"],
+            [{"y":-0.88,"x":-5},"5,0","5,1",{"x":1},"5,3"],
+            [{"y":-0.75,"x":-1},"5,4",{"c":"#777777"},"5,5"],
+            [{"y":-0.37,"x":-3,"c":"#cccccc"},"6,2"],
+            [{"y":-0.88,"x":-5},"6,0","6,1",{"x":1},"6,3"],
+            [{"y":-0.75,"x":-1},"6,4",{"c":"#aaaaaa"},"6,5"]
+        ]
+    }
+}

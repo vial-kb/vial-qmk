@@ -1,0 +1,10 @@
+VIA_ENABLE = no
+LTO_ENABLE = no
+POINTING_DEVICE_ENABLE = yes
+POINTING_DEVICE_DRIVER = pimoroni_trackball
+BOOTMAGIC_ENABLE = no       # Enable Bootmagic Lite
+CONSOLE_ENABLE = no         # Console for debug
+COMMAND_ENABLE = no         # Commands for debug and configuration
+NKRO_ENABLE = yes           # Enable N-Key Rollover
+COMBO_ENABLE = yes
+EXTRAKEY_ENABLE = yes

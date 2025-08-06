@@ -1,1 +1,0 @@
-The vial keymap for the Syndrome PCB.

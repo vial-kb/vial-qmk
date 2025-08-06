@@ -1,0 +1,38 @@
+{
+   "keyboard": "mechwild/puckbuddy",
+   "keymap": "vial",
+   "version": 1,
+   "layout": "LAYOUT",
+   "layers": [
+      [
+         "KC_MUTE",  "KC_TRNS", "MO(2)", "MO(1)",                "LGUI(KC_D)",
+         "MO(1)",                                                "KC_HOME",
+         "MO(2)",                                                "KC_END",
+         "KC_BTN3",  "KC_BTN1", "KC_BTN2", "KC_BTN2", "KC_BTN1", "DPI_FINE"
+      ],
+      [
+         "RGB_TOG", "KC_TRNS", "KC_TRNS", "KC_TRNS",           "TAP_TOG",
+         "DPI_UP",                                             "TAP_UP",
+         "DPI_DN",                                             "TAP_DN",
+         "KC_TRNS", "KC_HOME", "KC_PGUP", "KC_PGDN", "KC_END", "KC_TRNS"
+      ],
+      [
+         "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS",            "RGB_TOG",
+         "KC_TRNS",                                             "RGB_MOD",
+         "KC_TRNS",                                             "RGB_RMOD",
+         "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS", "KC_TRNS"
+      ]
+   ],
+   "config": {
+      "features": {
+         "via": true,
+         "vial": true,
+         "encoder_map": true
+      }
+   },
+   "encoders": [
+      [{"ccw": "KC_VOLD", "cw": "KC_VOLU"}, {"ccw": "KC_PGDN", "cw": "KC_PGUP"}],
+      [{"ccw": "DPI_DN", "cw": "DPI_UP"}, {"ccw": "TAP_DN", "cw": "TAP_UP"}],
+      [{"ccw": "KC_TRNS", "cw": "KC_TRNS"}, {"ccw": "KC_TRNS", "cw": "KC_TRNS"}]
+   ]
+}

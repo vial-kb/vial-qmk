@@ -1,0 +1,11 @@
+/* SPDX-License-Identifier: GPL-2.0-or-later */
+
+#pragma once
+
+#define VIAL_KEYBOARD_UID {0xC2, 0xC9, 0x56, 0xF4, 0x00, 0x63, 0x4A, 0xF9}
+
+#define VIAL_ENCODER_DEFAULT { KC_VOLD, KC_VOLU, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS }
+
+// #define VIAL_TAP_DANCE_ENTRIES 2
+// #define VIAL_COMBO_ENTRIES 2
+// #define DYNAMIC_KEYMAP_LAYER_COUNT 2

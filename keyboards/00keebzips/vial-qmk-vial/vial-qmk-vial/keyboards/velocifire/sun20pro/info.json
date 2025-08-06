@@ -1,0 +1,23 @@
+{
+    "manufacturer": "Velocifire",
+    "keyboard_name": "Sun20pro",
+    "maintainer": "qmk",
+    "bootloader": "atmel-dfu",
+    "diode_direction": "COL2ROW",
+    "encoder": {
+        "enabled": true
+    },
+    "processor": "atmega32u4",
+    "rgb_matrix": {
+        "driver": "ws2812"
+    },
+    "url": "",
+    "usb": {
+        "device_version": "0.0.1",
+        "pid": "0x0002",
+        "vid": "0x0002"
+    },
+    "ws2812": {
+        "pin": "C7"
+    }
+}

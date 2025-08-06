@@ -1,0 +1,13 @@
+{
+    "name":"tks4",
+    "vendorId":"0x3938",
+    "productId":"0x3034",
+    "lighting":"qmk_rgblight",
+    "matrix":{"rows":1,"cols":4},
+    "layouts":{
+        "keymap":[
+            [{"x":1},"0,0"],
+            ["0,2","0,1","0,3"]
+        ]
+    }
+}

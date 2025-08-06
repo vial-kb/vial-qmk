@@ -1,0 +1,11 @@
+{
+    "keyboard_name": "pyaa",
+    "url": "https://github.com/konomu/pyaa",
+    "manufacturer": "konomu",
+    "maintainer": "konomu",
+    "usb": {
+        "device_version": "1.0.0",
+        "pid": "0x6060",
+        "vid": "0xFEED"
+    }
+}

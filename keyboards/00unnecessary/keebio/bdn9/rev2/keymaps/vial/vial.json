@@ -1,0 +1,19 @@
+{
+    "name": "BDN9",
+    "vendorId": "0xXXXX",
+    "productId": "0xXXXX",
+    "lighting": "vialrgb",
+    "matrix": {
+        "rows": 3,
+        "cols": 3
+    },
+    "layouts": {
+        "keymap":[
+		[{"y":0.25},"0,0\n\n\n\n\n\n\n\n\ne","1,0\n\n\n\n\n\n\n\n\ne","2,0\n\n\n\n\n\n\n\n\ne"],
+["0,1\n\n\n\n\n\n\n\n\ne","1,1\n\n\n\n\n\n\n\n\ne","2,1\n\n\n\n\n\n\n\n\ne"],
+[{"y":0.75},"0,0","0,1","0,2"],
+["1,0","1,1","1,2"],
+["2,0","2,1","2,2"]
+]
+}
+}

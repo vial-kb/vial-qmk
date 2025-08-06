@@ -1,0 +1,302 @@
+{
+  "name": "Syndrome",
+  "vendorId": "0x4B43",
+  "productId": "0x5360",
+  "customKeycodes": [
+        {
+            "name": "JmpWordL",
+            "title": "Jump Word Left",
+            "shortName": "JWRDL"
+        },
+        {
+            "name": "JmpWordR",
+            "title": "Jump Word Right",
+            "shortName": "JWRDR"
+        },
+        {
+            "name": "SlcWordL",
+            "title": "Select Word Left",
+            "shortName": "SWRDL"
+        },
+        {
+            "name": "SlcWordR",
+            "title": "Select Word Right",
+            "shortName": "SWRDR"
+        },
+        {
+            "name": "TabLft",
+            "title": "Tab Left",
+            "shortName": "TABL"
+        },
+        {
+            "name": "TabRght",
+            "title": "Tab Right",
+            "shortName": "TABR"
+        },
+        {
+            "name": "DsktpLft",
+            "title": "Desktop Left",
+            "shortName": "DSKTPL"
+        },
+        {
+            "name": "DsktpRght",
+            "title": "Desktop Right",
+            "shortName": "DSKTPR"
+        },
+        {
+            "name": "PrevApp",
+            "title": "Previous App",
+            "shortName": "PRVAPP"
+        },
+        {
+            "name": "NextApp",
+            "title": "Next App",
+            "shortName": "NXTAPP"
+        }
+  ],
+  "matrix": { "rows": 10, "cols": 8 },
+  "lighting": "vialrgb",
+  "layouts": {
+    "labels":[
+      [
+        "Bottom Row",
+        "All 1U",
+        "2U Centered Space",
+        "6U Big Bar",
+        "3U/3U",
+        "2U/2U",
+        "1.75U/1.75U"
+      ],
+      "Alpha Stagger",
+      "R1 Encoder",
+      "R2 Encoder",
+      "R3 Encoder",
+      "Macro Row"
+    ],
+    "keymap": [
+      [
+        {
+          "y": 2.5,
+          "x": 2
+        },
+        "3,0\n\n\n\n\n\n\n\n\ne",
+        "3,1\n\n\n\n\n\n\n\n\ne"
+      ],
+      [
+        {
+          "x": 2.5
+        },
+        "8,5\n\n\n5,0",
+        {
+          "x": 6
+        },
+        "9,5\n\n\n5,0",
+        "8,6\n\n\n5,0",
+        "9,6\n\n\n5,0",
+        "8,7\n\n\n5,0"
+      ],
+      [
+        {
+          "y": 0.5,
+          "x": 2.5
+        },
+        "0,0",
+        "1,0",
+        "0,1",
+        "1,1",
+        "0,2",
+        "1,2",
+        "0,3",
+        "1,3",
+        "0,4",
+        "1,4",
+        "0,5",
+        {
+          "x": 0.75,
+          "d": true
+        },
+        "0,0\n\n\n2,0\n\n\n\n\n\ne",
+        {
+          "d": true
+        },
+        "0,1\n\n\n2,0\n\n\n\n\n\ne",
+        "0,0\n\n\n2,1\n\n\n\n\n\ne",
+        "0,1\n\n\n2,1\n\n\n\n\n\ne"
+      ],
+      [
+        {
+          "x": 2.5,
+          "c": "#aaaaaa"
+        },
+        "2,0",
+        {
+          "c": "#cccccc"
+        },
+        "3,0",
+        "2,1",
+        "3,1",
+        "2,2",
+        "3,2",
+        "2,3",
+        "3,3",
+        "2,4",
+        {
+          "c": "#777777"
+        },
+        "3,4",
+        "2,5",
+        {
+          "x": 0.75,
+          "c": "#cccccc",
+          "d": true
+        },
+        "1,0\n\n\n3,0\n\n\n\n\n\ne",
+        {
+          "d": true
+        },
+        "1,1\n\n\n3,0\n\n\n\n\n\ne",
+        "1,0\n\n\n3,1\n\n\n\n\n\ne",
+        "1,1\n\n\n3,1\n\n\n\n\n\ne"
+      ],
+      [
+        {
+          "x": 2.5,
+          "c": "#aaaaaa"
+        },
+        "4,0\n\n\n1,0",
+        {
+          "c": "#cccccc"
+        },
+        "5,0\n\n\n1,0",
+        "4,1\n\n\n1,0",
+        "5,1\n\n\n1,0",
+        "4,2\n\n\n1,0",
+        "5,2",
+        "4,3\n\n\n1,0",
+        "5,3\n\n\n1,0",
+        "4,4\n\n\n1,0",
+        {
+          "c": "#aaaaaa"
+        },
+        "5,4\n\n\n1,0",
+        "4,5\n\n\n1,0",
+        {
+          "x": 0.75,
+          "c": "#cccccc",
+          "d": true
+        },
+        "2,0\n\n\n4,0\n\n\n\n\n\ne",
+        {
+          "d": true
+        },
+        "2,1\n\n\n4,0\n\n\n\n\n\ne",
+        "2,0\n\n\n4,1\n\n\n\n\n\ne",
+        "2,1\n\n\n4,1\n\n\n\n\n\ne"
+      ],
+      [
+        {
+          "x": 2.5,
+          "w": 1.5
+        },
+        "6,0",
+        "7,0",
+        "6,1\n\n\n0,0",
+        "7,1\n\n\n0,0",
+        "6,2\n\n\n0,0",
+        "7,2\n\n\n0,0",
+        "7,3\n\n\n0,0",
+        "6,4\n\n\n0,0",
+        "7,4",
+        {
+          "w": 1.5
+        },
+        "6,5"
+      ],
+      [
+        {
+          "x": 5
+        },
+        "6,1\n\n\n0,1",
+        "7,1\n\n\n0,1",
+        {
+          "w": 2
+        },
+        "6,3\n\n\n0,1",
+        "7,3\n\n\n0,1",
+        "6,4\n\n\n0,1"
+      ],
+      [
+        {
+          "x": 5,
+          "w": 6
+        },
+        "6,3\n\n\n0,2"
+      ],
+      [
+        {
+          "x": 5,
+          "w": 3
+        },
+        "7,1\n\n\n0,3",
+        {
+          "w": 3
+        },
+        "7,3\n\n\n0,3"
+      ],
+      [
+        {
+          "x": 5
+        },
+        "6,1\n\n\n0,4",
+        {
+          "w": 2
+        },
+        "6,2\n\n\n0,4",
+        {
+          "w": 2
+        },
+        "7,3\n\n\n0,4",
+        "6,4\n\n\n0,4"
+      ],
+      [
+        {
+          "x": 5,
+          "w": 1.25
+        },
+        "6,1\n\n\n0,5",
+        {
+          "w": 1.75
+        },
+        "6,2\n\n\n0,5",
+        {
+          "w": 1.75
+        },
+        "7,3\n\n\n0,5",
+        {
+          "w": 1.25
+        },
+        "6,4\n\n\n0,5"
+      ],
+      [
+        {
+          "y": 1.25,
+          "x": 2.5,
+          "w": 1.5
+        },
+        "4,0\n\n\n1,1",
+        "5,0\n\n\n1,1",
+        "4,1\n\n\n1,1",
+        "5,1\n\n\n1,1",
+        "4,2\n\n\n1,1",
+        "4,3\n\n\n1,1",
+        "5,3\n\n\n1,1",
+        "4,4\n\n\n1,1",
+        "5,4\n\n\n1,1",
+        {
+          "w": 1.5
+        },
+        "4,5\n\n\n1,1"
+      ]
+    ]
+  }
+}

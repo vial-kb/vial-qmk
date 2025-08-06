@@ -1,0 +1,15 @@
+#include "abbr.def"
+
+COMB(c_mms, KC_BTN3, KC_BTN2, KC_BTN1)
+COMB(c_rpt, QK_REP, KC_COMBO, KC_COMBO_SFT)
+
+// Punctuation
+COMB(c_bdot, KC_BSEN, KC_COMBO, KC_COMBO_SFT, KC_COMBO_ALT2)
+SUBS(p_bcomma, SS_TAP(X_BSPC)", ", KC_COMBO, KC_COMBO_SFT, KC_COMBO_ALT1)
+COMB(c_dot, KC_SEN, KC_COMBO, KC_COMBO_ALT2)
+SUBS(p_comma, ", ", KC_COMBO, KC_COMBO_ALT1)
+
+// Personal
+SUBS(b_Dane, "Dane", KC_COMBO, KC_D, KC_X)
+SUBS(b_Lipscombe, "Lipscombe", KC_COMBO, KC_L, KC_X)
+SUBS(b_danelipscombeatgmaildotcom, "danelipscombe@gmail.com", KC_COMBO, KC_G, KC_X)

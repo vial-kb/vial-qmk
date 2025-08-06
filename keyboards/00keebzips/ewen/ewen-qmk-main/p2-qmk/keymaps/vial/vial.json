@@ -1,0 +1,20 @@
+{
+  "name": "Pee-Two Macro Pad",
+  "vendorId": "0x6666",
+  "productId": "0x6672",
+  "lighting": "qmk_rgblight", 
+  "matrix": {
+      "rows": 1,
+      "cols": 2
+    },
+  "layouts": {
+       "keymap": [
+       [
+         "0,0",
+         "0,1",
+         "0,0\n\n\n\n\n\n\n\n\ne",
+         "0,1\n\n\n\n\n\n\n\n\ne"
+       ]
+    ]
+  }
+}

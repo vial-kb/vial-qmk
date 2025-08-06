@@ -1,0 +1,13 @@
+/* SPDX-License-Identifier: GPL-2.0-or-later */
+
+#pragma once
+
+#define VIAL_KEYBOARD_UID {0xBE, 0xF5, 0xDB, 0xD4, 0xA3, 0x2A, 0xAC, 0xDE}
+
+#define VIAL_UNLOCK_COMBO_ROWS { 2, 0 }
+#define VIAL_UNLOCK_COMBO_COLS { 0, 13 }
+
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
+#define VIAL_TAP_DANCE_ENTRIES 10
+#define VIAL_COMBO_ENTRIES 15
+#define VIAL_KEY_OVERRIDE_ENTRIES 10

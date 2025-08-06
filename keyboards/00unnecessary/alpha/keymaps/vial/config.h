@@ -1,0 +1,21 @@
+/* SPDX-License-Identifier: GPL-2.0-or-later */
+
+#pragma once
+
+#define VIAL_KEYBOARD_UID {0x78, 0xB8, 0x88, 0x36, 0x6B, 0x38, 0x42, 0x39}
+
+#define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
+#define VIAL_UNLOCK_COMBO_COLS { 0, 9 }
+
+#if defined(__AVR_ATmega32U4__)
+    #undef LOCKING_SUPPORT_ENABLE
+    #undef LOCKING_RESYNC_ENABLE
+
+    #undef RGBLIGHT_EFFECT_RAINBOW_SWIRL
+    #undef RGBLIGHT_EFFECT_SNAKE
+    #undef RGBLIGHT_EFFECT_CHRISTMAS
+    #undef RGBLIGHT_EFFECT_STATIC_GRADIENT
+    #undef RGBLIGHT_EFFECT_RGB_TEST
+    #undef RGBLIGHT_EFFECT_ALTERNATING
+    #undef RGBLIGHT_EFFECT_TWINKLE
+#endif

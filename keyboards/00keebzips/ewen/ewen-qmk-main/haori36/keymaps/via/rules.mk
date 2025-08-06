@@ -1,0 +1,4 @@
+VIA_ENABLE = yes
+LTO_ENABLE = no
+POINTING_DEVICE_ENABLE = yes
+POINTING_DEVICE_DRIVER = pimoroni_trackball
