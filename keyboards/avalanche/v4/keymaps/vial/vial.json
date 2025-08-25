@@ -1,5 +1,7 @@
 {
-    "lighting": "none",
+    "name" : "Avalanche V4",
+    "product_id": "0xCEE2",
+    "vendor_id": "0x0004",
     "matrix": {
         "rows": 10,
         "cols": 7
