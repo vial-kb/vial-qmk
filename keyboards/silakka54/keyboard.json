@@ -6,6 +6,8 @@
     "diode_direction": "COL2ROW",
     "features": {
         "bootmagic": true,
+        "command": false,
+        "console": false,
         "extrakey": true,
         "mousekey": true,
         "nkro": true
@@ -14,9 +16,6 @@
         "enabled": true,
         "serial": {
             "driver": "vendor"
-        },
-        "transport": {
-            "watchdog": true
         }
     },
     "matrix_pins": {
