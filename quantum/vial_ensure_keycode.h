@@ -525,6 +525,7 @@ _Static_assert(MAGIC_UNSWAP_ALT_GUI == 0x7015, "");
 _Static_assert(MAGIC_TOGGLE_ALT_GUI == 0x7016, "");
 _Static_assert(MAGIC_NO_GUI == 0x700A, "");
 _Static_assert(MAGIC_UNNO_GUI == 0x7009, "");
+_Static_assert(MAGIC_TOGGLE_GUI == 0x700B, "");
 _Static_assert(MAGIC_SWAP_GRAVE_ESC == 0x700C, "");
 _Static_assert(MAGIC_UNSWAP_GRAVE_ESC == 0x700D, "");
 _Static_assert(MAGIC_SWAP_BACKSLASH_BACKSPACE == 0x700E, "");
