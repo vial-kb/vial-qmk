@@ -17,6 +17,4 @@
 
 #pragma once
 
-/* Use the custom font */
-#define OLED_FONT_H "./lib/glcdfont.c"
-#define DYNAMIC_KEYMAP_LAYER_COUNT 6
+void render_layer_status(void);

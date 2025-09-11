@@ -1,4 +1,4 @@
-SRC += ./lib/layer_status/layer_status.c
+SRC += ./lib/layer_status_six_layers/layer_status.c
 SRC += ./lib/logo.c
 
 # Configure for 128K flash
