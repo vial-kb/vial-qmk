@@ -26,13 +26,11 @@ Enter the bootloader in 3 ways:
 * **Physical reset button**: Briefly press the button on the back of the PCB and plug in the keyboard
 * **Keycode in layout**: Press the key mapped to `QK_BOOT` if it is available
 
----
-
 ## Vial Support
 
 Vial is also supported with layout configuration. The supported configurations allow for factory layouts with end-user modifications.
 
-![Vial layout configuration](https://i.imgur.com/xc3yMoH.mp4)
+<img src="https://i.imgur.com/DxKZoPW.png" alt="ctrl-M PCB" width="75%" />
 
 To compile with Vial compatibility:
 
