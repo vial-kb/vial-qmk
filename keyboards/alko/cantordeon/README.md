@@ -1,14 +1,21 @@
 # Cantordeon
-##Inspired by [El Cantor HS](https://github.com/azhizhinov/ELCANTORHS)
 
-![Cantordeon](https://cornedeon.ru/img/cantordeon.jpg)
+Inspired by [El Cantor HS](https://github.com/azhizhinov/ELCANTORHS)
+
+![Cantordeon](https://cornedeon.ru/img/cantordeon_1_over.jpg)
 
 This keyboard a mod of El Cantor HS with rp2040 MCU and diode matrix, optimized for handwired.
 
 * Keyboard Maintainer: [alko](https://github.com/alko-kbd/)
+* Gallery: [Cornedeon](https://cornedeon.ru)
+* Case 3D Model: [Thingiverse](https://www.thingiverse.com/thing:7161522)
 * Hardware Supported: rp2040-zero
 
-Build firmware:
+## Build firmware
+
+Prepare QMK/Vial build environment
+
+Put its into keyboards/alko/canterdeon
 
 qmk compile -kb alko/cantordeon -km vial
 
