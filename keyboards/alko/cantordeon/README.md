@@ -13,10 +13,6 @@ This keyboard a mod of El Cantor HS with rp2040 MCU and diode matrix, optimized 
 
 ## Build firmware
 
-Prepare QMK/Vial build environment
-
-Put its into keyboards/alko/canterdeon
-
 qmk compile -kb alko/cantordeon -km vial
 
 ## Bootloader
