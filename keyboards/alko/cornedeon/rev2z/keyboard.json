@@ -1,31 +1,33 @@
 {
     "maintainer": "alko",
     "manufacturer": "alko",
+    "keyboard_name": "Cornedeon v2z",
     "url": "https://github.com/alko-kbd/cornedeon",
     "usb": {
         "vid": "0x4653",
         "pid": "0x0002",
+        "suspend_wakeup_delay": 200,
         "device_version": "2.0.0"
     },
     "processor": "RP2040",
     "bootloader": "rp2040",
     "features": {
-        "bootmagic": false,
-        "extrakey": false,
-        "mousekey": false,
-        "nkro": false,
+        "bootmagic": true,
+        "extrakey": true,
+        "nkro": true,
         "oled": false,
         "rgblight": false,
-        "rgb_matrix": false,
+        "rgb_matrix": true,
+        "mousekey": true,
         "encoder": false
     },
     "diode_direction": "COL2ROW",
     "matrix_pins": {
-        "cols": ["GP29", "GP28", "GP27", "GP26", "GP22", "GP20"],
+        "cols": ["GP28", "GP27", "GP26", "GP15", "GP14", "GP13"],
         "rows": ["GP4", "GP5", "GP6", "GP7"]
     },
     "bootmagic": {
-        "enabled": false,
+        "enabled": true,
         "matrix": [ 0, 1 ]
     },
     "split": {
@@ -34,11 +36,10 @@
             "matrix": [4, 1]
         },
         "handedness": {
-            "pin": "GP8"
+            "pin": "GP29"
         },
         "serial": {
             "driver": "vendor",
-            "pin": "GP1"
         },
         "transport": {
             "sync": {
@@ -110,7 +111,25 @@
     },
     "ws2812": {
         "driver": "vendor",
-        "pin": "GP0"
+        "pin": "GP3"
+    },
+    "rgblight": {
+        "led_count": 60,
+        "split": true,
+        "split_count": [30, 30],
+        "max_brightness": 120,
+        "animations": {
+            "alternating": true,
+            "breathing": true,
+            "christmas": true,
+            "knight": true,
+            "rainbow_mood": true,
+            "rainbow_swirl": true,
+            "rgb_test": true,
+            "snake": true,
+            "static_gradient": true,
+            "twinkle": true
+        }
     },
     "rgb_matrix": {
         "animations": {
@@ -159,5 +178,5 @@
             "solid_multisplash": true
         },
         "sleep": true
-    }
+    },
 }

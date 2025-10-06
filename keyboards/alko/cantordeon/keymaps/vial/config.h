@@ -18,11 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#define VIAL_KEYBOARD_UID {0xA8, 0xE7, 0xCA, 0x40, 0x6B, 0x53, 0x0B, 0x1F}
+#define VIAL_KEYBOARD_UID {0x85, 0x86, 0x45, 0x19, 0x3D, 0x36, 0xA3, 0x90}
 #define VIAL_UNLOCK_COMBO_ROWS {0, 0}
 #define VIAL_UNLOCK_COMBO_COLS {0, 1}
-
-//#define DYNAMIC_KEYMAP_LAYER_COUNT 6
 
 // For master half only when MASTER_LEFT/MASTER_RIGHT using
 //#define WAIT_FOR_USB
@@ -32,3 +30,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define MASTER_LEFT
 //#define MASTER_RIGHT
 // #define EE_HANDS
+// moved to revXX
+//#define SPLIT_HAND_PIN GP8
