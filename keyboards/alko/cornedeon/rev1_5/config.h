@@ -1,1 +1,0 @@
-#define SPLIT_HAND_PIN B4
