@@ -12,8 +12,6 @@ Hardware Supported: Corne 3 PCB, Handwired
 
 Revisions:
 
-rev1_5 - promicro 32u4
-
 rev2 - promicro rp2040
 
 rev2z - rp2040 zero
