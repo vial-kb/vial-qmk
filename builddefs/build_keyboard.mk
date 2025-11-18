@@ -598,6 +598,8 @@ flash: build
 
 avrisp: BOOTLOADER = avrisp
 avrisp: flash
+caterina: BOOTLOADER = caterina
+caterina: flash
 objs-size: build
 
 ifneq ($(strip $(TOP_SYMBOLS)),)
