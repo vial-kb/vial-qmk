@@ -9,6 +9,11 @@
 #define VIAL_UNLOCK_COMBO_ROWS { 1, 2 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 12 }
 
-/* Enable Vial features */
+/* Five layers - Mac/Win base + 3 function layers */
 #undef DYNAMIC_KEYMAP_LAYER_COUNT
-#define DYNAMIC_KEYMAP_LAYER_COUNT 8
+#define DYNAMIC_KEYMAP_LAYER_COUNT 5
+
+/* Vial features - Macros, Tap Dance, Combos */
+#define VIAL_MACRO_COUNT 16
+#define VIAL_TAP_DANCE_ENTRIES 8
+#define VIAL_COMBO_ENTRIES 8

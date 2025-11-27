@@ -1,4 +1,5 @@
 /* Copyright 2024 @ Keychron (https://www.keychron.com)
+ * Modified for Vial wired-only build
  *
  * This program is free software : you can redistribute it and /or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,15 +17,15 @@
 
 #pragma once
 
-#define _CHIBIOS_HAL_CONF_VER_8_0_
+/* Disable I2C to avoid peripheral errors */
+#undef HAL_USE_I2C
+#define HAL_USE_I2C FALSE
 
+/* SPI needed for RGB Matrix LED driver */
 #define HAL_USE_SPI TRUE
 
-#ifdef LK_WIRELESS_ENABLE
-#    define HAL_USE_RTC TRUE
-#endif
-
-#if defined(LK_WIRELESS_ENABLE) || defined(ENCODER_ENABLE)
+/* Encoder support */
+#ifdef ENCODER_ENABLE
 #    define PAL_USE_CALLBACKS TRUE
 #endif
 
