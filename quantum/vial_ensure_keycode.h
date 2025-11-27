@@ -298,6 +298,8 @@ _Static_assert(LALT_T(kc) == 0x2400, "");
 _Static_assert(LALT(kc) == 0x400, "");
 _Static_assert(LCA_T(kc) == 0x2500, "");
 _Static_assert(LCA(kc) == 0x500, "");
+_Static_assert(LAG_T(kc) == 0x2c00, "");
+_Static_assert(LAG(kc) == 0xc00, "");
 _Static_assert(LCAG_T(kc) == 0x2d00, "");
 _Static_assert(LCAG(kc) == 0xd00, "");
 _Static_assert(LCG_T(kc) == 0x2900, "");
