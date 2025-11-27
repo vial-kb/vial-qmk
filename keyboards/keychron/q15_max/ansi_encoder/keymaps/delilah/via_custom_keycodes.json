@@ -1,0 +1,350 @@
+{
+  "name": "Keychron Q15 Max - Delilah Custom",
+  "vendorId": "0x3434",
+  "productId": "0x08F0",
+  "matrix": {"rows": 5, "cols": 14},
+  "customKeycodes": [
+    {
+      "name": "MD H1",
+      "title": "Markdown Header 1 - Insert '# ' at line start",
+      "shortName": "MD H1"
+    },
+    {
+      "name": "MD H2",
+      "title": "Markdown Header 2 - Insert '## ' at line start",
+      "shortName": "MD H2"
+    },
+    {
+      "name": "MD H3",
+      "title": "Markdown Header 3 - Insert '### ' at line start",
+      "shortName": "MD H3"
+    },
+    {
+      "name": "Bold",
+      "title": "Bold Text (Cmd+B)",
+      "shortName": "BOLD"
+    },
+    {
+      "name": "Italic",
+      "title": "Italic Text (Cmd+I)",
+      "shortName": "ITAL"
+    },
+    {
+      "name": "ClrFmt",
+      "title": "Clear Formatting (Cmd+Shift+Ctrl+K)",
+      "shortName": "CLR"
+    },
+    {
+      "name": "EmDash",
+      "title": "Em Dash with spaces",
+      "shortName": "—"
+    },
+    {
+      "name": "TODO",
+      "title": "Todo Checkbox '- [ ] '",
+      "shortName": "TODO"
+    },
+    {
+      "name": "Cut←",
+      "title": "Cut to Line Start",
+      "shortName": "CUT←"
+    },
+    {
+      "name": "Cut→",
+      "title": "Cut to Line End",
+      "shortName": "CUT→"
+    },
+    {
+      "name": "CutW←",
+      "title": "Cut Previous Word",
+      "shortName": "CW←"
+    },
+    {
+      "name": "CutW→",
+      "title": "Cut Next Word",
+      "shortName": "CW→"
+    },
+    {
+      "name": "Cut¶",
+      "title": "Cut Paragraph",
+      "shortName": "CUT¶"
+    },
+    {
+      "name": "Wrap\"",
+      "title": "Wrap Selection in Quotes",
+      "shortName": "W\""
+    },
+    {
+      "name": "Wrap()",
+      "title": "Wrap Selection in Parentheses",
+      "shortName": "W()"
+    },
+    {
+      "name": "Wrap[]",
+      "title": "Wrap Selection in Brackets",
+      "shortName": "W[]"
+    },
+    {
+      "name": "Daily",
+      "title": "Obsidian Daily Note (Cmd+Shift+D)",
+      "shortName": "DAILY"
+    },
+    {
+      "name": "Search",
+      "title": "Obsidian Search (Cmd+O)",
+      "shortName": "SRCH"
+    },
+    {
+      "name": "Graph",
+      "title": "Obsidian Graph View (Cmd+G)",
+      "shortName": "GRAPH"
+    },
+    {
+      "name": "Cmd-P",
+      "title": "Obsidian Command Palette (Cmd+P)",
+      "shortName": "CMD-P"
+    },
+    {
+      "name": "GD H1",
+      "title": "Google Docs Header 1 (Cmd+Alt+1)",
+      "shortName": "GD H1"
+    },
+    {
+      "name": "GD H2",
+      "title": "Google Docs Header 2 (Cmd+Alt+2)",
+      "shortName": "GD H2"
+    },
+    {
+      "name": "GD H3",
+      "title": "Google Docs Header 3 (Cmd+Alt+3)",
+      "shortName": "GD H3"
+    },
+    {
+      "name": "GD Nrm",
+      "title": "Google Docs Normal Text (Cmd+Alt+0)",
+      "shortName": "GD N"
+    },
+    {
+      "name": "Split",
+      "title": "Logic Pro Split Region (Cmd+T)",
+      "shortName": "SPLIT"
+    },
+    {
+      "name": "Join",
+      "title": "Logic Pro Join Regions (Cmd+J)",
+      "shortName": "JOIN"
+    },
+    {
+      "name": "XFade",
+      "title": "Logic Pro Crossfade (X)",
+      "shortName": "XFADE"
+    },
+    {
+      "name": "Color",
+      "title": "Logic Pro Color Regions (Alt+C)",
+      "shortName": "COLOR"
+    },
+    {
+      "name": "Bounce",
+      "title": "Logic Pro Bounce in Place (Ctrl+B)",
+      "shortName": "BNCE"
+    },
+    {
+      "name": "Marker",
+      "title": "Logic Pro Add Marker (Alt+')",
+      "shortName": "MRKR"
+    },
+    {
+      "name": "Date",
+      "title": "Insert Current Date",
+      "shortName": "DATE"
+    },
+    {
+      "name": "Time",
+      "title": "Insert Current Time",
+      "shortName": "TIME"
+    }
+  ],
+  "keycodes": ["qmk_lighting"],
+  "menus": [
+    {
+      "label": "Lighting",
+      "content": [
+        {
+          "label": "Backlight",
+          "content": [
+            {
+              "label": "Brightness",
+              "type": "range",
+              "options": [0, 255],
+              "content": ["id_qmk_rgb_matrix_brightness", 3, 1]
+            },
+            {
+              "label": "Effect",
+              "type": "dropdown",
+              "content": ["id_qmk_rgb_matrix_effect", 3, 2],
+              "options": [
+                ["None", 0],
+                ["Solid Color", 1],
+                ["Alphas Mods", 2],
+                ["Gradient Up Down", 3],
+                ["Gradient Left Right", 4],
+                ["Breathing", 5],
+                ["Band Sat", 6],
+                ["Band Val", 7],
+                ["Band Pinwheel Sat", 8],
+                ["Band Pinwheel Val", 9],
+                ["Band Spiral Sat", 10],
+                ["Band Spiral Val", 11],
+                ["Cycle All", 12],
+                ["Cycle Left Right", 13],
+                ["Cycle Up Down", 14],
+                ["Rainbow Moving Chevron", 15],
+                ["Cycle Out In", 16],
+                ["Cycle Out In Dual", 17],
+                ["Cycle Pinwheel", 18],
+                ["Cycle Spiral", 19],
+                ["Dual Beacon", 20],
+                ["Rainbow Beacon", 21],
+                ["Rainbow Pinwheels", 22],
+                ["Flower Blooming", 23],
+                ["Raindrops", 24],
+                ["Jellybean Raindrops", 25],
+                ["Hue Breathing", 26],
+                ["Hue Pendulum", 27],
+                ["Hue Wave", 28],
+                ["Pixel Flow", 29],
+                ["Pixel Rain", 30],
+                ["Starlight", 31],
+                ["Starlight Dual Hue", 32],
+                ["Starlight Dual Sat", 33],
+                ["Typing Heatmap", 34],
+                ["Digital Rain", 35],
+                ["Solid Reactive Simple", 36],
+                ["Solid Reactive", 37],
+                ["Solid Reactive Wide", 38],
+                ["Solid Reactive Multiwide", 39],
+                ["Solid Reactive Cross", 40],
+                ["Solid Reactive Multicross", 41],
+                ["Solid Reactive Nexus", 42],
+                ["Solid Reactive Multinexus", 43],
+                ["Splash", 44],
+                ["Multisplash", 45],
+                ["Solid Splash", 46],
+                ["Solid Multisplash", 47]
+              ]
+            },
+            {
+              "label": "Effect Speed",
+              "type": "range",
+              "options": [0, 255],
+              "content": ["id_qmk_rgb_matrix_effect_speed", 3, 3]
+            },
+            {
+              "label": "Color",
+              "type": "color",
+              "content": ["id_qmk_rgb_matrix_color", 3, 4]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "layouts": {
+    "keymap": [
+      [
+        {"c":"#777777"},
+        "0,0\n\n\n\n\n\n\n\n\ne0",
+        {"c":"#cccccc"},
+        "0,1",
+        "0,2",
+        "0,3",
+        "0,4",
+        "0,5",
+        "0,6",
+        "0,7",
+        "0,8",
+        "0,9",
+        "0,10",
+        "0,11",
+        {"c":"#aaaaaa"},
+        "0,12",
+        "0,13\n\n\n\n\n\n\n\n\ne1"
+      ],
+      [
+        {"c":"#777777"},
+        "1,0",
+        {"c":"#cccccc"},
+        "1,1",
+        "1,2",
+        "1,3",
+        "1,4",
+        "1,5",
+        "1,6",
+        "1,7",
+        "1,8",
+        "1,9",
+        "1,10",
+        "1,11",
+        "1,12",
+        {"c":"#aaaaaa"},
+        "1,13"
+      ],
+      [
+        "2,0",
+        {"c":"#cccccc"},
+        "2,1",
+        "2,2",
+        "2,3",
+        "2,4",
+        "2,5",
+        "2,6",
+        "2,7",
+        "2,8",
+        "2,9",
+        "2,10",
+        "2,11",
+        {"c":"#777777","w":2},
+        "2,12"
+      ],
+      [
+        {"c":"#aaaaaa"},
+        "3,0",
+        {"c":"#cccccc"},
+        "3,1",
+        "3,2",
+        "3,3",
+        "3,4",
+        "3,5",
+        "3,6",
+        "3,7",
+        "3,8",
+        "3,9",
+        "3,10",
+        {"c":"#aaaaaa"},
+        "3,11",
+        {"c":"#cccccc"},
+        "3,12",
+        {"c":"#aaaaaa"},
+        "3,13"
+      ],
+      [
+        "4,0",
+        "4,1",
+        "4,2",
+        "4,3",
+        {"c":"#cccccc","w":2.25},
+        "4,4",
+        {"w":2.75},
+        "4,7",
+        {"c":"#aaaaaa"},
+        "4,9",
+        "4,10",
+        {"c":"#cccccc"},
+        "4,11",
+        "4,12",
+        "4,13"
+      ]
+    ]
+  }
+}
