@@ -1,5 +1,8 @@
 /* Copyright 2021 @ Keychron (https://www.keychron.com)
  *
+ * SPI variant ported from Keychron wireless branch by Tymon3310
+ * Adapted for Vial QMK by d3lilah
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
