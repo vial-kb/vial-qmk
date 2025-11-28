@@ -3,7 +3,7 @@
 #pragma once
 
 /* Vial Keyboard UID - Unique ID for Q15 Max */
-#define VIAL_KEYBOARD_UID {0x70, 0xFE, 0x9A, 0xB1, 0x0C, 0x68, 0x1D, 0xFE}
+#define VIAL_KEYBOARD_UID {0x36, 0xA9, 0x43, 0x75, 0x3E, 0x8A, 0x1D, 0xFA}
 
 /* Vial unlock combo - ESC + Enter (top-left + main enter) */
 #define VIAL_UNLOCK_COMBO_ROWS { 1, 2 }
