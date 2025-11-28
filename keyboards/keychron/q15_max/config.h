@@ -20,6 +20,16 @@
 #define ENCODER_DEFAULT_POS 0x3
 #define ENCODER_MAP_KEY_DELAY 2
 
+#ifdef RGB_MATRIX_ENABLE
+/* SPI configuration for RGB */
+#    define SPI_DRIVER SPID1
+#    define SPI_SCK_PIN A5
+#    define SPI_MISO_PIN A6
+#    define SPI_MOSI_PIN A7
+#    define SNLED27351_SDB_PIN B7
+#    define SNLED27351_SPI_DIVISOR 16
+#endif
+
 #ifdef LK_WIRELESS_ENABLE
 /* Hardware configuration */
 #    define P2P4_MODE_SELECT_PIN A10

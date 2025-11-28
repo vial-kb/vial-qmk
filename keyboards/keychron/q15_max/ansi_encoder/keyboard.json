@@ -1,53 +1,7 @@
 {
-    "keyboard_name": "Keychron Q15 Max ANSI Encoder",
-    "manufacturer": "Keychron",
-    "url": "https://github.com/Keychron",
-    "maintainer": "Keychron",
-    "processor": "STM32F401",
-    "bootloader": "stm32-dfu",
     "usb": {
-        "vid": "0x3434",
         "pid": "0x08F0",
         "device_version": "1.0.0"
-    },
-    "features": {
-        "bootmagic": true,
-        "command": false,
-        "console": false,
-        "extrakey": true,
-        "mousekey": true,
-        "dip_switch": true,
-        "encoder": true,
-        "encoder_map": true,
-        "nkro": true,
-        "raw": true,
-        "sendstring": true
-    },
-    "matrix_pins": {
-        "cols": ["B10", "B12", "B13", "B14", "B15", "C9", "A8", "A13", "A14", "A15", "C10", "C11", "C12", "C2"],
-        "rows": ["D2", "B3", "B4", "B5", "B6"]
-    },
-    "diode_direction": "ROW2COL",
-    "dip_switch": {
-        "pins": ["C6"]
-    },
-    "dynamic_keymap": {
-        "layer_count": 5
-    },
-    "bootmagic": {
-        "matrix": [1, 0]
-    },
-    "encoder": {
-        "rotary": [
-            {
-                "pin_a": "C7",
-                "pin_b": "C8"
-            },
-            {
-                "pin_a": "A0",
-                "pin_b": "A1"
-            }
-        ]
     },
     "layouts": {
         "LAYOUT_ansi_66": {
@@ -96,32 +50,32 @@
                 {"matrix": [2, 11], "x": 11, "y": 2},
                 {"matrix": [2, 12], "x": 12, "y": 2, "w": 2},
 
-                {"matrix": [3, 0], "x": 0, "y": 3, "w": 2},
-                {"matrix": [3, 1], "x": 2, "y": 3},
-                {"matrix": [3, 2], "x": 3, "y": 3},
-                {"matrix": [3, 3], "x": 4, "y": 3},
-                {"matrix": [3, 4], "x": 5, "y": 3},
-                {"matrix": [3, 5], "x": 6, "y": 3},
-                {"matrix": [3, 6], "x": 7, "y": 3},
-                {"matrix": [3, 7], "x": 8, "y": 3},
-                {"matrix": [3, 8], "x": 9, "y": 3},
-                {"matrix": [3, 9], "x": 10, "y": 3},
-                {"matrix": [3, 10], "x": 11, "y": 3},
-                {"matrix": [3, 11], "x": 12, "y": 3},
-                {"matrix": [3, 12], "x": 13, "y": 3},
-                {"matrix": [3, 13], "x": 14, "y": 3},
+                {"matrix": [3, 0], "x": 0, "y": 3},
+                {"matrix": [3, 1], "x": 1, "y": 3},
+                {"matrix": [3, 2], "x": 2, "y": 3},
+                {"matrix": [3, 3], "x": 3, "y": 3},
+                {"matrix": [3, 4], "x": 4, "y": 3},
+                {"matrix": [3, 5], "x": 5, "y": 3},
+                {"matrix": [3, 6], "x": 6, "y": 3},
+                {"matrix": [3, 7], "x": 7, "y": 3},
+                {"matrix": [3, 8], "x": 8, "y": 3},
+                {"matrix": [3, 9], "x": 9, "y": 3},
+                {"matrix": [3, 10], "x": 10, "y": 3},
+                {"matrix": [3, 11], "x": 11, "y": 3},
+                {"matrix": [3, 12], "x": 12, "y": 3},
+                {"matrix": [3, 13], "x": 13, "y": 3},
 
                 {"matrix": [4, 0], "x": 0, "y": 4},
                 {"matrix": [4, 1], "x": 1, "y": 4},
                 {"matrix": [4, 2], "x": 2, "y": 4},
                 {"matrix": [4, 3], "x": 3, "y": 4},
-                {"matrix": [4, 4], "x": 4, "y": 4, "w": 2},
-                {"matrix": [4, 6], "x": 6, "y": 4, "w": 2},
-                {"matrix": [4, 8], "x": 8, "y": 4},
+                {"matrix": [4, 4], "x": 4, "y": 4, "w": 2.25},
+                {"matrix": [4, 7], "x": 6.25, "y": 4, "w": 2.75},
                 {"matrix": [4, 9], "x": 9, "y": 4},
                 {"matrix": [4, 10], "x": 10, "y": 4},
                 {"matrix": [4, 11], "x": 11, "y": 4},
-                {"matrix": [4, 13], "x": 13, "y": 4}
+                {"matrix": [4, 12], "x": 12, "y": 4},
+                {"matrix": [4, 13], "x": 13, "y": 4},
             ]
         }
     }

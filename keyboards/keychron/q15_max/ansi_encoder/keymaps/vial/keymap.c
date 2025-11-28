@@ -15,7 +15,6 @@
  */
 
 #include QMK_KEYBOARD_H
-#include "keychron_common.h"
 
 // clang-format off
 
@@ -70,42 +69,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* Layer 2: _FN1 (Mac Function Layer)
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │   │BrD│BrU│MCt│LPd│   │   │Prv│Ply│Nxt│Mut│VoD│VoU│   │
+     * │   │BrD│BrU│MCt│LPd│RGB│   │Prv│Ply│Nxt│Mut│VoD│VoU│   │
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │ ` │   │   │   │   │   │   │   │   │   │Ins│PgU│Hom│   │
+     * │ ` │RMD│RMI│   │   │   │   │   │   │   │Ins│PgU│Hom│   │
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┴───┤
-     * │   │   │   │   │   │   │   │   │   │   │PgD│End│       │
+     * │   │SPD│SPI│   │   │   │   │   │   │   │PgD│End│       │
      * ├───┴───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┬───┼───┐
-     * │       │   │   │   │   │   │NKR│   │   │   │Del│   │   │   │
+     * │       │HUD│HUI│SAD│SAI│VAD│VAI│NKR│   │   │Del│   │   │   │
      * ├───┬───┼───┼───┼───┴───┴───┴───┴───┼───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │                   │   │   │   │   │   │
      * └───┴───┴───┴───┴───────────────────┴───┴───┴───┴───┴───┘
      */
     [_FN1] = LAYOUT_ansi_66(
-        _______,  KC_BRID,  KC_BRIU,  KC_MCTL,  KC_LPAD,  _______,  _______,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  _______,
-        KC_GRV,   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_INS,   KC_PGUP,  KC_HOME,  _______,
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_PGDN,  KC_END,   _______,
-        _______,  _______,  _______,  _______,  _______,  _______,  NK_TOGG,  _______,  _______,  _______,  KC_DEL,   _______,  _______,  _______,
+        _______,  KC_BRID,  KC_BRIU,  KC_MCTL,  KC_LPAD,  RGB_TOG,  _______,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  _______,
+        KC_GRV,   RGB_RMOD, RGB_MOD,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_INS,   KC_PGUP,  KC_HOME,  _______,
+        _______,  RGB_SPD,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_PGDN,  KC_END,   _______,
+        _______,  RGB_HUD,  RGB_HUI,  RGB_SAD,  RGB_SAI,  RGB_VAD,  RGB_VAI,  NK_TOGG,  _______,  _______,  KC_DEL,   _______,  _______,  _______,
         _______,  _______,  _______,  XXXXXXX,  _______,                      _______,            _______,  _______,  _______,  _______,  _______),
 
     /* Layer 3: _FN2 (Windows Function Layer)
      * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┐
-     * │   │BrD│BrU│App│PSc│   │   │Prv│Ply│Nxt│Mut│VoD│VoU│   │
+     * │   │BrD│BrU│App│PSc│RGB│   │Prv│Ply│Nxt│Mut│VoD│VoU│   │
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┤
-     * │ ` │   │   │   │   │   │   │   │   │Scr│Ins│PgU│Hom│   │
+     * │ ` │RMD│RMI│   │   │   │   │   │   │Scr│Ins│PgU│Hom│   │
      * ├───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┴───┤
-     * │   │   │   │   │   │   │   │   │   │   │PgD│End│       │
+     * │   │SPD│SPI│   │   │   │   │   │   │   │PgD│End│       │
      * ├───┴───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┼───┬───┼───┐
-     * │       │   │   │   │   │   │NKR│   │   │   │Del│   │   │   │
+     * │       │HUD│HUI│SAD│SAI│VAD│VAI│NKR│   │   │Del│   │   │   │
      * ├───┬───┼───┼───┼───┴───┴───┴───┴───┼───┼───┼───┼───┼───┼───┤
      * │   │   │   │   │                   │   │   │   │   │   │
      * └───┴───┴───┴───┴───────────────────┴───┴───┴───┴───┴───┘
      */
     [_FN2] = LAYOUT_ansi_66(
-        _______,  KC_BRID,  KC_BRIU,  KC_APP,   KC_PSCR,  _______,  _______,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  _______,
-        KC_GRV,   _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_SCRL,  KC_INS,   KC_PGUP,  KC_HOME,  _______,
-        _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_PGDN,  KC_END,   _______,
-        _______,  _______,  _______,  _______,  _______,  _______,  NK_TOGG,  _______,  _______,  _______,  KC_DEL,   _______,  _______,  _______,
+        _______,  KC_BRID,  KC_BRIU,  KC_APP,   KC_PSCR,  RGB_TOG,  _______,  KC_MPRV,  KC_MPLY,  KC_MNXT,  KC_MUTE,  KC_VOLD,  KC_VOLU,  _______,
+        KC_GRV,   RGB_RMOD, RGB_MOD,  _______,  _______,  _______,  _______,  _______,  _______,  KC_SCRL,  KC_INS,   KC_PGUP,  KC_HOME,  _______,
+        _______,  RGB_SPD,  RGB_SPI,  _______,  _______,  _______,  _______,  _______,  _______,  _______,  KC_PGDN,  KC_END,   _______,
+        _______,  RGB_HUD,  RGB_HUI,  RGB_SAD,  RGB_SAI,  RGB_VAD,  RGB_VAI,  NK_TOGG,  _______,  _______,  KC_DEL,   _______,  _______,  _______,
         _______,  _______,  _______,  XXXXXXX,  _______,                      _______,            _______,  _______,  _______,  _______,  _______),
 
     /* Layer 4: _FN3 (Universal F-key Layer)
@@ -131,17 +130,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // clang-format on
 
-/* Process Keychron-specific keycodes */
+/* Process user keycodes */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_record_keychron(keycode, record)) {
-        return false;
-    }
+    // No special processing needed for Vial-only build
     return true;
 }
 
 /* Encoder map for both knobs (positions 0,0 and 0,13) */
 #ifdef ENCODER_MAP_ENABLE
-const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+const uint16_t PROGMEM encoder_map[][2][2] = {
     [MAC_BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [WIN_BASE] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [_FN1]     = { ENCODER_CCW_CW(KC_BRID, KC_BRIU), ENCODER_CCW_CW(KC_BRID, KC_BRIU) },

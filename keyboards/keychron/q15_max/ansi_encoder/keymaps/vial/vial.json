@@ -2,6 +2,7 @@
   "name": "Keychron Q15 Max",
   "vendorId": "0x3434",
   "productId": "0x08F0",
+  "lighting": "vialrgb",
   "matrix": {
     "rows": 5,
     "cols": 14
@@ -9,7 +10,10 @@
   "layouts": {
     "keymap": [
       [
-        {"c": "#777777"},
+        {"c": "#cccccc"},
+        "0,0\n\n\n\n\n\n\n\n\ne",
+        "0,1\n\n\n\n\n\n\n\n\ne",
+        {"x": 0.25, "c": "#777777"},
         "0,0\nENC",
         {"c": "#cccccc"},
         "0,1",
@@ -25,7 +29,10 @@
         "0,11",
         {"c": "#aaaaaa"},
         "0,12",
-        "0,13"
+        "0,13\nENC",
+        {"x": 0.25, "c": "#cccccc"},
+        "1,0\n\n\n\n\n\n\n\n\ne",
+        "1,1\n\n\n\n\n\n\n\n\ne"
       ],
       [
         {"c": "#aaaaaa"},
@@ -94,9 +101,9 @@
         {"c": "#cccccc", "w": 2.25},
         "4,4",
         {"w": 2.75},
-        "4,6",
+        "4,7",
         {"c": "#aaaaaa"},
-        "4,8",
+        "4,9",
         "4,10",
         {"c": "#777777"},
         "4,11",

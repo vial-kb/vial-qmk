@@ -1,4 +1,4 @@
-/* Copyright 2024 @ Keychron (https://www.keychron.com)
+/* Copyright 2024 ~ 2025 @ Keychron (https://www.keychron.com)
  *
  * This program is free software : you can redistribute it and /or modify
  * it under the terms of the GNU General Public License as published by
@@ -35,7 +35,3 @@
 
 #undef STM32_SPI_USE_SPI1
 #define STM32_SPI_USE_SPI1 TRUE
-
-/* Explicitly disable I2C for wired-only build */
-#undef STM32_I2C_USE_I2C1
-#define STM32_I2C_USE_I2C1 FALSE

@@ -33,6 +33,10 @@
 #    include "is31fl3746a.h"
 #elif defined(RGB_MATRIX_SNLED27351)
 #    include "snled27351.h"
+#elif defined(RGB_MATRIX_SNLED27351_SPI)
+#    include "snled27351-spi.h"
+#elif defined(RGB_MATRIX_AW20216S)
+#    include "aw20216s.h"
 #elif defined(RGB_MATRIX_WS2812)
 #    include "ws2812.h"
 #endif

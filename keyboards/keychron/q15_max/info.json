@@ -29,7 +29,7 @@
         "pins": ["C6"]
     },
     "dynamic_keymap": {
-    	"layer_count": 5
+        "layer_count": 5
     },
     "bootmagic": {
         "matrix": [1, 0]
@@ -47,7 +47,7 @@
         ]
     },
     "rgb_matrix": {
-        "driver": "snled27351",
+        "driver": "snled27351_spi",
         "sleep": true,
         "animations": {
             "band_spiral_val": true,

@@ -17,3 +17,8 @@
 #define VIAL_MACRO_COUNT 16
 #define VIAL_TAP_DANCE_ENTRIES 8
 #define VIAL_COMBO_ENTRIES 8
+
+/* Include expanded RGB effects from d3lilah's configuration */
+#ifdef RGB_MATRIX_ENABLE
+#include "rgb_effects_config.h"
+#endif
