@@ -47,7 +47,7 @@
         ]
     },
     "rgb_matrix": {
-        "driver": "snled27351_spi",
+        "driver": "custom",
         "sleep": true,
         "animations": {
             "band_spiral_val": true,
