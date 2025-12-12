@@ -250,13 +250,13 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
     switch(get_highest_layer(remove_auto_mouse_layer(state, true))) {
         case 1 ... 2:
             //rgblight_sethsv_range(HSV_YELLOW, 0, 9);
-            cocot_set_scroll_mode(true);
-            state = remove_auto_mouse_layer(state, false);
-            set_auto_mouse_enable(false);
+            //cocot_set_scroll_mode(true);
+            //state = remove_auto_mouse_layer(state, false);
+            //set_auto_mouse_enable(false);
             break;
         case 3 ... 7:
             //rgblight_sethsv_range(HSV_CYAN, 0, 9);
-            cocot_set_scroll_mode(false);
+            //cocot_set_scroll_mode(false);
             //set_auto_mouse_enable(true);
             break;
         default:
