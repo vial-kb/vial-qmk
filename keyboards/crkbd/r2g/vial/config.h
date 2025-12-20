@@ -52,6 +52,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #   define RGB_MATRIX_SPLIT { 27, 27 }
 #   define SPLIT_TRANSPORT_MIRROR
 #   define RGB_MATRIX_LED_FLUSH_LIMIT 16
+
+/* RGB effects */
+#   define ENABLE_RGB_MATRIX_SOLID_COLOR
+#   define ENABLE_RGB_MATRIX_BREATHING
+#   define ENABLE_RGB_MATRIX_CYCLE_ALL
+#   define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
+#   define ENABLE_RGB_MATRIX_SOLID_REACTIVE
+#   define ENABLE_RGB_MATRIX_SPLASH
 #endif
 
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
