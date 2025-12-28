@@ -29,9 +29,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "debug.h"
 #include "command.h"
 #include "util.h"
+#include "host.h"
 #include "sendchar.h"
 #include "eeconfig.h"
 #include "action_layer.h"
+#include "suspend.h"
 #ifdef BOOTMAGIC_ENABLE
 #    include "bootmagic.h"
 #endif
@@ -128,7 +130,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifdef SPLIT_KEYBOARD
 #    include "split_util.h"
 #endif
-#ifdef BATTERY_DRIVER
+#ifdef BATTERY_ENABLE
 #    include "battery.h"
 #endif
 #ifdef BLUETOOTH_ENABLE
@@ -483,6 +485,7 @@ void keyboard_init(void) {
 #ifdef CONNECTION_ENABLE
     connection_init();
 #endif
+    host_init();
     led_init_ports();
 #ifdef BACKLIGHT_ENABLE
     backlight_init_ports();
@@ -544,7 +547,7 @@ void keyboard_init(void) {
     // init after split init
     pointing_device_init();
 #endif
-#ifdef BATTERY_DRIVER
+#ifdef BATTERY_ENABLE
     battery_init();
 #endif
 #ifdef BLUETOOTH_ENABLE
@@ -573,6 +576,7 @@ void switch_events(uint8_t row, uint8_t col, bool pressed) {
 #if defined(RGB_MATRIX_ENABLE)
     rgb_matrix_handle_key_event(row, col, pressed);
 #endif
+    wakeup_matrix_handle_key_event(row, col, pressed);
 }
 
 /**
@@ -588,6 +592,8 @@ static inline void generate_tick_event(void) {
     }
 }
 
+matrix_row_t matrix_previous[MATRIX_ROWS];
+
 /**
  * @brief This task scans the keyboards matrix and processes any key presses
  * that occur.
@@ -600,8 +606,6 @@ static bool matrix_task(void) {
         generate_tick_event();
         return false;
     }
-
-    static matrix_row_t matrix_previous[MATRIX_ROWS];
 
     matrix_scan();
     bool matrix_changed = false;
@@ -636,7 +640,7 @@ static bool matrix_task(void) {
             if (row_changes & col_mask) {
                 const bool key_pressed = current_row & col_mask;
 
-                if (process_keypress) {
+                if (process_keypress && !keypress_is_wakeup_key(row, col)) {
                     action_exec(MAKE_KEYEVENT(row, col, key_pressed));
                 }
 
@@ -660,24 +664,8 @@ void quantum_task(void) {
     if (!is_keyboard_master()) return;
 #endif
 
-#if defined(AUDIO_ENABLE) && defined(AUDIO_INIT_DELAY)
-    // There are some tasks that need to be run a little bit
-    // after keyboard startup, or else they will not work correctly
-    // because of interaction with the USB device state, which
-    // may still be in flux...
-    //
-    // At the moment the only feature that needs this is the
-    // startup song.
-    static bool     delayed_tasks_run  = false;
-    static uint16_t delayed_task_timer = 0;
-    if (!delayed_tasks_run) {
-        if (!delayed_task_timer) {
-            delayed_task_timer = timer_read();
-        } else if (timer_elapsed(delayed_task_timer) > 300) {
-            audio_startup();
-            delayed_tasks_run = true;
-        }
-    }
+#ifdef AUDIO_ENABLE
+    audio_task();
 #endif
 
 #if defined(AUDIO_ENABLE) && !defined(NO_MUSIC_MODE)
@@ -727,6 +715,8 @@ void quantum_task(void) {
 #ifdef LAYER_LOCK_ENABLE
     layer_lock_task();
 #endif
+
+    host_task();
 }
 
 /** \brief Main task that is repeatedly called as fast as possible. */
@@ -807,7 +797,7 @@ void keyboard_task(void) {
     joystick_task();
 #endif
 
-#ifdef BATTERY_DRIVER
+#ifdef BATTERY_ENABLE
     battery_task();
 #endif
 
