@@ -201,6 +201,12 @@ __attribute__((weak)) void raw_hid_receive_kb(uint8_t *data, uint8_t length) {
     *command_id         = id_unhandled;
 }
 
+__attribute__((unused)) static uint16_t vial_keycode_firewall(uint16_t in) {
+    if (in == QK_BOOT && !vial_unlocked)
+        return 0;
+    return in;
+}
+
 // VIA handles received HID messages first, and will route to
 // raw_hid_receive_kb() for command IDs that are not handled here.
 // This gives the keyboard code level the ability to handle the command
@@ -300,7 +306,11 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
             break;
         }
         case id_dynamic_keymap_set_keycode: {
+#ifdef VIAL_ENABLE
+            dynamic_keymap_set_keycode(command_data[0], command_data[1], command_data[2], vial_keycode_firewall((command_data[3] << 8) | command_data[4]));
+#else
             dynamic_keymap_set_keycode(command_data[0], command_data[1], command_data[2], (command_data[3] << 8) | command_data[4]);
+#endif
             break;
         }
         case id_dynamic_keymap_reset: {
