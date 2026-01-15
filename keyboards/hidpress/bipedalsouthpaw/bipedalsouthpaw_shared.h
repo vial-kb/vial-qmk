@@ -1,5 +1,8 @@
 #pragma once
 
+#include <stdint.h>
+#include <stdbool.h>
+
 // Declare the variables as extern
 extern uint32_t actuation_display_timer;
 extern bool showing_actuation;
@@ -24,3 +27,6 @@ enum layers {
     _TWO,
     _THREE
 };
+
+// OLED screensaver activity tracking
+void register_oled_activity(void);

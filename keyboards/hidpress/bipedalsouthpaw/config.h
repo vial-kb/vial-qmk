@@ -15,7 +15,7 @@
 #define WS2812_PIO_USE_PIO1
 #define WS2812_DI_PIN GP24
 #define RGBLED_NUM 12
-#define RGBLIGHT_LED_COUNT RGBLED_NUM 
+#define RGBLIGHT_LED_COUNT RGBLED_NUM
 
 
 #define CUSTOM_ENCODER_ENABLE
@@ -60,4 +60,5 @@
 #define I2C1_SDA_PIN GP0
 
 #define OLED_DISPLAY_128X32
-#define OLED_TIMEOUT 60000 // Increase timeout to 1 minute
+#define OLED_TIMEOUT 0  // Disable built-in timeout - we handle it with screensaver
+#define SCREENSAVER_TIMEOUT 60000  // 60 seconds before screensaver activates

@@ -81,6 +81,11 @@ bool scroll_inverted = false;  // Add this with your other global variables
 int actuation = 256; // actuation point for customkeys (0-511)
 
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    // Wake OLED screensaver on pointing device activity
+    if (mouse_report.x != 0 || mouse_report.y != 0) {
+        register_oled_activity();
+    }
+
     switch (current_mode) {
         case MODE_MOUSE:
             // Mouse mode doesn't modify the mouse report
@@ -130,6 +135,9 @@ const uint16_t actuation_values[] = {352, 320, 256, 128, 64};  // Values from hi
 uint8_t current_actuation_index = 2;  // Start at center (256)
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // Wake OLED screensaver on any key activity
+    register_oled_activity();
+
     switch (keycode) {
 
         case ACT_DOWN:

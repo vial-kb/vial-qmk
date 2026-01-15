@@ -193,19 +193,19 @@ bool showing_actuation = false;
 
 void render_actuation_state(void) {
     switch(actuation) {
-        case 64:  
+        case 64:
             oled_write_P(actuation_level_5, false);
             break;
-        case 128:  
+        case 128:
             oled_write_P(actuation_level_4, false);
             break;
         case 256:  // State 3 (default)
             oled_write_P(actuation_level_3, false);
             break;
-        case 320:  
+        case 320:
             oled_write_P(actuation_level_2, false);
             break;
-        case 352:  
+        case 352:
             oled_write_P(actuation_level_1, false);
             break;
         default:
@@ -214,9 +214,268 @@ void render_actuation_state(void) {
     }
 }
 
+// Startup splash screen
+#define SPLASH_DURATION 2000  // Show splash for 2 seconds
+static uint32_t splash_timer = 0;
+static bool splash_shown = false;
+static bool splash_initialized = false;
+
+// Screensaver state
+static uint32_t last_activity_time = 0;
+static bool screensaver_active = false;
+
+// Vortex animation particle system
+#define NUM_PARTICLES 50
+#define VORTEX_CENTER_X 64  // Center of 128-pixel wide display
+#define VORTEX_CENTER_Y 16  // Center of 32-pixel tall display
+#define FRAME_DELAY 40      // ~25 FPS
+
+// Particle structure - uses fixed point for smooth animation
+typedef struct {
+    int16_t x;       // Position (scaled by 16 for sub-pixel precision)
+    int16_t y;
+    int16_t radius;  // Distance from center (scaled)
+    int16_t angle;   // Angle in degrees (0-359)
+    int8_t speed;    // Angular velocity
+    int8_t inward;   // Inward velocity
+} particle_t;
+
+static particle_t particles[NUM_PARTICLES];
+static uint32_t vortex_timer = 0;
+static bool particles_initialized = false;
+
+// Simple pseudo-random number generator
+static uint16_t rng_state = 12345;
+static uint16_t simple_rand(void) {
+    rng_state ^= rng_state << 7;
+    rng_state ^= rng_state >> 9;
+    rng_state ^= rng_state << 8;
+    return rng_state;
+}
+
+// Sine lookup table (90 values for 0-89 degrees, scaled by 256)
+static const int16_t sin_table[90] = {
+    0, 4, 9, 13, 18, 22, 27, 31, 36, 40,
+    44, 49, 53, 58, 62, 66, 71, 75, 79, 83,
+    88, 92, 96, 100, 104, 108, 112, 116, 120, 124,
+    128, 131, 135, 139, 142, 146, 149, 152, 156, 159,
+    162, 165, 168, 171, 174, 177, 179, 182, 184, 187,
+    189, 191, 194, 196, 198, 200, 202, 204, 205, 207,
+    209, 210, 212, 213, 214, 216, 217, 218, 219, 220,
+    221, 222, 223, 224, 224, 225, 226, 226, 227, 227,
+    228, 228, 228, 229, 229, 229, 229, 230, 230, 230
+};
+
+// Get sine value (angle in degrees, returns -256 to 256)
+static int16_t fast_sin(int16_t angle) {
+    // Normalize angle to 0-359
+    while (angle < 0) angle += 360;
+    while (angle >= 360) angle -= 360;
+
+    if (angle < 90) return sin_table[angle];
+    if (angle < 180) return sin_table[179 - angle];
+    if (angle < 270) return -sin_table[angle - 180];
+    return -sin_table[359 - angle];
+}
+
+// Get cosine value
+static int16_t fast_cos(int16_t angle) {
+    return fast_sin(angle + 90);
+}
+
+// Helper to calculate X/Y based on radius and angle
+static void calculate_pos(int16_t radius, int16_t angle, int16_t *x, int16_t *y) {
+    // Scale X by 2.5
+    *x = VORTEX_CENTER_X * 16 + (radius * fast_cos(angle) * 5) / 512;
+    // Scale Y by 0.8
+    *y = VORTEX_CENTER_Y * 16 + (radius * fast_sin(angle)) / 320;
+}
+
+// Initialize a single particle at random position on outer edge
+static void init_particle(particle_t *p) {
+    p->angle = simple_rand() % 360;
+    p->radius = 400 + (simple_rand() % 200);  // Start near outer edge (scaled)
+    p->speed = 3 + (simple_rand() % 4);       // Angular speed variation
+    p->inward = 2 + (simple_rand() % 3);      // Inward speed variation
+
+    // Calculate initial position
+    calculate_pos(p->radius, p->angle, &p->x, &p->y);
+}
+
+// Initialize all particles
+static void init_vortex(void) {
+    rng_state = timer_read() | 1;  // Seed with timer (ensure odd)
+    for (int i = 0; i < NUM_PARTICLES; i++) {
+        init_particle(&particles[i]);
+        // Spread initial radii for visual variety
+        particles[i].radius = 50 + (simple_rand() % 550);
+    }
+    particles_initialized = true;
+}
+
+// Update particle positions
+static void update_vortex(bool respawn) {
+    for (int i = 0; i < NUM_PARTICLES; i++) {
+        particle_t *p = &particles[i];
+
+        // Rotate around center
+        p->angle += p->speed;
+        if (p->angle >= 360) p->angle -= 360;
+
+        // Move inward (accelerate as it gets closer)
+        int16_t accel = (600 - p->radius) / 100;
+        if (accel < 1) accel = 1;
+        p->radius -= p->inward + accel;
+
+        // Respawn if reached center (only if respawn allowed)
+        if (p->radius < 20) {
+            if (respawn) {
+                init_particle(p);
+            } else {
+                // Ensure it stays "dead" or extremely close to center (invisible)
+                p->radius = 0;
+            }
+        }
+
+        // Update cartesian position
+        calculate_pos(p->radius, p->angle, &p->x, &p->y);
+    }
+}
+
+// Render vortex to OLED with trails
+static void render_vortex(uint8_t count) {
+    oled_clear();
+
+    // Draw particles
+    for (int i = 0; i < count && i < NUM_PARTICLES; i++) {
+        // Skip rendering if radius is 0 (dead particle)
+        if (particles[i].radius == 0) continue;
+
+        int16_t px, py;
+
+        // Draw main pixel
+        px = particles[i].x / 16;
+        py = particles[i].y / 16;
+        if (px >= 0 && px < 128 && py >= 0 && py < 32) {
+            oled_write_pixel(px, py, true);
+        }
+
+        // Draw trail (2 segments behind)
+        // Trail length depends on speed (faster = longer trail potentially, but fixed angle offset is easier)
+        int16_t trail_angle = particles[i].angle;
+        int16_t tx, ty;
+
+        // Trail point 1
+        trail_angle -= 2;
+        calculate_pos(particles[i].radius, trail_angle, &tx, &ty);
+        px = tx / 16;
+        py = ty / 16;
+        if (px >= 0 && px < 128 && py >= 0 && py < 32) {
+            oled_write_pixel(px, py, true);
+        }
+
+        // Trail point 2
+        trail_angle -= 2;
+        calculate_pos(particles[i].radius, trail_angle, &tx, &ty);
+        px = tx / 16;
+        py = ty / 16;
+        if (px >= 0 && px < 128 && py >= 0 && py < 32) {
+            oled_write_pixel(px, py, true);
+        }
+
+        // Draw brighter (larger) particles near center for core glow effect
+        if (particles[i].radius < 100) {
+            px = particles[i].x / 16;
+            py = particles[i].y / 16;
+            if (px > 0) oled_write_pixel(px - 1, py, true);
+            if (px < 127) oled_write_pixel(px + 1, py, true);
+            if (py > 0) oled_write_pixel(px, py - 1, true);
+            if (py < 31) oled_write_pixel(px, py + 1, true);
+        }
+    }
+
+    // Draw bright center core - fade out by shrinking it based on count
+    // Full core if count > 40, smaller if count > 20, hidden if count < 10
+    if (count > 10) {
+        int radius_sq = (count > 40) ? 4 : (count > 20 ? 1 : 0);
+        for (int dy = -2; dy <= 2; dy++) {
+            for (int dx = -2; dx <= 2; dx++) {
+                if (dx*dx + dy*dy <= radius_sq) {
+                    oled_write_pixel(VORTEX_CENTER_X + dx, VORTEX_CENTER_Y + dy, true);
+                }
+            }
+        }
+    }
+}
+
+// Register activity to reset screensaver timer
+void register_oled_activity(void) {
+    last_activity_time = timer_read32();
+    if (screensaver_active) {
+        screensaver_active = false;
+        oled_clear();
+    }
+}
+
 bool oled_task_user(void) {
     static bool was_showing_actuation = false;
 
+    // Initialize on first run
+    if (!splash_initialized) {
+        oled_clear();
+        init_vortex();  // Initialize vortex for startup animation
+        splash_timer = timer_read32();
+        last_activity_time = timer_read32();
+        splash_initialized = true;
+    }
+
+    // Show animated vortex on startup
+    if (!splash_shown) {
+        if (timer_elapsed32(vortex_timer) > FRAME_DELAY) {
+            uint32_t elapsed = timer_elapsed32(splash_timer);
+            bool respawn = true;
+            uint8_t render_count = NUM_PARTICLES;
+
+            // Fade out in the last 1000ms of splash
+            #define FADE_DURATION 1000
+            if (elapsed > (SPLASH_DURATION - FADE_DURATION)) {
+                respawn = false;  // Stop respawning
+
+                // Reduce particle count over time
+                uint32_t fade_elapsed = elapsed - (SPLASH_DURATION - FADE_DURATION);
+                if (fade_elapsed > FADE_DURATION) fade_elapsed = FADE_DURATION;
+
+                // Linear fade: reduce from NUM_PARTICLES to 0
+                render_count = NUM_PARTICLES - (NUM_PARTICLES * fade_elapsed / FADE_DURATION);
+            }
+
+            update_vortex(respawn);
+            render_vortex(render_count);
+            vortex_timer = timer_read32();
+        }
+        if (timer_elapsed32(splash_timer) > SPLASH_DURATION) {
+            splash_shown = true;
+            oled_clear();
+        }
+        return false;
+    }
+
+    // Check for screensaver activation
+    if (!screensaver_active && timer_elapsed32(last_activity_time) > SCREENSAVER_TIMEOUT) {
+        screensaver_active = true;
+    }
+
+    // Render screensaver if active
+    if (screensaver_active) {
+        if (timer_elapsed32(vortex_timer) > FRAME_DELAY) {
+            update_vortex(true);  // Always respawn
+            render_vortex(NUM_PARTICLES); // Always render all
+            vortex_timer = timer_read32();
+        }
+        return false;
+    }
+
+    // Normal display logic
     if (showing_actuation) {
         // If we just started showing actuation
         if (!was_showing_actuation) {
@@ -239,7 +498,7 @@ bool oled_task_user(void) {
         }
         render_layer_state();
     }
-    
+
     return false;
 }
 
