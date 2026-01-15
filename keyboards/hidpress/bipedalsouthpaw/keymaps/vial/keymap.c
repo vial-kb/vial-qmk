@@ -16,6 +16,55 @@ enum custom_keycodes {
 
 enum pointing_device_mode current_mode = MODE_MOUSE; // Adjusted line
 
+// Per-layer mode memory: stores the last active mode for each layer
+static enum pointing_device_mode layer_modes[4] = {MODE_MOUSE, MODE_MOUSE, MODE_MOUSE, MODE_MOUSE};
+
+// Per-layer actuation memory: stores the actuation index for each layer (0-4, default 2)
+static uint8_t layer_actuation_indices[4] = {2, 2, 2, 2};
+
+// Forward declarations for actuation values
+extern const uint16_t actuation_values[];
+
+// EEPROM persistence for layer modes and actuation
+// Bit packing: 5 bits per layer (2 bits mode + 3 bits actuation index)
+// Layout: bits 0-4 = layer 0, bits 5-9 = layer 1, bits 10-14 = layer 2, bits 15-19 = layer 3
+void save_layer_config_to_eeprom(void) {
+    uint32_t data = 0;
+    for (int i = 0; i < 4; i++) {
+        uint32_t layer_data = ((uint32_t)layer_modes[i] & 0x03) |
+                              (((uint32_t)layer_actuation_indices[i] & 0x07) << 2);
+        data |= layer_data << (i * 5);
+    }
+    eeconfig_update_user(data);
+}
+
+void load_layer_config_from_eeprom(void) {
+    uint32_t data = eeconfig_read_user();
+    for (int i = 0; i < 4; i++) {
+        uint8_t layer_data = (data >> (i * 5)) & 0x1F;
+        uint8_t mode = layer_data & 0x03;
+        uint8_t act_idx = (layer_data >> 2) & 0x07;
+
+        // Validate and set mode
+        layer_modes[i] = (mode < MODE_COUNT) ? mode : MODE_MOUSE;
+
+        // Validate and set actuation index (0-4)
+        layer_actuation_indices[i] = (act_idx <= 4) ? act_idx : 2;
+    }
+    // Set current values to layer 0's values
+    current_mode = layer_modes[0];
+}
+
+void keyboard_post_init_user(void) {
+    load_layer_config_from_eeprom();
+    // Set actuation from layer 0
+    extern int actuation;
+    extern uint8_t current_actuation_index;
+    current_actuation_index = layer_actuation_indices[0];
+    actuation = actuation_values[current_actuation_index];
+}
+
+
 // Read the state of the joystick button
 bool is_joystick_button_pressed(void) {
     return readPin(GP7) == 0;
@@ -88,6 +137,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (current_actuation_index > 0) {  // Not at lowest value
                     current_actuation_index--;
                     actuation = actuation_values[current_actuation_index];
+                    // Save per-layer and persist
+                    layer_actuation_indices[get_highest_layer(layer_state)] = current_actuation_index;
+                    save_layer_config_to_eeprom();
                     showing_actuation = true;
                     actuation_display_timer = timer_read32();
                     oled_clear();
@@ -100,6 +152,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (current_actuation_index < 4) {  // Not at highest value
                     current_actuation_index++;
                     actuation = actuation_values[current_actuation_index];
+                    // Save per-layer and persist
+                    layer_actuation_indices[get_highest_layer(layer_state)] = current_actuation_index;
+                    save_layer_config_to_eeprom();
                     showing_actuation = true;
                     actuation_display_timer = timer_read32();
                     oled_clear();
@@ -111,6 +166,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 current_actuation_index = 2;  // Reset to center position
                 actuation = actuation_values[current_actuation_index];
+                // Save per-layer and persist
+                layer_actuation_indices[get_highest_layer(layer_state)] = current_actuation_index;
+                save_layer_config_to_eeprom();
                 showing_actuation = true;
                 actuation_display_timer = timer_read32();
                 oled_clear();
@@ -126,6 +184,10 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case TMB_MODE:
             if (record->event.pressed) {
                 current_mode = (current_mode + 1) % MODE_COUNT;
+                // Save the new mode for the current layer
+                layer_modes[get_highest_layer(layer_state)] = current_mode;
+                // Persist to EEPROM
+                save_layer_config_to_eeprom();
             }
             return false;
 
@@ -265,3 +327,14 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
 };
 
 #endif
+
+// Restore pointing device mode and actuation when switching layers
+layer_state_t layer_state_set_user(layer_state_t state) {
+    uint8_t new_layer = get_highest_layer(state);
+    current_mode = layer_modes[new_layer];
+    // Restore actuation for the new layer
+    current_actuation_index = layer_actuation_indices[new_layer];
+    actuation = actuation_values[current_actuation_index];
+    return state;
+}
+
