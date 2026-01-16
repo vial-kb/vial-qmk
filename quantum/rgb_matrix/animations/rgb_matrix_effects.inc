@@ -45,3 +45,4 @@
 #include "starlight_dual_hue_anim.h"
 #include "riverflow_anim.h"
 #include "vialrgb_direct_anim.h"
+#include "rule_lighting_anim.h"

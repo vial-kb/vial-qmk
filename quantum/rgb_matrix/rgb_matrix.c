@@ -22,11 +22,16 @@
 #include "keyboard.h"
 #include "sync_timer.h"
 #include "debug.h"
+#include "print.h"
 #include <string.h>
 #include <math.h>
 #include <stdlib.h>
 
 #include <lib/lib8tion/lib8tion.h>
+
+#ifdef RULE_LIGHTING_ENABLE
+#    include "rule_lighting.h"
+#endif
 
 #ifndef RGB_MATRIX_CENTER
 const led_point_t k_rgb_matrix_center = {112, 32};
@@ -100,6 +105,9 @@ const uint8_t k_rgb_matrix_split[2] = RGB_MATRIX_SPLIT;
 EECONFIG_DEBOUNCE_HELPER(rgb_matrix, rgb_matrix_config);
 
 void eeconfig_force_flush_rgb_matrix(void) {
+#ifdef RULE_LIGHTING_ENABLE
+    rule_lighting_save();
+#endif
     eeconfig_flush_rgb_matrix(true);
 }
 
@@ -110,6 +118,9 @@ void eeconfig_update_rgb_matrix_default(void) {
     rgb_matrix_config.hsv    = (hsv_t){RGB_MATRIX_DEFAULT_HUE, RGB_MATRIX_DEFAULT_SAT, RGB_MATRIX_DEFAULT_VAL};
     rgb_matrix_config.speed  = RGB_MATRIX_DEFAULT_SPD;
     rgb_matrix_config.flags  = RGB_MATRIX_DEFAULT_FLAGS;
+#ifdef RULE_LIGHTING_ENABLE
+    rule_lighting_reset();
+#endif
     eeconfig_flush_rgb_matrix(true);
 }
 
@@ -395,6 +406,10 @@ static void rgb_task_flush(uint8_t effect) {
 void rgb_matrix_task(void) {
     rgb_task_timers();
 
+#ifdef RULE_LIGHTING_ENABLE
+    rule_lighting_task();
+#endif
+
     uint8_t effect = rgb_current_effect;
 
     switch (rgb_task_state) {
@@ -507,6 +522,11 @@ void rgb_matrix_init(void) {
         dprintf("rgb_matrix_init_drivers rgb_matrix_config.mode = 0. Write default values to EEPROM.\n");
         eeconfig_update_rgb_matrix_default();
     }
+#ifdef RULE_LIGHTING_ENABLE
+    // Initialize rule_lighting - registers split RPC handlers
+    // (rule_lighting_reset was called above if mode==0, but init still needed for sync)
+    rule_lighting_init();
+#endif
     eeconfig_debug_rgb_matrix(); // display current eeprom values
 }
 

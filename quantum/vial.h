@@ -60,6 +60,8 @@ enum {
     dynamic_vial_key_override_set = 0x06,
     dynamic_vial_alt_repeat_key_get = 0x07,
     dynamic_vial_alt_repeat_key_set = 0x08,
+    dynamic_rule_lighting_get_entry = 0x09,
+    dynamic_rule_lighting_set_entry = 0x0A,
 };
 
 #define VIAL_MACRO_EXT_TAP 5
@@ -219,4 +221,18 @@ enum {
 #else
 #undef VIAL_ALT_REPEAT_KEY_ENTRIES
 #define VIAL_ALT_REPEAT_KEY_ENTRIES 0
+#endif
+
+
+/* RGB Matrix Rule Lighting effect opt-in feature for per-key colors based on layer/mods/caps/keycode
+ * To enable, add to your config.h:
+ *   #define RULE_LIGHTING_ENABLE
+ * Optionally set entry count (default 31):
+ *   #define RULE_LIGHTING_ENTRIES 16
+ */
+#if defined(RGB_MATRIX_ENABLE) && defined(RULE_LIGHTING_ENABLE)
+#include "rule_lighting.h"
+#else
+#undef RULE_LIGHTING_ENTRIES
+#define RULE_LIGHTING_ENTRIES 0
 #endif
