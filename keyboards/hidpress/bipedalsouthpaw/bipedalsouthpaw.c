@@ -230,25 +230,27 @@ static bool splash_initialized = false;
 static uint32_t last_activity_time = 0;
 static bool screensaver_active = false;
 
-// Vortex animation particle system
+// Animation particle system
 #define NUM_PARTICLES 50
-#define VORTEX_CENTER_X 64  // Center of 128-pixel wide display
-#define VORTEX_CENTER_Y 16  // Center of 32-pixel tall display
+#define SCREEN_CENTER_X 64  // Center of 128-pixel wide display
+#define SCREEN_CENTER_Y 16  // Center of 32-pixel tall display
 #define FRAME_DELAY 40      // ~25 FPS
 
-// Particle structure - uses fixed point for smooth animation
+// Warp particle structure - linear movement to center
 typedef struct {
-    int16_t x;       // Position (scaled by 16 for sub-pixel precision)
+    int16_t x;       // Current position (scaled by 16)
     int16_t y;
-    int16_t radius;  // Distance from center (scaled)
-    int16_t angle;   // Angle in degrees (0-359)
-    int8_t speed;    // Angular velocity
-    int8_t inward;   // Inward velocity
-} particle_t;
+    int16_t dx;      // Velocity X (scaled by 16)
+    int16_t dy;      // Velocity Y
+    int16_t prev_x;  // Previous position for trails
+    int16_t prev_y;
+    int16_t prev2_x; // Second previous position
+    int16_t prev2_y;
+} warp_particle_t;
 
-static particle_t particles[NUM_PARTICLES];
-static uint32_t vortex_timer = 0;
-static bool particles_initialized = false;
+static warp_particle_t warp_particles[NUM_PARTICLES];
+static uint32_t animation_timer = 0;
+static bool warp_initialized = false;
 
 // Simple pseudo-random number generator
 static uint16_t rng_state = 12345;
@@ -259,155 +261,177 @@ static uint16_t simple_rand(void) {
     return rng_state;
 }
 
-// Sine lookup table (90 values for 0-89 degrees, scaled by 256)
-static const int16_t sin_table[90] = {
-    0, 4, 9, 13, 18, 22, 27, 31, 36, 40,
-    44, 49, 53, 58, 62, 66, 71, 75, 79, 83,
-    88, 92, 96, 100, 104, 108, 112, 116, 120, 124,
-    128, 131, 135, 139, 142, 146, 149, 152, 156, 159,
-    162, 165, 168, 171, 174, 177, 179, 182, 184, 187,
-    189, 191, 194, 196, 198, 200, 202, 204, 205, 207,
-    209, 210, 212, 213, 214, 216, 217, 218, 219, 220,
-    221, 222, 223, 224, 224, 225, 226, 226, 227, 227,
-    228, 228, 228, 229, 229, 229, 229, 230, 230, 230
-};
 
-// Get sine value (angle in degrees, returns -256 to 256)
-static int16_t fast_sin(int16_t angle) {
-    // Normalize angle to 0-359
-    while (angle < 0) angle += 360;
-    while (angle >= 360) angle -= 360;
 
-    if (angle < 90) return sin_table[angle];
-    if (angle < 180) return sin_table[179 - angle];
-    if (angle < 270) return -sin_table[angle - 180];
-    return -sin_table[359 - angle];
+
+
+// Initialize a single warp particle - spawn on edges/corners of screen
+static void init_warp_particle(warp_particle_t *p) {
+    // Spawn on edges of the screen for a better warp effect
+    // Screen is vertically oriented (32 wide x 128 tall in visual space)
+    // Top/bottom are short edges, left/right are long edges
+    // Distribution: top 40%, bottom 40%, left 10%, right 10%
+    int16_t edge_rand = simple_rand() % 100;
+
+    if (edge_rand < 40) {
+        // Top edge (40%)
+        p->x = (simple_rand() % 128) * 16;
+        p->y = 0;
+    } else if (edge_rand < 80) {
+        // Bottom edge (40%)
+        p->x = (simple_rand() % 128) * 16;
+        p->y = 31 * 16;
+    } else if (edge_rand < 90) {
+        // Left edge (10%)
+        p->x = 0;
+        p->y = (simple_rand() % 32) * 16;
+    } else {
+        // Right edge (10%)
+        p->x = 127 * 16;
+        p->y = (simple_rand() % 32) * 16;
+    }
+
+    // Calculate velocity toward center
+    int16_t target_x = SCREEN_CENTER_X * 16;
+    int16_t target_y = SCREEN_CENTER_Y * 16;
+
+    int16_t diff_x = target_x - p->x;
+    int16_t diff_y = target_y - p->y;
+
+    // Calculate distance (approximate using octagonal method)
+    int16_t abs_dx = diff_x < 0 ? -diff_x : diff_x;
+    int16_t abs_dy = diff_y < 0 ? -diff_y : diff_y;
+    int16_t dist = abs_dx > abs_dy ? abs_dx + (abs_dy >> 1) : abs_dy + (abs_dx >> 1);
+
+    // Normalize and set speed (2-4 pixels per frame, scaled)
+    int16_t speed = 32 + (simple_rand() % 32);  // 2-4 * 16
+
+    if (dist > 16) {  // Ensure minimum distance
+        p->dx = (diff_x * speed) / dist;
+        p->dy = (diff_y * speed) / dist;
+    } else {
+        // If too close to center, give a default velocity
+        p->dx = 16;
+        p->dy = 8;
+    }
+
+    // Initialize trail positions to current position
+    p->prev_x = p->x;
+    p->prev_y = p->y;
+    p->prev2_x = p->x;
+    p->prev2_y = p->y;
 }
 
-// Get cosine value
-static int16_t fast_cos(int16_t angle) {
-    return fast_sin(angle + 90);
-}
-
-// Helper to calculate X/Y based on radius and angle
-static void calculate_pos(int16_t radius, int16_t angle, int16_t *x, int16_t *y) {
-    // Scale X by 2.5
-    *x = VORTEX_CENTER_X * 16 + (radius * fast_cos(angle) * 5) / 512;
-    // Scale Y by 0.8
-    *y = VORTEX_CENTER_Y * 16 + (radius * fast_sin(angle)) / 320;
-}
-
-// Initialize a single particle at random position on outer edge
-static void init_particle(particle_t *p) {
-    p->angle = simple_rand() % 360;
-    p->radius = 400 + (simple_rand() % 200);  // Start near outer edge (scaled)
-    p->speed = 3 + (simple_rand() % 4);       // Angular speed variation
-    p->inward = 2 + (simple_rand() % 3);      // Inward speed variation
-
-    // Calculate initial position
-    calculate_pos(p->radius, p->angle, &p->x, &p->y);
-}
-
-// Initialize all particles
-static void init_vortex(void) {
+// Initialize all warp particles
+static void init_warp(void) {
     rng_state = timer_read() | 1;  // Seed with timer (ensure odd)
     for (int i = 0; i < NUM_PARTICLES; i++) {
-        init_particle(&particles[i]);
-        // Spread initial radii for visual variety
-        particles[i].radius = 50 + (simple_rand() % 550);
+        init_warp_particle(&warp_particles[i]);
     }
-    particles_initialized = true;
 }
 
-// Update particle positions
-static void update_vortex(bool respawn) {
+// Update warp particle positions
+static void update_warp(bool respawn) {
+    int16_t target_x = SCREEN_CENTER_X * 16;
+    int16_t target_y = SCREEN_CENTER_Y * 16;
+
     for (int i = 0; i < NUM_PARTICLES; i++) {
-        particle_t *p = &particles[i];
+        warp_particle_t *p = &warp_particles[i];
 
-        // Rotate around center
-        p->angle += p->speed;
-        if (p->angle >= 360) p->angle -= 360;
+        // Store previous positions for trails
+        p->prev2_x = p->prev_x;
+        p->prev2_y = p->prev_y;
+        p->prev_x = p->x;
+        p->prev_y = p->y;
 
-        // Move inward (accelerate as it gets closer)
-        int16_t accel = (600 - p->radius) / 100;
-        if (accel < 1) accel = 1;
-        p->radius -= p->inward + accel;
+        // Move toward center
+        p->x += p->dx;
+        p->y += p->dy;
 
-        // Respawn if reached center (only if respawn allowed)
-        if (p->radius < 20) {
+        // Check if reached center (within threshold)
+        int16_t diff_x = target_x - p->x;
+        int16_t diff_y = target_y - p->y;
+        int16_t abs_dx = diff_x < 0 ? -diff_x : diff_x;
+        int16_t abs_dy = diff_y < 0 ? -diff_y : diff_y;
+
+        if (abs_dx < 32 && abs_dy < 32) {  // Within 2 pixels of center
             if (respawn) {
-                init_particle(p);
+                init_warp_particle(p);
             } else {
-                // Ensure it stays "dead" or extremely close to center (invisible)
-                p->radius = 0;
+                // Mark as dead (at center)
+                p->x = target_x;
+                p->y = target_y;
+                p->dx = 0;
+                p->dy = 0;
             }
         }
-
-        // Update cartesian position
-        calculate_pos(p->radius, p->angle, &p->x, &p->y);
     }
 }
 
-// Render vortex to OLED with trails
-static void render_vortex(uint8_t count) {
+// Render warp particles to OLED with streaking trails
+static void render_warp(uint8_t count) {
     oled_clear();
 
-    // Draw particles
+    int16_t target_x = SCREEN_CENTER_X * 16;
+    int16_t target_y = SCREEN_CENTER_Y * 16;
+
+    // Draw particles with trails
     for (int i = 0; i < count && i < NUM_PARTICLES; i++) {
-        // Skip rendering if radius is 0 (dead particle)
-        if (particles[i].radius == 0) continue;
+        warp_particle_t *p = &warp_particles[i];
+
+        // Skip dead particles (at center with no velocity)
+        if (p->dx == 0 && p->dy == 0 && p->x == target_x && p->y == target_y) continue;
 
         int16_t px, py;
 
-        // Draw main pixel
-        px = particles[i].x / 16;
-        py = particles[i].y / 16;
+        // Draw main pixel (current position)
+        px = p->x / 16;
+        py = p->y / 16;
         if (px >= 0 && px < 128 && py >= 0 && py < 32) {
             oled_write_pixel(px, py, true);
         }
 
-        // Draw trail (2 segments behind)
-        // Trail length depends on speed (faster = longer trail potentially, but fixed angle offset is easier)
-        int16_t trail_angle = particles[i].angle;
-        int16_t tx, ty;
-
-        // Trail point 1
-        trail_angle -= 2;
-        calculate_pos(particles[i].radius, trail_angle, &tx, &ty);
-        px = tx / 16;
-        py = ty / 16;
+        // Draw trail point 1 (previous position)
+        px = p->prev_x / 16;
+        py = p->prev_y / 16;
         if (px >= 0 && px < 128 && py >= 0 && py < 32) {
             oled_write_pixel(px, py, true);
         }
 
-        // Trail point 2
-        trail_angle -= 2;
-        calculate_pos(particles[i].radius, trail_angle, &tx, &ty);
-        px = tx / 16;
-        py = ty / 16;
+        // Draw trail point 2 (second previous position)
+        px = p->prev2_x / 16;
+        py = p->prev2_y / 16;
         if (px >= 0 && px < 128 && py >= 0 && py < 32) {
             oled_write_pixel(px, py, true);
         }
 
-        // Draw brighter (larger) particles near center for core glow effect
-        if (particles[i].radius < 100) {
-            px = particles[i].x / 16;
-            py = particles[i].y / 16;
-            if (px > 0) oled_write_pixel(px - 1, py, true);
-            if (px < 127) oled_write_pixel(px + 1, py, true);
-            if (py > 0) oled_write_pixel(px, py - 1, true);
-            if (py < 31) oled_write_pixel(px, py + 1, true);
+        // Draw brighter particles near center for convergence glow
+        int16_t dist_x = p->x - target_x;
+        int16_t dist_y = p->y - target_y;
+        int16_t abs_dx = dist_x < 0 ? -dist_x : dist_x;
+        int16_t abs_dy = dist_y < 0 ? -dist_y : dist_y;
+
+        if (abs_dx < 80 && abs_dy < 80) {  // Within ~5 pixels of center
+            px = p->x / 16;
+            py = p->y / 16;
+            if (px > 0 && px < 127) {
+                oled_write_pixel(px - 1, py, true);
+                oled_write_pixel(px + 1, py, true);
+            }
+            if (py > 0 && py < 31) {
+                oled_write_pixel(px, py - 1, true);
+                oled_write_pixel(px, py + 1, true);
+            }
         }
     }
 
-    // Draw bright center core - fade out by shrinking it based on count
-    // Full core if count > 40, smaller if count > 20, hidden if count < 10
+    // Draw bright center core
     if (count > 10) {
         int radius_sq = (count > 40) ? 4 : (count > 20 ? 1 : 0);
         for (int dy = -2; dy <= 2; dy++) {
             for (int dx = -2; dx <= 2; dx++) {
                 if (dx*dx + dy*dy <= radius_sq) {
-                    oled_write_pixel(VORTEX_CENTER_X + dx, VORTEX_CENTER_Y + dy, true);
+                    oled_write_pixel(SCREEN_CENTER_X + dx, SCREEN_CENTER_Y + dy, true);
                 }
             }
         }
@@ -419,6 +443,7 @@ void register_oled_activity(void) {
     last_activity_time = timer_read32();
     if (screensaver_active) {
         screensaver_active = false;
+        warp_initialized = false;  // Reset so warp reinits next time
         oled_clear();
     }
 }
@@ -429,15 +454,16 @@ bool oled_task_user(void) {
     // Initialize on first run
     if (!splash_initialized) {
         oled_clear();
-        init_vortex();  // Initialize vortex for startup animation
+        init_warp();  // Initialize warp for startup animation
+        warp_initialized = true;
         splash_timer = timer_read32();
         last_activity_time = timer_read32();
         splash_initialized = true;
     }
 
-    // Show animated vortex on startup
+    // Show animated warp on startup
     if (!splash_shown) {
-        if (timer_elapsed32(vortex_timer) > FRAME_DELAY) {
+        if (timer_elapsed32(animation_timer) > FRAME_DELAY) {
             uint32_t elapsed = timer_elapsed32(splash_timer);
             bool respawn = true;
             uint8_t render_count = NUM_PARTICLES;
@@ -455,12 +481,13 @@ bool oled_task_user(void) {
                 render_count = NUM_PARTICLES - (NUM_PARTICLES * fade_elapsed / FADE_DURATION);
             }
 
-            update_vortex(respawn);
-            render_vortex(render_count);
-            vortex_timer = timer_read32();
+            update_warp(respawn);
+            render_warp(render_count);
+            animation_timer = timer_read32();
         }
         if (timer_elapsed32(splash_timer) > SPLASH_DURATION) {
             splash_shown = true;
+            warp_initialized = false;  // Reset for screensaver use
             oled_clear();
         }
         return false;
@@ -471,12 +498,17 @@ bool oled_task_user(void) {
         screensaver_active = true;
     }
 
-    // Render screensaver if active
+    // Render screensaver if active - use warp animation
     if (screensaver_active) {
-        if (timer_elapsed32(vortex_timer) > FRAME_DELAY) {
-            update_vortex(true);  // Always respawn
-            render_vortex(NUM_PARTICLES); // Always render all
-            vortex_timer = timer_read32();
+        if (timer_elapsed32(animation_timer) > FRAME_DELAY) {
+            // Init warp if not yet initialized
+            if (!warp_initialized) {
+                init_warp();
+                warp_initialized = true;
+            }
+            update_warp(true);  // Always respawn
+            render_warp(NUM_PARTICLES); // Always render all
+            animation_timer = timer_read32();
         }
         return false;
     }
