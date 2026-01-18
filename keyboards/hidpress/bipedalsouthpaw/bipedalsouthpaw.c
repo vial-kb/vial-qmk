@@ -114,9 +114,15 @@ static const char PROGMEM actuation_level_5[] = {
 };
 
 // static const char PROGMEM hidpress_logo[] = {
-//     0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x24, 0x44, 0x64, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F,
-//     0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x25, 0x45, 0x65, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F,
-//     0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x26, 0x46, 0x66, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x00
+//     0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1f, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F,
+//     0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x24, 0x25, 0x26, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F,
+//     0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x44, 0x45, 0x46, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x00
+// };
+
+// static const char PROGMEM hidpress_logo_alt[] = {
+//     0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x24, 0x25, 0x26, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F,
+//     0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x44, 0x45, 0x46, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F,
+//     0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x64, 0x65, 0x66, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F, 0x00
 // };
 
 // Layer state rendering function
@@ -229,6 +235,9 @@ static bool splash_initialized = false;
 // Screensaver state
 static uint32_t last_activity_time = 0;
 static bool screensaver_active = false;
+static uint32_t screensaver_start_time = 0;
+static bool screen_is_off = false;
+#define SCREEN_OFF_TIMEOUT 300000  // Turn off screen after 5 minutes of screensaver (300,000ms)
 
 // Animation particle system
 #define NUM_PARTICLES 50
@@ -368,6 +377,7 @@ static void update_warp(bool respawn) {
     }
 }
 
+
 // Render warp particles to OLED with streaking trails
 static void render_warp(uint8_t count) {
     oled_clear();
@@ -425,22 +435,15 @@ static void render_warp(uint8_t count) {
         }
     }
 
-    // Draw bright center core
-    if (count > 10) {
-        int radius_sq = (count > 40) ? 4 : (count > 20 ? 1 : 0);
-        for (int dy = -2; dy <= 2; dy++) {
-            for (int dx = -2; dx <= 2; dx++) {
-                if (dx*dx + dy*dy <= radius_sq) {
-                    oled_write_pixel(SCREEN_CENTER_X + dx, SCREEN_CENTER_Y + dy, true);
-                }
-            }
-        }
-    }
 }
 
 // Register activity to reset screensaver timer
 void register_oled_activity(void) {
     last_activity_time = timer_read32();
+    if (screen_is_off) {
+        screen_is_off = false;
+        oled_on();  // Turn screen back on
+    }
     if (screensaver_active) {
         screensaver_active = false;
         warp_initialized = false;  // Reset so warp reinits next time
@@ -496,10 +499,23 @@ bool oled_task_user(void) {
     // Check for screensaver activation
     if (!screensaver_active && timer_elapsed32(last_activity_time) > SCREENSAVER_TIMEOUT) {
         screensaver_active = true;
+        screensaver_start_time = timer_read32();  // Track when screensaver started
     }
 
     // Render screensaver if active - use warp animation
     if (screensaver_active) {
+        // Check if we should turn off the screen after 5 minutes of screensaver
+        if (!screen_is_off && timer_elapsed32(screensaver_start_time) > SCREEN_OFF_TIMEOUT) {
+            screen_is_off = true;
+            oled_clear();  // Clear the buffer so animation doesn't freeze on screen
+            oled_off();    // Turn off the display
+        }
+
+        // If screen is off, just return without doing anything
+        if (screen_is_off) {
+            return false;
+        }
+
         if (timer_elapsed32(animation_timer) > FRAME_DELAY) {
             // Init warp if not yet initialized
             if (!warp_initialized) {
