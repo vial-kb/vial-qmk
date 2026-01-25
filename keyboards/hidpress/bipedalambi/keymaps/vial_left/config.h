@@ -1,0 +1,45 @@
+#pragma once
+
+// LEFT side firmware
+// Flash this to the left half only
+
+// Vial UID
+#define VIAL_KEYBOARD_UID {0x89, 0x4D, 0x6E, 0x12, 0x33, 0x56, 0x78, 0x90}
+#define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
+#define VIAL_UNLOCK_COMBO_COLS { 0, 1 }
+#define DYNAMIC_KEYMAP_LAYER_COUNT 4
+
+// LEFT Serial (GP0 TX, GP1 RX)
+#undef SERIAL_USART_TX_PIN
+#undef SERIAL_USART_RX_PIN
+#define SERIAL_USART_TX_PIN GP0
+#define SERIAL_USART_RX_PIN GP1
+
+// LEFT I2C (GP12 SDA, GP13 SCL) matches schematic
+#undef I2C_DRIVER
+#define I2C_DRIVER I2CD0
+#undef I2C1_SDA_PIN
+#undef I2C1_SCL_PIN
+#define I2C1_SDA_PIN GP12
+#define I2C1_SCL_PIN GP13
+
+// LEFT Matrix Pins (Schematic Verified + Virtual Col 7)
+// Rows: GP27, GP25, GP18, GP17
+// Cols: GP24, GP23, GP21, GP20, GP19, GP26, GP16, NO_PIN
+#undef MATRIX_ROW_PINS
+#undef MATRIX_COL_PINS
+#define MATRIX_ROW_PINS { GP27, GP25, GP18, GP17 }
+#define MATRIX_COL_PINS { GP24, GP23, GP21, GP20, GP19, GP26, GP16, NO_PIN }
+
+// Disable RGB Pin (GP24 is used for Col 0)
+#undef WS2812_DI_PIN
+
+// LEFT Joystick (GP28 X, GP29 Y) -> Matches Spreadsheet
+#undef ANALOG_JOYSTICK_X_AXIS_PIN
+#undef ANALOG_JOYSTICK_Y_AXIS_PIN
+#define ANALOG_JOYSTICK_X_AXIS_PIN GP29
+#define ANALOG_JOYSTICK_Y_AXIS_PIN GP28
+#define ANALOG_JOYSTICK_ENABLE
+#define POINTING_DEVICE_LEFT
+#define SPLIT_POINTING_ENABLE
+#define POINTING_DEVICE_INVERT_X
