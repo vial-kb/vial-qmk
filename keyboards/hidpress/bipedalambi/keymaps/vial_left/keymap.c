@@ -41,8 +41,8 @@ enum custom_keycodes {
 };
 
 // --- Per-Layer State ---
-static enum pointing_device_mode layer_modes[4] = {MODE_MOUSE, MODE_MOUSE, MODE_MOUSE, MODE_MOUSE};
-static uint8_t layer_actuation_indices[4] = {2, 2, 2, 2};
+static uint8_t layer_modes[4] = {MODE_MOUSE, MODE_MOUSE, MODE_MOUSE, MODE_MOUSE};
+// static uint8_t layer_actuation_indices[4] = {2, 2, 2, 2}; // Removed for global actuation
 const uint16_t actuation_values[] = {352, 320, 256, 128, 64};
 uint8_t current_actuation_index = 2;
 
@@ -63,25 +63,29 @@ bool customkeys[4];
 // --- EEPROM Persistence ---
 void save_layer_config_to_eeprom(void) {
     uint32_t data = 0;
+    // Bits 0-7: Layer modes (2 bits per layer * 4 layers)
     for (int i = 0; i < 4; i++) {
-        uint32_t layer_data = ((uint32_t)layer_modes[i] & 0x03) |
-                              (((uint32_t)layer_actuation_indices[i] & 0x07) << 2);
-        data |= layer_data << (i * 5);
+        uint32_t mode = (uint32_t)layer_modes[i] & 0x03;
+        data |= mode << (i * 2);
     }
+    // Bits 8-10: Global actuation index (3 bits)
+    data |= ((uint32_t)current_actuation_index & 0x07) << 8;
+
     eeconfig_update_user(data);
 }
 
 void load_layer_config_from_eeprom(void) {
     uint32_t data = eeconfig_read_user();
+    // Bits 0-7: Layer modes
     for (int i = 0; i < 4; i++) {
-        uint8_t layer_data = (data >> (i * 5)) & 0x1F;
-        uint8_t mode = layer_data & 0x03;
-        uint8_t act_idx = (layer_data >> 2) & 0x07;
+        uint8_t mode = (data >> (i * 2)) & 0x03;
         layer_modes[i] = (mode < MODE_COUNT) ? mode : MODE_MOUSE;
-        layer_actuation_indices[i] = (act_idx <= 4) ? act_idx : 2;
     }
+    // Bits 8-10: Global actuation index
+    uint8_t act_idx = (data >> 8) & 0x07;
+    current_actuation_index = (act_idx <= 4) ? act_idx : 2;
+
     current_mode = layer_modes[0];
-    current_actuation_index = layer_actuation_indices[0];
     actuation = actuation_values[current_actuation_index];
 }
 
@@ -93,7 +97,7 @@ void keyboard_post_init_user(void) {
 // 29-key layout for left side
 // Order: k03, k02, k04, k00, k01, k05, k13, k12, k14, k10, k11, k15, k07, k23, k22, k24, k20, k21, k25, k26, k27, k36, k37, k33, k32, k34, k31, k35, k17
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = LAYOUT_left(KC_E, KC_W, KC_R, KC_ESC, KC_Q, KC_T, KC_D, KC_S, KC_F, KC_TAB, KC_A, KC_G, KC_UP, KC_C, KC_X, KC_V, KC_LSFT, KC_Z, KC_B, KC_SPC, KC_LEFT, KC_BTN1, KC_RGHT, KC_LGUI, KC_LCTL, KC_LALT, KC_MINS, MO(1), KC_DOWN),
+    [0] = LAYOUT_left(KC_E, KC_W, KC_R, KC_ESC, KC_Q, KC_T, KC_D, KC_S, KC_F, KC_TAB, KC_A, KC_G, KC_UP, KC_C, KC_X, KC_V, KC_LSFT, KC_Z, KC_B, KC_SPC, KC_LEFT, TMB_MODE, KC_RGHT, KC_LGUI, KC_LCTL, KC_LALT, KC_MINS, MO(1), KC_DOWN),
     [1] = LAYOUT_left(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
     [2] = LAYOUT_left(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
     [3] = LAYOUT_left(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
@@ -109,7 +113,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (current_actuation_index > 0) {
                     current_actuation_index--;
                     actuation = actuation_values[current_actuation_index];
-                    layer_actuation_indices[get_highest_layer(layer_state)] = current_actuation_index;
+                    // Global actuation, no per-layer index to update
                     save_layer_config_to_eeprom();
                     showing_actuation = true;
                     actuation_display_timer = timer_read32();
@@ -123,7 +127,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 if (current_actuation_index < 4) {
                     current_actuation_index++;
                     actuation = actuation_values[current_actuation_index];
-                    layer_actuation_indices[get_highest_layer(layer_state)] = current_actuation_index;
+                    // Global actuation, no per-layer index to update
                     save_layer_config_to_eeprom();
                     showing_actuation = true;
                     actuation_display_timer = timer_read32();
@@ -136,7 +140,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 current_actuation_index = 2;
                 actuation = actuation_values[current_actuation_index];
-                layer_actuation_indices[get_highest_layer(layer_state)] = current_actuation_index;
+                // Global actuation, no per-layer index to update
                 save_layer_config_to_eeprom();
                 showing_actuation = true;
                 actuation_display_timer = timer_read32();
@@ -295,8 +299,9 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     uint8_t new_layer = get_highest_layer(state);
     current_mode = layer_modes[new_layer];
-    current_actuation_index = layer_actuation_indices[new_layer];
-    actuation = actuation_values[current_actuation_index];
+    // Actuation is global, so we don't change it when layer changes
+    // current_actuation_index is already correct
+    // actuation is already correct
     return state;
 }
 
