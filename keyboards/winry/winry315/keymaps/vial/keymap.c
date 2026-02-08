@@ -28,10 +28,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [1] = LAYOUT_via(
             RGB_M_P,           RGB_M_B,           RGB_M_R,
-        RGB_HUD, RGB_HUI,  RGB_SAD, RGB_SAI,  RGB_VAD, RGB_VAI,
-             RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI,
-             RGB_RMOD,RGB_HUD, RGB_SAD, RGB_VAD, RGB_SPD,
-             KC_TRNS, RGB_TOG, RGB_M_P, RGB_M_B, RGB_M_R
+        RM_HUED, RM_HUEU,  RM_SATD, RM_SATU,  RM_VALD, RM_VALU,
+             RM_NEXT, RM_HUEU, RM_SATU, RM_VALU, RM_SPDU,
+             RM_PREV,RM_HUED, RM_SATD, RM_VALD, RM_SPDD,
+             KC_TRNS, RM_TOGG, RGB_M_P, RGB_M_B, RGB_M_R
     ),
 };
 
@@ -40,6 +40,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [0] = { ENCODER_CCW_CW(KC_PGUP, KC_PGDN), ENCODER_CCW_CW(KC_VOLD, KC_VOLU), ENCODER_CCW_CW(KC_MPRV, KC_MNXT) },
-    [1] = { ENCODER_CCW_CW(RGB_HUD, RGB_HUI), ENCODER_CCW_CW(RGB_SAD, RGB_SAI), ENCODER_CCW_CW(RGB_VAD, RGB_VAI) }
+    [1] = { ENCODER_CCW_CW(RM_HUED, RM_HUEU), ENCODER_CCW_CW(RM_SATD, RM_SATU), ENCODER_CCW_CW(RM_VALD, RM_VALU) }
 };
 #endif

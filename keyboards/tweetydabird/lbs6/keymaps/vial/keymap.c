@@ -6,14 +6,14 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT(
         KC_MPLY,
-		TO(1),		KC_MSEL,	RGB_TOG,
+		TO(1),		KC_MSEL,	UG_TOGG,
 		KC_MPRV,	KC_MSTP,	KC_MNXT
     ),
 	
 	[1] = LAYOUT(
         KC_TRNS, 	
-		TO(0),		RGB_HUI, 	RGB_SAI,
-		RGB_MOD,	RGB_HUD, 	RGB_SAD
+		TO(0),		UG_HUEU, 	UG_SATU,
+		UG_NEXT,	UG_HUED, 	UG_SATD
     ),
 	
 	[2] = LAYOUT(

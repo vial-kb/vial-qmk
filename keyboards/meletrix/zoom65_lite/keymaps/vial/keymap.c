@@ -19,7 +19,7 @@
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [1] = { ENCODER_CCW_CW(KC_MS_WH_DOWN, KC_MS_WH_UP) },
+    [1] = { ENCODER_CCW_CW(MS_WHLD, MS_WHLU) },
     [2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
 };
 #endif

@@ -37,10 +37,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [_RAISE] = LAYOUT_all(
-  KC_BTN1, KC_BTN2, _______, SGUI(KC_LBRC), SGUI(KC_RBRC), _______, KC_PGUP, KC_HOME, KC_UP, KC_END, KC_COLN, RALT(KC_BSPC),
+  MS_BTN1, MS_BTN2, _______, SGUI(KC_LBRC), SGUI(KC_RBRC), _______, KC_PGUP, KC_HOME, KC_UP, KC_END, KC_COLN, RALT(KC_BSPC),
   KC_TRNS, _______, _______, _______, KC_BSPC, _______, KC_TRNS, KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, KC_ENT, RALT(KC_D),
   KC_TRNS, _______, _______, _______, _______, _______, KC_TRNS, _______, RALT(KC_LEFT), RALT(KC_RIGHT), _______, RALT(KC_B), RALT(KC_F),
-  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, _______, LALT(KC_DEL), KC_TRNS, KC_DEL, _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R
+  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, _______, LALT(KC_DEL), KC_TRNS, KC_DEL, _______, MS_LEFT, MS_DOWN, MS_UP, MS_RGHT
 ),
 
 

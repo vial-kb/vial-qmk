@@ -25,8 +25,8 @@ enum layer_names {
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
-    [_BASE] =   { ENCODER_CCW_CW(KC_MS_WH_UP, KC_MS_WH_DOWN) },
-    [_LOWER] =  { ENCODER_CCW_CW(RGB_HUD, RGB_HUI) },
+    [_BASE] =   { ENCODER_CCW_CW(MS_WHLU, MS_WHLD) },
+    [_LOWER] =  { ENCODER_CCW_CW(UG_HUED, UG_HUEU) },
 };
 #endif
 
@@ -36,6 +36,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LO_VD,         KC_MPRV,       KC_MPLY,       KC_MNXT,       KC_VOLU
     ),
     [_LOWER] = LAYOUT_reviung5(
-        _______,       RGB_HUI,       RGB_MOD,       RGB_TOG,       KC_MUTE
+        _______,       UG_HUEU,       UG_NEXT,       UG_TOGG,       KC_MUTE
     )
 };

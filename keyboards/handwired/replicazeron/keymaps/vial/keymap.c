@@ -48,10 +48,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [_SETTINGS] = LAYOUT(
         RGB_M_P, RGB_M_B,   RGB_M_K, RGB_M_T,  KC_RIGHT,
-        KC_NO,   RGB_SAI,   RGB_VAI, RGB_HUI,  KC_ENT,
-        RGB_TOG, KC_NO,     KC_NO,   KC_NO  ,  KC_DOWN,
-        EE_CLR,  RGB_SAD,   RGB_VAD, RGB_HUD,  KC_LEFT,
+        KC_NO,   UG_SATU,   UG_VALU, UG_HUEU,  KC_ENT,
+        UG_TOGG, KC_NO,     KC_NO,   KC_NO  ,  KC_DOWN,
+        EE_CLR,  UG_SATD,   UG_VALD, UG_HUED,  KC_LEFT,
         QK_BOOT, AUTORUN,   JOYMODE, KC_V,     KC_UP,
-        RGB_MOD, TO(_BASE), KC_NO,   RGB_RMOD, KC_P
+        UG_NEXT, TO(_BASE), KC_NO,   UG_PREV, KC_P
     )
 };
