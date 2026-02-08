@@ -46,12 +46,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
     [WIN_FN] = LAYOUT( /* FN */
-        _______, KC_MYCM, KC_MAIL, KC_WSCH, KC_WHOM, KC_MSEL, KC_MPLY, KC_MPRV, KC_MNXT, _______, _______, _______, _______, _______,           RGB_MOD,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_SPD, RGB_SPI, _______,           _______,
-        _______, _______,TG(WIN_W),_______, _______, _______, _______, _______, KC_INS,  _______, KC_PSCR,_______, _______, RGB_MOD,           _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_TOG, _______, RGB_MOD, RGB_HUI,           _______,
-        _______, _______, _______, KC_CALC, _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU, _______,          _______,  RGB_VAI, _______,
-        _______, GU_TOGG, _______,                   _______,                            _______, _______, _______,          RGB_SAD,  RGB_VAD, RGB_SAI),
+        _______, KC_MYCM, KC_MAIL, KC_WSCH, KC_WHOM, KC_MSEL, KC_MPLY, KC_MPRV, KC_MNXT, _______, _______, _______, _______, _______,           RM_NEXT,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RM_SPDD, RM_SPDU, _______,           _______,
+        _______, _______,TG(WIN_W),_______, _______, _______, _______, _______, KC_INS,  _______, KC_PSCR,_______, _______, RM_NEXT,           _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, RM_TOGG, _______, RM_NEXT, RM_HUEU,           _______,
+        _______, _______, _______, KC_CALC, _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU, _______,          _______,  RM_VALU, _______,
+        _______, GU_TOGG, _______,                   _______,                            _______, _______, _______,          RM_SATD,  RM_VALD, RM_SATU),
 
     [MAC_B] = LAYOUT( /* Base */
         KC_ESC,  KC_BRID, KC_BRIU, KC_MCTL, KC_LPAD, KC_F5,   KC_F6,   KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD,KC_VOLU,  KC_DEL,           KC_MUTE,
@@ -70,22 +70,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______,                   _______,                            _______, MO(MAC_FN), _______,       KC_A,    KC_S,    KC_D),
 
     [MAC_FN] = LAYOUT( /* FN */
-        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,             RGB_MOD,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_SPD, RGB_SPI, _______,           _______,
-        _______, _______,TG(MAC_W),_______, _______, _______, _______, _______, KC_INS,  _______, KC_PSCR,_______, _______,RGB_MOD,           _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_TOG, _______, RGB_MOD, RGB_HUI,           _______,
-        _______, _______, _______, KC_CALC, _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU, _______,          _______,  RGB_VAI, _______,
-        _______, _______, _______,                   _______,                            _______, _______, _______,          RGB_SAD,  RGB_VAD, RGB_SAI),
+        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______,             RM_NEXT,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RM_SPDD, RM_SPDU, _______,           _______,
+        _______, _______,TG(MAC_W),_______, _______, _______, _______, _______, KC_INS,  _______, KC_PSCR,_______, _______,RM_NEXT,           _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, RM_TOGG, _______, RM_NEXT, RM_HUEU,           _______,
+        _______, _______, _______, KC_CALC, _______, _______, _______, KC_MUTE, KC_VOLD, KC_VOLU, _______,          _______,  RM_VALU, _______,
+        _______, _______, _______,                   _______,                            _______, _______, _______,          RM_SATD,  RM_VALD, RM_SATU),
 };
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [WIN_B] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [WIN_W] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [WIN_FN] = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) },
+    [WIN_FN] = { ENCODER_CCW_CW(RM_VALD, RM_VALU) },
     [MAC_B] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [MAC_W] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
-    [MAC_FN] = { ENCODER_CCW_CW(RGB_VAD, RGB_VAI) }
+    [MAC_FN] = { ENCODER_CCW_CW(RM_VALD, RM_VALU) }
 };
 #endif
 
