@@ -19,4 +19,3 @@
 #undef ENCODER_B_PINS
 #define ENCODER_A_PINS { B5, A1, A4 }
 #define ENCODER_B_PINS { B6, A2, A3 }
-#define ENCODER_RESOLUTIONS { 4, 4, 4 }

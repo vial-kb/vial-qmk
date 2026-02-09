@@ -30,17 +30,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [2] = LAYOUT_ortho_4x12(
-    KC_BTN1, KC_BTN2, _______, SGUI(KC_LBRC), SGUI(KC_RBRC), _______, KC_PGUP, KC_HOME, KC_UP, KC_END, KC_COLN, RALT(KC_BSPC),
+    MS_BTN1, MS_BTN2, _______, SGUI(KC_LBRC), SGUI(KC_RBRC), _______, KC_PGUP, KC_HOME, KC_UP, KC_END, KC_COLN, RALT(KC_BSPC),
     KC_TRNS, _______, _______, _______, KC_BSPC, _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RIGHT, KC_ENT, RALT(KC_D),
     KC_TRNS, _______, _______, _______, _______, _______, _______, RALT(KC_LEFT), RALT(KC_RIGHT), _______, RALT(KC_B), RALT(KC_F),
-    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, _______, LALT(KC_DEL), KC_DEL, _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R
+    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, _______, LALT(KC_DEL), KC_DEL, _______, MS_LEFT, MS_DOWN, MS_UP, MS_RGHT
   ),
 
   [3] = LAYOUT_ortho_4x12(
     KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, _______, KC_TRNS, KC_TRNS,
     KC_CAPS, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, _______, KC_PLUS, KC_DLR, KC_PIPE, KC_BSLS, KC_DQT, KC_TRNS,
     KC_TRNS, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, KC_MUTE, KC_MINS, KC_EQL, KC_LT, KC_GT, KC_QUES, KC_TRNS,
-    KC_TRNS, KC_TRNS, QK_BOOT, _______, _______, KC_TRNS, KC_UNDS, _______, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R
+    KC_TRNS, KC_TRNS, QK_BOOT, _______, _______, KC_TRNS, KC_UNDS, _______, MS_WHLL, MS_WHLD, MS_WHLU, MS_WHLR
   )
 
 };

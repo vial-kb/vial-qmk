@@ -17,13 +17,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [_ZERO] = LAYOUT(
     KC_MPLY, KC_HOME, KC_MUTE,
-    MO(1),   KC_UP,   RGB_MOD,
+    MO(1),   KC_UP,   RM_NEXT,
     KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
 [_ONE] = LAYOUT(
     QK_BOOT,   BL_STEP, KC_STOP,
-    _______, KC_HOME, RGB_MOD,
+    _______, KC_HOME, RM_NEXT,
     KC_MPRV, KC_END , KC_MNXT
 ),
 

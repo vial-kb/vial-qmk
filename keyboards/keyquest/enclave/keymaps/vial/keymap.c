@@ -44,8 +44,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [3] = LAYOUT(
-        UG_TOGG, UG_NEXTE_PLAIN, UG_NEXTE_BREATHE,
-        UG_NEXTE_RAINBOW, UG_NEXTE_SWIRL, UG_NEXTE_GRADIENT,
+        UG_TOGG, RGB_M_P, RGB_M_B,
+        RGB_M_R, RGB_M_SW, RGB_M_G,
         _______, _______, _______
     )
 };

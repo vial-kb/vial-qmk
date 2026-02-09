@@ -13,3 +13,4 @@ ifeq ($(strip $(CONVERT_TO)), )
 endif
 
 COMBO_ENABLE = no
+TAP_DANCE_ENABLE = no

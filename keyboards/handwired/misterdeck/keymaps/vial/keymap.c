@@ -23,15 +23,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_MOUSE] = LAYOUT(
-        _______, _______, KC_WH_D,  NUMPAD,
+        _______, _______, MS_WHLD,  NUMPAD,
         _______, _______, MS_BTN1, _______,
-        _______, _______, KC_WH_U, _______
+        _______, _______, MS_WHLU, _______
     ),
 
     [_CTRL] = LAYOUT(
-        KC_MUTE,  RGB_TOG, _______, _______,
-        KC_VOLU, RGB_RMOD, _______, _______,
-        KC_VOLD,  RGB_MOD, _______, _______
+        KC_MUTE,  UG_TOGG, _______, _______,
+        KC_VOLU, UG_PREV, _______, _______,
+        KC_VOLD,  UG_NEXT, _______, _______
     ),
 
 };

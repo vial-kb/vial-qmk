@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, _______, KC_TRNS, KC_TRNS,
   KC_CAPS, KC_LBRC, KC_RBRC, KC_LPRN, KC_RPRN, _______, KC_TRNS, KC_PLUS, KC_DLR, KC_PIPE, KC_BSLS, KC_DQT, KC_TRNS,
   KC_TRNS, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, KC_MUTE, KC_TRNS, KC_MINS, KC_EQL, KC_LT, KC_GT, KC_QUES, KC_TRNS,
-  KC_TRNS, KC_TRNS, QK_BOOT, _______, _______, KC_TRNS, KC_TRNS, KC_UNDS, _______, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R
+  KC_TRNS, KC_TRNS, QK_BOOT, _______, _______, KC_TRNS, KC_TRNS, KC_UNDS, _______, MS_WHLL, MS_WHLD, MS_WHLU, MS_WHLR
 )
 
 };
@@ -80,7 +80,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [0] =   { ENCODER_CCW_CW(KC_VOLU, KC_VOLD),   },
     [1] =   { ENCODER_CCW_CW(KC_BRIU, KC_BRID),   },
-    [2] =   { ENCODER_CCW_CW(KC_WH_L, KC_WH_R),   },
-    [3] =   { ENCODER_CCW_CW(KC_WH_U, KC_WH_D),   },
+    [2] =   { ENCODER_CCW_CW(MS_WHLL, MS_WHLR),   },
+    [3] =   { ENCODER_CCW_CW(MS_WHLU, MS_WHLD),   },
 };
 #endif
