@@ -49,8 +49,15 @@ uint16_t dynamic_keymap_get_keycode(uint8_t layer, uint8_t row, uint8_t column) 
     return nvm_dynamic_keymap_read_keycode(layer, row, column);
 }
 
+#ifdef SPLIT_KEYBOARD
+extern void dynamic_keymap_reset_sync(void);
+#endif
+
 void dynamic_keymap_set_keycode(uint8_t layer, uint8_t row, uint8_t column, uint16_t keycode) {
     nvm_dynamic_keymap_update_keycode(layer, row, column, keycode);
+#ifdef SPLIT_KEYBOARD
+    dynamic_keymap_reset_sync();
+#endif
 }
 
 #ifdef ENCODER_MAP_ENABLE

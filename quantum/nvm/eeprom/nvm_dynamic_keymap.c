@@ -90,9 +90,19 @@ STATIC_ASSERT(DYNAMIC_KEYMAP_EEPROM_MAX_ADDR <= 65535, "DYNAMIC_KEYMAP_EEPROM_MA
 #define VIAL_ALT_REPEAT_KEY_SIZE 0
 #endif
 
+// RGB Indicator
+#define RULE_LIGHTING_EEPROM_ADDR (VIAL_ALT_REPEAT_KEY_EEPROM_ADDR + VIAL_ALT_REPEAT_KEY_SIZE)
+
+#ifdef RULE_LIGHTING_ENABLE
+#include "rule_lighting.h"
+#define RULE_LIGHTING_SIZE (sizeof(rule_lighting_entry_t) * RULE_LIGHTING_ENTRIES)
+#else
+#define RULE_LIGHTING_SIZE 0
+#endif
+
 // Dynamic macro
 #ifndef DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
-#    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (VIAL_ALT_REPEAT_KEY_EEPROM_ADDR + VIAL_ALT_REPEAT_KEY_SIZE)
+#    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (RULE_LIGHTING_EEPROM_ADDR + RULE_LIGHTING_SIZE)
 #endif
 
 // Sanity check that dynamic keymaps fit in available EEPROM
@@ -384,5 +394,17 @@ int nvm_dynamic_keymap_set_alt_repeat_key(uint8_t index, const vial_alt_repeat_k
     eeprom_write_block(entry, address, sizeof(vial_alt_repeat_key_entry_t));
 
     return 0;
+}
+#endif
+
+#ifdef RULE_LIGHTING_ENABLE
+void nvm_dynamic_keymap_load_rgb_indicators(rule_lighting_entry_t *entries) {
+    void *address = (void*)RULE_LIGHTING_EEPROM_ADDR;
+    eeprom_read_block(entries, address, sizeof(rule_lighting_entry_t) * RULE_LIGHTING_ENTRIES);
+}
+
+void nvm_dynamic_keymap_save_rgb_indicators(const rule_lighting_entry_t *entries) {
+    void *address = (void*)RULE_LIGHTING_EEPROM_ADDR;
+    eeprom_write_block(entries, address, sizeof(rule_lighting_entry_t) * RULE_LIGHTING_ENTRIES);
 }
 #endif

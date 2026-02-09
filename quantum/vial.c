@@ -62,6 +62,10 @@ static void reload_key_override(void);
 static void reload_alt_repeat_key(void);
 #endif
 
+#ifdef RULE_LIGHTING_ENABLE
+#include "rule_lighting.h"
+#endif
+
 void vial_init(void) {
 #ifdef VIAL_TAP_DANCE_ENABLE
     reload_tap_dance();
@@ -232,6 +236,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 msg[1] = VIAL_COMBO_ENTRIES;
                 msg[2] = VIAL_KEY_OVERRIDE_ENTRIES;
                 msg[3] = VIAL_ALT_REPEAT_KEY_ENTRIES;
+                msg[4] = RULE_LIGHTING_ENTRIES;
 
                 // The last byte of msg indicates optionally supported features.
                 msg[length - 1] = (0
@@ -317,6 +322,31 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 entry.alt_keycode = vial_keycode_firewall(entry.alt_keycode);
                 msg[0] = dynamic_keymap_set_alt_repeat_key(idx, &entry);
                 reload_alt_repeat_key();
+                break;
+            }
+#endif
+#ifdef RULE_LIGHTING_ENABLE
+            case dynamic_rule_lighting_get_entry: {
+                uint8_t idx = msg[3];
+                memset(msg, 0, length);
+                if (idx < RULE_LIGHTING_ENTRIES) {
+                    const rule_lighting_entry_t *rules = rule_lighting_get_rules();
+                    memcpy(&msg[1], &rules[idx], sizeof(rule_lighting_entry_t));
+                    msg[0] = 0;  /* success */
+                } else {
+                    msg[0] = 1;  /* error: index out of bounds */
+                }
+                break;
+            }
+            case dynamic_rule_lighting_set_entry: {
+                uint8_t idx = msg[3];
+                if (idx < RULE_LIGHTING_ENTRIES) {
+                    rule_lighting_entry_t *rules = (rule_lighting_entry_t *)rule_lighting_get_rules();
+                    memcpy(&rules[idx], &msg[4], sizeof(rule_lighting_entry_t));
+                    msg[0] = 0;  /* success */
+                } else {
+                    msg[0] = 1;  /* error: index out of bounds */
+                }
                 break;
             }
 #endif
