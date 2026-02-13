@@ -47,11 +47,10 @@ Plans:
   1. A cross-reference table exists showing config.h MATRIX_ROWS, config.h MATRIX_COLS, info.json dimensions, left vial.json rows/cols, right vial.json rows/cols, and LAYOUT macro row/col counts
   2. Every disagreement between sources is explicitly flagged with the expected correct value (derived from Phase 1 reference)
   3. info.json matrix dimensions agree with config.h (or the required fix is documented if they disagree)
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 02-01: Extract and compare all matrix dimension sources
-- [ ] 02-02: Create cross-reference table with disagreement flags
+- [ ] 02-01-PLAN.md -- Extract all dimension values from source files and create cross-reference table with disagreement flags
 
 ### Phase 3: vial.json Matrix Fix
 **Goal**: Both vial.json files declare rows=8 to match config.h MATRIX_ROWS, and the right-half layout positions reference rows 4-7
@@ -153,7 +152,7 @@ Note: Phase 4 and Phase 5 can run in parallel after Phase 3 completes. Phase 7 d
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Reference Analysis | 3/3 | ✓ Complete | 2026-02-13 |
-| 2. Matrix Dimension Audit | 0/2 | Not started | - |
+| 2. Matrix Dimension Audit | 0/1 | Not started | - |
 | 3. vial.json Matrix Fix | 0/2 | Not started | - |
 | 4. Peripheral Matrix Mapping | 0/2 | Not started | - |
 | 5. EEPROM Budget Verification | 0/2 | Not started | - |
