@@ -56,27 +56,27 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| MTRX-01 | — | Pending |
-| MTRX-02 | — | Pending |
-| MTRX-03 | — | Pending |
-| MTRX-04 | — | Pending |
-| MTRX-05 | — | Pending |
-| MTRX-06 | — | Pending |
-| EEPR-01 | — | Pending |
-| EEPR-02 | — | Pending |
-| EEPR-03 | — | Pending |
-| EEPR-04 | — | Pending |
-| DFNS-01 | — | Pending |
-| DFNS-02 | — | Pending |
-| XVAL-01 | — | Pending |
-| XVAL-02 | — | Pending |
-| XVAL-03 | — | Pending |
+| MTRX-01 | Phase 3 | Pending |
+| MTRX-02 | Phase 3 | Pending |
+| MTRX-03 | Phase 2 | Pending |
+| MTRX-04 | Phase 1 | Pending |
+| MTRX-05 | Phase 4 | Pending |
+| MTRX-06 | Phase 4 | Pending |
+| EEPR-01 | Phase 6 | Pending |
+| EEPR-02 | Phase 8 | Pending |
+| EEPR-03 | Phase 8 | Pending |
+| EEPR-04 | Phase 5 | Pending |
+| DFNS-01 | Phase 6 | Pending |
+| DFNS-02 | Phase 6 | Pending |
+| XVAL-01 | Phase 2 | Pending |
+| XVAL-02 | Phase 5 | Pending |
+| XVAL-03 | Phase 1 | Pending |
 
 **Coverage:**
 - v1 requirements: 15 total
-- Mapped to phases: 0
-- Unmapped: 15 ⚠️
+- Mapped to phases: 15
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-02-13*
-*Last updated: 2026-02-13 after initial definition*
+*Last updated: 2026-02-13 after roadmap creation*
