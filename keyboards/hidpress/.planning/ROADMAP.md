@@ -32,11 +32,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. Sofle rev1 vial.json layout positions for the right half are documented, showing which row numbers the right side uses
   3. Sofle rev1 encoder mapping in vial.json is documented as reference for the Bipedal Ambi right-half encoder
   4. A clear list of "what Sofle does that Bipedal Ambi must also do" exists as a checklist for subsequent phases
-**Plans:** 2 plans
+**Plans:** 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md -- Read and verify Sofle + Ambi source files, create REFERENCE-ANALYSIS.md
-- [ ] 01-02-PLAN.md -- Derive fix checklist from reference analysis, cross-validate against all requirements
+- [ ] 01-01-PLAN.md -- Extract raw values from all Sofle + Ambi source files into EXTRACTED-DATA.md
+- [ ] 01-02-PLAN.md -- Synthesize REFERENCE-ANALYSIS.md with comparison tables, position maps, and EEPROM calculations
+- [ ] 01-03-PLAN.md -- Derive fix checklist from reference analysis, cross-validate against all 15 requirements
 
 ### Phase 2: Matrix Dimension Audit
 **Goal**: Every source of matrix dimensions (config.h, info.json, vial.json, LAYOUT macro) is documented in a single cross-reference table showing current values and disagreements
@@ -151,7 +152,7 @@ Note: Phase 4 and Phase 5 can run in parallel after Phase 3 completes. Phase 7 d
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Reference Analysis | 0/2 | Planned | - |
+| 1. Reference Analysis | 0/3 | Planned | - |
 | 2. Matrix Dimension Audit | 0/2 | Not started | - |
 | 3. vial.json Matrix Fix | 0/2 | Not started | - |
 | 4. Peripheral Matrix Mapping | 0/2 | Not started | - |
