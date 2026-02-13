@@ -166,3 +166,200 @@
   - File: `keyboards/hidpress/bipedalambi/keymaps/vial_right/vial.json`
   - The "encoders" JSON key defines encoder actions per layer -- it must not be removed or modified during the row fix
   - Reference: REFERENCE-ANALYSIS.md Section 7 (Ambi uses "encoders" JSON key, different from Sofle approach)
+
+---
+
+## Phase 5: EEPROM Budget Verification
+
+**Requirements:** EEPR-04, XVAL-02
+
+- [ ] **EEPR-04:** Calculate dynamic keymap region size
+  - Formula: `DYNAMIC_KEYMAP_EEPROM_ADDR + (4 layers * 8 rows * 8 cols * 2 bytes) = base + 512 bytes`
+  - File: vial-qmk fork `quantum/dynamic_keymap.c` (verify formula against source, NOT upstream QMK docs)
+  - Reference: REFERENCE-ANALYSIS.md Section 6 (Calculation: Correct -- layer_size=128, total=512)
+
+- [ ] **EEPR-04:** Calculate encoder map region size
+  - Formula: `VIAL_ENCODERS_EEPROM_ADDR + (2 encoders * 4 layers * 2 directions * 2 bytes) = +32 bytes`
+  - Note: NUM_ENCODERS may be 2 (split doubling) even though only 1 physical encoder exists -- verify in Phase 4 first
+  - File: vial-qmk fork `keyboards/vial/vial.c` or `quantum/encoder_map.c`
+
+- [ ] **EEPR-04:** Calculate total EEPROM usage and confirm < 4096 bytes
+  - Budget: eeconfig (~14 bytes) + VIA magic (~4 bytes) + layout options (~4 bytes) + dynamic keymap (512 bytes) + encoder map (32 bytes) + dynamic macros (remaining)
+  - Total must fit within 4096-byte RP2040 wear-leveling logical size
+  - Reference: REFERENCE-ANALYSIS.md Section 6 ("well within 4096-byte wear-leveling budget")
+
+- [ ] **XVAL-02:** Verify eeconfig_user region does not overlap with VIA/dynamic keymap region
+  - eeconfig_user region: bytes ~14-17 (4 bytes, via `eeconfig_read_user()` / `eeconfig_update_user()`)
+  - VIA dynamic keymap region: starts at ~byte 50 (after eeconfig + VIA magic + layout options)
+  - Gap: ~33 bytes between end of eeconfig_user and start of dynamic keymap -- no overlap expected
+  - File: vial-qmk fork `tmk_core/protocol/chibios/eeprom_driver.c` or `quantum/eeconfig.h` for region definitions
+
+- [ ] **XVAL-02:** All EEPROM calculations must use vial-qmk fork source (dynamic_keymap.c), not upstream QMK docs
+  - Rationale: Vial fork may differ from upstream QMK in EEPROM layout and address calculations
+  - File: `quantum/dynamic_keymap.c` in the vial-qmk repo (not docs.qmk.fm)
+
+---
+
+## Phase 6: Defensive EEPROM Improvements
+
+**Requirements:** DFNS-01, DFNS-02, EEPR-01
+
+- [ ] **DFNS-01:** Add `eeconfig_init_user()` to both keymap.c files with sane defaults
+  - File: `keyboards/hidpress/bipedalambi/keymaps/vial_left/keymap.c`
+  - File: `keyboards/hidpress/bipedalambi/keymaps/vial_right/keymap.c`
+  - Defaults to set: actuation_index=2 (middle sensitivity), layer_modes=defaults
+  - Purpose: After EEPROM clear, keyboard boots with sane defaults without requiring Vial reconfiguration
+  - Reference: PROJECT.md constraint ("After EEPROM clear, keyboard boots with sane defaults")
+
+- [ ] **DFNS-02:** Add QK_CLEAR_EEPROM keycode to at least one layer in both keymaps
+  - File: `keyboards/hidpress/bipedalambi/keymaps/vial_left/keymap.c`
+  - File: `keyboards/hidpress/bipedalambi/keymaps/vial_right/keymap.c`
+  - Placement: Accessible layer position that doesn't conflict with normal use
+  - Purpose: User can clear EEPROM without needing Bootmagic Lite or external tools
+
+- [ ] **EEPR-01:** Document EEPROM clear procedure for both halves
+  - Must document: which keycode to press (or which hold-on-boot sequence), expected behavior after clear, whether Vial reconfiguration is needed
+  - Both halves must be documented independently (they flash and clear separately)
+
+---
+
+## Phase 7: Build and Flash
+
+**Requirements:** None new (enables verification of EEPR-02, EEPR-03)
+
+- [ ] `make hidpress/bipedalambi:vial_left` compiles without errors
+  - File: All files in `keyboards/hidpress/bipedalambi/` and `keymaps/vial_left/`
+  - Note: Compilation is Claude's task; user only handles physical flashing
+
+- [ ] `make hidpress/bipedalambi:vial_right` compiles without errors
+  - File: All files in `keyboards/hidpress/bipedalambi/` and `keymaps/vial_right/`
+
+- [ ] EEPROM cleared on left half (mandatory after vial.json dimension change)
+  - Method: QK_CLEAR_EEPROM keycode (added in Phase 6) or Bootmagic Lite hold-on-boot
+  - **This is a physical user action** -- Claude documents the procedure, user executes
+
+- [ ] EEPROM cleared on right half (mandatory after vial.json dimension change)
+  - Method: Same as left half, executed independently
+  - **This is a physical user action**
+
+- [ ] Both halves flashed with new firmware
+  - **This is a physical user action** -- Claude provides the .uf2 files and procedure
+
+---
+
+## Phase 8: End-to-End Verification
+
+**Requirements:** EEPR-02, EEPR-03
+
+- [ ] **EEPR-02:** All 4 layers visible in Vial when connected to either half
+  - Test: Plug in left half via USB, open Vial, verify layers 0-3 are visible and editable
+  - Test: Plug in right half via USB, open Vial, verify layers 0-3 are visible and editable
+  - **This is a physical user verification**
+
+- [ ] **EEPR-02:** Layer 1 content appears on layer 1 (not shifted to layer 2)
+  - Test: Set a distinctive keycode (e.g., KC_A) on layer 1 in Vial, switch to layer 1, verify KC_A appears where placed
+  - Expected: No off-by-one shift -- layer N content appears on layer N
+  - **This is a physical user verification**
+
+- [ ] **EEPR-03:** KC_TRNS displays on layers 1 and 3 (not layers 2 and 4)
+  - Test: View layers 1 and 3 in Vial -- transparent keys should show as KC_TRNS (down arrow icon)
+  - Expected: Layers 1 and 3 show KC_TRNS for unassigned keys (standard QMK pattern)
+  - **This is a physical user verification**
+
+- [ ] **EEPR-03:** Keycodes set in Vial persist after power cycle on both halves
+  - Test: Set a keycode in Vial, unplug keyboard, replug, reopen Vial, verify keycode persists
+  - Test on both halves independently
+  - **This is a physical user verification**
+
+- [ ] Both halves respond correctly to key presses on all layers
+  - Test: Press physical keys on each layer, verify correct keycode output
+  - Test: Verify layer switching works (MO(), TG(), etc.)
+  - **This is a physical user verification**
+
+---
+
+## Critical Constraints (Apply to ALL Phases)
+
+These constraints are repeated from CONTEXT.md decisions and must be honored in every phase:
+
+1. **DO NOT break existing working features:**
+   - OLED display and layer state display
+   - Actuation level system and actuation value display
+   - Screensaver animation
+   - Joystick modes (left half)
+   - Encoder functionality (right half)
+
+2. **vial.json position integrity:**
+   - Any vial.json changes must maintain existing thumbstick matrix positions (rows 0-3, col 7 in left vial.json)
+   - Encoder display positions use encoder_index/direction numbering, NOT matrix row numbers
+   - The "encoders" JSON key in right vial.json must be preserved
+
+3. **Scope boundaries:**
+   - Only modify files in `keyboards/hidpress/bipedalambi/`
+   - Do NOT modify Bipedal Southpaw firmware (reference only)
+   - Do NOT modify upstream Sofle files (reference only)
+   - This is a bug fix project -- no new features
+
+---
+
+## Quick Reference Values
+
+A single table of key numbers for copy-paste in later phases:
+
+| Value | Number | Source |
+|-------|--------|--------|
+| MATRIX_ROWS | 8 | `config.h` |
+| MATRIX_COLS | 8 | `config.h` |
+| ROWS_PER_HAND | 4 | 8 / 2 (split) |
+| Left-half rows | 0-3 | Standard split convention |
+| Right-half rows | 4-7 | ROWS_PER_HAND to MATRIX_ROWS - 1 |
+| Layer count | 4 | DYNAMIC_KEYMAP_LAYER_COUNT |
+| Layer size (bytes) | 128 | 8 * 8 * 2 |
+| Total keymap EEPROM | 512 | 128 * 4 |
+| Encoder EEPROM | 32 | 2 encoders * 4 layers * 2 directions * 2 bytes |
+| Left key count | 29 | 25 regular + 4 thumbstick (col 7) |
+| Right key count | 25 | No thumbstick |
+| Right encoder KLE entries | 2 | CW (0,0) and CCW (0,1) with `\ne` suffix |
+| EEPROM total budget | < 4096 | RP2040 wear-leveling logical size |
+
+---
+
+## Requirement Coverage Matrix
+
+Every requirement ID must appear at least once in this checklist. Verification:
+
+| Requirement | Phase(s) | Status |
+|-------------|----------|--------|
+| MTRX-01 | Phase 3 | Covered -- rows change + cols verify |
+| MTRX-02 | Phase 3 | Covered -- right-half position remap (25 keys) |
+| MTRX-03 | Phase 2 | Covered -- disagreement flagging |
+| MTRX-04 | Phase 1 | Covered -- Sofle cross-reference (completed) |
+| MTRX-05 | Phase 3, Phase 4 | Covered -- thumbstick verification (already correct) |
+| MTRX-06 | Phase 4 | Covered -- encoder display, encoder_map investigation, "encoders" key preservation |
+| EEPR-01 | Phase 6 | Covered -- EEPROM clear documentation |
+| EEPR-02 | Phase 8 | Covered -- layer visibility and content verification |
+| EEPR-03 | Phase 8 | Covered -- persistence and KC_TRNS verification |
+| EEPR-04 | Phase 5 | Covered -- EEPROM budget calculation |
+| DFNS-01 | Phase 6 | Covered -- eeconfig_init_user with defaults |
+| DFNS-02 | Phase 6 | Covered -- QK_CLEAR_EEPROM keycode |
+| XVAL-01 | Phase 2 | Covered -- cross-reference table |
+| XVAL-02 | Phase 5 | Covered -- eeconfig_user overlap check + vial-qmk source verification |
+| XVAL-03 | Phase 1 | Covered -- Sofle comparison (completed) |
+
+**All 15 requirements covered. No gaps.**
+
+---
+
+## Scope Validation
+
+**No scope creep detected:**
+
+- No items add new features (all items fix the matrix dimension mismatch or add defensive measures for the fix)
+- No items modify files outside `keyboards/hidpress/bipedalambi/`
+- No items touch the Bipedal Southpaw firmware (referenced only in Phase 1 for validation)
+- No items modify OLED, joystick modes, or screensaver code
+- All items trace back to the 15 project requirements defined in PROJECT.md and ROADMAP.md
+
+---
+
+*Fix checklist complete. This document is the primary deliverable of Phase 1 and the source of truth for Phases 2-8.*
