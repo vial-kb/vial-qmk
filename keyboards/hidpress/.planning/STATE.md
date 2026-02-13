@@ -10,27 +10,27 @@ See: .planning/PROJECT.md (updated 2026-02-13)
 ## Current Position
 
 Phase: 1 of 8 (Reference Analysis)
-Plan: 1 of 3 in current phase
+Plan: 2 of 3 in current phase
 Status: Executing
-Last activity: 2026-02-13 -- Completed 01-01 data extraction (13 source files, 19 research claims verified)
+Last activity: 2026-02-13 -- Completed 01-02 reference analysis synthesis (REFERENCE-ANALYSIS.md with 9 sections)
 
-Progress: [█░░░░░░░░░] 5%
+Progress: [█░░░░░░░░░] 10%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 1
-- Average duration: 2min
-- Total execution time: 0.03 hours
+- Total plans completed: 2
+- Average duration: 2.5min
+- Total execution time: 0.08 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-reference-analysis | 1/3 | 2min | 2min |
+| 01-reference-analysis | 2/3 | 5min | 2.5min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (2min)
+- Last 5 plans: 01-01 (2min), 01-02 (3min)
 - Trend: --
 
 *Updated after each plan completion*
@@ -47,6 +47,9 @@ Recent decisions affecting current work:
 - [Roadmap]: Sofle rev1 Vial keymap chosen as known-working reference for split row-doubling convention
 - [01-01]: All 19 research claims verified against source files -- no discrepancies
 - [01-01]: Encoder KLE entries documented separately from key positions to prevent row-number confusion
+- [01-02]: Encoder KLE entries use encoder indices not matrix rows -- must NOT be adjusted during row remapping
+- [01-02]: Ambi uses "encoders" JSON key (different from Sofle ENCODER_MAP_ENABLE) -- needs Phase 4 investigation
+- [01-02]: EEPROM layer offset proven: Vial writes layer 1 at byte 64, firmware reads at byte 128
 
 ### Pending Todos
 
@@ -60,5 +63,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-13
-Stopped at: Completed 01-01-PLAN.md -- ready for 01-02
+Stopped at: Completed 01-02-PLAN.md -- ready for 01-03
 Resume file: None
