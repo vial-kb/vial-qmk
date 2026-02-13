@@ -12,7 +12,7 @@ This roadmap fixes the confirmed matrix dimension mismatch (vial.json rows=4 vs 
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: Reference Analysis** - Cross-reference Sofle rev1 Vial split configuration as known-working baseline
+- [x] **Phase 1: Reference Analysis** - Cross-reference Sofle rev1 Vial split configuration as known-working baseline
 - [ ] **Phase 2: Matrix Dimension Audit** - Document current state of all dimension sources and identify every disagreement
 - [ ] **Phase 3: vial.json Matrix Fix** - Fix rows mismatch and right-half layout positions in both vial.json files
 - [ ] **Phase 4: Peripheral Matrix Mapping** - Verify and fix thumbstick and encoder matrix positions in vial.json
@@ -35,9 +35,9 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 3 plans
 
 Plans:
-- [ ] 01-01-PLAN.md -- Extract raw values from all Sofle + Ambi source files into EXTRACTED-DATA.md
-- [ ] 01-02-PLAN.md -- Synthesize REFERENCE-ANALYSIS.md with comparison tables, position maps, and EEPROM calculations
-- [ ] 01-03-PLAN.md -- Derive fix checklist from reference analysis, cross-validate against all 15 requirements
+- [x] 01-01-PLAN.md -- Extract raw values from all Sofle + Ambi source files into EXTRACTED-DATA.md
+- [x] 01-02-PLAN.md -- Synthesize REFERENCE-ANALYSIS.md with comparison tables, position maps, and EEPROM calculations
+- [x] 01-03-PLAN.md -- Derive fix checklist from reference analysis, cross-validate against all 15 requirements
 
 ### Phase 2: Matrix Dimension Audit
 **Goal**: Every source of matrix dimensions (config.h, info.json, vial.json, LAYOUT macro) is documented in a single cross-reference table showing current values and disagreements
@@ -152,7 +152,7 @@ Note: Phase 4 and Phase 5 can run in parallel after Phase 3 completes. Phase 7 d
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Reference Analysis | 0/3 | Planned | - |
+| 1. Reference Analysis | 3/3 | ✓ Complete | 2026-02-13 |
 | 2. Matrix Dimension Audit | 0/2 | Not started | - |
 | 3. vial.json Matrix Fix | 0/2 | Not started | - |
 | 4. Peripheral Matrix Mapping | 0/2 | Not started | - |

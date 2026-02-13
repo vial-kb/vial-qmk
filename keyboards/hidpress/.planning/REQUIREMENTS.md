@@ -59,7 +59,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | MTRX-01 | Phase 3 | Pending |
 | MTRX-02 | Phase 3 | Pending |
 | MTRX-03 | Phase 2 | Pending |
-| MTRX-04 | Phase 1 | Pending |
+| MTRX-04 | Phase 1 | ✓ Done |
 | MTRX-05 | Phase 4 | Pending |
 | MTRX-06 | Phase 4 | Pending |
 | EEPR-01 | Phase 6 | Pending |
@@ -70,7 +70,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DFNS-02 | Phase 6 | Pending |
 | XVAL-01 | Phase 2 | Pending |
 | XVAL-02 | Phase 5 | Pending |
-| XVAL-03 | Phase 1 | Pending |
+| XVAL-03 | Phase 1 | ✓ Done |
 
 **Coverage:**
 - v1 requirements: 15 total
