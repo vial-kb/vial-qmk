@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Keycodes set in Vial must persist correctly across power cycles and map to the correct layers
-**Current focus:** Phase 6 complete, ready for Phase 7
+**Current focus:** Phase 7 Plan 1 complete (firmware compiled), ready for Plan 2 (flash)
 
 ## Current Position
 
-Phase: 6 of 8 (Defensive EEPROM Improvements) -- COMPLETE
-Plan: 1 of 1 in current phase
-Status: Phase 6 complete, ready for Phase 7
-Last activity: 2026-02-14 -- Completed 06-01 defensive EEPROM improvements (DFNS-01, DFNS-02, EEPR-01 satisfied)
+Phase: 7 of 8 (Build and Flash)
+Plan: 1 of 2 in current phase -- COMPLETE
+Status: Both UF2 firmware binaries compiled, ready for Plan 2 (flash and validate)
+Last activity: 2026-02-14 -- Compiled left and right half firmware with all Phase 3-6 fixes
 
-Progress: [███████░░░] 75%
+Progress: [████████░░] 82%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 8
-- Average duration: 2.3min
-- Total execution time: 0.30 hours
+- Total plans completed: 9
+- Average duration: 2.2min
+- Total execution time: 0.33 hours
 
 **By Phase:**
 
@@ -33,10 +33,11 @@ Progress: [███████░░░] 75%
 | 04-peripheral-matrix-mapping | 1/1 | 2min | 2min |
 | 05-eeprom-budget-verification | 1/1 | 3min | 3min |
 | 06-defensive-eeprom-improvements | 1/1 | 2min | 2min |
+| 07-build-and-flash | 1/2 | 2min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 03-01 (2min), 04-01 (2min), 05-01 (3min), 06-01 (2min)
-- Trend: Stable ~2.3min/plan
+- Last 5 plans: 04-01 (2min), 05-01 (3min), 06-01 (2min), 07-01 (2min)
+- Trend: Stable ~2.2min/plan
 
 *Updated after each plan completion*
 
@@ -73,6 +74,7 @@ Recent decisions affecting current work:
 - [06-01]: Left EE_CLR at k17 (KC_DOWN position), right EE_CLR at k35 (KC_EQL position) -- k31 avoided because it is MO(1) itself
 - [06-01]: Default value 0x200 = actuation_index=2 (middle sensitivity) + all layers MODE_MOUSE
 - [06-01]: eeconfig_init_user writes hardcoded constant matching save function encoding -- never call load from init
+- [07-01]: Pre-existing SERIAL_PIO_USE_PIO1 and UART0/UART1 config committed as-is -- hardware config from before Phase 1
 
 ### Pending Todos
 
@@ -86,5 +88,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-14
-Stopped at: Completed 06-01-PLAN.md -- Phase 6 complete, ready for Phase 7
+Stopped at: Completed 07-01-PLAN.md -- Both UF2 binaries compiled, ready for 07-02 (flash and validate)
 Resume file: None
