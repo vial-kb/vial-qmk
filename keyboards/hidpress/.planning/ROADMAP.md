@@ -58,18 +58,21 @@ Plans:
   3. Each diagnostic test that was executed has a clear pass/fail result documented with the exact config change made and the user-observed behavior
   4. Tests skipped (because a prior test resolved the issue or audit ruled out the hypothesis) are documented with the reason for skipping
   5. If no single test resolves the issue, console debug output from the serial driver is captured and available for verdict analysis
-**Plans**: TBD
+**Plans**: 3 plans (sequential diagnostic funnel with early-exit support)
 
 Plans:
-- [ ] 10-01: TBD
+- [ ] 10-01-PLAN.md -- DIAG-00: Remove HAL_USE_SIO/UART config (H1 test) + document DIAG-01 skip
+- [ ] 10-02-PLAN.md -- DIAG-02: Half-duplex fallback test (wiring isolation diagnostic)
+- [ ] 10-03-PLAN.md -- DIAG-03/04/05/06: Remaining diagnostics (wiring verification, PIN_SWAP, MASTER_LEFT, console debug)
 
-**Test Priority Order** (earlier tests run first; later tests may be skipped if issue is resolved):
-1. DIAG-01: PIO conflict -- separate WS2812 and serial onto different PIO peripherals
-2. DIAG-02: Half-duplex fallback -- eliminate TX/RX crossing as a variable
-3. DIAG-03: Pin swap -- try SERIAL_USART_PIN_SWAP if full-duplex fails
-4. DIAG-04: TX/RX swap -- reverse pin assignments as brute-force check
-5. DIAG-05: Static master -- replace SPLIT_USB_DETECT with MASTER_LEFT
-6. DIAG-06: Console debug -- enable CONSOLE_ENABLE for serial driver inspection
+**Test Priority Order** (updated from Phase 9 audit -- DIAG-01 eliminated, DIAG-00 added):
+1. DIAG-00 (new): SIO/UART cleanup -- remove HAL_USE_SIO and UART0/UART1 config (Plan 10-01)
+2. DIAG-01: SKIPPED -- PIO conflict eliminated by audit (WS2812 driver never compiled)
+3. DIAG-02: Half-duplex fallback -- eliminate TX/RX crossing as a variable (Plan 10-02)
+4. DIAG-03: Wiring verification -- user checks PCB schematic/TRRS routing (Plan 10-03)
+5. DIAG-04: PIN_SWAP test -- try SERIAL_USART_PIN_SWAP for straight-through wiring (Plan 10-03)
+6. DIAG-05: Static master -- replace SPLIT_USB_DETECT with MASTER_LEFT (Plan 10-03)
+7. DIAG-06: Console debug -- enable CONSOLE_ENABLE for serial driver inspection (Plan 10-03)
 
 ### Phase 11: Verdict
 **Goal**: Root cause is identified with evidence and either a confirmed fix is committed or a PCB report is produced for the hardware designer
