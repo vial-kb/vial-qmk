@@ -12,5 +12,8 @@ POINTING_DEVICE_DRIVER = analog_joystick
 JOYSTICK_ENABLE = yes
 JOYSTICK_DRIVER = analog
 
+# Debug
+CONSOLE_ENABLE = yes  # DIAG-06: enable QMK console for serial debug output
+
 # Source files
 SRC += analog.c
