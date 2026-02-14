@@ -61,11 +61,10 @@ Plans:
   2. Right vial.json declares "rows": 8 and "cols": 8, matching config.h
   3. Right vial.json layout positions use rows 4-7 (not 0-3) for the right half's physical keys, following the split keyboard convention confirmed in Phase 1
   4. Left vial.json layout positions remain on rows 0-3 for the left half's physical keys
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 03-01: Fix left vial.json matrix dimensions
-- [ ] 03-02: Fix right vial.json matrix dimensions and layout row positions
+- [ ] 03-01-PLAN.md -- Fix matrix dimensions in both vial.json files and remap right-half KLE positions to rows 4-7
 
 ### Phase 4: Peripheral Matrix Mapping
 **Goal**: Thumbstick (left half, col 7) and encoder (right half) matrix positions are correctly represented in vial.json
@@ -153,7 +152,7 @@ Note: Phase 4 and Phase 5 can run in parallel after Phase 3 completes. Phase 7 d
 |-------|----------------|--------|-----------|
 | 1. Reference Analysis | 3/3 | ✓ Complete | 2026-02-13 |
 | 2. Matrix Dimension Audit | 1/1 | ✓ Complete | 2026-02-14 |
-| 3. vial.json Matrix Fix | 0/2 | Not started | - |
+| 3. vial.json Matrix Fix | 0/1 | Not started | - |
 | 4. Peripheral Matrix Mapping | 0/2 | Not started | - |
 | 5. EEPROM Budget Verification | 0/2 | Not started | - |
 | 6. Defensive EEPROM Improvements | 0/2 | Not started | - |
