@@ -35,6 +35,7 @@
 #define ENCODERS_PAD_A { GP28 }
 #define ENCODERS_PAD_B { GP29 }
 #define ENCODER_RESOLUTION 4
+#define NUM_ENCODERS 1
 
 // Pointing device disabled in rules.mk for right side
 
