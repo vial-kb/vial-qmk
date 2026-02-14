@@ -88,11 +88,10 @@ Plans:
   2. Total EEPROM usage is calculated and confirmed to be less than 4096 bytes (the RP2040 wear-leveling logical size)
   3. The eeconfig_user region (bytes ~14-17) is confirmed to not overlap with VIA/dynamic keymap regions (starting at ~byte 50)
   4. All address calculations are verified against vial-qmk fork source code (dynamic_keymap.c), not upstream QMK/VIA documentation alone
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 05-01: Calculate EEPROM address map from vial-qmk source
-- [ ] 05-02: Document address ranges and verify no overlaps
+- [ ] 05-01-PLAN.md -- Verify EEPROM address constants against vial-qmk source and produce documented address map
 
 ### Phase 6: Defensive EEPROM Improvements
 **Goal**: EEPROM clear is safe and recoverable -- defaults are restored automatically, and the user has a keymap shortcut to trigger EEPROM clear
@@ -153,7 +152,7 @@ Note: Phase 4 and Phase 5 can run in parallel after Phase 3 completes. Phase 7 d
 | 2. Matrix Dimension Audit | 1/1 | ✓ Complete | 2026-02-14 |
 | 3. vial.json Matrix Fix | 1/1 | ✓ Complete | 2026-02-14 |
 | 4. Peripheral Matrix Mapping | 1/1 | ✓ Complete | 2026-02-14 |
-| 5. EEPROM Budget Verification | 0/2 | Not started | - |
+| 5. EEPROM Budget Verification | 0/1 | Not started | - |
 | 6. Defensive EEPROM Improvements | 0/2 | Not started | - |
 | 7. Build and Flash | 0/2 | Not started | - |
 | 8. End-to-End Verification | 0/2 | Not started | - |
