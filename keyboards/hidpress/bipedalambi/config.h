@@ -3,8 +3,9 @@
 // Common Configuration for Bipedal Ambi
 // Specific configuration (Pins, Matrix, I2C) is in keymaps/vial_left and keymaps/vial_right
 
-// #define SERIAL_USART_FULL_DUPLEX  // DIAG-02: disabled for half-duplex test
-#define SPLIT_USB_DETECT
+#define SERIAL_USART_FULL_DUPLEX
+// #define SPLIT_USB_DETECT  // DIAG-05: disabled for MASTER_LEFT test
+#define MASTER_LEFT  // DIAG-05: hardcode left as master
 #define SERIAL_PIO_USE_PIO1  // Use PIO1 for serial (PIO0 used by WS2812)
 #define SPLIT_LAYER_STATE_ENABLE
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
