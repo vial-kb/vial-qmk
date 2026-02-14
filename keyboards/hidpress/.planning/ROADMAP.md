@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: Reference Analysis** - Cross-reference Sofle rev1 Vial split configuration as known-working baseline
 - [x] **Phase 2: Matrix Dimension Audit** - Document current state of all dimension sources and identify every disagreement
-- [ ] **Phase 3: vial.json Matrix Fix** - Fix rows mismatch and right-half layout positions in both vial.json files
+- [x] **Phase 3: vial.json Matrix Fix** - Fix rows mismatch and right-half layout positions in both vial.json files
 - [ ] **Phase 4: Peripheral Matrix Mapping** - Verify and fix thumbstick and encoder matrix positions in vial.json
 - [ ] **Phase 5: EEPROM Budget Verification** - Calculate complete EEPROM address map and confirm no region overlaps
 - [ ] **Phase 6: Defensive EEPROM Improvements** - Add eeconfig_init_user defaults and QK_CLEAR_EEPROM keycode
@@ -64,7 +64,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 03-01-PLAN.md -- Fix matrix dimensions in both vial.json files and remap right-half KLE positions to rows 4-7
+- [x] 03-01-PLAN.md -- Fix matrix dimensions in both vial.json files and remap right-half KLE positions to rows 4-7
 
 ### Phase 4: Peripheral Matrix Mapping
 **Goal**: Thumbstick (left half, col 7) and encoder (right half) matrix positions are correctly represented in vial.json
@@ -152,7 +152,7 @@ Note: Phase 4 and Phase 5 can run in parallel after Phase 3 completes. Phase 7 d
 |-------|----------------|--------|-----------|
 | 1. Reference Analysis | 3/3 | ✓ Complete | 2026-02-13 |
 | 2. Matrix Dimension Audit | 1/1 | ✓ Complete | 2026-02-14 |
-| 3. vial.json Matrix Fix | 0/1 | Not started | - |
+| 3. vial.json Matrix Fix | 1/1 | ✓ Complete | 2026-02-14 |
 | 4. Peripheral Matrix Mapping | 0/2 | Not started | - |
 | 5. EEPROM Budget Verification | 0/2 | Not started | - |
 | 6. Defensive EEPROM Improvements | 0/2 | Not started | - |
