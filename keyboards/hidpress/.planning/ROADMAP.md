@@ -27,7 +27,7 @@ See `milestones/v1.0-ROADMAP.md` for full details.
 
 **Milestone Goal:** Diagnose and fix the serial communication failure between halves -- slave-side key presses don't reach the master when connected via TRRS cable. Produce a confirmed fix if firmware-solvable, or a PCB report if hardware issue.
 
-- [ ] **Phase 9: Configuration Audit** -- Audit every serial/split config file to identify misconfigurations before touching hardware
+- [x] **Phase 9: Configuration Audit** -- Audit every serial/split config file to identify misconfigurations before touching hardware -- completed 2026-02-14
 - [ ] **Phase 10: Diagnostic Testing** -- Test hypotheses from the audit with isolated firmware changes, priority-ordered
 - [ ] **Phase 11: Verdict** -- Document root cause with evidence, deliver fix or PCB report
 
@@ -46,7 +46,7 @@ See `milestones/v1.0-ROADMAP.md` for full details.
 **Plans**: 1 plan
 
 Plans:
-- [ ] 09-01-PLAN.md -- Audit all serial/split config surfaces and produce prioritized hypothesis list
+- [x] 09-01-PLAN.md -- Audit all serial/split config surfaces and produce prioritized hypothesis list -- completed 2026-02-14
 
 ### Phase 10: Diagnostic Testing
 **Goal**: Each suspected misconfiguration is tested with an isolated, reversible firmware change -- user flashes and reports results for each test
@@ -99,6 +99,6 @@ Phases execute in numeric order: 9 -> 10 -> 11
 | 6. Defensive EEPROM Improvements | v1.0 | 1/1 | Complete | 2026-02-14 |
 | 7. Build and Flash | v1.0 | 2/2 | Complete | 2026-02-14 |
 | 8. End-to-End Verification | v1.0 | 2/2 | Complete | 2026-02-14 |
-| 9. Configuration Audit | v1.1 | 0/1 | Planned | - |
+| 9. Configuration Audit | v1.1 | 1/1 | Complete | 2026-02-14 |
 | 10. Diagnostic Testing | v1.1 | 0/? | Not started | - |
 | 11. Verdict | v1.1 | 0/? | Not started | - |

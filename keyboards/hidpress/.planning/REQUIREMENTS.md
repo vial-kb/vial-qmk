@@ -9,13 +9,13 @@ Requirements for diagnosing and fixing split serial communication failure. Follo
 
 ### Configuration Audit
 
-- [ ] **AUDIT-01**: Serial driver type identified and verified correct for RP2040 (must be `vendor`/PIO, not `usart`/SIO)
-- [ ] **AUDIT-02**: TX/RX pin assignments verified against PCB TRRS jack routing
-- [ ] **AUDIT-03**: PIO peripheral assignments verified -- WS2812 and serial on separate PIOs (no silent conflict)
-- [ ] **AUDIT-04**: Full-duplex configuration verified -- TX/RX crossing correct (PCB or firmware `PIN_SWAP`)
-- [ ] **AUDIT-05**: Split detection config verified -- `SPLIT_USB_DETECT` and handedness (`EE_HANDS`/`MASTER_LEFT`/`MASTER_RIGHT`)
-- [ ] **AUDIT-06**: ChibiOS peripheral activation verified (`mcuconf.h`, `halconf.h`)
-- [ ] **AUDIT-07**: `info.json` split config verified -- no conflicts with `config.h`/`rules.mk` settings
+- [x] **AUDIT-01**: Serial driver type identified and verified correct for RP2040 (must be `vendor`/PIO, not `usart`/SIO)
+- [x] **AUDIT-02**: TX/RX pin assignments verified against PCB TRRS jack routing
+- [x] **AUDIT-03**: PIO peripheral assignments verified -- WS2812 and serial on separate PIOs (no silent conflict)
+- [x] **AUDIT-04**: Full-duplex configuration verified -- TX/RX crossing correct (PCB or firmware `PIN_SWAP`)
+- [x] **AUDIT-05**: Split detection config verified -- `SPLIT_USB_DETECT` and handedness (`EE_HANDS`/`MASTER_LEFT`/`MASTER_RIGHT`)
+- [x] **AUDIT-06**: ChibiOS peripheral activation verified (`mcuconf.h`, `halconf.h`)
+- [x] **AUDIT-07**: `info.json` split config verified -- no conflicts with `config.h`/`rules.mk` settings
 
 ### Diagnostic Testing
 
@@ -51,13 +51,13 @@ Requirements for diagnosing and fixing split serial communication failure. Follo
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| AUDIT-01 | Phase 9 | Pending |
-| AUDIT-02 | Phase 9 | Pending |
-| AUDIT-03 | Phase 9 | Pending |
-| AUDIT-04 | Phase 9 | Pending |
-| AUDIT-05 | Phase 9 | Pending |
-| AUDIT-06 | Phase 9 | Pending |
-| AUDIT-07 | Phase 9 | Pending |
+| AUDIT-01 | Phase 9 | Done |
+| AUDIT-02 | Phase 9 | Done |
+| AUDIT-03 | Phase 9 | Done |
+| AUDIT-04 | Phase 9 | Done |
+| AUDIT-05 | Phase 9 | Done |
+| AUDIT-06 | Phase 9 | Done |
+| AUDIT-07 | Phase 9 | Done |
 | DIAG-01 | Phase 10 | Pending |
 | DIAG-02 | Phase 10 | Pending |
 | DIAG-03 | Phase 10 | Pending |
