@@ -74,11 +74,10 @@ Plans:
   1. Left vial.json includes thumbstick positions at rows 0-3, col 7 (matching the dynamic keymap positions used by matrix_scan_user for custom keys mode)
   2. Right vial.json encoder mapping references valid matrix positions within the 8-row matrix bounds
   3. Both peripheral mappings are cross-referenced against Sofle rev1 encoder mapping conventions from Phase 1
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 04-01: Verify and fix thumbstick matrix positions in left vial.json
-- [ ] 04-02: Verify and fix encoder matrix positions in right vial.json
+- [ ] 04-01-PLAN.md -- Verify thumbstick and encoder positions, fix NUM_ENCODERS split-doubling mismatch
 
 ### Phase 5: EEPROM Budget Verification
 **Goal**: Complete EEPROM address map is calculated and documented, confirming no region overlaps and total usage fits within 4096-byte wear-leveling allocation
@@ -153,7 +152,7 @@ Note: Phase 4 and Phase 5 can run in parallel after Phase 3 completes. Phase 7 d
 | 1. Reference Analysis | 3/3 | ✓ Complete | 2026-02-13 |
 | 2. Matrix Dimension Audit | 1/1 | ✓ Complete | 2026-02-14 |
 | 3. vial.json Matrix Fix | 1/1 | ✓ Complete | 2026-02-14 |
-| 4. Peripheral Matrix Mapping | 0/2 | Not started | - |
+| 4. Peripheral Matrix Mapping | 0/1 | Not started | - |
 | 5. EEPROM Budget Verification | 0/2 | Not started | - |
 | 6. Defensive EEPROM Improvements | 0/2 | Not started | - |
 | 7. Build and Flash | 0/2 | Not started | - |
