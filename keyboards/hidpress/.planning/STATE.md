@@ -5,33 +5,34 @@
 See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Keycodes set in Vial must persist correctly across power cycles and map to the correct layers
-**Current focus:** Phase 2 - Matrix Dimension Audit
+**Current focus:** Phase 3 - vial.json Matrix Fix
 
 ## Current Position
 
-Phase: 2 of 8 (Matrix Dimension Audit)
-Plan: 0 of 2 in current phase
-Status: Phase 1 complete, ready for Phase 2
-Last activity: 2026-02-13 -- Completed 01-03 fix checklist derivation (FIX-CHECKLIST.md covering all 15 requirements across 8 phases)
+Phase: 3 of 8 (vial.json Matrix Fix)
+Plan: 0 of 1 in current phase
+Status: Phase 2 complete, ready for Phase 3
+Last activity: 2026-02-14 -- Completed 02-01 matrix dimension cross-reference audit (DIMENSION-AUDIT.md with 2 disagreements documented, XVAL-01 and MTRX-03 satisfied)
 
-Progress: [██░░░░░░░░] 19%
+Progress: [███░░░░░░░] 25%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 3
-- Average duration: 2.7min
-- Total execution time: 0.13 hours
+- Total plans completed: 4
+- Average duration: 2.5min
+- Total execution time: 0.17 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 01-reference-analysis | 3/3 | 8min | 2.7min |
+| 02-matrix-dimension-audit | 1/1 | 2min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (2min), 01-02 (3min), 01-03 (3min)
-- Trend: Stable ~3min/plan
+- Last 5 plans: 01-01 (2min), 01-02 (3min), 01-03 (3min), 02-01 (2min)
+- Trend: Stable ~2.5min/plan
 
 *Updated after each plan completion*
 
@@ -53,6 +54,9 @@ Recent decisions affecting current work:
 - [01-03]: FIX-CHECKLIST.md covers all 15 requirements across 8 phases with specific file paths, values, and citations
 - [01-03]: Phase 7-8 items annotated as physical user actions (Claude cannot flash or test hardware)
 - [01-03]: Phase 1 complete -- all 4 ROADMAP success criteria satisfied
+- [02-01]: info.json 4 row pins confirmed correct via QMK split auto-doubling -- no fix needed (MTRX-03 satisfied)
+- [02-01]: Right vial.json KLE row range (0-3 instead of 4-7) documented as separate disagreement from matrix.rows=4 issue
+- [02-01]: Encoder KLE entries confirmed as encoder indices, not matrix rows -- must not be remapped in Phase 3
 
 ### Pending Todos
 
@@ -65,6 +69,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-13
-Stopped at: Completed 01-03-PLAN.md -- Phase 1 complete, ready for Phase 2
+Last session: 2026-02-14
+Stopped at: Completed 02-01-PLAN.md -- Phase 2 complete, ready for Phase 3
 Resume file: None
