@@ -102,11 +102,10 @@ Plans:
   2. At least one layer in the keymap includes a QK_CLEAR_EEPROM key, accessible without needing Bootmagic Lite
   3. EEPROM clear procedure is documented for both halves independently (which key to hold, or which keycode to press, and the expected behavior after clear)
   4. After EEPROM clear, the keyboard boots with sane defaults (middle actuation sensitivity, mouse mode) without requiring Vial reconfiguration
-**Plans**: TBD
+**Plans:** 1 plan
 
 Plans:
-- [ ] 06-01: Implement eeconfig_init_user in both keymap.c files
-- [ ] 06-02: Add QK_CLEAR_EEPROM keycode and document clear procedure
+- [ ] 06-01-PLAN.md -- Add eeconfig_init_user defaults, EE_CLR keycode, and EEPROM clear procedure documentation
 
 ### Phase 7: Build and Flash
 **Goal**: Both halves compile cleanly with all fixes applied, EEPROM is cleared on both halves, and new firmware is flashed
@@ -153,6 +152,6 @@ Note: Phase 4 and Phase 5 can run in parallel after Phase 3 completes. Phase 7 d
 | 3. vial.json Matrix Fix | 1/1 | ✓ Complete | 2026-02-14 |
 | 4. Peripheral Matrix Mapping | 1/1 | ✓ Complete | 2026-02-14 |
 | 5. EEPROM Budget Verification | 1/1 | ✓ Complete | 2026-02-14 |
-| 6. Defensive EEPROM Improvements | 0/2 | Not started | - |
+| 6. Defensive EEPROM Improvements | 0/1 | Not started | - |
 | 7. Build and Flash | 0/2 | Not started | - |
 | 8. End-to-End Verification | 0/2 | Not started | - |
