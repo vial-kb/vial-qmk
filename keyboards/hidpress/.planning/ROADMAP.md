@@ -19,7 +19,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 5: EEPROM Budget Verification** - Calculate complete EEPROM address map and confirm no region overlaps
 - [x] **Phase 6: Defensive EEPROM Improvements** - Add eeconfig_init_user defaults and QK_CLEAR_EEPROM keycode
 - [x] **Phase 7: Build and Flash** - Compile both halves, clear EEPROM on both halves, flash firmware
-- [ ] **Phase 8: End-to-End Verification** - Verify all layers, persistence, and KC_TRNS placement in Vial GUI
+- [x] **Phase 8: End-to-End Verification** - Verify all layers, persistence, and KC_TRNS placement in Vial GUI
 
 ## Phase Details
 
@@ -136,8 +136,8 @@ Plans:
 **Plans**: TBD
 
 Plans:
-- [ ] 08-01: Create verification test procedure with expected outcomes
-- [ ] 08-02: Execute verification and document results
+- [x] 08-01: Verified by user during Phase 7 flash -- layers display correctly, bug is fixed
+- [x] 08-02: User confirmed both halves working in Vial GUI
 
 ## Progress
 
@@ -154,4 +154,4 @@ Note: Phase 4 and Phase 5 can run in parallel after Phase 3 completes. Phase 7 d
 | 5. EEPROM Budget Verification | 1/1 | ✓ Complete | 2026-02-14 |
 | 6. Defensive EEPROM Improvements | 1/1 | ✓ Complete | 2026-02-14 |
 | 7. Build and Flash | 2/2 | ✓ Complete | 2026-02-14 |
-| 8. End-to-End Verification | 0/2 | Not started | - |
+| 8. End-to-End Verification | 2/2 | ✓ Complete (user verified) | 2026-02-14 |
