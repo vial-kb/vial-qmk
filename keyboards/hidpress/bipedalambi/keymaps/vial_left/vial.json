@@ -2,7 +2,7 @@
     "name": "Bipedal Ambi Left",
     "lighting": "none",
     "matrix": {
-        "rows": 4,
+        "rows": 8,
         "cols": 8
     },
     "customKeycodes": [
