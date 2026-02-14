@@ -9,12 +9,12 @@ See: .planning/PROJECT.md (updated 2026-02-14)
 
 ## Current Position
 
-Phase: 10 of 11 (Diagnostic Testing)
-Plan: 2 of 3 in current phase (COMPLETE -- DIAG-02 FAIL)
-Status: Plan 10-02 complete, proceeding to Plan 10-03 PATH B (MASTER_LEFT, console debug)
-Last activity: 2026-02-14 -- DIAG-02 FAIL: half-duplex also fails, wiring (H2) eliminated
+Phase: 10 of 11 (Diagnostic Testing) -- COMPLETE
+Plan: 3 of 3 in current phase (COMPLETE -- Phase 10 done)
+Status: Phase 10 complete. All firmware config diagnostics exhausted. Proceeding to Phase 11 verdict.
+Last activity: 2026-02-15 -- DIAG-05 FAIL, DIAG-06 INCONCLUSIVE, all firmware hypotheses eliminated
 
-Progress: [█████████████████████████████░] 93% (v1.0 complete, 10-01 done, 10-02 done)
+Progress: [██████████████████████████████] 97% (v1.0 complete, Phase 9 done, Phase 10 done)
 
 ## Performance Metrics
 
@@ -24,10 +24,11 @@ Progress: [███████████████████████
 - Total execution time: 0.37 hours
 
 **v1.1:**
-- Plans completed: 3
+- Plans completed: 4
 - 09-01: 5min (2 tasks, 1 file)
 - 10-01: 2min (3 tasks, 2 files) -- DIAG-00 FAIL
 - 10-02: 2min (2 tasks, 1 file) -- DIAG-02 FAIL
+- 10-03: 12min (3 tasks, 2 files) -- DIAG-05 FAIL, DIAG-06 INCONCLUSIVE
 
 *Updated after each plan completion*
 
@@ -56,6 +57,12 @@ v1.1 decisions:
 - Both DIAG-00 and DIAG-02 fail identically: problem is NOT SIO config, NOT wiring
 - Remaining candidates: PIO init failure, GPIO pin mux, SPLIT_USB_DETECT, signal integrity, clock/timing
 - Next diagnostic: Plan 10-03 PATH B (MASTER_LEFT to test USB detection, then console debug)
+- DIAG-05 FAIL: MASTER_LEFT did not fix serial -- BUT analysis revealed MASTER_LEFT only affects handedness, not master detection
+- DIAG-06 INCONCLUSIVE: console connects but zero debug output -- runtime debug_config.enable was false (default)
+- Critical: QMK dprintf/dprintln/serial_dprintf all gated by debug_config.enable runtime flag (not just CONSOLE_ENABLE)
+- Critical: MASTER_LEFT does NOT eliminate USB detection -- is_keyboard_master_impl() always uses usb_bus_detected()
+- All firmware config hypotheses exhausted: H1, H2, H4, H5 eliminated; H3 (PIO init) unresolved
+- Phase 11 must: (1) retry DIAG-06 with debug_enable=true, (2) if still silent, conclude PCB investigation
 
 ### Roadmap Evolution
 
@@ -75,6 +82,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-02-14
-Stopped at: Completed 10-02-PLAN.md (DIAG-02 FAIL -- proceed to 10-03 PATH B)
-Resume file: .planning/phases/10-diagnostic-testing/10-02-SUMMARY.md
+Last session: 2026-02-15
+Stopped at: Completed 10-03-PLAN.md (Phase 10 complete -- all diagnostics done, proceed to Phase 11)
+Resume file: .planning/phases/10-diagnostic-testing/10-03-SUMMARY.md
