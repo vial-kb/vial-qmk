@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-02-14)
 ## Current Position
 
 Phase: 9 of 11 (Configuration Audit)
-Plan: 0 of ? in current phase
-Status: Ready to plan
-Last activity: 2026-02-14 -- Roadmap created for v1.1 (3 phases: audit, test, verdict)
+Plan: 1 of 1 in current phase (COMPLETE)
+Status: Phase 9 complete
+Last activity: 2026-02-14 -- Serial config audit complete, hypothesis list produced
 
-Progress: [████████████████████░░░░░░░░░░] 73% (v1.0 complete, v1.1 starting)
+Progress: [██████████████████████████░░░░] 82% (v1.0 complete, Phase 9 done)
 
 ## Performance Metrics
 
@@ -23,7 +23,9 @@ Progress: [████████████████████░░░
 - Average duration: 2.2min
 - Total execution time: 0.37 hours
 
-**v1.1:** No plans executed yet.
+**v1.1:**
+- Plans completed: 1
+- 09-01: 5min (2 tasks, 1 file)
 
 *Updated after each plan completion*
 
@@ -34,9 +36,14 @@ Progress: [████████████████████░░░
 Decisions are logged in PROJECT.md Key Decisions table.
 
 v1.0 decisions carried forward:
-- SERIAL_PIO_USE_PIO1 committed as defensive config -- needs verification in Phase 9
-- mcuconf.h UART0/UART1 config pre-dates Phase 1 -- needs audit in Phase 9
+- SERIAL_PIO_USE_PIO1 committed as defensive config -- VERIFIED OK in Phase 9 (serial on PIO1, PIO0 free)
+- mcuconf.h UART0/UART1 config pre-dates Phase 1 -- AUDITED in Phase 9: unnecessary for vendor driver
 - Each half operates standalone with separate firmware (vial_left, vial_right)
+
+v1.1 decisions:
+- HAL_USE_SIO identified as unnecessary for PIO vendor driver -- removing it is first diagnostic test
+- WS2812 PIO conflict hypothesis eliminated (driver never compiled, RGBLIGHT disabled)
+- Phase 10 test order: DIAG-00 (SIO cleanup) > DIAG-02 (half-duplex) > DIAG-03/04 (wiring) > DIAG-05 (USB detect)
 
 ### Roadmap Evolution
 
@@ -57,5 +64,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-14
-Stopped at: v1.1 roadmap created, ready to plan Phase 9
-Resume file: None
+Stopped at: Completed 09-01-PLAN.md (Serial Configuration Audit)
+Resume file: .planning/phases/09-configuration-audit/09-01-SUMMARY.md
