@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Keycodes set in Vial must persist correctly across power cycles and map to the correct layers
-**Current focus:** Phase 4 - Encoder Audit
+**Current focus:** Phase 5 - Dynamic Keymap EEPROM Audit
 
 ## Current Position
 
-Phase: 4 of 8 (Encoder Audit)
+Phase: 5 of 8 (Dynamic Keymap EEPROM Audit)
 Plan: 0 of 1 in current phase
-Status: Phase 3 complete, ready for Phase 4
-Last activity: 2026-02-14 -- Completed 03-01 vial.json matrix fix (rows=8 for both halves, right KLE remapped to rows 4-7, MTRX-01 and MTRX-02 satisfied)
+Status: Phase 4 complete, ready for Phase 5
+Last activity: 2026-02-14 -- Completed 04-01 peripheral matrix mapping (MTRX-05 and MTRX-06 satisfied, NUM_ENCODERS=1 fix applied)
 
-Progress: [████░░░░░░] 38%
+Progress: [█████░░░░░] 50%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 5
-- Average duration: 2.4min
-- Total execution time: 0.20 hours
+- Total plans completed: 6
+- Average duration: 2.3min
+- Total execution time: 0.23 hours
 
 **By Phase:**
 
@@ -30,10 +30,11 @@ Progress: [████░░░░░░] 38%
 | 01-reference-analysis | 3/3 | 8min | 2.7min |
 | 02-matrix-dimension-audit | 1/1 | 2min | 2min |
 | 03-vialjson-matrix-fix | 1/1 | 2min | 2min |
+| 04-peripheral-matrix-mapping | 1/1 | 2min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 01-02 (3min), 01-03 (3min), 02-01 (2min), 03-01 (2min)
-- Trend: Stable ~2.4min/plan
+- Last 5 plans: 01-03 (3min), 02-01 (2min), 03-01 (2min), 04-01 (2min)
+- Trend: Stable ~2.3min/plan
 
 *Updated after each plan completion*
 
@@ -61,6 +62,9 @@ Recent decisions affecting current work:
 - [03-01]: Left KLE positions unchanged (rows 0-3 correct for left half)
 - [03-01]: Right KLE positions remapped +4 rows (0-3 to 4-7) per split convention
 - [03-01]: Encoder KLE entries preserved as encoder indices, not matrix rows
+- [04-01]: NUM_ENCODERS=1 set explicitly to override QMK split-doubling (encoder.h #ifndef guard)
+- [04-01]: Preserved undocumented "encoders" JSON key in right vial.json (risk of removal outweighs benefit)
+- [04-01]: No vial.json modifications needed -- all peripheral positions survived Phase 3 correctly
 
 ### Pending Todos
 
@@ -74,5 +78,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-14
-Stopped at: Completed 03-01-PLAN.md -- Phase 3 complete, ready for Phase 4
+Stopped at: Completed 04-01-PLAN.md -- Phase 4 complete, ready for Phase 5
 Resume file: None
