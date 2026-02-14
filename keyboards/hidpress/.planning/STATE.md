@@ -2,10 +2,10 @@
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-02-13)
+See: .planning/PROJECT.md (updated 2026-02-14)
 
 **Core value:** Keycodes set in Vial must persist correctly across power cycles and map to the correct layers
-**Current focus:** All phases complete -- milestone done
+**Current focus:** v1.0 milestone complete — bug fixed and verified
 
 ## Current Position
 

@@ -2,7 +2,7 @@
 
 ## What This Is
 
-A diagnosis and fix for the Bipedal Ambi split keyboard firmware where keycodes set via the Vial desktop app don't persist correctly and layers are offset (layer 1 content appears on layer 2 in Vial, odd-numbered layers are broken). The firmware lives at `keyboards/hidpress/bipedalambi/` in the vial-qmk repo.
+Firmware fix for the Bipedal Ambi split keyboard (RP2040-based, vial-qmk). The Vial layer offset bug has been diagnosed and fixed — keycodes now persist correctly across power cycles and layers display without offset in the Vial GUI.
 
 ## Core Value
 
@@ -16,44 +16,37 @@ Keycodes set in Vial must persist correctly across power cycles and map to the c
 - ✓ RP2040-based split keyboard compiles and boots — existing
 - ✓ OLED display, joystick, and encoders function — existing
 - ✓ Split keyboard communication works (USART serial) — existing
+- ✓ Keycodes set in Vial persist across power cycles — v1.0
+- ✓ Layer indexing matches between firmware and Vial (no off-by-one shift) — v1.0
+- ✓ KC_TRNS displays correctly on layers 1 and 3 — v1.0
+- ✓ All 4 layers are visible and editable in Vial — v1.0
+- ✓ Custom EEPROM features don't collide with Vial's dynamic keymap region — v1.0
+- ✓ EEPROM budget fits within wear-leveling allocation (568/4096 bytes) — v1.0
 
 ### Active
 
-- [ ] Keycodes set in Vial persist across power cycles
-- [ ] Layer indexing matches between firmware and Vial (no off-by-one shift)
-- [ ] KC_TRNS displays correctly on layers 1 and 3 (not shifted to 2 and 4)
-- [ ] All 4 layers are visible and editable in Vial
-- [ ] Custom EEPROM features (actuation, scroll direction) don't collide with Vial's dynamic keymap region
-- [ ] EEPROM budget fits within wear-leveling allocation
+(None — bug fix milestone complete)
 
 ### Out of Scope
 
 - Macropad firmware changes — Bipedal Southpaw works fine, don't touch it
 - Upstream Sofle file modifications — reference only
-- New features or refactoring — this is a bug fix
+- New features or refactoring — this was a bug fix
 - OLED display changes — display works correctly
 
 ## Context
 
 - **Board**: Bipedal Ambi — RP2040-based split keyboard under the Hidpress brand
 - **Firmware base**: Heavily based on Sofle rev1 Vial keymap (`keyboards/sofle/rev1/`)
-- **Prior work**: Custom EEPROM features (joystick actuation persistence, scroll direction inversion) carried over from the Bipedal Southpaw macropad (`keyboards/hidpress/bipedalsouthpaw/`)
-- **RP2040 constraint**: No true EEPROM — uses wear-leveling emulation over SPI flash (typically 4KB logical / 8KB backing)
-- **First split board**: Matt's first split keyboard firmware; macropad is the known-good reference for custom features in isolation
+- **Architecture**: Each half has its own separate firmware (vial_left, vial_right), operates standalone via USB
+- **RP2040 constraint**: No true EEPROM — uses wear-leveling emulation over SPI flash (4KB logical / 8KB backing)
+- **Shipped v1.0**: Both halves compile cleanly (left 124.5 KB, right 108 KB), flashed and verified working
 
-### Suspected Root Causes
+### Root Cause (Confirmed)
 
-1. **Matrix dimension mismatch (Issue A)**: `MATRIX_ROWS × MATRIX_COLS` in config.h / info.json / vial.json don't agree, causing Vial to read/write layer data at wrong EEPROM offsets. For split boards, `MATRIX_ROWS` must be doubled (rows_per_side × 2).
+The Vial layer offset bug was caused by **vial.json matrix rows mismatch**: both vial.json files declared `rows: 4` while config.h had `MATRIX_ROWS=8`. This caused Vial to calculate EEPROM offsets using a 4-row matrix while the firmware used an 8-row matrix, shifting every layer after layer 0.
 
-2. **EEPROM collision (Issue B)**: Custom `eeconfig_read_user()` / `eeconfig_update_user()` calls from macropad code may write into Vial's dynamic keymap region, corrupting stored keycodes.
-
-### Diagnostic Evidence
-
-- Layer 1 content appears on layer 2 in Vial (off-by-one shift)
-- KC_TRNS shows on layers 2 and 4 instead of 1 and 3
-- Layer 0 displays correctly (first layer is unaffected by offset)
-- Odd-numbered layers are broken — classic matrix dimension mismatch pattern
-- Each layer occupies `rows × cols × 2` bytes; wrong dimensions shift every subsequent layer's start address
+The EEPROM collision hypothesis (Issue B) was ruled out — eeconfig_user (bytes 19-22) is 13 bytes away from VIA magic (byte 36), no overlap possible.
 
 ## Constraints
 
@@ -66,9 +59,13 @@ Keycodes set in Vial must persist correctly across power cycles and map to the c
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Diagnose matrix dimensions first | Layer offset is the more impactful bug and may resolve persistence issues too | — Pending |
-| Compare against Sofle rev1 reference | Known-working split Vial board with similar architecture | — Pending |
-| Calculate EEPROM budget before fixing | Need to understand if space is sufficient before changing allocations | — Pending |
+| Diagnose matrix dimensions first | Layer offset is the more impactful bug and may resolve persistence issues too | ✓ Confirmed as root cause |
+| Compare against Sofle rev1 reference | Known-working split Vial board with similar architecture | ✓ Established correct conventions |
+| Calculate EEPROM budget before fixing | Need to understand if space is sufficient before changing allocations | ✓ 568/4096 bytes, no collisions |
+| Right half KLE rows 0-3 (not 4-7) | Each half operates standalone, scanning its own 4 row pins as rows 0-3 | ✓ Fixed during Phase 7 flash |
+| NUM_ENCODERS=1 explicit | QMK split-doubling auto-doubles to 2, causing phantom encoder EEPROM allocation | ✓ Prevents 16-byte waste |
+| eeconfig_init_user hardcoded 0x200 | Must match save function encoding; never call load from init | ✓ Safe EEPROM clear defaults |
+| SERIAL_PIO_USE_PIO1 | WS2812 may claim PIO0 on right half; PIO1 avoids conflict | ✓ Committed as defensive config |
 
 ---
-*Last updated: 2026-02-13 after initialization*
+*Last updated: 2026-02-14 after v1.0 milestone*
