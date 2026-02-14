@@ -77,6 +77,13 @@ void load_layer_config_from_eeprom(void) {
     actuation = actuation_values[current_actuation_index];
 }
 
+void eeconfig_init_user(void) {
+    // Default: all layers MODE_MOUSE (0), actuation_index = 2 (middle)
+    // Encoding: bits 0-7 = layer modes (2 bits each), bits 8-10 = actuation index
+    // (0 << 0) | (0 << 2) | (0 << 4) | (0 << 6) | (2 << 8) = 0x200
+    eeconfig_update_user(0x200);
+}
+
 void keyboard_post_init_user(void) {
     load_layer_config_from_eeprom();
 }
@@ -86,7 +93,7 @@ void keyboard_post_init_user(void) {
 // Order: k03, k04, k02, k05, k01, k00, k13, k14, k12, k15, k11, k10, k23, k24, k22, k26, k25, k21, k20, k36, k33, k34, k32, k35, k31
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_right(KC_U, KC_O, KC_Y, KC_I, KC_P, KC_BSPC, KC_J, KC_K, KC_H, KC_L, KC_SCLN, KC_QUOT, KC_COMM, KC_N, KC_DOT, KC_ENT, KC_M, KC_SLSH, KC_RSFT, TMB_MODE, KC_RGUI, KC_RALT, KC_RCTL, MO(1), KC_EQL),
-    [1] = LAYOUT_right(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
+    [1] = LAYOUT_right(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, EE_CLR, KC_TRNS),
     [2] = LAYOUT_right(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
     [3] = LAYOUT_right(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 };

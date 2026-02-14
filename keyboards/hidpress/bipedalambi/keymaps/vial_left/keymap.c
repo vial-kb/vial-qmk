@@ -89,6 +89,13 @@ void load_layer_config_from_eeprom(void) {
     actuation = actuation_values[current_actuation_index];
 }
 
+void eeconfig_init_user(void) {
+    // Default: all layers MODE_MOUSE (0), actuation_index = 2 (middle)
+    // Encoding: bits 0-7 = layer modes (2 bits each), bits 8-10 = actuation index
+    // (0 << 0) | (0 << 2) | (0 << 4) | (0 << 6) | (2 << 8) = 0x200
+    eeconfig_update_user(0x200);
+}
+
 void keyboard_post_init_user(void) {
     load_layer_config_from_eeprom();
 }
@@ -98,7 +105,7 @@ void keyboard_post_init_user(void) {
 // Order: k03, k02, k04, k00, k01, k05, k13, k12, k14, k10, k11, k15, k07, k23, k22, k24, k20, k21, k25, k26, k27, k36, k37, k33, k32, k34, k31, k35, k17
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = LAYOUT_left(KC_E, KC_W, KC_R, KC_ESC, KC_Q, KC_T, KC_D, KC_S, KC_F, KC_TAB, KC_A, KC_G, KC_UP, KC_C, KC_X, KC_V, KC_LSFT, KC_Z, KC_B, KC_SPC, KC_LEFT, TMB_MODE, KC_RGHT, KC_LGUI, KC_LCTL, KC_LALT, KC_MINS, MO(1), KC_DOWN),
-    [1] = LAYOUT_left(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
+    [1] = LAYOUT_left(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, EE_CLR),
     [2] = LAYOUT_left(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
     [3] = LAYOUT_left(KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS),
 };
