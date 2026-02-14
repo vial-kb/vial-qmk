@@ -117,11 +117,11 @@ Plans:
   3. EEPROM is cleared on the left half (via bootmagic or QK_CLEAR_EEPROM)
   4. EEPROM is cleared on the right half independently
   5. Both halves are flashed with the new firmware and boot successfully
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 07-01: Compile both halves and resolve any build errors
-- [ ] 07-02: Document flash and EEPROM clear procedure for user execution
+- [ ] 07-01-PLAN.md -- Commit uncommitted config changes, clean build both halves, resolve any build errors
+- [ ] 07-02-PLAN.md -- Flash both halves and clear EEPROM (user-executed, checkpoint)
 
 ### Phase 8: End-to-End Verification
 **Goal**: The Vial layer offset bug is confirmed fixed -- all layers display correctly, keycodes persist, and KC_TRNS appears on the correct layers
