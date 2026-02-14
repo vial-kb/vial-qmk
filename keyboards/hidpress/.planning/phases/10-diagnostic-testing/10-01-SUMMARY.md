@@ -30,6 +30,8 @@ key-files:
 key-decisions:
   - "Removed HAL_USE_SIO and UART0/UART1 config -- vendor serial driver uses PIO directly, never touches ChibiOS SIO HAL"
   - "DIAG-01 (PIO conflict) skipped -- audit proved WS2812 driver never compiled, no conflict to test"
+  - "DIAG-00 result FAIL -- SIO removal was correct but not the root cause of serial failure"
+  - "SIO removal retained permanently -- config was wrong regardless of test outcome"
 
 patterns-established:
   - "Vendor (PIO) serial driver requires zero ChibiOS SIO/UART configuration"
@@ -37,20 +39,22 @@ patterns-established:
 # Metrics
 duration: 2min
 completed: 2026-02-14
-status: paused-at-checkpoint
+status: complete
+test-result: FAIL
 ---
 
 # Phase 10 Plan 01: DIAG-00 SIO/UART Config Removal Summary
 
-**Removed unnecessary HAL_USE_SIO and UART peripheral config from ChibiOS HAL; both halves compile cleanly; awaiting user flash test**
+**DIAG-00 FAIL: Removed unnecessary HAL_USE_SIO/UART config (correct cleanup) but serial communication still broken -- eliminates ChibiOS SIO HAL as root cause, proceed to DIAG-02 half-duplex test**
 
 ## Performance
 
-- **Duration:** 2 min
+- **Duration:** 2 min (automation) + user flash time
 - **Started:** 2026-02-14T12:10:46Z
-- **Paused:** 2026-02-14T12:12:37Z
-- **Tasks:** 2 of 3 complete (Task 3 is checkpoint:human-action)
+- **Completed:** 2026-02-14
+- **Tasks:** 3 of 3 complete
 - **Files modified:** 2
+- **Test result:** FAIL
 
 ## Accomplishments
 
@@ -59,6 +63,9 @@ status: paused-at-checkpoint
 - Preserved all necessary config: HAL_USE_I2C, HAL_USE_ADC, I2C0, I2C1, ADC1
 - Both halves compile cleanly: left UF2 = 125,952 bytes, right UF2 = 108,544 bytes
 - DIAG-01 (PIO conflict hypothesis) documented as skipped -- Phase 9 audit AUDIT-03 proved WS2812 driver is never compiled
+- **DIAG-00 test result: FAIL** -- slave-side keys still do not register on master
+- User confirmed: power flows through TRRS (slave OLED fully functional), but serial data does not
+- H1 (SIO/UART misconfiguration) eliminated as root cause -- ChibiOS SIO HAL init is not the problem
 
 ## Task Commits
 
@@ -66,7 +73,7 @@ Each task was committed atomically:
 
 1. **Task 1: Remove SIO/UART config and document DIAG-01 skip** - `0dddbd763b` (fix)
 2. **Task 2: Compile both halves** - No commit (build-only task, no tracked files changed)
-3. **Task 3: User flashes and tests** - PENDING (checkpoint:human-action)
+3. **Task 3: User flashes and tests** - No commit (user action, result: FAIL)
 
 ## Files Created/Modified
 
@@ -96,34 +103,46 @@ None.
 
 None - no external service configuration required.
 
-## Checkpoint: Awaiting User Flash Test
+## DIAG-00 Test Result: FAIL
 
-**Status:** Task 3 (checkpoint:human-action) reached. User must physically flash both halves and report whether slave-side keys register.
+**Result:** FAIL -- slave-side keys do NOT register on master after SIO/UART config removal.
 
-**UF2 file locations:**
-- Left: `/Users/matthewthomas/dev/vial-qmk/hidpress_bipedalambi_vial_left.uf2`
-- Right: `/Users/matthewthomas/dev/vial-qmk/hidpress_bipedalambi_vial_right.uf2`
+**User report (verbatim):**
+> "Same results as before, which ever side does not have the direct connection does not work. however it must get power as when the right side is plugged with usb, the left side's oled turns on and is functional (startup animation, screen saver, correct graphics displayed)."
 
-**Expected results:**
-- PASS: Serial communication fixed, proceed to Phase 11 (Verdict)
-- FAIL: SIO removal was not the cause, proceed to Plan 10-02 (DIAG-02: half-duplex fallback)
-- PARTIAL: Describe behavior, informs next diagnostic step
+**Analysis:**
+- **Power path (VCC/GND):** CONFIRMED working through TRRS -- slave OLED is fully functional (startup animation, screensaver, correct graphics)
+- **Serial data path:** NOT working -- slave-side key presses do not register on master side
+- **Both directions tested:** Neither direction works (right-USB-left-slave and left-USB-right-slave both fail)
+- **Conclusion:** ChibiOS SIO HAL initialization (sio_lld_init resetting UART peripherals) is NOT the root cause. The SIO config removal was correct cleanup but did not fix serial communication.
 
-## Next Phase Readiness
+**Hypothesis elimination:**
+- H1 (HAL_USE_SIO / UART Peripheral Misconfiguration): **ELIMINATED** -- removing it had no effect on serial behavior
+- SIO removal retained permanently -- it was incorrect config regardless
 
-- Both UF2 files ready for flashing
-- If PASS: Phase 10 complete, skip remaining diagnostics, proceed to Phase 11
-- If FAIL: SIO config removal stays in place (it was correct regardless), proceed to Plan 10-02
+**Diagnostic significance:**
+The fact that OLED works perfectly through TRRS confirms:
+1. VCC and GND traces on the TRRS PCB routing are correct
+2. I2C is NOT involved in cross-half communication (each OLED uses its own I2C bus)
+3. The OLED working confirms the slave MCU is booting and running firmware correctly
+4. The failure is isolated to the PIO serial data path (TX/RX pins or wiring)
+
+## Next Step
+
+Proceed to **Plan 10-02: DIAG-02 half-duplex fallback test**. Switching from full-duplex (2-wire TX+RX) to half-duplex (1-wire TX only) will isolate whether the problem is:
+- **Wiring:** TX/RX crossing issue on TRRS (H2) -- if half-duplex works, full-duplex wiring is wrong
+- **Deeper:** PIO serial init, clock, or pin mux issue -- if half-duplex also fails, problem is fundamental
 
 ## Self-Check: PASSED
 
 - FOUND: keyboards/hidpress/bipedalambi/halconf.h
 - FOUND: keyboards/hidpress/bipedalambi/mcuconf.h
-- FOUND: hidpress_bipedalambi_vial_left.uf2
-- FOUND: hidpress_bipedalambi_vial_right.uf2
 - FOUND: 10-01-SUMMARY.md
-- FOUND: commit 0dddbd763b
+- FOUND: STATE.md
+- FOUND: commit 0dddbd763b (Task 1: SIO/UART removal)
+- FOUND: commit 88aee6c84e (docs: checkpoint pause)
+- Task 3 result: FAIL recorded from user report
 
 ---
 *Phase: 10-diagnostic-testing*
-*Paused at checkpoint: 2026-02-14*
+*Completed: 2026-02-14*
