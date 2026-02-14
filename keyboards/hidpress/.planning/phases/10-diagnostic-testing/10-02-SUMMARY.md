@@ -29,6 +29,9 @@ key-files:
 key-decisions:
   - "Commented out SERIAL_USART_FULL_DUPLEX rather than deleting -- easily restorable after diagnostic"
   - "RX pin defines left in keymap configs -- driver ignores them in half-duplex mode"
+  - "DIAG-02 result FAIL -- half-duplex also fails, H2 (wiring) ELIMINATED as root cause"
+  - "Problem is deeper than wiring: PIO init, GPIO pin, signal integrity, or fundamental driver issue"
+  - "Next diagnostic path: Plan 10-03 PATH B (MASTER_LEFT, then console debug)"
 
 patterns-established:
   - "Half-duplex serial: single-wire bidirectional on TX pin only"
@@ -36,21 +39,22 @@ patterns-established:
 # Metrics
 duration: 2min
 completed: 2026-02-14
-status: checkpoint-paused
-test-result: PENDING
+status: complete
+test-result: FAIL
 ---
 
 # Phase 10 Plan 02: DIAG-02 Half-Duplex Fallback Test Summary
 
-**Switched serial from full-duplex to half-duplex mode (TX-only, single wire) to isolate whether broken serial is caused by TRRS TX/RX wiring (H2) or a deeper PIO/signal issue**
+**DIAG-02 FAIL: Half-duplex serial (TX-only, single wire) also fails -- eliminates wiring hypothesis (H2), problem is deeper than TX/RX crossing (PIO init, GPIO, or signal integrity)**
 
 ## Performance
 
-- **Duration:** 2 min (automation) + awaiting user flash/test
+- **Duration:** 2 min (automation) + user flash time
 - **Started:** 2026-02-14T12:50:05Z
-- **Completed:** PENDING (checkpoint: awaiting user flash and test)
-- **Tasks:** 1 of 2 complete (Task 2 is user action)
+- **Completed:** 2026-02-14
+- **Tasks:** 2 of 2 complete
 - **Files modified:** 1
+- **Test result:** FAIL
 
 ## Accomplishments
 
@@ -59,13 +63,16 @@ test-result: PENDING
 - Half-duplex eliminates RX pin (GP1 left / GP16 right) and TX/RX crossing as variables
 - Only TX pin used for bidirectional communication on a single wire
 - SIO cleanup from DIAG-00 (Plan 10-01) remains in place
+- **DIAG-02 test result: FAIL** -- slave-side keys still do not register in half-duplex mode
+- H2 (wiring / TX/RX crossing) ELIMINATED -- half-duplex removes wiring as a variable entirely
+- Problem is deeper: PIO initialization, GPIO pin configuration, signal integrity, or fundamental driver issue
 
 ## Task Commits
 
 Each task was committed atomically:
 
 1. **Task 1: Switch to half-duplex mode and compile both halves** - `a007619ece` (fix)
-2. **Task 2: User flashes DIAG-02 firmware and tests** - PENDING (checkpoint:human-action)
+2. **Task 2: User flashes DIAG-02 firmware and tests** - No commit (user action, result: FAIL)
 
 ## Files Created/Modified
 
@@ -90,30 +97,53 @@ None - plan executed exactly as written.
 
 None.
 
-## DIAG-02 Test Result: PENDING
+## DIAG-02 Test Result: FAIL
 
-**Status:** Awaiting user flash and test
+**Result:** FAIL -- slave-side keys do NOT register on master in half-duplex mode.
 
-**What half-duplex changes:**
-- Driver uses only TX pin (GP0 left, GP17 right) for bidirectional communication
-- RX pin is completely unused -- eliminates TRRS TX/RX crossing as a variable
-- If half-duplex WORKS: wiring hypothesis (H2) confirmed -- full-duplex requires proper TX/RX crossing
-- If half-duplex FAILS: wiring ruled out -- problem is PIO init, signal integrity, or fundamental
+**User report (verbatim):**
+> "Same result unfortunately"
+
+**Analysis:**
+- **Half-duplex mode:** Uses only TX pin (GP0 left, GP17 right) for bidirectional single-wire communication
+- **RX pin completely unused:** GP1 (left) and GP16 (right) are not involved at all
+- **TX/RX crossing eliminated:** Half-duplex does not require crossed wiring -- single wire, single pin
+- **Result:** Same failure as full-duplex -- slave-side keys do not register on master
+- **Both directions tested:** Neither direction works (same behavior as DIAG-00)
+
+**Hypothesis elimination:**
+- H1 (HAL_USE_SIO / UART Peripheral Misconfiguration): **ELIMINATED in DIAG-00** -- removing SIO had no effect
+- H2 (TRRS TX/RX Wiring / Crossing): **ELIMINATED in DIAG-02** -- half-duplex removes all wiring variables and still fails
+- Both halves boot and run correctly (OLEDs work through TRRS)
+- Power path confirmed working, serial data path broken in both full-duplex and half-duplex
+
+**Diagnostic significance:**
+The fact that BOTH full-duplex and half-duplex fail identically means:
+1. The problem is NOT wiring-related (RX pin, TX/RX crossing, TRRS cable routing)
+2. The problem is NOT ChibiOS SIO HAL related (already removed)
+3. The problem must be in: PIO initialization, GPIO pin mux, signal integrity, USB master detection (SPLIT_USB_DETECT), or a fundamental serial driver issue
+4. The GPIO pins themselves may not be outputting signal, OR the PIO program is not loading correctly
+
+**Remaining hypotheses:**
+- PIO1 initialization failure (PIO program not loading or executing)
+- GPIO pin not being configured for PIO function (pin mux issue)
+- SPLIT_USB_DETECT not correctly determining master/slave roles
+- Signal integrity issue (damaged trace, cold solder joint on data pins)
+- Clock/timing issue in PIO serial protocol
 
 ## Next Step
 
-Awaiting user test result to determine:
-- **PASS** -> Plan 10-03 PATH A: restore full-duplex + try SERIAL_USART_PIN_SWAP
-- **FAIL** -> Plan 10-03 PATH B: try MASTER_LEFT, then console debug
-- **PARTIAL** -> Plan 10-03 with partial diagnosis info
+Proceed to **Plan 10-03 PATH B** -- the problem is NOT wiring:
+1. **DIAG-05: MASTER_LEFT** -- Remove SPLIT_USB_DETECT, use explicit MASTER_LEFT/MASTER_RIGHT to eliminate USB detection as a variable
+2. **DIAG-06: Console debug** -- Enable QMK console output to see if serial driver reports errors, timeouts, or initialization failures
 
 ## Self-Check: PASSED
 
 - FOUND: keyboards/hidpress/bipedalambi/config.h (SERIAL_USART_FULL_DUPLEX commented out)
 - FOUND: commit a007619ece (Task 1: half-duplex config change)
-- Task 2: checkpoint:human-action (awaiting user)
+- Task 2: user action complete (result: FAIL)
 - Both UF2 files exist with fresh timestamps
 
 ---
 *Phase: 10-diagnostic-testing*
-*Status: checkpoint-paused (2026-02-14)*
+*Completed: 2026-02-14*
