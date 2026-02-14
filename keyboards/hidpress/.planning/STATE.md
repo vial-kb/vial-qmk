@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Keycodes set in Vial must persist correctly across power cycles and map to the correct layers
-**Current focus:** Phase 5 - Dynamic Keymap EEPROM Audit
+**Current focus:** Phase 5 complete, ready for Phase 6
 
 ## Current Position
 
-Phase: 5 of 8 (Dynamic Keymap EEPROM Audit)
-Plan: 0 of 1 in current phase
-Status: Phase 4 complete, ready for Phase 5
-Last activity: 2026-02-14 -- Completed 04-01 peripheral matrix mapping (MTRX-05 and MTRX-06 satisfied, NUM_ENCODERS=1 fix applied)
+Phase: 5 of 8 (Dynamic Keymap EEPROM Audit) -- COMPLETE
+Plan: 1 of 1 in current phase
+Status: Phase 5 complete, ready for Phase 6
+Last activity: 2026-02-14 -- Completed 05-01 EEPROM budget verification (EEPR-04 and XVAL-02 satisfied)
 
-Progress: [█████░░░░░] 50%
+Progress: [██████░░░░] 60%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 6
+- Total plans completed: 7
 - Average duration: 2.3min
-- Total execution time: 0.23 hours
+- Total execution time: 0.27 hours
 
 **By Phase:**
 
@@ -31,9 +31,10 @@ Progress: [█████░░░░░] 50%
 | 02-matrix-dimension-audit | 1/1 | 2min | 2min |
 | 03-vialjson-matrix-fix | 1/1 | 2min | 2min |
 | 04-peripheral-matrix-mapping | 1/1 | 2min | 2min |
+| 05-eeprom-budget-verification | 1/1 | 3min | 3min |
 
 **Recent Trend:**
-- Last 5 plans: 01-03 (3min), 02-01 (2min), 03-01 (2min), 04-01 (2min)
+- Last 5 plans: 02-01 (2min), 03-01 (2min), 04-01 (2min), 05-01 (3min)
 - Trend: Stable ~2.3min/plan
 
 *Updated after each plan completion*
@@ -65,6 +66,9 @@ Recent decisions affecting current work:
 - [04-01]: NUM_ENCODERS=1 set explicitly to override QMK split-doubling (encoder.h #ifndef guard)
 - [04-01]: Preserved undocumented "encoders" JSON key in right vial.json (risk of removal outweighs benefit)
 - [04-01]: No vial.json modifications needed -- all peripheral positions survived Phase 3 correctly
+- [05-01]: All addresses verified against vial-qmk fork source files, not upstream QMK docs (XVAL-02)
+- [05-01]: eeconfig_user (bytes 19-22) confirmed 13 bytes away from VIA magic (byte 36) -- no collision possible
+- [05-01]: Right half uses 568 bytes fixed (13.9% of 4096), left half uses 552 bytes (13.5%)
 
 ### Pending Todos
 
@@ -78,5 +82,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-14
-Stopped at: Completed 04-01-PLAN.md -- Phase 4 complete, ready for Phase 5
+Stopped at: Completed 05-01-PLAN.md -- Phase 5 complete, ready for Phase 6
 Resume file: None
