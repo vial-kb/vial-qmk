@@ -43,10 +43,10 @@ See `milestones/v1.0-ROADMAP.md` for full details.
   3. PIO peripheral assignments are mapped for both WS2812 and serial -- conflict or separation confirmed with evidence from config files
   4. A prioritized hypothesis list exists ranking the most likely cause of serial failure, with each hypothesis tied to specific config evidence
   5. Every config surface (config.h, rules.mk, mcuconf.h, halconf.h, info.json) has been checked and any conflicts between them are documented
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 09-01: TBD
+- [ ] 09-01-PLAN.md -- Audit all serial/split config surfaces and produce prioritized hypothesis list
 
 ### Phase 10: Diagnostic Testing
 **Goal**: Each suspected misconfiguration is tested with an isolated, reversible firmware change -- user flashes and reports results for each test
@@ -99,6 +99,6 @@ Phases execute in numeric order: 9 -> 10 -> 11
 | 6. Defensive EEPROM Improvements | v1.0 | 1/1 | Complete | 2026-02-14 |
 | 7. Build and Flash | v1.0 | 2/2 | Complete | 2026-02-14 |
 | 8. End-to-End Verification | v1.0 | 2/2 | Complete | 2026-02-14 |
-| 9. Configuration Audit | v1.1 | 0/? | Not started | - |
+| 9. Configuration Audit | v1.1 | 0/1 | Planned | - |
 | 10. Diagnostic Testing | v1.1 | 0/? | Not started | - |
 | 11. Verdict | v1.1 | 0/? | Not started | - |
