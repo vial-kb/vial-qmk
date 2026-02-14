@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Keycodes set in Vial must persist correctly across power cycles and map to the correct layers
-**Current focus:** Phase 7 Plan 1 complete (firmware compiled), ready for Plan 2 (flash)
+**Current focus:** Phase 7 complete, ready for Phase 8
 
 ## Current Position
 
-Phase: 7 of 8 (Build and Flash)
-Plan: 1 of 2 in current phase -- COMPLETE
-Status: Both UF2 firmware binaries compiled, ready for Plan 2 (flash and validate)
-Last activity: 2026-02-14 -- Compiled left and right half firmware with all Phase 3-6 fixes
+Phase: 7 of 8 (Build and Flash) -- COMPLETE
+Plan: 2 of 2 in current phase -- COMPLETE
+Status: Phase 7 complete -- both halves flashed, EEPROM cleared, verified working
+Last activity: 2026-02-14 -- Both halves flashed and verified working in Vial GUI (right half required KLE row fix)
 
-Progress: [████████░░] 82%
+Progress: [█████████░] 88%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 9
+- Total plans completed: 10
 - Average duration: 2.2min
-- Total execution time: 0.33 hours
+- Total execution time: 0.37 hours
 
 **By Phase:**
 
@@ -33,10 +33,10 @@ Progress: [████████░░] 82%
 | 04-peripheral-matrix-mapping | 1/1 | 2min | 2min |
 | 05-eeprom-budget-verification | 1/1 | 3min | 3min |
 | 06-defensive-eeprom-improvements | 1/1 | 2min | 2min |
-| 07-build-and-flash | 1/2 | 2min | 2min |
+| 07-build-and-flash | 2/2 | 4min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 04-01 (2min), 05-01 (3min), 06-01 (2min), 07-01 (2min)
+- Last 5 plans: 05-01 (3min), 06-01 (2min), 07-01 (2min), 07-02 (2min)
 - Trend: Stable ~2.2min/plan
 
 *Updated after each plan completion*
@@ -75,6 +75,8 @@ Recent decisions affecting current work:
 - [06-01]: Default value 0x200 = actuation_index=2 (middle sensitivity) + all layers MODE_MOUSE
 - [06-01]: eeconfig_init_user writes hardcoded constant matching save function encoding -- never call load from init
 - [07-01]: Pre-existing SERIAL_PIO_USE_PIO1 and UART0/UART1 config committed as-is -- hardware config from before Phase 1
+- [07-02]: Right half vial.json KLE positions reverted from rows 4-7 to rows 0-3 -- standalone halves scan rows 0-3
+- [07-02]: Phase 3 row remapping was incorrect for standalone split halves -- KLE must match firmware matrix scanning
 
 ### Pending Todos
 
@@ -88,5 +90,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-14
-Stopped at: Completed 07-01-PLAN.md -- Both UF2 binaries compiled, ready for 07-02 (flash and validate)
+Stopped at: Completed 07-02-PLAN.md -- Phase 7 complete, ready for Phase 8
 Resume file: None

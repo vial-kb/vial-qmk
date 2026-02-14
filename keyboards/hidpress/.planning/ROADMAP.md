@@ -18,7 +18,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 4: Peripheral Matrix Mapping** - Verify and fix thumbstick and encoder matrix positions in vial.json
 - [ ] **Phase 5: EEPROM Budget Verification** - Calculate complete EEPROM address map and confirm no region overlaps
 - [x] **Phase 6: Defensive EEPROM Improvements** - Add eeconfig_init_user defaults and QK_CLEAR_EEPROM keycode
-- [ ] **Phase 7: Build and Flash** - Compile both halves, clear EEPROM on both halves, flash firmware
+- [x] **Phase 7: Build and Flash** - Compile both halves, clear EEPROM on both halves, flash firmware
 - [ ] **Phase 8: End-to-End Verification** - Verify all layers, persistence, and KC_TRNS placement in Vial GUI
 
 ## Phase Details
@@ -120,8 +120,8 @@ Plans:
 **Plans:** 2 plans
 
 Plans:
-- [ ] 07-01-PLAN.md -- Commit uncommitted config changes, clean build both halves, resolve any build errors
-- [ ] 07-02-PLAN.md -- Flash both halves and clear EEPROM (user-executed, checkpoint)
+- [x] 07-01-PLAN.md -- Commit uncommitted config changes, clean build both halves, resolve any build errors
+- [x] 07-02-PLAN.md -- Flash both halves and clear EEPROM (user-executed, checkpoint)
 
 ### Phase 8: End-to-End Verification
 **Goal**: The Vial layer offset bug is confirmed fixed -- all layers display correctly, keycodes persist, and KC_TRNS appears on the correct layers
@@ -153,5 +153,5 @@ Note: Phase 4 and Phase 5 can run in parallel after Phase 3 completes. Phase 7 d
 | 4. Peripheral Matrix Mapping | 1/1 | ✓ Complete | 2026-02-14 |
 | 5. EEPROM Budget Verification | 1/1 | ✓ Complete | 2026-02-14 |
 | 6. Defensive EEPROM Improvements | 1/1 | ✓ Complete | 2026-02-14 |
-| 7. Build and Flash | 0/2 | Not started | - |
+| 7. Build and Flash | 2/2 | ✓ Complete | 2026-02-14 |
 | 8. End-to-End Verification | 0/2 | Not started | - |
