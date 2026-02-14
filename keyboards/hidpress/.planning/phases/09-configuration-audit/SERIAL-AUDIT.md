@@ -357,3 +357,30 @@ Based on the hypothesis ranking, the recommended diagnostic test order is:
 2. If still failing, flash with SIO removed AND half-duplex (DIAG-00 + DIAG-02) -- isolates wiring vs config
 3. If half-duplex works, the problem is wiring (H2) -- verify with DIAG-03/DIAG-04
 4. If half-duplex also fails, deeper investigation needed (PIO init failure, clock, etc.)
+
+---
+
+## Audit Metadata
+
+**Files Audited (9):**
+1. `bipedalambi/config.h` -- board-level shared config
+2. `bipedalambi/rules.mk` -- driver selection
+3. `bipedalambi/mcuconf.h` -- ChibiOS MCU peripheral config
+4. `bipedalambi/halconf.h` -- ChibiOS HAL feature enables
+5. `bipedalambi/info.json` -- QMK board metadata
+6. `bipedalambi/keymaps/vial_left/config.h` -- left-half pin assignments
+7. `bipedalambi/keymaps/vial_right/config.h` -- right-half pin assignments
+8. `bipedalambi/keymaps/vial_left/rules.mk` -- left-half feature toggles
+9. `bipedalambi/keymaps/vial_right/rules.mk` -- right-half feature toggles
+
+**Driver Sources Traced (3):**
+1. `platforms/chibios/drivers/vendor/RP/RP2040/serial_vendor.c` -- PIO serial implementation
+2. `platforms/chibios/drivers/vendor/RP/RP2040/ws2812_vendor.c` -- PIO WS2812 implementation
+3. `lib/chibios/os/hal/ports/RP/LLD/UARTv1/hal_sio_lld.c` -- ChibiOS SIO HAL init
+
+**Build System Verified:**
+- `builddefs/common_features.mk` lines 663-703 (serial driver selection)
+- `builddefs/common_features.mk` lines 933-954 (WS2812 driver compilation guard)
+
+**Cross-reference Board:**
+- `keyboards/hidpress/bipedal65/` (non-split RP2040, known working) -- used to validate expected HAL config
