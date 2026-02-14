@@ -5,23 +5,23 @@
 See: .planning/PROJECT.md (updated 2026-02-13)
 
 **Core value:** Keycodes set in Vial must persist correctly across power cycles and map to the correct layers
-**Current focus:** Phase 5 complete, ready for Phase 6
+**Current focus:** Phase 6 complete, ready for Phase 7
 
 ## Current Position
 
-Phase: 5 of 8 (Dynamic Keymap EEPROM Audit) -- COMPLETE
+Phase: 6 of 8 (Defensive EEPROM Improvements) -- COMPLETE
 Plan: 1 of 1 in current phase
-Status: Phase 5 complete, ready for Phase 6
-Last activity: 2026-02-14 -- Completed 05-01 EEPROM budget verification (EEPR-04 and XVAL-02 satisfied)
+Status: Phase 6 complete, ready for Phase 7
+Last activity: 2026-02-14 -- Completed 06-01 defensive EEPROM improvements (DFNS-01, DFNS-02, EEPR-01 satisfied)
 
-Progress: [██████░░░░] 60%
+Progress: [███████░░░] 75%
 
 ## Performance Metrics
 
 **Velocity:**
-- Total plans completed: 7
+- Total plans completed: 8
 - Average duration: 2.3min
-- Total execution time: 0.27 hours
+- Total execution time: 0.30 hours
 
 **By Phase:**
 
@@ -32,9 +32,10 @@ Progress: [██████░░░░] 60%
 | 03-vialjson-matrix-fix | 1/1 | 2min | 2min |
 | 04-peripheral-matrix-mapping | 1/1 | 2min | 2min |
 | 05-eeprom-budget-verification | 1/1 | 3min | 3min |
+| 06-defensive-eeprom-improvements | 1/1 | 2min | 2min |
 
 **Recent Trend:**
-- Last 5 plans: 02-01 (2min), 03-01 (2min), 04-01 (2min), 05-01 (3min)
+- Last 5 plans: 03-01 (2min), 04-01 (2min), 05-01 (3min), 06-01 (2min)
 - Trend: Stable ~2.3min/plan
 
 *Updated after each plan completion*
@@ -69,6 +70,9 @@ Recent decisions affecting current work:
 - [05-01]: All addresses verified against vial-qmk fork source files, not upstream QMK docs (XVAL-02)
 - [05-01]: eeconfig_user (bytes 19-22) confirmed 13 bytes away from VIA magic (byte 36) -- no collision possible
 - [05-01]: Right half uses 568 bytes fixed (13.9% of 4096), left half uses 552 bytes (13.5%)
+- [06-01]: Left EE_CLR at k17 (KC_DOWN position), right EE_CLR at k35 (KC_EQL position) -- k31 avoided because it is MO(1) itself
+- [06-01]: Default value 0x200 = actuation_index=2 (middle sensitivity) + all layers MODE_MOUSE
+- [06-01]: eeconfig_init_user writes hardcoded constant matching save function encoding -- never call load from init
 
 ### Pending Todos
 
@@ -82,5 +86,5 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-02-14
-Stopped at: Completed 05-01-PLAN.md -- Phase 5 complete, ready for Phase 6
+Stopped at: Completed 06-01-PLAN.md -- Phase 6 complete, ready for Phase 7
 Resume file: None
