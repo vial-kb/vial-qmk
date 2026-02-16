@@ -1,0 +1,15 @@
+VIA_ENABLE = yes
+VIAL_ENABLE = yes
+LTO_ENABLE = yes # Link time optimization to reduce build size
+EXTRAFLAGS += -flto # More link time
+CONSOLE_ENABLE = no         # Console for debug
+COMMAND_ENABLE = no         # Commands for debug and configuration
+SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
+RGBLIGHT_ENABLE = yes       # Enable keyboard RGB underglow
+BACKLIGHT_ENABLE = yes       # Enable keyboard backlight functionality
+BLUETOOTH_ENABLE = no       # Enable Bluetooth
+AUDIO_ENABLE = no           # Audio output
+UNICODE_ENABLE   = no       # Unicode
+MOUSEKEY_ENABLE  = no       # Mouse keys(+4700)
+QMK_SETTINGS = no
+TAP_DANCE_ENABLE = no
