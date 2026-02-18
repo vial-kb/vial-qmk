@@ -19,24 +19,24 @@ extern uint32_t actuation_display_timer;
 
 void register_oled_activity(void);
 
-// Layout macro for the Left Side (29 keys) based on Raw Data
-// Renamed to LAYOUT_bipedalambi to avoid QMK data-driven conflict
+// Unified layout macro for both halves (54 keys)
+// Left keys (L_) → rows 0-3, Right keys (R_) → rows 4-7
 #define LAYOUT_bipedalambi( \
-    k03, \
-    k02, k04, \
-    k00, k01, k05, \
-    k13, \
-    k12, k14, \
-    k10, k11, k15, k07, \
-    k23, \
-    k22, k24, \
-    k20, k21, k25, k26, k27, k36, k37, \
-    k33, \
-    k32, k34, \
-    k31, k35, k17 \
+    L03, L02, L04, L00, L01, L05, \
+    L13, L12, L14, L10, L11, L15, L07, \
+    L23, L22, L24, L20, L21, L25, L26, L27, L36, L37, \
+    L33, L32, L34, L31, L35, L17, \
+    R03, R04, R02, R05, R01, R00, \
+    R13, R14, R12, R15, R11, R10, \
+    R23, R24, R22, R26, R25, R21, R20, \
+    R36, R33, R34, R32, R35, R31 \
 ) { \
-    { k00, k01, k02, k03, k04, k05, KC_NO, k07 }, \
-    { k10, k11, k12, k13, k14, k15, KC_NO, k17 }, \
-    { k20, k21, k22, k23, k24, k25, k26,   k27 }, \
-    { KC_NO, k31, k32, k33, k34, k35, k36,   k37 } \
+    { L00, L01, L02, L03, L04, L05, KC_NO, L07 }, \
+    { L10, L11, L12, L13, L14, L15, KC_NO, L17 }, \
+    { L20, L21, L22, L23, L24, L25, L26,   L27 }, \
+    { KC_NO, L31, L32, L33, L34, L35, L36, L37 }, \
+    { R00, R01, R02, R03, R04, R05, KC_NO, KC_NO }, \
+    { R10, R11, R12, R13, R14, R15, KC_NO, KC_NO }, \
+    { R20, R21, R22, R23, R24, R25, R26,   KC_NO }, \
+    { KC_NO, R31, R32, R33, R34, R35, R36, KC_NO } \
 }

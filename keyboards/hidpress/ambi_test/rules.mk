@@ -13,7 +13,7 @@ CONSOLE_ENABLE = yes
 
 SRC += analog.c
 
-# Build for right side: make hidpress/bipedalambi:vial SIDE=right
+# Build for right side: qmk compile ... -e SIDE=right
 ifeq ($(SIDE),right)
     OPT_DEFS += -DRIGHT_SIDE
 endif

@@ -9,10 +9,6 @@
 #define SERIAL_DEBUG
 #define SPLIT_LAYER_STATE_ENABLE
 
-// Double-tap reset to bootloader
-#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
-#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 200U
-
 // Serial pins differ per side
 #ifdef RIGHT_SIDE
 #    define SERIAL_USART_TX_PIN GP16
@@ -24,26 +20,14 @@
 
 // WS2812
 #define WS2812_DI_PIN GP24
-// Left side uses GP24 for matrix col 0, so no RGB on left
-#ifndef RIGHT_SIDE
-#    undef WS2812_DI_PIN
-#endif
 
 // OLED
 #define OLED_DISPLAY_128X32
 #define OLED_TIMEOUT 0
-#define OLED_FONT_H "keyboards/hidpress/bipedalambi/glcdfont.c"
-
-// I2C — left uses I2C0 (GP12/GP13), right uses I2C1 (GP18/GP19)
-#ifdef RIGHT_SIDE
-#    define I2C_DRIVER I2CD1
-#    define I2C1_SDA_PIN GP18
-#    define I2C1_SCL_PIN GP19
-#else
-#    define I2C_DRIVER I2CD0
-#    define I2C1_SDA_PIN GP12
-#    define I2C1_SCL_PIN GP13
-#endif
+#define OLED_FONT_H "keyboards/hidpress/ambi_test/glcdfont.c"
+#define I2C_DRIVER I2CD0
+#define I2C1_SDA_PIN GP12
+#define I2C1_SCL_PIN GP13
 
 // Joystick / Pointing device
 #define ANALOG_JOYSTICK_AUTO_AXIS

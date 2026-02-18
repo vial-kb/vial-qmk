@@ -1,0 +1,41 @@
+{
+    "name": "Bipedal Ambi",
+    "lighting": "none",
+    "matrix": {
+        "rows": 8,
+        "cols": 8
+    },
+    "customKeycodes": [
+        {"name": "Thmbstk", "title": "Cycle Thumbstick Mode", "shortName": "Thmb"},
+        {"name": "Lyr Fwd", "title": "Cycle Layer Forward", "shortName": "LFwd"},
+        {"name": "Lyr Bwd", "title": "Cycle Layer Backward", "shortName": "LBwd"},
+        {"name": "Scrl Dir", "title": "Invert Scroll Direction", "shortName": "ScrlD"},
+        {"name": "Act Up", "title": "Increase Actuation Point", "shortName": "Act+"},
+        {"name": "Act Down", "title": "Decrease Actuation Point", "shortName": "Act-"},
+        {"name": "Act Rst", "title": "Reset Actuation Point", "shortName": "ActR"}
+    ],
+    "layouts": {
+        "keymap": [
+            [{"x": 3.5}, "0,3", {"x": 12.25}, "0,3"],
+            [{"y": -0.75, "x": 2.5}, "0,2", {"x": 1}, "0,4", {"x": 10.25}, "0,4", {"x": 1}, "0,2"],
+            [{"y": -0.75, "x": 0.25, "w": 1.25}, "0,0", "0,1", {"x": 3}, "0,5", {"x": 8.25}, "0,5", {"x": 3}, "0,1", {"w": 1.25}, "0,0"],
+            [{"y": -0.5, "x": 3.5}, "1,3", {"x": 12.25}, "1,3"],
+            [{"y": -0.75, "x": 2.5}, "1,2", {"x": 1}, "1,4", {"x": 10.25}, "1,4", {"x": 1}, "1,2"],
+            [{"y": -0.75, "x": 0.25, "w": 1.25}, "1,0", "1,1", {"x": 3}, "1,5", {"x": 2, "c": "#737373"}, "0,7", {"x": 5.25, "c": "#cccccc"}, "1,5", {"x": 3}, "1,1", {"w": 1.25}, "1,0"],
+            [{"y": -0.5, "x": 3.5}, "2,3", {"x": 12.25}, "2,3"],
+            [{"y": -0.75, "x": 2.5}, "2,2", {"x": 1}, "2,4", {"x": 10.25}, "2,4", {"x": 1}, "2,2"],
+            [{"y": -0.75, "x": 0.25, "w": 1.25}, "2,0", "2,1", {"x": 3}, "2,5", {"h": 2}, "2,6", {"c": "#737373"}, "2,7", "3,6", "3,7", {"x": 0.25}, "0,0\n\n\n\n\n\n\n\n\ne", {"x": 2, "c": "#cccccc", "h": 2}, "2,6", "2,5", {"x": 3}, "2,1", {"w": 1.25}, "2,0"],
+            [{"y": -0.5, "x": 3.5, "h": 1.5}, "3,3", {"x": 7.75, "c": "#737373"}, "3,6", {"x": 3.5, "c": "#cccccc", "h": 1.5}, "3,3"],
+            [{"y": -0.75, "x": 2.5, "h": 1.25}, "3,2", {"x": 1, "h": 1.25}, "3,4", {"x": 10.25, "h": 1.25}, "3,4", {"x": 1, "h": 1.25}, "3,2"],
+            [{"y": -0.75, "x": 1.5}, "3,1", {"x": 3}, "3,5", {"x": 2, "c": "#737373"}, "1,7", {"x": 1.25}, "0,1\n\n\n\n\n\n\n\n\ne", {"x": 3, "c": "#cccccc"}, "3,5", {"x": 3}, "3,1"]
+        ]
+    },
+    "encoders": [
+        [
+            ["QK_KB_2", "QK_KB_1"],
+            ["KC_TRNS", "KC_TRNS"],
+            ["KC_TRNS", "KC_TRNS"],
+            ["KC_TRNS", "KC_TRNS"]
+        ]
+    ]
+}

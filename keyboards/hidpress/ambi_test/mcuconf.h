@@ -6,14 +6,10 @@
 #undef RP_I2C_USE_I2C0
 #define RP_I2C_USE_I2C0 TRUE
 
-// I2C1 for RIGHT side OLED (GP18 SDA, GP19 SCL)
-#undef RP_I2C_USE_I2C1
-#define RP_I2C_USE_I2C1 TRUE
-
-// ADC for joystick (LEFT) and encoder might use analog
+// ADC for joystick
 #undef RP_ADC_USE_ADC1
 #define RP_ADC_USE_ADC1 TRUE
 
-// Hardware UART for split serial (GP0/GP1 and GP16/GP17 are both UART0 pins)
+// Hardware UART for split serial
 #undef RP_SIO_USE_UART0
 #define RP_SIO_USE_UART0 TRUE
