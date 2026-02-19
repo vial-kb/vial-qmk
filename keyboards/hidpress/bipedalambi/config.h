@@ -13,6 +13,13 @@
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 200U
 
+// Bootmagic — hold key while plugging in to enter bootloader
+// Left: (0,0) = top-left 1.25u key, Right: (4,0) = top-right 1.25u key
+#define BOOTMAGIC_ROW 0
+#define BOOTMAGIC_COLUMN 0
+#define BOOTMAGIC_ROW_RIGHT 4
+#define BOOTMAGIC_COLUMN_RIGHT 0
+
 // Serial pins differ per side
 #ifdef RIGHT_SIDE
 #    define SERIAL_USART_TX_PIN GP16
