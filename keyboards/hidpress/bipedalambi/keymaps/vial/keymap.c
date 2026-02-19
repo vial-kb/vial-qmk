@@ -14,6 +14,7 @@ enum custom_keycodes {
     ACT_UP,
     ACT_DOWN,
     ACT_RESET,
+    ENC_MOD,
     KC_JOYSTICK_BUTTON
 };
 
@@ -32,6 +33,9 @@ bool scroll_inverted = false;
 
 // Joystick custom key state
 bool customkeys[4];
+
+// Encoder modifier state
+bool enc_mod_held = false;
 
 // Layer cycle bounds
 #define LAYER_CYCLE_START 0
@@ -93,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_U,    KC_O,    KC_Y,    KC_I,    KC_P,    KC_BSPC,
         KC_J,    KC_K,    KC_H,    KC_L,    KC_SCLN, KC_QUOT,
         KC_COMM, KC_N,    KC_DOT,  KC_ENT,  KC_M,    KC_SLSH, KC_RSFT,
-        TMB_MODE, KC_RGUI, KC_RALT, KC_RCTL, MO(1),  KC_EQL
+        ENC_MOD,  KC_RGUI, KC_RALT, KC_RCTL, MO(1),  KC_EQL
     ),
     [1] = LAYOUT_bipedalambi(
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -194,28 +198,60 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case CL_FWD:
             if (record->event.pressed) {
-                uint8_t current_layer = get_highest_layer(layer_state);
-                if (current_layer >= LAYER_CYCLE_START && current_layer <= LAYER_CYCLE_END) {
-                    uint8_t next_layer = current_layer + 1;
-                    if (next_layer > LAYER_CYCLE_END) {
-                        next_layer = LAYER_CYCLE_START;
+                if (enc_mod_held) {
+                    // Shift to actuation up
+                    if (current_actuation_index < 4) {
+                        current_actuation_index++;
+                        actuation = actuation_values[current_actuation_index];
+                        save_layer_config_to_eeprom();
+                        showing_actuation = true;
+                        actuation_display_timer = timer_read32();
+#ifdef OLED_ENABLE
+                        oled_clear();
+#endif
                     }
-                    layer_move(next_layer);
+                } else {
+                    uint8_t current_layer = get_highest_layer(layer_state);
+                    if (current_layer >= LAYER_CYCLE_START && current_layer <= LAYER_CYCLE_END) {
+                        uint8_t next_layer = current_layer + 1;
+                        if (next_layer > LAYER_CYCLE_END) {
+                            next_layer = LAYER_CYCLE_START;
+                        }
+                        layer_move(next_layer);
+                    }
                 }
             }
             return false;
 
         case CL_BWD:
             if (record->event.pressed) {
-                uint8_t current_layer = get_highest_layer(layer_state);
-                if (current_layer >= LAYER_CYCLE_START && current_layer <= LAYER_CYCLE_END) {
-                    int8_t prev_layer = current_layer - 1;
-                    if (prev_layer < LAYER_CYCLE_START) {
-                        prev_layer = LAYER_CYCLE_END;
+                if (enc_mod_held) {
+                    // Shift to actuation down
+                    if (current_actuation_index > 0) {
+                        current_actuation_index--;
+                        actuation = actuation_values[current_actuation_index];
+                        save_layer_config_to_eeprom();
+                        showing_actuation = true;
+                        actuation_display_timer = timer_read32();
+#ifdef OLED_ENABLE
+                        oled_clear();
+#endif
                     }
-                    layer_move(prev_layer);
+                } else {
+                    uint8_t current_layer = get_highest_layer(layer_state);
+                    if (current_layer >= LAYER_CYCLE_START && current_layer <= LAYER_CYCLE_END) {
+                        int8_t prev_layer = current_layer - 1;
+                        if (prev_layer < LAYER_CYCLE_START) {
+                            prev_layer = LAYER_CYCLE_END;
+                        }
+                        layer_move(prev_layer);
+                    }
                 }
             }
+            return false;
+
+        case ENC_MOD:
+            enc_mod_held = record->event.pressed;
             return false;
     }
     return true;
@@ -336,8 +372,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 // --- Encoder Map ---
-// Encoder is on right PCB only; left encoder arrays are empty so this is a no-op locally.
-// Data must still be present for split sync.
+// Rotation is remappable in Vial. When ENC_MOD is held, CL_FWD/CL_BWD
+// are intercepted in process_record_user to do ACT_UP/ACT_DOWN instead.
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [0] = { ENCODER_CCW_CW(CL_BWD, CL_FWD) },
