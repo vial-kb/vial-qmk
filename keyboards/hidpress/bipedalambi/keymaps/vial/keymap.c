@@ -292,7 +292,7 @@ void matrix_scan_user(void) {
 
     // Read joystick position (512 is center of 10-bit ADC)
     int16_t joy_y = analogReadPin(GP28) - 512;
-    int16_t joy_x = analogReadPin(GP29) - 512;
+    int16_t joy_x = -(analogReadPin(GP29) - 512);
 
     // Up (Y < -actuation) - reads keycode from [0,7]
     if (!customkeys[0] && joy_y < -actuation) {

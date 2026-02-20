@@ -5,8 +5,16 @@
 // Split
 #define SERIAL_USART_FULL_DUPLEX
 #define SELECT_SOFT_SERIAL_SPEED 2
+#define EE_HANDS
 #define SPLIT_USB_DETECT
 #define SPLIT_USB_TIMEOUT 2000
+
+// Write handedness to EEPROM at compile time (matches SIDE=right build flag)
+#ifdef RIGHT_SIDE
+#    define INIT_EE_HANDS_RIGHT
+#else
+#    define INIT_EE_HANDS_LEFT
+#endif
 #define SERIAL_DEBUG
 #define SPLIT_LAYER_STATE_ENABLE
 
