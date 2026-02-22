@@ -404,6 +404,11 @@ bool oled_task_user(void) {
         return false;
     }
 
+    // Freeze OLED when auto-mouse layer (4) is active — no re-render
+    if (get_highest_layer(layer_state) == 4) {
+        return false;
+    }
+
     static bool was_showing_actuation = false;
 
     if (showing_actuation) {

@@ -70,9 +70,9 @@
 #define POINTING_DEVICE_RIGHT
 #define SPLIT_POINTING_ENABLE
 
-// Auto mouse — activates layer 3 when trackpad reports movement
+// Auto mouse — activates layer 4 when trackpad reports movement
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
-#define AUTO_MOUSE_DEFAULT_LAYER 3
+#define AUTO_MOUSE_DEFAULT_LAYER 4
 #define AUTO_MOUSE_TIME 650
 #define AUTO_MOUSE_THRESHOLD 10
 

@@ -44,7 +44,7 @@ enum custom_keycodes {
 };
 
 // --- Per-Layer State ---
-static uint8_t layer_modes[4] = {MODE_CUSTOM_KEYS, MODE_CUSTOM_KEYS, MODE_CUSTOM_KEYS, MODE_CUSTOM_KEYS};
+static uint8_t layer_modes[5] = {MODE_CUSTOM_KEYS, MODE_CUSTOM_KEYS, MODE_CUSTOM_KEYS, MODE_CUSTOM_KEYS, MODE_CUSTOM_KEYS};
 // static uint8_t layer_actuation_indices[4] = {2, 2, 2, 2}; // Removed for global actuation
 const uint16_t actuation_values[] = {352, 320, 256, 128, 64};
 uint8_t current_actuation_index = 2;
@@ -62,26 +62,26 @@ bool enc_mod_held = false;
 // --- EEPROM Persistence ---
 void save_layer_config_to_eeprom(void) {
     uint32_t data = 0;
-    // Bits 0-7: Layer modes (2 bits per layer * 4 layers)
-    for (int i = 0; i < 4; i++) {
+    // Bits 0-9: Layer modes (2 bits per layer * 5 layers)
+    for (int i = 0; i < 5; i++) {
         uint32_t mode = (uint32_t)layer_modes[i] & 0x03;
         data |= mode << (i * 2);
     }
-    // Bits 8-10: Global actuation index (3 bits)
-    data |= ((uint32_t)current_actuation_index & 0x07) << 8;
+    // Bits 10-12: Global actuation index (3 bits)
+    data |= ((uint32_t)current_actuation_index & 0x07) << 10;
 
     eeconfig_update_user(data);
 }
 
 void load_layer_config_from_eeprom(void) {
     uint32_t data = eeconfig_read_user();
-    // Bits 0-7: Layer modes
-    for (int i = 0; i < 4; i++) {
+    // Bits 0-9: Layer modes (2 bits per layer * 5 layers)
+    for (int i = 0; i < 5; i++) {
         uint8_t mode = (data >> (i * 2)) & 0x03;
         layer_modes[i] = (mode < MODE_COUNT) ? mode : MODE_CUSTOM_KEYS;
     }
-    // Bits 8-10: Global actuation index
-    uint8_t act_idx = (data >> 8) & 0x07;
+    // Bits 10-12: Global actuation index
+    uint8_t act_idx = (data >> 10) & 0x07;
     current_actuation_index = (act_idx <= 4) ? act_idx : 2;
 
     current_mode = layer_modes[0];
@@ -90,9 +90,9 @@ void load_layer_config_from_eeprom(void) {
 
 void eeconfig_init_user(void) {
     // Default: all layers MODE_CUSTOM_KEYS (0), actuation_index = 2 (middle)
-    // Encoding: bits 0-7 = layer modes (2 bits each), bits 8-10 = actuation index
-    // (0 << 0) | (0 << 2) | (0 << 4) | (0 << 6) | (2 << 8) = 0x200
-    eeconfig_update_user(0x200);
+    // Encoding: bits 0-9 = layer modes (2 bits each, 5 layers), bits 10-12 = actuation index
+    // All modes 0, actuation index 2: (2 << 10) = 0x800
+    eeconfig_update_user(0x800);
 }
 
 void keyboard_post_init_user(void) {
@@ -144,6 +144,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
     ),
     [3] = LAYOUT_bipedalambi(
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS
+    ),
+    [4] = LAYOUT_bipedalambi(
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -217,18 +227,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CL_FWD:
             if (record->event.pressed) {
                 if (enc_mod_held) {
-                    // Shift to actuation up
-                    if (current_actuation_index < 4) {
-                        current_actuation_index++;
-                        actuation = actuation_values[current_actuation_index];
-                        save_layer_config_to_eeprom();
-                        showing_actuation = true;
-                        actuation_display_timer = timer_read32();
-#ifdef OLED_ENABLE
-                        oled_clear();
-#endif
-                    }
-                } else {
                     uint8_t current_layer = get_highest_layer(layer_state);
                     if (current_layer >= LAYER_CYCLE_START && current_layer <= LAYER_CYCLE_END) {
                         uint8_t next_layer = current_layer + 1;
@@ -237,6 +235,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         }
                         layer_move(next_layer);
                     }
+                } else {
+                    tap_code(KC_VOLU);
                 }
             }
             return false;
@@ -244,18 +244,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CL_BWD:
             if (record->event.pressed) {
                 if (enc_mod_held) {
-                    // Shift to actuation down
-                    if (current_actuation_index > 0) {
-                        current_actuation_index--;
-                        actuation = actuation_values[current_actuation_index];
-                        save_layer_config_to_eeprom();
-                        showing_actuation = true;
-                        actuation_display_timer = timer_read32();
-#ifdef OLED_ENABLE
-                        oled_clear();
-#endif
-                    }
-                } else {
                     uint8_t current_layer = get_highest_layer(layer_state);
                     if (current_layer >= LAYER_CYCLE_START && current_layer <= LAYER_CYCLE_END) {
                         int8_t prev_layer = current_layer - 1;
@@ -264,6 +252,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                         }
                         layer_move(prev_layer);
                     }
+                } else {
+                    tap_code(KC_VOLD);
                 }
             }
             return false;
@@ -480,21 +470,22 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     uint8_t new_layer = get_highest_layer(state);
-    current_mode = layer_modes[new_layer];
-    // Actuation is global, so we don't change it when layer changes
-    // current_actuation_index is already correct
-    // actuation is already correct
+    // Don't update mode when auto-mouse layer is active — freeze OLED state
+    if (new_layer != 4) {
+        current_mode = layer_modes[new_layer];
+    }
     return state;
 }
 
 // --- Encoder Map ---
-// Rotation is remappable in Vial. When ENC_MOD is held, CL_FWD/CL_BWD
-// are intercepted in process_record_user to do ACT_UP/ACT_DOWN instead.
+// Base rotation: volume up/down. When ENC_MOD is held, CL_FWD/CL_BWD
+// are intercepted in process_record_user to cycle layers instead.
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [0] = { ENCODER_CCW_CW(CL_BWD, CL_FWD) },
     [1] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [3] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
+    [4] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
 };
 #endif
