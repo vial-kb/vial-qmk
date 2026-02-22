@@ -81,6 +81,7 @@
 // Scroll is already enabled by default in the driver.
 // Press-and-hold and swipe are disabled by default -- enable them here.
 #define AZOTEQ_IQS5XX_PRESS_AND_HOLD_ENABLE true
+#define AZOTEQ_IQS5XX_ZOOM_ENABLE true
 // TPS43 hardware swipe detection is unreliable on 43mm pad — disabled.
 // TPAD-06 (back/forward) deferred to software-based swipe detection.
 // #define AZOTEQ_IQS5XX_SWIPE_X_ENABLE true

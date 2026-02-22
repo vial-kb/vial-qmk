@@ -192,8 +192,8 @@ report_mouse_t azoteq_iqs5xx_get_report(report_mouse_t mouse_report) {
                 }
             } else if (base_data.gesture_events_1.scroll) {
                 pd_dprintf("IQS5XX - Scroll.\n");
-                temp_report.h = CONSTRAIN_HID(AZOTEQ_IQS5XX_COMBINE_H_L_BYTES(base_data.x.h, base_data.x.l));
-                temp_report.v = CONSTRAIN_HID(AZOTEQ_IQS5XX_COMBINE_H_L_BYTES(base_data.y.h, base_data.y.l));
+                temp_report.h = CONSTRAIN_HID(AZOTEQ_IQS5XX_COMBINE_H_L_BYTES(base_data.x.h, base_data.x.l)) / 10;
+                temp_report.v = -CONSTRAIN_HID(AZOTEQ_IQS5XX_COMBINE_H_L_BYTES(base_data.y.h, base_data.y.l)) / 10;
             }
             if (base_data.number_of_fingers == 1 && !ignore_movement) {
                 temp_report.x = CONSTRAIN_HID_XY(AZOTEQ_IQS5XX_COMBINE_H_L_BYTES(base_data.x.h, base_data.x.l));

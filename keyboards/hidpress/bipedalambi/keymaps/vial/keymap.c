@@ -169,6 +169,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     register_oled_activity();
 
+    // Intercept encoder rotation when ENC_MOD is held → layer cycling
+    if (enc_mod_held && IS_ENCODEREVENT(record->event) && record->event.pressed) {
+        bool clockwise = (record->event.type == ENCODER_CW_EVENT);
+        uint8_t current_layer = get_highest_layer(layer_state);
+        if (current_layer >= LAYER_CYCLE_START && current_layer <= LAYER_CYCLE_END) {
+            if (clockwise) {
+                uint8_t next_layer = current_layer + 1;
+                if (next_layer > LAYER_CYCLE_END) next_layer = LAYER_CYCLE_START;
+                layer_move(next_layer);
+            } else {
+                int8_t prev_layer = current_layer - 1;
+                if (prev_layer < LAYER_CYCLE_START) prev_layer = LAYER_CYCLE_END;
+                layer_move(prev_layer);
+            }
+        }
+        return false;  // suppress the encoder map keycode
+    }
+
     switch (keycode) {
         case ACT_DOWN:
             if (record->event.pressed) {
@@ -226,34 +244,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
         case CL_FWD:
             if (record->event.pressed) {
-                if (enc_mod_held) {
-                    uint8_t current_layer = get_highest_layer(layer_state);
-                    if (current_layer >= LAYER_CYCLE_START && current_layer <= LAYER_CYCLE_END) {
-                        uint8_t next_layer = current_layer + 1;
-                        if (next_layer > LAYER_CYCLE_END) {
-                            next_layer = LAYER_CYCLE_START;
-                        }
-                        layer_move(next_layer);
+                uint8_t current_layer = get_highest_layer(layer_state);
+                if (current_layer >= LAYER_CYCLE_START && current_layer <= LAYER_CYCLE_END) {
+                    uint8_t next_layer = current_layer + 1;
+                    if (next_layer > LAYER_CYCLE_END) {
+                        next_layer = LAYER_CYCLE_START;
                     }
-                } else {
-                    tap_code(KC_VOLU);
+                    layer_move(next_layer);
                 }
             }
             return false;
 
         case CL_BWD:
             if (record->event.pressed) {
-                if (enc_mod_held) {
-                    uint8_t current_layer = get_highest_layer(layer_state);
-                    if (current_layer >= LAYER_CYCLE_START && current_layer <= LAYER_CYCLE_END) {
-                        int8_t prev_layer = current_layer - 1;
-                        if (prev_layer < LAYER_CYCLE_START) {
-                            prev_layer = LAYER_CYCLE_END;
-                        }
-                        layer_move(prev_layer);
+                uint8_t current_layer = get_highest_layer(layer_state);
+                if (current_layer >= LAYER_CYCLE_START && current_layer <= LAYER_CYCLE_END) {
+                    int8_t prev_layer = current_layer - 1;
+                    if (prev_layer < LAYER_CYCLE_START) {
+                        prev_layer = LAYER_CYCLE_END;
                     }
-                } else {
-                    tap_code(KC_VOLD);
+                    layer_move(prev_layer);
                 }
             }
             return false;
@@ -345,39 +355,64 @@ static void process_joystick(int16_t joy_x, int16_t joy_y) {
             handle_joystick_keycode(keycode, false);
         }
     } else if (current_mode == MODE_SCROLLING) {
-        // Scroll mode: send mouse wheel keycodes based on ADC deflection
-        // Uses same actuation threshold as custom keys for consistent feel
+        // Scroll mode: continuously fire mouse wheel keycodes while joystick
+        // is held past actuation threshold. Repeat rate scales with deflection.
+        static uint32_t scroll_timers[4] = {0, 0, 0, 0};
         static bool scroll_active[4] = {false, false, false, false};
 
-        // Scroll Down (Y < -actuation, joystick pushed up → content scrolls up)
-        if (!scroll_active[0] && joy_y < -actuation) {
-            scroll_active[0] = true;
-            tap_code(KC_MS_WH_DOWN);
-        } else if (scroll_active[0] && joy_y > -actuation) {
+        // Compute repeat interval: farther deflection = faster scroll
+        // Range: ~40ms at threshold to ~10ms at full deflection (512)
+        #define SCROLL_INTERVAL_MAX 40
+        #define SCROLL_INTERVAL_MIN 10
+
+        int16_t abs_y = joy_y < 0 ? -joy_y : joy_y;
+        int16_t abs_x = joy_x < 0 ? -joy_x : joy_x;
+
+        // Scroll Down (Y < -actuation)
+        if (joy_y < -actuation) {
+            uint16_t interval = SCROLL_INTERVAL_MAX - (uint16_t)(abs_y - actuation) * (SCROLL_INTERVAL_MAX - SCROLL_INTERVAL_MIN) / (512 - actuation);
+            if (!scroll_active[0] || timer_elapsed32(scroll_timers[0]) > interval) {
+                tap_code(KC_MS_WH_DOWN);
+                scroll_timers[0] = timer_read32();
+                scroll_active[0] = true;
+            }
+        } else {
             scroll_active[0] = false;
         }
 
-        // Scroll Up (Y > actuation, joystick pushed down → content scrolls down)
-        if (!scroll_active[1] && joy_y > actuation) {
-            scroll_active[1] = true;
-            tap_code(KC_MS_WH_UP);
-        } else if (scroll_active[1] && joy_y < actuation) {
+        // Scroll Up (Y > actuation)
+        if (joy_y > actuation) {
+            uint16_t interval = SCROLL_INTERVAL_MAX - (uint16_t)(abs_y - actuation) * (SCROLL_INTERVAL_MAX - SCROLL_INTERVAL_MIN) / (512 - actuation);
+            if (!scroll_active[1] || timer_elapsed32(scroll_timers[1]) > interval) {
+                tap_code(KC_MS_WH_UP);
+                scroll_timers[1] = timer_read32();
+                scroll_active[1] = true;
+            }
+        } else {
             scroll_active[1] = false;
         }
 
-        // Scroll Right (X < -actuation, joystick pushed left → content scrolls left)
-        if (!scroll_active[2] && joy_x < -actuation) {
-            scroll_active[2] = true;
-            tap_code(KC_MS_WH_RIGHT);
-        } else if (scroll_active[2] && joy_x > -actuation) {
+        // Scroll Right (X < -actuation)
+        if (joy_x < -actuation) {
+            uint16_t interval = SCROLL_INTERVAL_MAX - (uint16_t)(abs_x - actuation) * (SCROLL_INTERVAL_MAX - SCROLL_INTERVAL_MIN) / (512 - actuation);
+            if (!scroll_active[2] || timer_elapsed32(scroll_timers[2]) > interval) {
+                tap_code(KC_MS_WH_RIGHT);
+                scroll_timers[2] = timer_read32();
+                scroll_active[2] = true;
+            }
+        } else {
             scroll_active[2] = false;
         }
 
-        // Scroll Left (X > actuation, joystick pushed right → content scrolls right)
-        if (!scroll_active[3] && joy_x > actuation) {
-            scroll_active[3] = true;
-            tap_code(KC_MS_WH_LEFT);
-        } else if (scroll_active[3] && joy_x < actuation) {
+        // Scroll Left (X > actuation)
+        if (joy_x > actuation) {
+            uint16_t interval = SCROLL_INTERVAL_MAX - (uint16_t)(abs_x - actuation) * (SCROLL_INTERVAL_MAX - SCROLL_INTERVAL_MIN) / (512 - actuation);
+            if (!scroll_active[3] || timer_elapsed32(scroll_timers[3]) > interval) {
+                tap_code(KC_MS_WH_LEFT);
+                scroll_timers[3] = timer_read32();
+                scroll_active[3] = true;
+            }
+        } else {
             scroll_active[3] = false;
         }
     }
@@ -443,6 +478,17 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 
     if (mouse_report.x != 0 || mouse_report.y != 0) register_oled_activity();
 
+    // Scroll inversion and sensitivity handled at driver level in pointing_device_drivers.c
+
+    // Pinch-to-zoom: driver reports BTN7 (zoom out) / BTN8 (zoom in) → Ctrl+scroll
+    if (mouse_report.buttons & (MOUSE_BTN7 | MOUSE_BTN8)) {
+        bool zoom_in = (mouse_report.buttons & MOUSE_BTN8);
+        mouse_report.buttons &= ~(MOUSE_BTN7 | MOUSE_BTN8);
+        register_code(KC_LCTL);
+        tap_code(zoom_in ? KC_MS_WH_DOWN : KC_MS_WH_UP);
+        unregister_code(KC_LCTL);
+    }
+
     // Only filter when right side is USB master (phantom doesn't occur with left master)
     if (!is_keyboard_left() && is_keyboard_master()) {
         bool idle = timer_elapsed32(last_touch_time) > 2000;
@@ -478,11 +524,11 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 }
 
 // --- Encoder Map ---
-// Base rotation: volume up/down. When ENC_MOD is held, CL_FWD/CL_BWD
-// are intercepted in process_record_user to cycle layers instead.
+// Base rotation is Vial-remappable (default: volume). When ENC_MOD is held,
+// process_record_user intercepts encoder events to cycle layers instead.
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
-    [0] = { ENCODER_CCW_CW(CL_BWD, CL_FWD) },
+    [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [1] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [3] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
