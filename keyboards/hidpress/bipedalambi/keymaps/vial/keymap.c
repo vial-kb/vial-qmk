@@ -2,6 +2,31 @@
 #include "bipedalambi.h"
 #include "analog.h"
 #include "dynamic_keymap.h"
+#include "transactions.h"
+
+// --- Joystick Split Transport ---
+// Joystick ADC is on left half (GP28/GP29). When right is master, slave handler
+// reads ADC and master polls via RPC to get values for keycode processing.
+typedef struct {
+    int16_t joy_x;
+    int16_t joy_y;
+} joystick_sync_t;
+
+void joystick_sync_slave_handler(uint8_t in_buflen, const void *in_data, uint8_t out_buflen, void *out_data) {
+    joystick_sync_t *joy = (joystick_sync_t *)out_data;
+    joy->joy_y = analogReadPin(GP28) - 512;
+    joy->joy_x = -(analogReadPin(GP29) - 512);
+}
+
+// --- State Sync (master → slave for OLED display) ---
+typedef struct {
+    uint8_t mode;
+} state_sync_t;
+
+void state_sync_slave_handler(uint8_t in_buflen, const void *in_data, uint8_t out_buflen, void *out_data) {
+    const state_sync_t *state = (const state_sync_t *)in_data;
+    current_mode = state->mode;
+}
 
 // --- Custom Keycodes ---
 // MUST use QK_KB_0 for Vial to recognize custom keycodes
@@ -19,17 +44,10 @@ enum custom_keycodes {
 };
 
 // --- Per-Layer State ---
-static uint8_t layer_modes[4] = {MODE_MOUSE, MODE_MOUSE, MODE_MOUSE, MODE_MOUSE};
+static uint8_t layer_modes[4] = {MODE_CUSTOM_KEYS, MODE_CUSTOM_KEYS, MODE_CUSTOM_KEYS, MODE_CUSTOM_KEYS};
 // static uint8_t layer_actuation_indices[4] = {2, 2, 2, 2}; // Removed for global actuation
 const uint16_t actuation_values[] = {352, 320, 256, 128, 64};
 uint8_t current_actuation_index = 2;
-
-// Scroll State
-#define SCROLL_DIVISOR_H 24.0
-#define SCROLL_DIVISOR_V 24.0
-float scroll_accumulated_h = 0;
-float scroll_accumulated_v = 0;
-bool scroll_inverted = false;
 
 // Joystick custom key state
 bool customkeys[4];
@@ -60,7 +78,7 @@ void load_layer_config_from_eeprom(void) {
     // Bits 0-7: Layer modes
     for (int i = 0; i < 4; i++) {
         uint8_t mode = (data >> (i * 2)) & 0x03;
-        layer_modes[i] = (mode < MODE_COUNT) ? mode : MODE_MOUSE;
+        layer_modes[i] = (mode < MODE_COUNT) ? mode : MODE_CUSTOM_KEYS;
     }
     // Bits 8-10: Global actuation index
     uint8_t act_idx = (data >> 8) & 0x07;
@@ -71,17 +89,23 @@ void load_layer_config_from_eeprom(void) {
 }
 
 void eeconfig_init_user(void) {
-    // Default: all layers MODE_MOUSE (0), actuation_index = 2 (middle)
+    // Default: all layers MODE_CUSTOM_KEYS (0), actuation_index = 2 (middle)
     // Encoding: bits 0-7 = layer modes (2 bits each), bits 8-10 = actuation index
     // (0 << 0) | (0 << 2) | (0 << 4) | (0 << 6) | (2 << 8) = 0x200
     eeconfig_update_user(0x200);
 }
 
 void keyboard_post_init_user(void) {
+    transaction_register_rpc(USER_SYNC_JOYSTICK, joystick_sync_slave_handler);
+    transaction_register_rpc(USER_SYNC_STATE, state_sync_slave_handler);
     debug_enable = true;
     debug_matrix = true;
     load_layer_config_from_eeprom();
     dprintf("SPLIT: master=%d left=%d\n", is_keyboard_master(), is_keyboard_left());
+}
+
+void pointing_device_init_user(void) {
+    set_auto_mouse_enable(true);
 }
 
 // --- Keymap Definition ---
@@ -182,12 +206,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
 
-        case SCROLL_DIR:
-            if (record->event.pressed) {
-                scroll_inverted = !scroll_inverted;
-            }
-            return false;
-
         case TMB_MODE:
             if (record->event.pressed) {
                 current_mode = (current_mode + 1) % MODE_COUNT;
@@ -281,84 +299,182 @@ static void handle_joystick_keycode(uint16_t keycode, bool pressed) {
     }
 }
 
-// --- Matrix Scan User (Joystick Logic) ---
+// --- Joystick Processing ---
+// Processes joystick ADC values into keycodes. Called from matrix_scan_user
+// (left-as-master) or housekeeping_task_user (right-as-master via split transport).
 // Joystick custom keys are read from these matrix positions (configurable in Vial):
 //   Up:    row 0, col 7
 //   Down:  row 1, col 7
 //   Left:  row 2, col 7
 //   Right: row 3, col 7
-void matrix_scan_user(void) {
-    if (current_mode != MODE_CUSTOM_KEYS) return;
+static void process_joystick(int16_t joy_x, int16_t joy_y) {
+    if (current_mode == MODE_CUSTOM_KEYS) {
+        // Custom keys mode: fire directional keycodes from dynamic keymap
 
-    // Read joystick position (512 is center of 10-bit ADC)
-    int16_t joy_y = analogReadPin(GP28) - 512;
-    int16_t joy_x = -(analogReadPin(GP29) - 512);
+        // Up (Y < -actuation) - reads keycode from [0,7]
+        if (!customkeys[0] && joy_y < -actuation) {
+            customkeys[0] = true;
+            uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 0, 7);
+            handle_joystick_keycode(keycode, true);
+        } else if (customkeys[0] && joy_y > -actuation) {
+            customkeys[0] = false;
+            uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 0, 7);
+            handle_joystick_keycode(keycode, false);
+        }
 
-    // Up (Y < -actuation) - reads keycode from [0,7]
-    if (!customkeys[0] && joy_y < -actuation) {
-        customkeys[0] = true;
-        uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 0, 7);
-        handle_joystick_keycode(keycode, true);
-    } else if (customkeys[0] && joy_y > -actuation) {
-        customkeys[0] = false;
-        uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 0, 7);
-        handle_joystick_keycode(keycode, false);
-    }
+        // Down (Y > actuation) - reads keycode from [1,7]
+        if (!customkeys[1] && joy_y > actuation) {
+            customkeys[1] = true;
+            uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 1, 7);
+            handle_joystick_keycode(keycode, true);
+        } else if (customkeys[1] && joy_y < actuation) {
+            customkeys[1] = false;
+            uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 1, 7);
+            handle_joystick_keycode(keycode, false);
+        }
 
-    // Down (Y > actuation) - reads keycode from [1,7]
-    if (!customkeys[1] && joy_y > actuation) {
-        customkeys[1] = true;
-        uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 1, 7);
-        handle_joystick_keycode(keycode, true);
-    } else if (customkeys[1] && joy_y < actuation) {
-        customkeys[1] = false;
-        uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 1, 7);
-        handle_joystick_keycode(keycode, false);
-    }
+        // Left (X < -actuation) - reads keycode from [2,7]
+        if (!customkeys[2] && joy_x < -actuation) {
+            customkeys[2] = true;
+            uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 2, 7);
+            handle_joystick_keycode(keycode, true);
+        } else if (customkeys[2] && joy_x > -actuation) {
+            customkeys[2] = false;
+            uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 2, 7);
+            handle_joystick_keycode(keycode, false);
+        }
 
-    // Left (X < -actuation) - reads keycode from [2,7]
-    if (!customkeys[2] && joy_x < -actuation) {
-        customkeys[2] = true;
-        uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 2, 7);
-        handle_joystick_keycode(keycode, true);
-    } else if (customkeys[2] && joy_x > -actuation) {
-        customkeys[2] = false;
-        uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 2, 7);
-        handle_joystick_keycode(keycode, false);
-    }
+        // Right (X > actuation) - reads keycode from [3,7]
+        if (!customkeys[3] && joy_x > actuation) {
+            customkeys[3] = true;
+            uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 3, 7);
+            handle_joystick_keycode(keycode, true);
+        } else if (customkeys[3] && joy_x < actuation) {
+            customkeys[3] = false;
+            uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 3, 7);
+            handle_joystick_keycode(keycode, false);
+        }
+    } else if (current_mode == MODE_SCROLLING) {
+        // Scroll mode: send mouse wheel keycodes based on ADC deflection
+        // Uses same actuation threshold as custom keys for consistent feel
+        static bool scroll_active[4] = {false, false, false, false};
 
-    // Right (X > actuation) - reads keycode from [3,7]
-    if (!customkeys[3] && joy_x > actuation) {
-        customkeys[3] = true;
-        uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 3, 7);
-        handle_joystick_keycode(keycode, true);
-    } else if (customkeys[3] && joy_x < actuation) {
-        customkeys[3] = false;
-        uint16_t keycode = dynamic_keymap_get_keycode(biton32(layer_state), 3, 7);
-        handle_joystick_keycode(keycode, false);
+        // Scroll Down (Y < -actuation, joystick pushed up → content scrolls up)
+        if (!scroll_active[0] && joy_y < -actuation) {
+            scroll_active[0] = true;
+            tap_code(KC_MS_WH_DOWN);
+        } else if (scroll_active[0] && joy_y > -actuation) {
+            scroll_active[0] = false;
+        }
+
+        // Scroll Up (Y > actuation, joystick pushed down → content scrolls down)
+        if (!scroll_active[1] && joy_y > actuation) {
+            scroll_active[1] = true;
+            tap_code(KC_MS_WH_UP);
+        } else if (scroll_active[1] && joy_y < actuation) {
+            scroll_active[1] = false;
+        }
+
+        // Scroll Right (X < -actuation, joystick pushed left → content scrolls left)
+        if (!scroll_active[2] && joy_x < -actuation) {
+            scroll_active[2] = true;
+            tap_code(KC_MS_WH_RIGHT);
+        } else if (scroll_active[2] && joy_x > -actuation) {
+            scroll_active[2] = false;
+        }
+
+        // Scroll Left (X > actuation, joystick pushed right → content scrolls right)
+        if (!scroll_active[3] && joy_x > actuation) {
+            scroll_active[3] = true;
+            tap_code(KC_MS_WH_LEFT);
+        } else if (scroll_active[3] && joy_x < actuation) {
+            scroll_active[3] = false;
+        }
     }
 }
 
-// --- Pointing Device Task (Mouse/Scroll Mode) ---
+// --- Matrix Scan User ---
+void matrix_scan_user(void) {
+    // Joystick: only read ADC + process on left-as-master (direct hardware access)
+    // When right is master, housekeeping_task_user polls via split transport instead
+    if (is_keyboard_left() && is_keyboard_master()) {
+        int16_t joy_y = analogReadPin(GP28) - 512;
+        int16_t joy_x = -(analogReadPin(GP29) - 512);
+        process_joystick(joy_x, joy_y);
+    }
+}
+
+// --- Housekeeping Task (Split Transport Polling) ---
+void housekeeping_task_user(void) {
+    if (is_keyboard_master()) {
+        // Sync state (current_mode) to slave for OLED display
+        static uint32_t last_state_sync = 0;
+        if (timer_elapsed32(last_state_sync) > 100) {  // 10Hz — OLED doesn't need faster
+            state_sync_t state = {.mode = current_mode};
+            transaction_rpc_send(USER_SYNC_STATE, sizeof(state), &state);
+            last_state_sync = timer_read32();
+        }
+
+        // When right is master, poll joystick ADC from left (slave) via split transport
+        if (!is_keyboard_left()) {
+            static uint32_t last_joy_sync = 0;
+            if (timer_elapsed32(last_joy_sync) > 10) {  // 100Hz polling
+                joystick_sync_t joy = {0, 0};
+                if (transaction_rpc_recv(USER_SYNC_JOYSTICK, sizeof(joy), &joy)) {
+                    process_joystick(joy.joy_x, joy.joy_y);
+                }
+                last_joy_sync = timer_read32();
+            }
+        }
+    }
+}
+
+// --- Pointing Device Task (TPS43 pass-through) ---
+// The TPS43 azoteq_iqs5xx driver handles gestures internally:
+//   - x/y for single-finger cursor movement
+//   - h/v for two-finger scroll
+//   - buttons for taps, swipes, press-and-hold
+//
+// Phantom right-click filter (right-side master only):
+// The TPS43 fires false two_finger_tap (~3s after idle) due to EMI when
+// the right side is USB master. A 2s activity gate filters these.
+// Double two-finger-tap within 500ms overrides the gate.
 report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    static uint32_t last_touch_time = 0;
+    static uint32_t suppressed_btn2_time = 0;
+    static bool     awaiting_double_tap = false;
+
+    // Any movement, scroll, or tap (BUTTON1) counts as real touch activity
+    if (mouse_report.x != 0 || mouse_report.y != 0 ||
+        mouse_report.h != 0 || mouse_report.v != 0 ||
+        (mouse_report.buttons & MOUSE_BTN1)) {
+        last_touch_time = timer_read32();
+    }
+
     if (mouse_report.x != 0 || mouse_report.y != 0) register_oled_activity();
 
-    if (current_mode == MODE_SCROLLING) {
-        scroll_accumulated_h -= (float)mouse_report.x / SCROLL_DIVISOR_H;
-        scroll_accumulated_v += (scroll_inverted ? -1 : 1) * (float)mouse_report.y / SCROLL_DIVISOR_V;
+    // Only filter when right side is USB master (phantom doesn't occur with left master)
+    if (!is_keyboard_left() && is_keyboard_master()) {
+        bool idle = timer_elapsed32(last_touch_time) > 2000;
 
-        mouse_report.h = (int8_t)scroll_accumulated_h;
-        mouse_report.v = (int8_t)scroll_accumulated_v;
+        if (idle && (mouse_report.buttons & MOUSE_BTN2)) {
+            if (awaiting_double_tap && timer_elapsed32(suppressed_btn2_time) < 500) {
+                // Double tap override — let it through and reset state
+                awaiting_double_tap = false;
+            } else {
+                // First suppressed tap — start double-tap window
+                suppressed_btn2_time = timer_read32();
+                awaiting_double_tap = true;
+                mouse_report.buttons &= ~MOUSE_BTN2;
+            }
+        }
 
-        scroll_accumulated_h -= (int8_t)scroll_accumulated_h;
-        scroll_accumulated_v -= (int8_t)scroll_accumulated_v;
-
-        mouse_report.x = 0;
-        mouse_report.y = 0;
-    } else if (current_mode == MODE_CUSTOM_KEYS) {
-        mouse_report.x = 0;
-        mouse_report.y = 0;
+        // Expire double-tap window
+        if (awaiting_double_tap && timer_elapsed32(suppressed_btn2_time) > 500) {
+            awaiting_double_tap = false;
+        }
     }
+
     return mouse_report;
 }
 

@@ -44,3 +44,26 @@
 
 ---
 
+
+## v1.2 TPS43 Trackpad (Shipped: 2026-02-22)
+
+**Phases completed:** 4 phases (12-15), 4 plans
+**Timeline:** 2026-02-22 (1 day)
+
+**Delivered:** Added Azoteq TPS43 trackpad to the right half as the primary pointing device, refactored joystick to custom keys and scroll modes only.
+
+**Key accomplishments:**
+- Switched pointing device driver to azoteq_iqs5xx (TPS43 43mm trackpad) with I2C bus sharing on right half
+- TPS43 trackpad cursor movement with QMK auto mouse layer 3 activation on touch
+- Enabled 4/5 gesture types: single-finger tap, two-finger tap, scroll, press-and-hold drag
+- Phantom right-click filter for TPS43 EMI false positives when right side is USB master
+- Removed joystick mouse mode, added scroll wheel keycodes from ADC (2-mode system)
+- Split transport for joystick ADC sync (slave-to-master) and state sync (master-to-slave for OLED)
+
+**Known Gaps:**
+- TPAD-06: Swipe gestures (back/forward) deferred — TPS43 hardware swipe unreliable on 43mm pad, needs software-based approach
+
+**Archive:** `milestones/v1.2-ROADMAP.md`, `milestones/v1.2-REQUIREMENTS.md`
+
+---
+

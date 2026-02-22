@@ -74,7 +74,7 @@ Both methods result in the same outcome on next boot:
 2. `keyboard_post_init_user()` runs, calling `load_layer_config_from_eeprom()` which reads the value back
 3. Runtime state is set to:
    - **actuation_index = 2** (middle sensitivity, threshold 256)
-   - **All layers = MODE_MOUSE** (trackball acts as mouse pointer)
+   - **All layers = MODE_CUSTOM_KEYS** (joystick fires directional keycodes from dynamic keymap)
 4. The Vial dynamic keymap is reset to PROGMEM defaults
 5. Any keys customized in Vial will need to be reconfigured
 
@@ -92,7 +92,7 @@ To fully reset both halves to factory defaults:
 1. **Connect the left half** via USB
 2. **Clear EEPROM on the left half** using Method 1 (EE_CLR key) or Method 2 (Bootmagic)
 3. If using Bootmagic, unplug and replug the left half to boot normally
-4. **Verify** the left half boots with correct defaults (middle actuation, mouse mode)
+4. **Verify** the left half boots with correct defaults (middle actuation, custom keys mode)
 5. **Disconnect the left half**
 6. **Connect the right half** via USB
 7. **Clear EEPROM on the right half** using Method 1 (EE_CLR key) or Method 2 (Bootmagic)

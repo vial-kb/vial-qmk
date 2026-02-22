@@ -4,6 +4,7 @@
 
 - ✅ **v1.0 EEPROM / Vial Layer Fix** -- Phases 1-8 (shipped 2026-02-14)
 - ✅ **v1.1 Split Serial Communication Fix** -- Phases 9-11 (shipped 2026-02-22)
+- ✅ **v1.2 TPS43 Trackpad** -- Phases 12-15 (shipped 2026-02-22)
 
 ## Phases
 
@@ -34,6 +35,18 @@ See `milestones/v1.1-ROADMAP.md` for full details.
 
 </details>
 
+<details>
+<summary>v1.2 TPS43 Trackpad (Phases 12-15) -- SHIPPED 2026-02-22</summary>
+
+- [x] Phase 12: Driver Switch and Build Foundation (1/1 plans) -- completed 2026-02-22
+- [x] Phase 13: Trackpad Cursor and Auto Mouse (1/1 plans) -- completed 2026-02-22
+- [x] Phase 14: Trackpad Gestures (1/1 plans, TPAD-06 deferred) -- completed 2026-02-22
+- [x] Phase 15: Joystick Refactor (1/1 plans) -- completed 2026-02-22
+
+See `milestones/v1.2-ROADMAP.md` for full details.
+
+</details>
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
@@ -49,3 +62,7 @@ See `milestones/v1.1-ROADMAP.md` for full details.
 | 9. Configuration Audit | v1.1 | 1/1 | Complete | 2026-02-14 |
 | 10. Diagnostic Testing | v1.1 | 3/3 | Complete | 2026-02-15 |
 | 11. Verdict | v1.1 | -- | Complete | 2026-02-22 |
+| 12. Driver Switch and Build Foundation | v1.2 | 1/1 | Complete | 2026-02-22 |
+| 13. Trackpad Cursor and Auto Mouse | v1.2 | 1/1 | Complete | 2026-02-22 |
+| 14. Trackpad Gestures | v1.2 | 1/1 | Complete (TPAD-06 deferred) | 2026-02-22 |
+| 15. Joystick Refactor | v1.2 | 1/1 | Complete | 2026-02-22 |

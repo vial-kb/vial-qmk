@@ -2,12 +2,11 @@
 
 #include "quantum.h"
 
-// Define pointing device modes if not already defined in quantum
+// Joystick operating modes (2 modes, no mouse — trackpad handles cursor)
 enum pointing_device_mode {
-    MODE_MOUSE,
-    MODE_SCROLLING,
-    MODE_CUSTOM_KEYS,
-    MODE_COUNT  // Keeps track of the total number of modes
+    MODE_CUSTOM_KEYS,   // 0 — directional keycodes from dynamic keymap
+    MODE_SCROLLING,     // 1 — mouse wheel keycodes from ADC
+    MODE_COUNT          // 2
 };
 
 #define ACTUATION_DISPLAY_DURATION 1000  // Show actuation bar for 1 second

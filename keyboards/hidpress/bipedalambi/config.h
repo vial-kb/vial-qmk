@@ -17,6 +17,10 @@
 #endif
 #define SERIAL_DEBUG
 #define SPLIT_LAYER_STATE_ENABLE
+#define SPLIT_ACTIVITY_ENABLE
+
+// Custom split transport for joystick ADC sync (left slave → right master)
+#define SPLIT_TRANSACTION_IDS_USER USER_SYNC_JOYSTICK, USER_SYNC_STATE
 
 // Double-tap reset to bootloader
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
@@ -61,16 +65,25 @@
 #    define I2C1_SCL_PIN GP13
 #endif
 
-// Joystick / Pointing device
-#define ANALOG_JOYSTICK_AUTO_AXIS
-#define ANALOG_JOYSTICK_SPEED_REGULATOR 20
-#define ANALOG_JOYSTICK_CUTOFF
-#define ANALOG_JOYSTICK_X_AXIS_PIN GP29
-#define ANALOG_JOYSTICK_Y_AXIS_PIN GP28
-#define ANALOG_JOYSTICK_ENABLE
-#define POINTING_DEVICE_LEFT
+// Pointing device — TPS43 trackpad on right half via azoteq_iqs5xx driver
+#define AZOTEQ_IQS5XX_TPS43
+#define POINTING_DEVICE_RIGHT
 #define SPLIT_POINTING_ENABLE
-#define POINTING_DEVICE_INVERT_X
+
+// Auto mouse — activates layer 3 when trackpad reports movement
+#define POINTING_DEVICE_AUTO_MOUSE_ENABLE
+#define AUTO_MOUSE_DEFAULT_LAYER 3
+#define AUTO_MOUSE_TIME 650
+#define AUTO_MOUSE_THRESHOLD 10
+
+// TPS43 gesture enables (override driver defaults)
+// Tap and two-finger tap are already enabled by default in the driver.
+// Scroll is already enabled by default in the driver.
+// Press-and-hold and swipe are disabled by default -- enable them here.
+#define AZOTEQ_IQS5XX_PRESS_AND_HOLD_ENABLE true
+// TPS43 hardware swipe detection is unreliable on 43mm pad — disabled.
+// TPAD-06 (back/forward) deferred to software-based swipe detection.
+// #define AZOTEQ_IQS5XX_SWIPE_X_ENABLE true
 
 // Encoder (right side only)
 #define ENCODER_RESOLUTION 4
