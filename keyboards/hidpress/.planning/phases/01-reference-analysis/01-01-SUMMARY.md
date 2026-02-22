@@ -66,7 +66,7 @@ Each task was committed atomically:
 1. **Task 1: Read Sofle rev1 Vial source files** -- No file output (data held in memory for Task 2)
 2. **Task 2: Read Ambi + Southpaw, verify research, write EXTRACTED-DATA.md** - `bfca6134bc` (feat)
 
-**Plan metadata:** (pending final commit)
+**Plan metadata:** `b2cabae50e` (docs: complete plan)
 
 ## Files Created/Modified
 - `.planning/phases/01-reference-analysis/EXTRACTED-DATA.md` - Raw extracted values from all 13 source files organized in tabular format with research verification

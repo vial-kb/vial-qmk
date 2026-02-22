@@ -63,7 +63,7 @@ Each task was committed atomically:
 1. **Task 1: Verify thumbstick and encoder positions with cross-reference validation** - no commit (read-only verification, no files modified)
 2. **Task 2: Fix NUM_ENCODERS split-doubling mismatch in right config.h** - `1bc7df4b60` (fix)
 
-**Plan metadata:** [pending] (docs: complete peripheral matrix mapping plan)
+**Plan metadata:** `edfc62d8f2` (docs: complete peripheral matrix mapping plan)
 
 ## Files Created/Modified
 - `bipedalambi/keymaps/vial_right/config.h` - Added `#define NUM_ENCODERS 1` after encoder pin defines to prevent QMK split-doubling
