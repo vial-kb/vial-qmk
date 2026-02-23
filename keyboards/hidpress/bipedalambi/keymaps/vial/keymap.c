@@ -21,12 +21,11 @@ void joystick_sync_slave_handler(uint8_t in_buflen, const void *in_data, uint8_t
 // --- State Sync (master → slave for OLED display) ---
 typedef struct {
     uint8_t mode;
+    uint8_t actuation_index;
+    bool    showing_actuation;
 } state_sync_t;
 
-void state_sync_slave_handler(uint8_t in_buflen, const void *in_data, uint8_t out_buflen, void *out_data) {
-    const state_sync_t *state = (const state_sync_t *)in_data;
-    current_mode = state->mode;
-}
+// state_sync_slave_handler defined below after variable declarations
 
 // --- Custom Keycodes ---
 // MUST use QK_KB_0 for Vial to recognize custom keycodes
@@ -48,6 +47,17 @@ static uint8_t layer_modes[5] = {MODE_CUSTOM_KEYS, MODE_CUSTOM_KEYS, MODE_CUSTOM
 // static uint8_t layer_actuation_indices[4] = {2, 2, 2, 2}; // Removed for global actuation
 const uint16_t actuation_values[] = {352, 320, 256, 128, 64};
 uint8_t current_actuation_index = 2;
+
+void state_sync_slave_handler(uint8_t in_buflen, const void *in_data, uint8_t out_buflen, void *out_data) {
+    const state_sync_t *state = (const state_sync_t *)in_data;
+    current_mode = state->mode;
+    current_actuation_index = state->actuation_index;
+    actuation = actuation_values[state->actuation_index];
+    showing_actuation = state->showing_actuation;
+    if (showing_actuation) {
+        actuation_display_timer = timer_read32();
+    }
+}
 
 // Joystick custom key state
 bool customkeys[4];
@@ -435,7 +445,11 @@ void housekeeping_task_user(void) {
         // Sync state (current_mode) to slave for OLED display
         static uint32_t last_state_sync = 0;
         if (timer_elapsed32(last_state_sync) > 100) {  // 10Hz — OLED doesn't need faster
-            state_sync_t state = {.mode = current_mode};
+            state_sync_t state = {
+                .mode = current_mode,
+                .actuation_index = current_actuation_index,
+                .showing_actuation = showing_actuation,
+            };
             transaction_rpc_send(USER_SYNC_STATE, sizeof(state), &state);
             last_state_sync = timer_read32();
         }
@@ -480,14 +494,6 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 
     // Scroll inversion and sensitivity handled at driver level in pointing_device_drivers.c
 
-    // Pinch-to-zoom: driver reports BTN7 (zoom out) / BTN8 (zoom in) → Ctrl+scroll
-    if (mouse_report.buttons & (MOUSE_BTN7 | MOUSE_BTN8)) {
-        bool zoom_in = (mouse_report.buttons & MOUSE_BTN8);
-        mouse_report.buttons &= ~(MOUSE_BTN7 | MOUSE_BTN8);
-        register_code(KC_LCTL);
-        tap_code(zoom_in ? KC_MS_WH_DOWN : KC_MS_WH_UP);
-        unregister_code(KC_LCTL);
-    }
 
     // Only filter when right side is USB master (phantom doesn't occur with left master)
     if (!is_keyboard_left() && is_keyboard_master()) {
