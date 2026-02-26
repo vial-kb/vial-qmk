@@ -128,12 +128,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_E,    KC_W,    KC_R,    KC_ESC,  KC_Q,    KC_T,
         KC_D,    KC_S,    KC_F,    KC_TAB,  KC_A,    KC_G,    KC_UP,
         KC_C,    KC_X,    KC_V,    KC_LSFT, KC_Z,    KC_B,    KC_LGUI, KC_LEFT, TMB_MODE, KC_RGHT,
-        LCTL_T(KC_UP), KC_LCTL, KC_LALT, KC_MINS, MO(1), KC_DOWN,
+        LCTL(KC_UP), KC_LCTL, KC_LALT, KC_MINS, MO(1), KC_DOWN,
         /* Right */
         KC_I,    KC_U,    KC_O,    KC_Y,    KC_P,    KC_BSPC,
         KC_K,    KC_J,    KC_L,    KC_H,    KC_SCLN, KC_ENT,
         KC_COMM, KC_M,    KC_DOT,  KC_SPC,  KC_N,    KC_SLSH, KC_RSFT,
-        ENC_MOD, LCTL_T(KC_UP), KC_RALT, KC_RCTL, MO(1), KC_EQL
+        ENC_MOD, RCTL(KC_UP), KC_RALT, KC_RCTL, MO(1), KC_EQL
     ),
     [1] = LAYOUT_bipedalambi(
         /* Left */
