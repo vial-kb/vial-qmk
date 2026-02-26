@@ -127,23 +127,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         /* Left */
         KC_E,    KC_W,    KC_R,    KC_ESC,  KC_Q,    KC_T,
         KC_D,    KC_S,    KC_F,    KC_TAB,  KC_A,    KC_G,    KC_UP,
-        KC_C,    KC_X,    KC_V,    KC_LSFT, KC_Z,    KC_B,    KC_SPC,  KC_LEFT, TMB_MODE, KC_RGHT,
-        KC_LGUI, KC_LCTL, KC_LALT, KC_MINS, MO(1),   KC_DOWN,
+        KC_C,    KC_X,    KC_V,    KC_LSFT, KC_Z,    KC_B,    KC_LGUI, KC_LEFT, TMB_MODE, KC_RGHT,
+        LCTL_T(KC_UP), KC_LCTL, KC_LALT, KC_MINS, MO(1), KC_DOWN,
         /* Right */
-        KC_U,    KC_O,    KC_Y,    KC_I,    KC_P,    KC_BSPC,
-        KC_J,    KC_K,    KC_H,    KC_L,    KC_SCLN, KC_QUOT,
-        KC_COMM, KC_N,    KC_DOT,  KC_ENT,  KC_M,    KC_SLSH, KC_RSFT,
-        ENC_MOD,  KC_RGUI, KC_RALT, KC_RCTL, MO(1),  KC_EQL
+        KC_I,    KC_U,    KC_O,    KC_Y,    KC_P,    KC_BSPC,
+        KC_K,    KC_J,    KC_L,    KC_H,    KC_SCLN, KC_ENT,
+        KC_COMM, KC_M,    KC_DOT,  KC_SPC,  KC_N,    KC_SLSH, KC_RSFT,
+        ENC_MOD, LCTL_T(KC_UP), KC_RALT, KC_RCTL, MO(1), KC_EQL
     ),
     [1] = LAYOUT_bipedalambi(
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, QK_BOOT,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS
+        /* Left */
+        KC_3,    KC_2,    KC_4,    KC_GRV,  KC_1,    KC_5,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_UP,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_LEFT, KC_TRNS, KC_RGHT,
+        KC_TRNS, KC_TRNS, KC_TRNS, ACT_DOWN, KC_TRNS, KC_DOWN,
+        /* Right */
+        KC_8,    KC_7,    KC_9,    KC_6,    KC_0,    KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_QUOT, KC_TRNS,
+        KC_LBRC, KC_TRNS, KC_RBRC, KC_TRNS, KC_TRNS, KC_BSLS, KC_TRNS,
+        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, ACT_UP
     ),
     [2] = LAYOUT_bipedalambi(
         KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,

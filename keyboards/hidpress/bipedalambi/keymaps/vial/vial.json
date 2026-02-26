@@ -33,7 +33,7 @@
     },
     "encoders": [
         [
-            ["QK_KB_2", "QK_KB_1"],
+            ["KC_VOLD", "KC_VOLU"],
             ["KC_TRNS", "KC_TRNS"],
             ["KC_TRNS", "KC_TRNS"],
             ["KC_TRNS", "KC_TRNS"]
