@@ -22,7 +22,6 @@ void joystick_sync_slave_handler(uint8_t in_buflen, const void *in_data, uint8_t
 typedef struct {
     uint8_t mode;
     uint8_t actuation_index;
-    bool    showing_actuation;
 } state_sync_t;
 
 // state_sync_slave_handler defined below after variable declarations
@@ -51,11 +50,14 @@ uint8_t current_actuation_index = 2;
 void state_sync_slave_handler(uint8_t in_buflen, const void *in_data, uint8_t out_buflen, void *out_data) {
     const state_sync_t *state = (const state_sync_t *)in_data;
     current_mode = state->mode;
-    current_actuation_index = state->actuation_index;
-    actuation = actuation_values[state->actuation_index];
-    showing_actuation = state->showing_actuation;
-    if (showing_actuation) {
+    if (state->actuation_index != current_actuation_index) {
+        current_actuation_index = state->actuation_index;
+        actuation = actuation_values[state->actuation_index];
+        showing_actuation = true;
         actuation_display_timer = timer_read32();
+#ifdef OLED_ENABLE
+        oled_clear();
+#endif
     }
 }
 
@@ -448,7 +450,6 @@ void housekeeping_task_user(void) {
             state_sync_t state = {
                 .mode = current_mode,
                 .actuation_index = current_actuation_index,
-                .showing_actuation = showing_actuation,
             };
             transaction_rpc_send(USER_SYNC_STATE, sizeof(state), &state);
             last_state_sync = timer_read32();
