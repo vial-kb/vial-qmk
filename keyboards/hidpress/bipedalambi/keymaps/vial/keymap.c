@@ -497,6 +497,90 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
 
     // Scroll inversion and sensitivity handled at driver level in pointing_device_drivers.c
 
+    // Double-tap-hold: tap, then touch again within window → immediate BUTTON1
+    // Bypasses the ~300ms hardware press_and_hold delay for drag operations
+    #define DTH_TAP_WINDOW_MS  300   // Max ms between tap and second contact
+    #define DTH_RELEASE_COUNT  10    // Idle reports before releasing drag (~100ms)
+    #define DTH_IDLE           0
+    #define DTH_TAP_SEEN       1
+    #define DTH_DRAG_ACTIVE    2
+
+    {
+        static uint8_t  dth_state       = DTH_IDLE;
+        static uint32_t dth_tap_time    = 0;
+        static uint8_t  dth_idle_count  = 0;
+        static bool     dth_prev_btn1   = false;
+        static uint32_t dth_btn1_start  = 0;
+
+        bool hw_btn1      = mouse_report.buttons & MOUSE_BTN1;
+        bool has_movement = (mouse_report.x != 0 || mouse_report.y != 0);
+
+        // Track BUTTON1 press start time (to distinguish tap vs hold)
+        if (hw_btn1 && !dth_prev_btn1) dth_btn1_start = timer_read32();
+
+        switch (dth_state) {
+            case DTH_IDLE:
+                // Brief BUTTON1 pulse ended → probable single_tap
+                if (dth_prev_btn1 && !hw_btn1 && timer_elapsed32(dth_btn1_start) < 50) {
+                    dth_state    = DTH_TAP_SEEN;
+                    dth_tap_time = timer_read32();
+                }
+                break;
+            case DTH_TAP_SEEN:
+                if (timer_elapsed32(dth_tap_time) > DTH_TAP_WINDOW_MS) {
+                    dth_state = DTH_IDLE;
+                } else if (has_movement) {
+                    dth_state      = DTH_DRAG_ACTIVE;
+                    dth_idle_count = 0;
+                    mouse_report.buttons |= MOUSE_BTN1;
+                }
+                break;
+            case DTH_DRAG_ACTIVE:
+                if (has_movement || hw_btn1) {
+                    dth_idle_count = 0;
+                } else {
+                    dth_idle_count++;
+                }
+                if (dth_idle_count > DTH_RELEASE_COUNT) {
+                    dth_state = DTH_IDLE;
+                } else {
+                    mouse_report.buttons |= MOUSE_BTN1;
+                }
+                break;
+        }
+        dth_prev_btn1 = hw_btn1;
+    }
+
+    // Scroll accumulator: raw h/v values from the driver are too coarse (up to ~12
+    // per report). Accumulate them and emit ±1 only when a threshold is crossed,
+    // giving fine-grained, smooth scrolling.
+    #define SCROLL_THRESHOLD 6
+    {
+        static int16_t scroll_acc_h = 0;
+        static int16_t scroll_acc_v = 0;
+
+        scroll_acc_h += mouse_report.h;
+        scroll_acc_v += mouse_report.v;
+
+        mouse_report.h = 0;
+        mouse_report.v = 0;
+
+        if (scroll_acc_h >= SCROLL_THRESHOLD) {
+            mouse_report.h = 1;
+            scroll_acc_h -= SCROLL_THRESHOLD;
+        } else if (scroll_acc_h <= -SCROLL_THRESHOLD) {
+            mouse_report.h = -1;
+            scroll_acc_h += SCROLL_THRESHOLD;
+        }
+
+        if (scroll_acc_v >= SCROLL_THRESHOLD) {
+            mouse_report.v = 1;
+            scroll_acc_v -= SCROLL_THRESHOLD;
+        } else if (scroll_acc_v <= -SCROLL_THRESHOLD) {
+            mouse_report.v = -1;
+            scroll_acc_v += SCROLL_THRESHOLD;
+        }
+    }
 
     // Only filter when right side is USB master (phantom doesn't occur with left master)
     if (!is_keyboard_left() && is_keyboard_master()) {
