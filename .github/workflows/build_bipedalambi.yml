@@ -19,14 +19,18 @@ permissions: {}
 
 jobs:
   build:
-    name: Build ${{ matrix.keymap }} keymap
+    name: Build ${{ matrix.side }} half
     runs-on: ubuntu-latest
     container: ghcr.io/qmk/qmk_cli@sha256:16c4916e95b99bf88d27b15aec8db409ee17265d1710287fde248c6666508966
 
     strategy:
       fail-fast: false
       matrix:
-        keymap: [default, vial]
+        include:
+          - side: left
+            make_args: ""
+          - side: right
+            make_args: "SIDE=right"
 
     steps:
       - name: Checkout repository
@@ -38,14 +42,12 @@ jobs:
       - name: Build firmware
         run: |
           git config --global --add safe.directory $(pwd)
-          qmk compile -kb hidpress/bipedalambi -km ${{ matrix.keymap }} -j $(nproc)
+          make hidpress/bipedalambi:vial ${{ matrix.make_args }} -j $(nproc)
 
       - name: Upload firmware artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: bipedalambi-${{ matrix.keymap }}-firmware
+          name: bipedalambi-vial-${{ matrix.side }}
           path: |
             *.uf2
-            *.hex
-            *.bin
           if-no-files-found: error
