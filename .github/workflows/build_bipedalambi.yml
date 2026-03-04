@@ -1,0 +1,53 @@
+name: Build Bipedalambi Firmware
+
+on:
+  push:
+    paths:
+      - 'keyboards/hidpress/bipedalambi/**'
+      - '.github/workflows/build_bipedalambi.yml'
+  pull_request:
+    paths:
+      - 'keyboards/hidpress/bipedalambi/**'
+      - '.github/workflows/build_bipedalambi.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  build:
+    name: Build ${{ matrix.side }} half
+    runs-on: ubuntu-latest
+    container: ghcr.io/qmk/qmk_cli@sha256:16c4916e95b99bf88d27b15aec8db409ee17265d1710287fde248c6666508966
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - side: left
+            make_args: ""
+          - side: right
+            make_args: "SIDE=right"
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          submodules: recursive
+
+      - name: Build firmware
+        run: |
+          git config --global --add safe.directory $(pwd)
+          make hidpress/bipedalambi:vial ${{ matrix.make_args }} -j $(nproc)
+
+      - name: Upload firmware artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: bipedalambi-vial-${{ matrix.side }}
+          path: |
+            *.uf2
+          if-no-files-found: error
