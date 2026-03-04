@@ -551,16 +551,20 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
         dth_prev_btn1 = hw_btn1;
     }
 
-    // Scroll accumulator: raw h/v values from the driver are too coarse (up to ~12
-    // per report). Accumulate them and emit ±1 only when a threshold is crossed,
-    // giving fine-grained, smooth scrolling.
-    #define SCROLL_THRESHOLD 6
+    // Scroll accumulator: normalise each report to ±1 (direction only) so that
+    // scroll speed is constant regardless of finger velocity (no acceleration).
+    // The threshold controls how many reports must agree before emitting a tick.
+    #define SCROLL_THRESHOLD 3
     {
         static int16_t scroll_acc_h = 0;
         static int16_t scroll_acc_v = 0;
 
-        scroll_acc_h += mouse_report.h;
-        scroll_acc_v += mouse_report.v;
+        // Normalise to direction only — removes velocity-based acceleration
+        if (mouse_report.h > 0)      scroll_acc_h += 1;
+        else if (mouse_report.h < 0) scroll_acc_h -= 1;
+
+        if (mouse_report.v > 0)      scroll_acc_v += 1;
+        else if (mouse_report.v < 0) scroll_acc_v -= 1;
 
         mouse_report.h = 0;
         mouse_report.v = 0;
