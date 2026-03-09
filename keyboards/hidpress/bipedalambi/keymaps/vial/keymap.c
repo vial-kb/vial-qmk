@@ -551,40 +551,9 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
         dth_prev_btn1 = hw_btn1;
     }
 
-    // Scroll accumulator: normalise each report to ±1 (direction only) so that
-    // scroll speed is constant regardless of finger velocity (no acceleration).
-    // The threshold controls how many reports must agree before emitting a tick.
-    #define SCROLL_THRESHOLD 3
-    {
-        static int16_t scroll_acc_h = 0;
-        static int16_t scroll_acc_v = 0;
-
-        // Normalise to direction only — removes velocity-based acceleration
-        if (mouse_report.h > 0)      scroll_acc_h += 1;
-        else if (mouse_report.h < 0) scroll_acc_h -= 1;
-
-        if (mouse_report.v > 0)      scroll_acc_v += 1;
-        else if (mouse_report.v < 0) scroll_acc_v -= 1;
-
-        mouse_report.h = 0;
-        mouse_report.v = 0;
-
-        if (scroll_acc_h >= SCROLL_THRESHOLD) {
-            mouse_report.h = 1;
-            scroll_acc_h -= SCROLL_THRESHOLD;
-        } else if (scroll_acc_h <= -SCROLL_THRESHOLD) {
-            mouse_report.h = -1;
-            scroll_acc_h += SCROLL_THRESHOLD;
-        }
-
-        if (scroll_acc_v >= SCROLL_THRESHOLD) {
-            mouse_report.v = 1;
-            scroll_acc_v -= SCROLL_THRESHOLD;
-        } else if (scroll_acc_v <= -SCROLL_THRESHOLD) {
-            mouse_report.v = -1;
-            scroll_acc_v += SCROLL_THRESHOLD;
-        }
-    }
+    // Scroll smoothing is now handled in the azoteq driver
+    // (pointing_device_drivers.c) with a remainder-preserving accumulator.
+    // AZOTEQ_IQS5XX_SCROLL_DIVISOR (default 10) can be tuned in config.h.
 
     // Only filter when right side is USB master (phantom doesn't occur with left master)
     if (!is_keyboard_left() && is_keyboard_master()) {
