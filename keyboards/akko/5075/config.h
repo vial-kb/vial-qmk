@@ -18,6 +18,7 @@
 
 /* Use 6 dynamic keymap layers */
 #define DYNAMIC_KEYMAP_LAYER_COUNT 6
+#define RGB_MATRIX_SLEEP
 
 /*encoder resolution */
 #define ENCODER_DEFAULT_POS 0x3
