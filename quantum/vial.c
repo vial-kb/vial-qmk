@@ -252,7 +252,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
             }
 
 #ifdef VIAL_DYNAMIC_LAYER_NAME_ENABLE
-            case vial_dynamic_layer_name_get: {
+            case dynamic_vial_layer_name_get: {
                 const uint8_t layer = msg[3];
 
                 memset(msg, 0, length);
@@ -271,7 +271,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                 break;
             }
 
-            case vial_dynamic_layer_name_set: {
+            case dynamic_vial_layer_name_set: {
                 const uint8_t layer = msg[3];
 
                 memset(msg, 0, length);

@@ -48,8 +48,6 @@ enum {
     vial_qmk_settings_set = 0x0B,
     vial_qmk_settings_reset = 0x0C,
     vial_dynamic_entry_op = 0x0D,  /* operate on tapdance, combos, etc */
-    vial_dynamic_layer_name_get = 0x0E,
-    vial_dynamic_layer_name_set = 0x0F,
 };
 
 enum {
@@ -62,6 +60,8 @@ enum {
     dynamic_vial_key_override_set = 0x06,
     dynamic_vial_alt_repeat_key_get = 0x07,
     dynamic_vial_alt_repeat_key_set = 0x08,
+    dynamic_vial_layer_name_get = 0x09,
+    dynamic_vial_layer_name_set = 0x0A,
 };
 
 #define VIAL_MACRO_EXT_TAP 5
