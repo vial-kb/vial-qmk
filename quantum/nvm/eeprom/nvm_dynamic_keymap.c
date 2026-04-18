@@ -392,6 +392,7 @@ int nvm_dynamic_keymap_set_alt_repeat_key(uint8_t index, const vial_alt_repeat_k
 
 #endif
 
+#ifdef VIAL_DYNAMIC_LAYER_NAME_ENABLE
 int nvm_dynamic_keymap_get_layer_name(uint8_t layer, uint8_t *name16) {
     if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT)
         return -1;
@@ -409,3 +410,4 @@ int nvm_dynamic_keymap_set_layer_name(uint8_t layer, const uint8_t *name16) {
     eeprom_write_block(name16, address, VIAL_LAYER_NAME_LEN);
     return 0;
 }
+#endif
