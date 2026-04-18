@@ -19,6 +19,7 @@
 #include <string.h>
 
 #include "dynamic_keymap.h"
+#include "nvm_dynamic_keymap.h"
 #include "quantum.h"
 #include "vial_generated_keyboard_definition.h"
 
@@ -63,6 +64,11 @@ static void reload_alt_repeat_key(void);
 #endif
 
 void vial_init(void) {
+    uint8_t base[16] = { 'B','A','S','E',0 };
+    uint8_t lower[16] = { 'L','O','W','E','R','R',0 };
+
+    nvm_dynamic_keymap_set_layer_name(0, base);
+    nvm_dynamic_keymap_set_layer_name(1, lower);
 #ifdef VIAL_TAP_DANCE_ENABLE
     reload_tap_dance();
 #endif
@@ -244,6 +250,45 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                         );
                 break;
             }
+
+#ifdef VIAL_DYNAMIC_LAYER_NAME_ENABLE
+            case vial_dynamic_layer_name_get: {
+                const uint8_t layer = msg[3];
+
+                memset(msg, 0, length);
+
+                if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT) {
+                    msg[0] = 1; // status (1 = error)
+                    break;
+                }
+
+                uint8_t name[16] = {0};
+                int ret = nvm_dynamic_keymap_get_layer_name(layer, name);
+
+                msg[0] = (ret == 0) ? 0 : 1; // status (0 = OK)
+                memcpy(&msg[1], name, 16);
+
+                break;
+            }
+
+            case vial_dynamic_layer_name_set: {
+                const uint8_t layer = msg[3];
+
+                memset(msg, 0, length);
+
+                if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT) {
+                    msg[0] = 1; // status (1 = error)
+                    break;
+                }
+
+                int ret = nvm_dynamic_keymap_set_layer_name(layer, &msg[4]);
+                memset(msg, 0, length);
+                msg[0] = (ret == 0) ? 0 : 1; // status (0 = OK)
+
+                break;
+            }
+#endif
+
 #ifdef VIAL_TAP_DANCE_ENABLE
             case dynamic_vial_tap_dance_get: {
                 uint8_t idx = msg[3];

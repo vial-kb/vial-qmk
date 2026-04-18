@@ -48,6 +48,8 @@ enum {
     vial_qmk_settings_set = 0x0B,
     vial_qmk_settings_reset = 0x0C,
     vial_dynamic_entry_op = 0x0D,  /* operate on tapdance, combos, etc */
+    vial_dynamic_layer_name_get = 0x0E,
+    vial_dynamic_layer_name_set = 0x0F,
 };
 
 enum {
