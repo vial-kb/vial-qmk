@@ -64,11 +64,6 @@ static void reload_alt_repeat_key(void);
 #endif
 
 void vial_init(void) {
-    uint8_t base[16] = { 'B','A','S','E',0 };
-    uint8_t lower[16] = { 'L','O','W','E','R','R',0 };
-
-    nvm_dynamic_keymap_set_layer_name(0, base);
-    nvm_dynamic_keymap_set_layer_name(1, lower);
 #ifdef VIAL_TAP_DANCE_ENABLE
     reload_tap_dance();
 #endif
@@ -253,7 +248,7 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
 
 #ifdef VIAL_DYNAMIC_LAYER_NAME_ENABLE
             case dynamic_vial_layer_name_get: {
-                const uint8_t layer = msg[3];
+                uint8_t layer = msg[3];
 
                 memset(msg, 0, length);
 
@@ -267,12 +262,14 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
 
                 msg[0] = (ret == 0) ? 0 : 1; // status (0 = OK)
                 memcpy(&msg[1], name, 16);
-
                 break;
             }
 
             case dynamic_vial_layer_name_set: {
-                const uint8_t layer = msg[3];
+                uint8_t layer = msg[3];
+
+                uint8_t name[16];
+                memcpy(name, &msg[4], 16);
 
                 memset(msg, 0, length);
 
@@ -281,10 +278,8 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
                     break;
                 }
 
-                int ret = nvm_dynamic_keymap_set_layer_name(layer, &msg[4]);
-                memset(msg, 0, length);
+                int ret = nvm_dynamic_keymap_set_layer_name(layer, name);
                 msg[0] = (ret == 0) ? 0 : 1; // status (0 = OK)
-
                 break;
             }
 #endif
