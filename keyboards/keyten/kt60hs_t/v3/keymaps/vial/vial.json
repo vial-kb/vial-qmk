@@ -1,7 +1,7 @@
 {
-  "name": "kt60HS-T",
+  "name": "kt60HS-T v3",
   "vendorId": "0xEB69",
-  "productId": "0x6007",
+  "productId": "0x6010",
   "lighting": "none",
   "matrix": {
     "rows": 5,
