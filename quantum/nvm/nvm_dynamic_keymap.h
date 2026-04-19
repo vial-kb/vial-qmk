@@ -51,5 +51,7 @@ int nvm_dynamic_keymap_get_alt_repeat_key(uint8_t index, vial_alt_repeat_key_ent
 int nvm_dynamic_keymap_set_alt_repeat_key(uint8_t index, const vial_alt_repeat_key_entry_t *entry);
 #endif
 
+#ifdef VIAL_DYNAMIC_LAYER_NAME_ENABLE
 int nvm_dynamic_keymap_get_layer_name(uint8_t layer, uint8_t *name16);
 int nvm_dynamic_keymap_set_layer_name(uint8_t layer, const uint8_t *name16);
+#endif
