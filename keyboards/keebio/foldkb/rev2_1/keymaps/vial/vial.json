@@ -1,5 +1,5 @@
 {
-  "name": "FoldKB rev1.1",
+  "name": "FoldKB Rev. 2.1",
   "vendorId": "0xCB10",
   "productId": "0x1258",
   "firmwareVersion": 0,
@@ -14,12 +14,7 @@
       "1U Slash Pipe",
       "Split Right Shift",
       "Split Right Space",
-      [
-          "Left Bottom Row",
-          "2x 1.5U",
-          "3x 1U",
-          "1U + 2U"
-      ]
+      ["Left Bottom Row", "2x 1.5U", "3x 1U", "1U + 2U"]
     ],
     "keymap": [
         [
@@ -181,11 +176,11 @@
           },
           "4,4",
           {
-            "w": 1.5
+            "w": 1
           },
           "4,5\n\n\n4,0",
           {
-            "w": 1.5
+            "w": 2
           },
           "4,7\n\n\n4,0",
           {
