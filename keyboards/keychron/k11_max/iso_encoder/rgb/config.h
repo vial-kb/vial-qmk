@@ -16,14 +16,14 @@
 
 #pragma once
 
-// Tap vs hold timing (tweak to your comfort)
 #define TAPPING_TERM 200
+#define PERMISSIVE_HOLD
+#define FLOW_TAP_TERM 150
+#define CHORDAL_HOLD
+#define SPECULATIVE_HOLD
 
 // Prevent accidental hold when quickly typing
 #define IGNORE_MOD_TAP_INTERRUPT
-
-// Mod-tap is preferred when interrupted by another key
-#define PERMISSIVE_HOLD
 
 // Keep mod-tap key held if you roll into it (e.g., quickly typing "AS")
 #define HOLD_ON_OTHER_KEY_PRESS
