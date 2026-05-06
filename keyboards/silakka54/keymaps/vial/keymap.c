@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include QMK_KEYBOARD_H
+#include "qmk_settings.h"
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -20,3 +21,74 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_TRNS, KC_TRNS, KC_TRNS,           KC_TRNS,  KC_TRNS,  KC_TRNS
     )
 };
+
+static bool is_home_row_mod_tap_key(uint16_t keycode) {
+    switch (get_tap_keycode(keycode)) {
+        case KC_A:
+        case KC_S:
+        case KC_D:
+        case KC_F:
+        case KC_J:
+        case KC_K:
+        case KC_L:
+        case KC_SCLN:
+            return true;
+    }
+
+    return false;
+}
+
+static bool is_home_row_ctrl_tap_key(uint16_t keycode) {
+    switch (get_tap_keycode(keycode)) {
+        case KC_D:
+        case KC_K:
+            return true;
+    }
+
+    return false;
+}
+
+static bool is_thumb_key_position(keyrecord_t *record) {
+    switch (record->event.key.row) {
+        case 4:
+            return record->event.key.col >= 3 && record->event.key.col <= 5;
+        case 9:
+            return record->event.key.col >= 3 && record->event.key.col <= 5;
+    }
+
+    return false;
+}
+
+uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_keycode) {
+    if (is_home_row_mod_tap_key(keycode)) {
+        return 0;
+    }
+
+    if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
+#ifdef QMK_SETTINGS
+        return QS.flow_tap_term;
+#else
+        return FLOW_TAP_TERM;
+#endif
+    }
+
+    return 0;
+}
+
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record, uint16_t other_keycode, keyrecord_t *other_record) {
+#ifdef QMK_SETTINGS
+    if (!QS_tapping_chordal_hold) {
+        return true;
+    }
+#endif
+
+    if (is_thumb_key_position(tap_hold_record)) {
+        return true;
+    }
+
+    if (is_home_row_ctrl_tap_key(tap_hold_keycode)) {
+        return true;
+    }
+
+    return get_chordal_hold_default(tap_hold_record, other_record);
+}

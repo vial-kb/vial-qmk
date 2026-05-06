@@ -6,3 +6,9 @@
 
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 1 }
+
+#ifndef FLOW_TAP_TERM
+#    define FLOW_TAP_TERM 150
+#endif
+
+#define DYNAMIC_KEYMAP_LAYER_COUNT 8

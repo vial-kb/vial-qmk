@@ -332,14 +332,14 @@ bool get_auto_shift_no_auto_repeat(uint16_t keycode, keyrecord_t *record) {
     return QS_auto_shift_no_auto_repeat;
 }
 
-bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
-                      uint16_t other_keycode, keyrecord_t* other_record) {
+__attribute__((weak)) bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
+                                            uint16_t other_keycode, keyrecord_t* other_record) {
     if (QS_tapping_chordal_hold)
         return get_chordal_hold_default(tap_hold_record, other_record);
     return true;
 }
 
-uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_keycode) {
+__attribute__((weak)) uint16_t get_flow_tap_term(uint16_t keycode, keyrecord_t *record, uint16_t prev_keycode) {
     if (is_flow_tap_key(keycode) && is_flow_tap_key(prev_keycode)) {
         return QS.flow_tap_term;
     }
