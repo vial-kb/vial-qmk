@@ -20,7 +20,7 @@
 #define DYNAMIC_KEYMAP_LAYER_COUNT 4
 
 /* Unique VIAL keyboard identifier - generated from vial.json */
-#define VIAL_KEYBOARD_UID {0x61, 0xE9, 0x36, 0xFD, 0x83, 0x70, 0xDE, 0x84}
+#define VIAL_KEYBOARD_UID {0x84, 0xDE, 0x70, 0x83, 0xFD, 0x36, 0xE9, 0x61}
 
 /* VIAL unlock combo - hold Q and P when plugging in to unlock */
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 0 }
