@@ -1,16 +1,18 @@
 {
   "keyboard_name": "BKF - Base Kit Forty",
   "manufacturer": "DrHigsby",
-  "url": "http://www.keyboard-layout-editor.com/#/gists/8a9ebae3a5f3f601bb928f7265db0e2e",
+  "url": "https://github.com/drhigsby/BKF",
   "maintainer": "drhigsby",
   "usb": {
-     "vid": "0x0007",
-     "pid": "0x0003",
-     "device_version": "0.0.1"
+    "vid": "0xFEED",
+    "pid": "0x0003",
+    "device_version": "0.0.2"
   },
+  "processor": "atmega32u4",
+  "bootloader": "caterina",
   "features": {
-    "bootmagic": false,
-    "encoder": true,
+    "bootmagic": true,
+    "encoder_map": true,
     "extrakey": true,
     "mousekey": false,
     "nkro": true
@@ -27,12 +29,10 @@
   },
   "diode_direction": "COL2ROW",
   "encoder": {
-      "rotary": [
-          {"pin_a": "F4", "pin_b": "F5"}
-      ]
+    "rotary": [
+      {"pin_a": "F4", "pin_b": "F5"}
+    ]
   },
-  "processor": "atmega32u4",
-  "bootloader": "caterina",
   "layouts": {
     "LAYOUT_625uC": {
       "layout": [
