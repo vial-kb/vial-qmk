@@ -24,6 +24,12 @@
 #include "action.h"
 #include "wait.h"
 
+// AVR timer counter registers (TCNT0/1/3/4) used in tap_random_base64 require
+// avr/io.h, which avr-gcc 15+ no longer pulls in transitively.
+#ifdef __AVR__
+#    include <avr/io.h>
+#endif
+
 #if defined(AUDIO_ENABLE) && defined(SENDSTRING_BELL)
 #    include "audio.h"
 #    ifndef BELL_SOUND
