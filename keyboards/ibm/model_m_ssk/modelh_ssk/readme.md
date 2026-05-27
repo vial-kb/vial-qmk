@@ -17,7 +17,7 @@ I tested using the Model H sold by Keebd, with IBM part number 1397681 made in
 matches the full-size matrix in the Model H definitions.
 
 ```bash
-qmk compile -kb ibm/model_m_ssk/modelh_ssk
+qmk compile -kb ibm/model_m_ssk/modelh_ssk -km vial
 
 # DFU device ID 6b62:0000 for Keebd Model H doesn't match stm32duino 1eaf:0003, so using dfu-util directly
 dfu-util -D ibm_model_m_ssk_modelh_ssk_vial.bin -R
