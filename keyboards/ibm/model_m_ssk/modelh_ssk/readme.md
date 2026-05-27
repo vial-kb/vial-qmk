@@ -20,6 +20,8 @@ SSK-specific features were copied and modified from those for the `teensypp_ssk`
 
 LED features of the Model H are left enabled in case you want to modify your SSK to add lock-indicator LEDs.
 
+I tested using the Model H sold by Keebd, with IBM part number 1397681 made in 1991.
+
 * Keyboard Maintainer: [Mike Bourgeous](https://github.com/mike-bourgeous), based on work by [John Hawthorn](https://github.com/jhawthorn) and [tiltowait](https://github.com/tiltowait)
 * Hardware Supported: Model H controller, IBM Model M Space-saving Keyboard
 * Hardware Availability: [www.modelh.club](www.modelh.club)
