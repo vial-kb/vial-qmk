@@ -4,14 +4,6 @@
 
 This conversion kit allows you to replace your IBM Model M's original internal controller board with a modern USB board. This aims to match the footprint of the original controller and plugs into the original keyboard matrix, but exposes a USB port through the original SDL connector.
 
-Make example for this keyboard (after setting up your build environment):
-
-    make ibm/model_m_ssk/modelh:vial
-
-Flashing example for this keyboard:
-
-    make ibm/model_m_ssk/modelh:vial:flash
-
 See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
 
 ## SSK (Space-saving Keyboard) variant
