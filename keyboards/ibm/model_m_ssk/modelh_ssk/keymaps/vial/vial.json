@@ -4,6 +4,13 @@
     "rows": 8,
     "cols": 16
   },
+  "customKeycodes": [
+    {
+      "shortName": "NumLk\nScrLk",
+      "title": "Num Lock / Scroll Lock",
+      "name": "NUM_SCRL"
+    }
+  ],
   "layouts": {
     "keymap": [
       [

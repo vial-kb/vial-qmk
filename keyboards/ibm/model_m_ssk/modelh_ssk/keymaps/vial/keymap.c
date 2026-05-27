@@ -21,7 +21,7 @@ enum custom_layers {
 };
 
 enum custom_keycodes {
-  NUM_SCRL = SAFE_RANGE
+  NUM_SCRL = QK_KB_0
 };
 
 void toggle_numpad_layer(int set_state);
