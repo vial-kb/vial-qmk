@@ -21,8 +21,8 @@
     },
     "indicators": {
         "caps_lock": "B8",
-        "num_lock": "B7",
-        "scroll_lock": "B9",
+        "num_lock": "B9",
+        "scroll_lock": "B7",
         "on_state": 0
     },
     "matrix_pins": {
