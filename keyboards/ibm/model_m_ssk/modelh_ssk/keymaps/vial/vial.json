@@ -5,11 +5,6 @@
     "cols": 16
   },
   "layouts": {
-    "labels": [
-      "Split LShift",
-      "ISO Enter",
-      ["Numpad", "Standard", "Terminal", "SSK"]
-    ],
     "keymap": [
       [
         {
