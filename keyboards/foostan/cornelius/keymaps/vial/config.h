@@ -6,3 +6,4 @@
 
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 3 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 6 }
+#define VIAL_QMK_SETTINGS_ENABLE
