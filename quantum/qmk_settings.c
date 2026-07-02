@@ -188,7 +188,10 @@ void qmk_settings_init(void) {
 }
 
 void qmk_settings_reset(void) {
-    QS.grave_esc_override = 0;
+    QS.grave_esc_override = (GRAVE_ESC_ALT_OVERRIDE_Defined << 0)
+                          | (GRAVE_ESC_CTRL_OVERRIDE_Defined << 1)
+                          | (GRAVE_ESC_GUI_OVERRIDE_Defined << 2)
+                          | (GRAVE_ESC_SHIFT_OVERRIDE_Defined << 3);
     QS.auto_shift = 0;
     QS.auto_shift_timeout = AUTO_SHIFT_TIMEOUT;
     QS.osk_tap_toggle = ONESHOT_TAP_TOGGLE;
@@ -209,7 +212,7 @@ void qmk_settings_reset(void) {
     QS.combo_term = COMBO_TERM;
     QS.tapping_term = TAPPING_TERM;
     QS.tapping_v2 = 0;
-    QS.quick_tap_term = TAPPING_TERM;
+    QS.quick_tap_term = QUICK_TAP_TERM;
     QS.tap_code_delay = TAP_CODE_DELAY;
     QS.tap_hold_caps_delay = TAP_HOLD_CAPS_DELAY;
     QS.tapping_toggle = TAPPING_TOGGLE;
@@ -220,7 +223,8 @@ void qmk_settings_reset(void) {
     /* must call clear_keyboard for the NKRO setting to not cause stuck keys */
     clear_keyboard();
     keymap_config.raw = 0;
-    keymap_config.oneshot_enable = 1;
+    keymap_config.nkro = NKRO_DEFAULT_ON;
+    keymap_config.oneshot_enable = true;
     eeconfig_update_keymap(&keymap_config);
 
     /* to trigger all callbacks */
