@@ -1,0 +1,66 @@
+{
+    "name": "Keyball39",
+    "vendorId": "0x5957",
+    "productId": "0x0200",
+    "lighting": "qmk_rgblight",
+    "matrix": { "rows": 8, "cols": 6 },
+    "customKeycodes": [
+        { "name": "Kb Reset (KBC_RST)", "title": "Keyball設定2のリセット", "shortName": "KbRst" },
+        { "name": "Kb Save (KBC_SAVE)", "title": "現在のKeyball設定2をEEPROMに保存します", "shortName": "KbSav" },
+        { "name": "CPI +100 (CPI_I100)", "title": "CPIを100増加させます(最大:12000)", "shortName": "Cpi+1" },
+        { "name": "CPI -100 (CPI_D100)", "title": "CPIを100減少させます(最小:100)", "shortName": "Cpi-1" },
+        { "name": "CPI +1000 (CPI_I1K)", "title": "CPIを1000増加させます(最大:12000)", "shortName": "Cpi+K" },
+        { "name": "CPI -1000 (CPI_D1K)", "title": "CPIを1000減少させます(最小:100)", "shortName": "Cpi-K" },
+        { "name": "Scroll Toggle (SCRL_TO)", "title": "タップごとにスクロールモードのON/OFFを切り替えます", "shortName": "SclTg" },
+        { "name": "Scroll Momentary (SCRL_MO)", "title": "キーを押している間、スクロールモードになります", "shortName": "SclMo" },
+        { "name": "Scroll Div Inc (SCRL_DVI)", "title": "スクロール除数を１つ上げます(max D7 = 1/128、最もスクロール遅い)", "shortName": "ScD+" },
+        { "name": "Scroll Div Dec (SCRL_DVD)", "title": "スクロール除数を１つ下げます(min D0 = 1/1、最もスクロール速い)", "shortName": "ScD-" },
+        { "name": "AML Toggle (AML_TO)", "title": "自動マウスレイヤーをトグルします", "shortName": "AmlTg" },
+        { "name": "AML +50ms (AML_I50)", "title": "自動マウスレイヤーのタイムアウトを50msec増やします (max 1000ms)", "shortName": "Aml+5" },
+        { "name": "AML -50ms (AML_D50)", "title": "自動マウスレイヤーのタイムアウトを50msec減らします (min 100ms)", "shortName": "Aml-5" },
+        { "name": "Scroll Snap Vertical (SSNP_VRT)", "title": "スクロールスナップモードを垂直にする", "shortName": "SnpV" },
+        { "name": "Scroll Snap Horizontal (SSNP_HOR)", "title": "スクロールスナップモードを水平にする", "shortName": "SnpH" },
+        { "name": "Scroll Snap Free (SSNP_FRE)", "title": "スクロールスナップモードを無効にする(自由スクロール)", "shortName": "SnpF" },
+        { "name": "Exit AML (ESC_ML)", "title": "Exit AutoMouseLayer only", "shortName": "ExAML" },
+        { "name": "Exit AML+LNG2 (ESC_ML_LNG2)", "title": "Exit AML then tap LNG2 (英数)", "shortName": "ExML2" },
+        { "name": "Exit AML+LNG1 (ESC_ML_LNG1)", "title": "Exit AML then tap LNG1 (かな)", "shortName": "ExML1" },
+        { "name": "LED Anim (MY_ANI)", "title": "Cycle custom LED animation (PLASMA/AURORA/METEOR)", "shortName": "LedAn" },
+        { "name": "Dynamic Tapping Term Print (DT_PRNT)", "title": "現在のTapping Termの値を送信します", "shortName": "DTPrn" },
+        { "name": "Dynamic Tapping Term +5ms (DT_UP)", "title": "Tapping Termを5ms増加させます", "shortName": "DT+5" },
+        { "name": "Dynamic Tapping Term -5ms (DT_DOWN)", "title": "Tapping Termを5ms減少させます", "shortName": "DT-5" },
+        { "name": "Tap LNG1 + TO(0) (LNG1_TO0)", "title": "かなに切り替えてレイヤー0に戻る", "shortName": "L1To0" },
+        { "name": "Tap LNG2 + TO(0) (LNG2_TO0)", "title": "英数に切り替えてレイヤー0に戻る", "shortName": "L2To0" }
+    ],
+    "layouts" : {
+        "labels": [
+            [ "Ball availability", "None", "Right", "Left", "Dual" ]
+        ],
+        "keymap": [
+            [{"x":2},                                               "0,2",   {"x":7.75},   "4,2"                    ],
+            [{"y":-0.875,"x":3},                                    "0,3",   {"x":5.75},   "4,3"                    ],
+            [{"y":-0.875,"x":1},            "0,1",    {"x":2},      "0,4",   {"x":3.75},   "4,4",   {"x":2},   "4,1"],
+            [{"y":-0.65},                                           "0,0",   {"x":11.75},  "4,0"                    ],
+            [{"y":-0.6,"x":2},                                      "1,2",   {"x":7.75},   "5,2"                    ],
+            [{"y":-0.875,"x":3},                                    "1,3",   {"x":5.75},   "5,3"                    ],
+            [{"y":-0.875,"x":1},            "1,1",    {"x":2},      "1,4",   {"x":3.75},   "5,4",   {"x":2},   "5,1"],
+            [{"y":-0.65},                                           "1,0",   {"x":11.75},  "5,0"                    ],
+            [{"y":-0.6,"x":2},                                      "2,2",   {"x":7.75},   "6,2"                    ],
+            [{"y":-0.875,"x":3},                                    "2,3",   {"x":5.75},   "6,3"                    ],
+            [{"y":-0.875,"x":1},            "2,1",    {"x":2},      "2,4",   {"x":3.75},   "6,4",   {"x":2},   "6,1"],
+            [{"y":-0.65},                                           "2,0",   {"x":11.75},  "6,0"                    ],
+
+            [{"y":-0.6,"x":2,"c":"#aaaaaa"}, "3,2\n\n\n0,0",              {"x":7.75}, "7,2\n\n\n0,0" ],
+            [{"y":-1.0,"x":2},               "3,2\n\n\n0,1", "\n\n\n0,2", {"x":7.75}, "7,2\n\n\n0,2" ],
+            [{"y":-0.75,"x":1},              "3,1\n\n\n0,0",              {"x":9.75}, "7,1\n\n\n0,0" ],
+            [{"y":-1.00,"x":1},              "3,1\n\n\n0,1", "\n\n\n0,2", {"x":9.75}, "7,1\n\n\n0,2" ],
+            [{"y":-0.75,"x":3.15},           "3,3\n\n\n0,0",              {"x":5.45}, "7,3\n\n\n0,0" ],
+            [{"y":-1.00,"x":3.15},           "3,3\n\n\n0,1", "\n\n\n0,2", {"x":5.45}, "7,3\n\n\n0,2" ],
+            [{"y":-0.9},                     "3,0",                       {"x":11.75},"7,0"          ],
+
+            [{"r":10,"rx":5.35,"ry":5.5,"y":-1.775,"x":-1.3},  "3,4" ],
+            [{"r":20,"rx":6.4,"ry":5.7,"y":-1.54,"x":-1.435},  "3,5" ],
+            [{"r":-20,"rx":10.15,"y":-2.46,"x":-2.18},         "7,5" ],
+            [{"r":-10,"rx":11.15,"ry":5.5,"y":-2.24,"x":-2.4}, "7,4" ]
+        ]
+    }
+}

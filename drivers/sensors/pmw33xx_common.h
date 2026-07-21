@@ -108,6 +108,10 @@ STATIC_ASSERT(sizeof((pmw33xx_report_t){0}.motion) == 1, "pmw33xx_report_t.motio
 #define pmw3389_pointing_device_driver pmw33xx_pointing_device_driver;
 const pointing_device_driver_t pmw33xx_pointing_device_driver;
 
+// True once pmw33xx_init_wrapper() has run and the sensor responded. Backported
+// from upstream QMK so keyboards can detect whether a sensor is physically present.
+extern bool pmw33xx_init_ok;
+
 /**
  * @brief Initializes the given sensor so it is in a working state and ready to
  * be polled for data.
