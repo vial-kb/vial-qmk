@@ -1,0 +1,23 @@
+{
+  "lighting": "qmk_rgblight",
+  "matrix": {"rows": 14, "cols": 8},
+  "customKeycodes": [
+    {"name": "ST(W)", "title": "", "shortName": "ST(W)"},
+    {"name": "ST(A)", "title": "", "shortName": "ST(A)"},
+    {"name": "ST(S)", "title": "", "shortName": "ST(S)"},
+    {"name": "ST(D)", "title": "", "shortName": "ST(D)"}
+  ], 
+  "layouts": {
+    "labels":[
+        ["CapsLock Color", "Red", "Orange", "Yellow", "Green", "Cyan", "Blue", "Violet", "White"]
+    ], 
+    "keymap": [
+        [{"h":0.75,"d":true},"0,0\n\n\n0,0",{"x":-1,"c":"#777777"},"0,0",{"c":"#aaaaaa"},"0,1","0,2","0,3"],
+        [{"y":0.25},"0,4","0,5","0,6","0,7"],
+        [{"c":"#cccccc"},"1,0","1,1","1,2",{"c":"#aaaaaa","h":2},"1,7"],
+        [{"c":"#cccccc"},"1,4","1,5","1,6"],
+        ["2,0","2,1","2,2",{"c":"#777777","h":2},"2,7"],
+        [{"c":"#cccccc","w":2},"2,4","2,6"]
+    ]
+  }
+}

@@ -1,0 +1,51 @@
+#include QMK_KEYBOARD_H
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+  {
+    {KC_ESCAPE, KC_GRAVE, KC_TAB, KC_Q, KC_1, KC_F1, KC_F2, KC_2},
+    {KC_W, KC_Z, KC_LGUI, KC_A, KC_NONUS_BSLASH, KC_LCTRL, KC_LSHIFT, KC_CAPSLOCK},
+    {KC_E, KC_3, KC_F3, KC_F4, KC_4, KC_R, KC_F5, KC_5},
+    {KC_T, KC_F, KC_NO, KC_C, KC_LALT, KC_X, KC_D, KC_S},
+    {KC_F6, KC_6, KC_Y, KC_F7, KC_7, KC_F8, KC_8, KC_U},
+    {KC_J, KC_NO, KC_N, KC_H, KC_SPACE, KC_B, KC_V, KC_G},
+    {KC_I, KC_9, KC_F9, KC_O, KC_0, KC_F10, KC_MINUS, KC_P},
+    {KC_SCOLON, KC_SLASH, KC_L, KC_DOT, KC_RALT, KC_COMMA, KC_M, KC_K},
+    {KC_LBRACKET, KC_F11, KC_EQUAL, KC_F12, KC_NO, KC_BSPACE, KC_RBRACKET, KC_BSPACE},
+    {KC_BSLASH, KC_ENTER, MO(1), MO(1), KC_RSHIFT, KC_RCTRL, KC_QUOTE, KC_RGUI},
+    {KC_DELETE, KC_INSERT, KC_PSCREEN, KC_SCROLLLOCK, KC_HOME, KC_END, KC_PAUSE, KC_PGUP},
+    {KC_PGDOWN, KC_NO, KC_RIGHT, KC_DOWN, KC_UP, KC_LEFT, KC_NO, KC_NO},
+    {KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO},
+    {KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO}
+  },
+  {
+    {QK_BOOT, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS},
+    {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS},
+    {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS},
+    {KC_TRNS, KC_TRNS, KC_NO, KC_CALC, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS},
+    {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS},
+    {KC_TRNS, KC_NO, MAGIC_TOGGLE_NKRO, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS},
+    {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS},
+    {KC_MPRV, KC_MNXT, KC_TRNS, KC_VOLU, KC_TRNS, KC_VOLD, KC_MUTE, KC_TRNS},
+    {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO, KC_TRNS, KC_TRNS, KC_TRNS},
+    {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_MPLY, KC_TRNS},
+    {KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS},
+    {KC_TRNS, KC_NO, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_NO, KC_NO},
+    {KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO},
+    {KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO}
+  },
+};
+
+#if 0
+#include "led.h"
+#include "rgblight.h"
+extern uint8_t indicator_color_config[3];
+extern uint8_t indicator_state;
+void rgb_extra_process(LED_TYPE *rgbled) {
+    if (indicator_color_config[2] & 1) {
+        //caps灯亮起时，灯条显示caps指示。其他状态显示灯效。
+        if (indicator_state & 1) {
+            rgbled[2] = rgbled[0];
+        }
+    }
+}
+#endif
