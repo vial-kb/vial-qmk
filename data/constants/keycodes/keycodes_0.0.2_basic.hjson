@@ -15,6 +15,14 @@
             "aliases": [
                 "KC_LPAD"
             ]
+        },
+        "0x00C3": {
+            "group": "media",
+            "key": "KC_DICTATION",
+            "label": "Start Dictation (macOS)",
+            "aliases": [
+                "KC_DICT"
+            ]
         }
     }
 }
