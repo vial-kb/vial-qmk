@@ -90,9 +90,15 @@ STATIC_ASSERT(DYNAMIC_KEYMAP_EEPROM_MAX_ADDR <= 65535, "DYNAMIC_KEYMAP_EEPROM_MA
 #define VIAL_ALT_REPEAT_KEY_SIZE 0
 #endif
 
+#ifdef VIAL_DYNAMIC_LAYER_NAME_ENABLE
+#define VIAL_LAYER_NAME_LEN 16
+#define VIAL_LAYER_NAME_EEPROM_ADDR (VIAL_ALT_REPEAT_KEY_EEPROM_ADDR + VIAL_ALT_REPEAT_KEY_SIZE)
+#define VIAL_LAYER_NAME_SIZE (DYNAMIC_KEYMAP_LAYER_COUNT * VIAL_LAYER_NAME_LEN)
+#endif
+
 // Dynamic macro
 #ifndef DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR
-#    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (VIAL_ALT_REPEAT_KEY_EEPROM_ADDR + VIAL_ALT_REPEAT_KEY_SIZE)
+#    define DYNAMIC_KEYMAP_MACRO_EEPROM_ADDR (VIAL_LAYER_NAME_EEPROM_ADDR + VIAL_LAYER_NAME_SIZE)
 #endif
 
 // Sanity check that dynamic keymaps fit in available EEPROM
@@ -383,6 +389,27 @@ int nvm_dynamic_keymap_set_alt_repeat_key(uint8_t index, const vial_alt_repeat_k
     void *address = (void*)(VIAL_ALT_REPEAT_KEY_EEPROM_ADDR + index * sizeof(vial_alt_repeat_key_entry_t));
     eeprom_write_block(entry, address, sizeof(vial_alt_repeat_key_entry_t));
 
+    return 0;
+}
+
+#endif
+
+#ifdef VIAL_DYNAMIC_LAYER_NAME_ENABLE
+int nvm_dynamic_keymap_get_layer_name(uint8_t layer, uint8_t *name16) {
+    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT)
+        return -1;
+
+    void *address = (void*)(VIAL_LAYER_NAME_EEPROM_ADDR + (layer * VIAL_LAYER_NAME_LEN));
+    eeprom_read_block(name16, address, VIAL_LAYER_NAME_LEN);
+    return 0;
+}
+
+int nvm_dynamic_keymap_set_layer_name(uint8_t layer, const uint8_t *name16) {
+    if (layer >= DYNAMIC_KEYMAP_LAYER_COUNT)
+        return -1;
+
+    void *address = (void*)(VIAL_LAYER_NAME_EEPROM_ADDR + (layer * VIAL_LAYER_NAME_LEN));
+    eeprom_write_block(name16, address, VIAL_LAYER_NAME_LEN);
     return 0;
 }
 #endif

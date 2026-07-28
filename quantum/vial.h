@@ -60,6 +60,8 @@ enum {
     dynamic_vial_key_override_set = 0x06,
     dynamic_vial_alt_repeat_key_get = 0x07,
     dynamic_vial_alt_repeat_key_set = 0x08,
+    dynamic_vial_layer_name_get = 0x09,
+    dynamic_vial_layer_name_set = 0x0A,
 };
 
 #define VIAL_MACRO_EXT_TAP 5
