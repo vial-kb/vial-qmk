@@ -96,6 +96,13 @@
 #define ONESHOT_TIMEOUT 5000
 #endif
 
+/* ========================================================================== */
+/* NKRO                                                                       */
+/* ========================================================================== */
+#ifndef NKRO_DEFAULT_ON
+#    define NKRO_DEFAULT_ON false
+#endif
+
 #ifdef QMK_SETTINGS
 /* dynamic settings framework is enabled */
 
