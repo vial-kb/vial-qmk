@@ -90,7 +90,7 @@ void backlight_init_ports(void) {
     pwmStart(&BACKLIGHT_PWM_DRIVER, &pwmCFG);
 
     backlight_set(get_backlight_level());
-
+    backlight_init();
 #ifdef BACKLIGHT_BREATHING
     chVTObjectInit(&breathing_vt);
     if (is_backlight_breathing()) {
