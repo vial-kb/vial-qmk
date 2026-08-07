@@ -592,6 +592,14 @@ all: build check-size
 build: elf cpfirmware
 check-size: build
 check-md5: build
+
+flash: build
+	$(QMK_BIN) flash -kb $(KEYBOARD) -km $(KEYMAP) -bl $(BOOTLOADER)
+
+avrisp: BOOTLOADER = avrisp
+avrisp: flash
+caterina: BOOTLOADER = caterina
+caterina: flash
 objs-size: build
 
 ifneq ($(strip $(TOP_SYMBOLS)),)
