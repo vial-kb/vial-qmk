@@ -25,6 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Oled config */
 #ifdef OLED_ENABLE
+#define OLED_FONT_H "keyboards/nachie/syndrome/glcdfont.c"
 #define I2C_DRIVER I2CD1
 #define I2C1_SDA_PIN GP10
 #define I2C1_SCL_PIN GP11
