@@ -51,6 +51,17 @@ enum custom_keycode {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
+
+      // I think it would be better to leave standard keycodes as-is and use
+      // custom keycodes for this if desired--- similar to the way JWRDL et al
+      // are implemented.
+      //
+      // For now the default behaviour is to include the code below, but it is
+      // possible to build without it using:
+      //
+      //   qmk compile -kb nachie/syndrome -km vial -e EXTRAFLAGS=-DNO_CHANGE_KC_BEHAVIOUR=true
+      //
+#ifndef NO_CHANGE_KC_BEHAVIOUR
         case KC_HOME:
             if (record->event.pressed && current_platform == OS_MACOS) {
                 register_mods(MOD_LGUI);
@@ -116,6 +127,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 tap_code(KC_PRINT_SCREEN);
             }
             break;
+#endif
         case JWRDL:
             if (record->event.pressed) {
                 (current_platform == OS_MACOS) ? register_mods(MOD_LALT) : register_mods(MOD_LCTL);
