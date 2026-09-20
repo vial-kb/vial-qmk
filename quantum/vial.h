@@ -30,6 +30,10 @@ void vial_handle_cmd(uint8_t *data, uint8_t length);
 bool process_record_vial(uint16_t keycode, keyrecord_t *record);
 
 extern int vial_unlocked;
+
+/* rotation flags for the matrix tester, see vial.c */
+void vial_encoder_tester_event(uint8_t index, bool clockwise);
+uint8_t vial_encoder_tester_fill(uint8_t *buf, uint8_t len);
 extern int vial_unlock_in_progress;
 extern uint16_t g_vial_magic_keycode_override;
 

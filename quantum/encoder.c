@@ -5,6 +5,9 @@
 #include "action.h"
 #include "encoder.h"
 #include "wait.h"
+#ifdef VIAL_ENABLE
+#    include "vial.h"
+#endif
 
 #ifndef ENCODER_MAP_KEY_DELAY
 #    define ENCODER_MAP_KEY_DELAY TAP_CODE_DELAY
@@ -32,6 +35,9 @@ static bool encoder_handle_queue(void) {
     uint8_t index;
     bool    clockwise;
     while (encoder_dequeue_event(&index, &clockwise)) {
+#ifdef VIAL_ENABLE
+        vial_encoder_tester_event(index, clockwise);
+#endif
 #ifdef ENCODER_MAP_ENABLE
 
         // The delays below cater for Windows and its wonderful requirements.

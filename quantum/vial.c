@@ -775,3 +775,29 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
     return alt_keycode;
 }
 #endif
+
+#ifdef ENCODER_ENABLE
+/* one sticky flag per encoder and direction for the matrix tester.
+ * bit 0 is counterclockwise, bit 1 is clockwise, four encoders per byte.
+ * flags are set when a rotation is handled and cleared when the host reads them. */
+static uint8_t vial_encoder_tester_state[(NUM_ENCODERS + 3) / 4];
+
+void vial_encoder_tester_event(uint8_t index, bool clockwise) {
+    if (index >= NUM_ENCODERS) return;
+    vial_encoder_tester_state[index / 4] |= 1 << ((index % 4) * 2 + (clockwise ? 1 : 0));
+}
+
+uint8_t vial_encoder_tester_fill(uint8_t *buf, uint8_t len) {
+    uint8_t n = sizeof(vial_encoder_tester_state);
+    if (n > len) n = len;
+    memcpy(buf, vial_encoder_tester_state, n);
+    memset(vial_encoder_tester_state, 0, n);
+    return n;
+}
+#else
+void vial_encoder_tester_event(uint8_t index, bool clockwise) {}
+
+uint8_t vial_encoder_tester_fill(uint8_t *buf, uint8_t len) {
+    return 0;
+}
+#endif
