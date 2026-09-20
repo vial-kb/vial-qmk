@@ -269,6 +269,10 @@ void raw_hid_receive(uint8_t *data, uint8_t length) {
 #    endif
                         command_data[i++] = value & 0xFF;
                     }
+#    ifdef VIAL_ENABLE
+                    /* rotation flags for the matrix tester follow the matrix rows */
+                    i += vial_encoder_tester_fill(&command_data[i], (length - 1) - i);
+#    endif
 #endif
                     break;
                 }
