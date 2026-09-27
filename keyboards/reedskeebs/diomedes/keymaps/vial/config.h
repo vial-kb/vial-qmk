@@ -1,0 +1,12 @@
+#pragma once
+
+#define MASTER_LEFT
+
+#define SERIAL_USART_FULL_DUPLEX
+#define SERIAL_USART_TX_PIN GP0
+#define SERIAL_USART_RX_PIN GP1
+
+#define VIAL_KEYBOARD_UID {0x44, 0x49, 0x4F, 0x4D, 0x45, 0x44, 0x45, 0x01}
+
+#define VIAL_UNLOCK_COMBO_ROWS {0, 0}
+#define VIAL_UNLOCK_COMBO_COLS {0, 1}
