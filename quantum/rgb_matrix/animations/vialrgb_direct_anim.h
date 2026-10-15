@@ -12,7 +12,7 @@ bool VIALRGB_DIRECT(effect_params_t* params) {
         RGB rgb = rgb_matrix_hsv_to_rgb(g_direct_mode_colors[i]);
         rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
-    return led_max < RGB_MATRIX_LED_COUNT;
+    return rgb_matrix_check_finished_leds(led_max);
 }
 #    endif
 #endif
