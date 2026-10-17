@@ -26,6 +26,7 @@
 #define VIAL_RAW_EPSIZE 32
 
 void vial_init(void);
+void vial_task(void);
 void vial_handle_cmd(uint8_t *data, uint8_t length);
 bool process_record_vial(uint16_t keycode, keyrecord_t *record);
 

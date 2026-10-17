@@ -25,6 +25,8 @@
 #include "vial_ensure_keycode.h"
 
 #define VIAL_UNLOCK_COUNTER_MAX 50
+/* an unlock nobody polls for this long ends */
+#define VIAL_UNLOCK_POLL_TIMEOUT 2000
 
 #ifdef VIAL_INSECURE
 #pragma message "Building Vial-enabled firmware in insecure mode."
@@ -35,6 +37,7 @@ int vial_unlocked = 0;
 int vial_unlock_in_progress = 0;
 static int vial_unlock_counter = 0;
 static uint16_t vial_unlock_timer;
+static uint16_t vial_unlock_polled;
 
 #ifndef VIAL_INSECURE
 static uint8_t vial_unlock_combo_rows[] = VIAL_UNLOCK_COMBO_ROWS;
@@ -61,6 +64,11 @@ static void reload_key_override(void);
 #ifdef VIAL_ALT_REPEAT_KEY_ENABLE
 static void reload_alt_repeat_key(void);
 #endif
+
+void vial_task(void) {
+    if (vial_unlock_in_progress && timer_elapsed(vial_unlock_polled) > VIAL_UNLOCK_POLL_TIMEOUT)
+        vial_unlock_in_progress = 0;
+}
 
 void vial_init(void) {
 #ifdef VIAL_TAP_DANCE_ENABLE
@@ -163,9 +171,11 @@ void vial_handle_cmd(uint8_t *msg, uint8_t length) {
             vial_unlock_in_progress = 1;
             vial_unlock_counter = VIAL_UNLOCK_COUNTER_MAX;
             vial_unlock_timer = timer_read();
+            vial_unlock_polled = vial_unlock_timer;
             break;
         }
         case vial_unlock_poll: {
+            vial_unlock_polled = timer_read();
 #ifndef VIAL_INSECURE
             if (vial_unlock_in_progress) {
                 int holding = 1;

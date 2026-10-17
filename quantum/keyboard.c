@@ -727,6 +727,10 @@ void quantum_task(void) {
 #ifdef LAYER_LOCK_ENABLE
     layer_lock_task();
 #endif
+
+#ifdef VIAL_ENABLE
+    vial_task();
+#endif
 }
 
 /** \brief Main task that is repeatedly called as fast as possible. */
