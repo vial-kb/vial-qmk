@@ -26,3 +26,7 @@
 // The four corners
 #define VIAL_UNLOCK_COMBO_ROWS { 0, 5, 3, 8 }
 #define VIAL_UNLOCK_COMBO_COLS { 0, 0, 0, 0 }
+
+// Common EC11 encoders double-step at the board default of 2
+#undef ENCODER_RESOLUTION
+#define ENCODER_RESOLUTION 4
