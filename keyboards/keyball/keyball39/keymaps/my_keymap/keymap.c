@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "transactions.h"
 #include "qmk_settings.h"
 #include <lib/lib8tion/lib8tion.h>
+#include <stdlib.h>
 
 #if defined(SPLIT_KEYBOARD)
 // Row offsets for this controller's own matrix vs. the peer's relayed rows
@@ -53,13 +54,17 @@ static void layer_sync_handler(uint8_t len, const void *data, uint8_t rlen, void
 //   - Trackball movement crossing threshold → activate AML, stay indefinitely.
 //   - Mouse button clicks do NOT exit AML.
 //   - Only ESC_ML (keyball_escape_mouse_layer) explicitly exits AML.
+//   - EXPERIMENT (aml-stock-test branch): the activation check is back to stock
+//     QMK's per-axis signed accumulation; the exit behavior above is unchanged.
 // All logic lives here in the keymap so the holykeebs keyball lib stays untouched.
 // ---------------------------------------------------------------------------
 #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #include "pointing_device_auto_mouse.h"
 
-// AML activation threshold: accumulated movement-magnitude sum (see
-// aml_movement_size/auto_mouse_activation below) required to fire AML.
+// AML activation threshold: AML fires once the accumulated signed movement on
+// EITHER axis exceeds this (see auto_mouse_activation below). Note the unit
+// change: this is now per axis, not the |x|+|y| sum used before this experiment,
+// so a value saved in EEPROM behaves differently than it did under the old sum.
 // Runtime-adjustable via MY_AML_UP/MY_AML_DOWN (layer 3), persisted in the
 // 4-byte EEPROM region freed up when the old Dynamic Tapping Term feature
 // was retired (see config.h's DYNAMIC_KEYMAP_EEPROM_MAX_ADDR comment) —
@@ -85,26 +90,28 @@ static void aml_threshold_save(void) {
     eeprom_update_word((uint16_t *)AML_THRESHOLD_EEPROM_MAGIC_ADDR, AML_THRESHOLD_EEPROM_MAGIC);
 }
 
-static const uint16_t AML_NO_MOVE_RESET_MS     = 500;
-// Keystroke vibration bursts settle within ~15 ms.  Only count movement toward
-// the AML threshold after it has been continuous for this long, so single-
-// keystroke shocks never accumulate enough to fire AML.
-#define AML_SUSTAIN_MS           25
+// EXPERIMENT: the anti-vibration logic that lived here (AML_SUSTAIN_MS: count
+// movement only after 25 ms of continuous motion; AML_NO_MOVE_RESET_MS: clear the
+// total after 500 ms at rest) is removed to compare against stock QMK. It
+// discarded slow trackball motion, and the keystroke vibration it targeted may
+// have come from a bad Pro Micro pin socket, since replaced with Conthrough.
 #define AML_FORCED_EXIT_COOLDOWN 600
 
-static uint16_t aml_no_move_timer     = 0;
 static bool     aml_forced_exit       = false;
 static uint16_t aml_forced_exit_timer = 0;
+static int16_t  aml_total_x           = 0;
+static int16_t  aml_total_y           = 0;
 
-// Magnitude of pointer movement in this report.
-static uint16_t aml_movement_size(report_mouse_t *r) {
-    int16_t x = r->x < 0 ? -r->x : r->x;
-    int16_t y = r->y < 0 ? -r->y : r->y;
-    return (uint16_t)(x + y);
+static void aml_reset_total(void) {
+    aml_total_x = 0;
+    aml_total_y = 0;
 }
 
-// Override QMK weak function. Returning true keeps the AML timer reset so the
-// timeout never fires; AML stays active until keyball_escape_mouse_layer().
+// Override QMK weak function. The activation check mirrors the stock version in
+// quantum/pointing_device/pointing_device_auto_mouse.c. Returning true keeps the
+// AML timer reset so the timeout never fires; AML stays active until
+// keyball_escape_mouse_layer(). The totals are only cleared on entering AML and
+// in keyball_escape_mouse_layer(), so they never decay while the ball is at rest.
 bool auto_mouse_activation(report_mouse_t mouse_report) {
     if (aml_forced_exit) {
         if (timer_elapsed(aml_forced_exit_timer) > AML_FORCED_EXIT_COOLDOWN) {
@@ -114,35 +121,18 @@ bool auto_mouse_activation(report_mouse_t mouse_report) {
         }
     }
 
-    uint16_t movement = aml_movement_size(&mouse_report);
-    static uint16_t total         = 0;
-    static uint16_t sustain_start = 0;
-    if (movement > 0) {
-        aml_no_move_timer = 0;
-        if (sustain_start == 0) sustain_start = timer_read();
-        // Only accumulate once movement has been sustained beyond the vibration
-        // window.  This prevents single keystroke shocks from triggering AML.
-        if (timer_elapsed(sustain_start) >= AML_SUSTAIN_MS) {
-            total += movement;
-        }
-    } else {
-        sustain_start = 0;
-        if (!layer_state_is(AUTO_MOUSE_DEFAULT_LAYER)) {
-            if (aml_no_move_timer == 0) {
-                aml_no_move_timer = timer_read();
-            } else if (timer_elapsed(aml_no_move_timer) > AML_NO_MOVE_RESET_MS) {
-                total = 0;
-                aml_no_move_timer = 0;
-            }
-        }
+    if (layer_state_is(AUTO_MOUSE_DEFAULT_LAYER)) {
+        // Covers every way into layer 1 (movement, buttons, layer keys), and
+        // leaves the totals at 0 for when AML is later left.
+        aml_reset_total();
+        return true;  // keep AML alive regardless of clicks
     }
 
-    if (aml_threshold < total) {
-        total = 0;
+    aml_total_x += mouse_report.x;
+    aml_total_y += mouse_report.y;
+    if (abs(aml_total_x) > aml_threshold || abs(aml_total_y) > aml_threshold) {
+        aml_reset_total();
         return true;
-    }
-    if (layer_state_is(AUTO_MOUSE_DEFAULT_LAYER)) {
-        return true;  // keep AML alive regardless of clicks
     }
     return mouse_report.buttons;
 }
@@ -152,7 +142,7 @@ void keyball_escape_mouse_layer(void) {
     layer_off(get_auto_mouse_layer());
     aml_forced_exit       = true;
     aml_forced_exit_timer = timer_read();
-    aml_no_move_timer     = 0;
+    aml_reset_total();
 }
 
 // Called from layer_state_set_user on every layer change. Previously lived in
@@ -1093,29 +1083,18 @@ void keyball_on_apply_motion_to_mouse_scroll(report_mouse_t *report, report_mous
 #endif
 }
 
-// Pointer movement dead zone + software velocity scale.
+// Pointer movement dead zone + axis snap.
 //
-// Background: on RP2040 (vs Pro Micro / ATmega32U4) the cursor feels less responsive
-// at the same physical CPI, probably due to faster split-sync draining the sensor's
-// burst register before sufficient motion accumulates. The typical workaround is to
-// raise CPI, but high CPI amplifies keystroke-vibration noise and triggers AML.
-//
-// Better approach: keep physical CPI low (fewer vibration counts) and compensate with
-// a software multiplier applied here — before the HID report is sent and before AML
-// sees the report. AML thus receives dead-zone-filtered, unscaled counts, so it is
-// not affected by the speed boost.
+// EXPERIMENT: the software velocity scale (MOVE_SCALE_NUM/DEN, was 11/7) is
+// removed, so output is 1:1 with the sensor and cursor speed is set by CPI alone.
+// It existed to keep physical CPI low against keystroke vibration; see the AML
+// notes at the top of this file and in config.h.
 //
 // Tune TRACKBALL_DEADZONE  : counts below which a report is treated as vibration noise.
-// Tune MOVE_SCALE_NUM/DEN  : software cursor speed multiplier.
-//   Pair with KEYBALL_CPI_DEFAULT in config.h so that
-//   (physical CPI) × (MOVE_SCALE_NUM / MOVE_SCALE_DEN) ≈ desired effective CPI.
-//   Example: 1000 CPI × 11/10 = 1100 effective CPI.
 // Tune AXIS_SNAP_RATIO      : when one axis >= N × the other, zero the weaker axis.
 //   Prevents diagonal drift when rolling nominally straight.
 //   4 means a 4:1 or stronger imbalance triggers the snap; pure diagonals (2:1, 3:2) pass.
 #define TRACKBALL_DEADZONE 1   // suppress only true zero; mag≥1 passes
-#define MOVE_SCALE_NUM     11
-#define MOVE_SCALE_DEN     7
 #define AXIS_SNAP_RATIO    4
 
 static inline int8_t clamp8(int16_t v) {
@@ -1123,15 +1102,6 @@ static inline int8_t clamp8(int16_t v) {
 }
 
 void keyball_on_apply_motion_to_mouse_move(report_mouse_t *report, report_mouse_t *output, bool is_left) {
-    // Indexed by side [0=left, 1=right] so the no-ball side's reset never
-    // contaminates the ball side's accumulator.  Without this,
-    // pointing_device_task_combined_kb calls this function twice per frame
-    // (once per keyboard half), and the no-ball call (x=0,y=0) always hits
-    // the else-branch and wipes the shared rem_x/rem_y before the ball call.
-    static int16_t rem_x[2] = {0, 0};
-    static int16_t rem_y[2] = {0, 0};
-    uint8_t side = is_left ? 0 : 1;
-
     int16_t x   = report->x;
     int16_t y   = report->y;
     int16_t abx = x < 0 ? -x : x;
@@ -1140,21 +1110,11 @@ void keyball_on_apply_motion_to_mouse_move(report_mouse_t *report, report_mouse_
 
     if (mag >= TRACKBALL_DEADZONE) {
         // Axis snap: when one axis strongly dominates, suppress the weaker one.
-        if      (abx >= AXIS_SNAP_RATIO * aby) { y = 0; rem_y[side] = 0; }
-        else if (aby >= AXIS_SNAP_RATIO * abx) { x = 0; rem_x[side] = 0; }
+        if      (abx >= AXIS_SNAP_RATIO * aby) { y = 0; }
+        else if (aby >= AXIS_SNAP_RATIO * abx) { x = 0; }
 
-        // Fixed-point scaling with per-side remainder carry-over across frames.
-        int32_t sx = (int32_t)x * MOVE_SCALE_NUM + rem_x[side];
-        int32_t sy = (int32_t)y * MOVE_SCALE_NUM + rem_y[side];
-        int16_t ox = (int16_t)(sx / MOVE_SCALE_DEN);
-        int16_t oy = (int16_t)(sy / MOVE_SCALE_DEN);
-        rem_x[side] = (int16_t)(sx - (int32_t)ox * MOVE_SCALE_DEN);
-        rem_y[side] = (int16_t)(sy - (int32_t)oy * MOVE_SCALE_DEN);
-        output->x = clamp8(ox);
-        output->y = clamp8(oy);
-    } else {
-        rem_x[side] = 0;
-        rem_y[side] = 0;
+        output->x = clamp8(x);
+        output->y = clamp8(y);
     }
 }
 

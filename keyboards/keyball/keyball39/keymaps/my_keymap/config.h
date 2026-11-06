@@ -57,10 +57,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #undef SPLIT_TRANSACTION_IDS_USER
 #define SPLIT_TRANSACTION_IDS_USER HK_SYNC_STATE, MY_LAYER_SYNC
 #define KEYBALL_SCROLL_DIV_DEFAULT 4
-// Physical CPI kept low to minimize keystroke-vibration counts reaching AML.
-// Software speed scaling in keyball_on_apply_motion_to_mouse_move (MOVE_SCALE 11/7)
-// boosts perceived cursor speed: 600 × 11/7 ≈ 943 effective CPI.
-// Axis-snap in keyball_on_apply_motion_to_mouse_move further suppresses cross-axis drift.
+// EXPERIMENT (aml-stock-test branch): AML activation and cursor scaling are back to
+// the stock QMK approach to compare against the old anti-vibration setup, which paired
+// this low CPI with a software multiplier (MOVE_SCALE 11/7, about 943 effective CPI).
+// The multiplier is gone, so cursor speed now comes from CPI alone; this default is
+// deliberately unchanged and the CPI saved in EEPROM is tuned with the CPI keys.
+// Axis-snap in keyball_on_apply_motion_to_mouse_move still suppresses cross-axis drift.
 // CPI is auto-saved to EEPROM in housekeeping_task_user whenever it changes.
 // After flashing, press KBC_RST (or use VIA) to reset saved CPI to this new default.
 #define KEYBALL_CPI_DEFAULT 600
