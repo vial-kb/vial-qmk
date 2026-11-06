@@ -29,7 +29,27 @@
         { "name": "Dynamic Tapping Term +5ms (DT_UP)", "title": "Tapping Termを5ms増加させます", "shortName": "DT+5" },
         { "name": "Dynamic Tapping Term -5ms (DT_DOWN)", "title": "Tapping Termを5ms減少させます", "shortName": "DT-5" },
         { "name": "Tap LNG1 + TO(0) (LNG1_TO0)", "title": "かなに切り替えてレイヤー0に戻る", "shortName": "L1To0" },
-        { "name": "Tap LNG2 + TO(0) (LNG2_TO0)", "title": "英数に切り替えてレイヤー0に戻る", "shortName": "L2To0" }
+        { "name": "Tap LNG2 + TO(0) (LNG2_TO0)", "title": "英数に切り替えてレイヤー0に戻る", "shortName": "L2To0" },
+        { "name": "Temp Layer 0 (MY_TL0)", "title": "押している間レイヤー0へ、離すとレイヤー0へ戻ります(AML等からでも0固定)", "shortName": "TL0" },
+        { "name": "Temp Layer 1 (MY_TL1)", "title": "押している間レイヤー1へ、離すとレイヤー0へ戻ります(AML等からでも0固定)", "shortName": "TL1" },
+        { "name": "Temp Layer 2 (MY_TL2)", "title": "押している間レイヤー2へ、離すとレイヤー0へ戻ります(AML等からでも0固定)", "shortName": "TL2" },
+        { "name": "Temp Layer 3 (MY_TL3)", "title": "押している間レイヤー3へ、離すとレイヤー0へ戻ります(AML等からでも0固定)", "shortName": "TL3" },
+        { "name": "Temp Layer 4 (MY_TL4)", "title": "押している間レイヤー4へ、離すとレイヤー0へ戻ります(AML等からでも0固定)", "shortName": "TL4" },
+        { "name": "Temp Layer 5 (MY_TL5)", "title": "押している間レイヤー5へ、離すとレイヤー0へ戻ります(AML等からでも0固定)", "shortName": "TL5" },
+        { "name": "Temp Layer 6 (MY_TL6)", "title": "押している間レイヤー6へ、離すとレイヤー0へ戻ります(AML等からでも0固定)", "shortName": "TL6" },
+        { "name": "AML ThumbL: Tap LNG2 / Hold L5 (AML_TL5)", "title": "タップ:AML脱出+英数、ホールド:レイヤー5へ(離すとレイヤー0固定)", "shortName": "AmT5" },
+        { "name": "AML ThumbM: Tap LNG2 / Hold L2 (AML_TL2)", "title": "タップ:AML脱出+英数、ホールド:レイヤー2へ(離すとレイヤー0固定)", "shortName": "AmT2" },
+        { "name": "AML ThumbR: Tap LNG1 / Hold L3 (AML_TL3)", "title": "タップ:AML脱出+かな、ホールド:レイヤー3へ(離すとレイヤー0固定)", "shortName": "AmT3" },
+        { "name": "Tap SPC / Hold L5 (TL5_SPC)", "title": "タップ:スペース、ホールド:即レイヤー5へ(150ms判定、離すとレイヤー0固定)", "shortName": "T5Spc" },
+        { "name": "Tap SPC / Hold L2 (TL2_SPC)", "title": "タップ:スペース、ホールド:即レイヤー2へ(150ms判定、離すとレイヤー0固定)", "shortName": "T2Spc" },
+        { "name": "Tap MINS / Hold L3 (TL3_MINS)", "title": "タップ:マイナス、ホールド:即レイヤー3へ(150ms判定、離すとレイヤー0固定)", "shortName": "T3Min" },
+        { "name": "Tap ENT / Hold L4 (TL4_ENT)", "title": "タップ:エンター、ホールド:即レイヤー4へ(150ms判定、離すとレイヤー0固定)", "shortName": "T4Ent" },
+        { "name": "AML Threshold Print (AML_PRNT)", "title": "現在のAML発動閾値を送信します", "shortName": "AmPrn" },
+        { "name": "AML Threshold +2 (AML_THUP)", "title": "AML発動閾値を2増加させます(最大200)", "shortName": "AmTh+" },
+        { "name": "AML Threshold -2 (AML_THDN)", "title": "AML発動閾値を2減少させます(最小2)", "shortName": "AmTh-" },
+        { "name": "Layer-move Tapping Term Print (LDT_PRNT)", "title": "AML_TL5/2/3用タッピングタームの現在値を送信します", "shortName": "LdPrn" },
+        { "name": "Layer-move Tapping Term +5ms (LDT_UP)", "title": "AML_TL5/2/3用タッピングタームを5ms増加させます", "shortName": "LdT+5" },
+        { "name": "Layer-move Tapping Term -5ms (LDT_DOWN)", "title": "AML_TL5/2/3用タッピングタームを5ms減少させます", "shortName": "LdT-5" }
     ],
     "layouts" : {
         "labels": [
