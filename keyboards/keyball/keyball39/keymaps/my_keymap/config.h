@@ -46,34 +46,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 200
 #undef MOUSE_EXTENDED_REPORT
 #undef WHEEL_EXTENDED_REPORT
-// Tried POINTING_DEVICE_HIRES_SCROLL_ENABLE (HID Resolution Multiplier) here
-// to report scroll as fractional sub-detent units, hoping it would help
-// macOS/Obsidian recognize continuous scroll input. Result: scrolling became
-// wildly oversensitive and the Obsidian issue was unchanged — macOS most
-// likely doesn't honor the Resolution Multiplier feature report (it's a
-// Windows-era HID mechanism), so it just read our inflated raw values
-// directly as whole clicks instead of fractional ones. Reverted.
 // Add our own layer-sync RPC transaction alongside holykeebs' HK_SYNC_STATE
 #undef SPLIT_TRANSACTION_IDS_USER
 #define SPLIT_TRANSACTION_IDS_USER HK_SYNC_STATE, MY_LAYER_SYNC
 #define KEYBALL_SCROLL_DIV_DEFAULT 4
-// EXPERIMENT (aml-stock-test branch): AML activation and cursor scaling are back to
-// the stock QMK approach to compare against the old anti-vibration setup, which paired
-// this low CPI with a software multiplier (MOVE_SCALE 11/7, about 943 effective CPI).
-// The multiplier is gone, so cursor speed now comes from CPI alone; this default is
-// deliberately unchanged and the CPI saved in EEPROM is tuned with the CPI keys.
-// Axis-snap in keyball_on_apply_motion_to_mouse_move still suppresses cross-axis drift.
+// Cursor speed comes from CPI alone (output is 1:1 with the sensor).
 // CPI is auto-saved to EEPROM in housekeeping_task_user whenever it changes.
-// After flashing, press KBC_RST (or use VIA) to reset saved CPI to this new default.
+// After flashing, press KBC_RST (or use VIA) to reset saved CPI to this default.
 #define KEYBALL_CPI_DEFAULT 600
 
-// Historical note: bytes 4092-4095 of EEPROM used to hold a bespoke
-// (value + 0xBEEF magic) tapping-term save, kept out of dynamic-keymap macro
-// storage by capping the boundary below. Tapping term now lives in
-// QS.tapping_term (quantum/qmk_settings.c) instead — see keymap.c — so those
-// bytes are unused, but the cap is left in place since loosening it changes
-// the EEPROM layout QMK/Vial already computed and isn't worth the risk of an
-// unintended full reset of the saved keymap/macros/tap-dances.
+// Bytes 4092-4095 of EEPROM hold aml_threshold (value + magic, see keymap.c), kept
+// out of dynamic-keymap macro storage by capping the boundary below.
 // RP2040 wear-leveling EEPROM here is 4096 bytes (TOTAL_EEPROM_BYTE_COUNT), not the
 // 1024-byte AVR-style size this was originally tuned for — Vial's tap dance/combo/
 // key override tables (32 entries each by default on >4000-byte EEPROM, defined in
@@ -81,21 +64,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // region, so the boundary must leave room for all of that, not just the keymap.
 #define DYNAMIC_KEYMAP_EEPROM_MAX_ADDR 4091
 
-// Disable split watchdog to prevent the secondary MCU from resetting during USB suspend.
-//
-// Root cause of the "CPI feels low after idle" bug:
-//   1. Host suspends USB (display sleep) → master stops sending split sync packets.
-//   2. Holykeebs sets SPLIT_WATCHDOG_TIMEOUT to 3000ms, so secondary resets after 3s.
-//   3. Secondary reboots and reads CPI from its own EEPROM (flash).
-//      On RP2040, each MCU has independent flash; VIA only writes to master's flash,
-//      so secondary always restores to KEYBALL_CPI_DEFAULT (1200) after reset.
-//   4. Master's split CPI sync only sends on change (last_cpi != shared_cpi).
-//      Since the master's CPI hasn't changed, it never resyncs to the secondary.
-//   5. User sees abnormally low CPI until USB is reconnected (which resets last_cpi).
-//
-// Fix: prevent secondary reset by disabling the watchdog.
-// RP2040 is stable enough that a secondary hang requiring watchdog recovery is
-// effectively never seen in practice.
+// Disable the split watchdog so the secondary MCU doesn't reset during USB suspend.
+// After a reset it restores CPI from its own flash, which master-side saves never
+// reach, and master only syncs CPI on change, so it would stay wrong until USB
+// is reconnected.
 #undef SPLIT_WATCHDOG_ENABLE
 
 #define COMBO_TERM 100

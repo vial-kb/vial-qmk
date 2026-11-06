@@ -50,25 +50,19 @@ static void layer_sync_handler(uint8_t len, const void *data, uint8_t rlen, void
 }
 
 // ---------------------------------------------------------------------------
-// Custom Auto Mouse Layer (AML) behavior — ported from lib/keyball customization
+// Custom Auto Mouse Layer (AML) behavior
 //   - Trackball movement crossing threshold → activate AML, stay indefinitely.
 //   - Mouse button clicks do NOT exit AML.
 //   - Only ESC_ML (keyball_escape_mouse_layer) explicitly exits AML.
-//   - EXPERIMENT (aml-stock-test branch): the activation check is back to stock
-//     QMK's per-axis signed accumulation; the exit behavior above is unchanged.
 // All logic lives here in the keymap so the holykeebs keyball lib stays untouched.
 // ---------------------------------------------------------------------------
 #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #include "pointing_device_auto_mouse.h"
 
 // AML activation threshold: AML fires once the accumulated signed movement on
-// EITHER axis exceeds this (see auto_mouse_activation below). Note the unit
-// change: this is now per axis, not the |x|+|y| sum used before this experiment,
-// so a value saved in EEPROM behaves differently than it did under the old sum.
-// Runtime-adjustable via MY_AML_UP/MY_AML_DOWN (layer 3), persisted in the
-// 4-byte EEPROM region freed up when the old Dynamic Tapping Term feature
-// was retired (see config.h's DYNAMIC_KEYMAP_EEPROM_MAX_ADDR comment) —
-// same value+magic layout that used to hold that feature's saved value.
+// either axis exceeds this (see auto_mouse_activation below).
+// Runtime-adjustable via MY_AML_UP/MY_AML_DOWN (layer 3), persisted in EEPROM
+// bytes 4092-4095 as value + magic (see DYNAMIC_KEYMAP_EEPROM_MAX_ADDR in config.h).
 #define AML_THRESHOLD_DEFAULT           20
 #define AML_THRESHOLD_MIN               2
 #define AML_THRESHOLD_MAX               200
@@ -90,11 +84,6 @@ static void aml_threshold_save(void) {
     eeprom_update_word((uint16_t *)AML_THRESHOLD_EEPROM_MAGIC_ADDR, AML_THRESHOLD_EEPROM_MAGIC);
 }
 
-// EXPERIMENT: the anti-vibration logic that lived here (AML_SUSTAIN_MS: count
-// movement only after 25 ms of continuous motion; AML_NO_MOVE_RESET_MS: clear the
-// total after 500 ms at rest) is removed to compare against stock QMK. It
-// discarded slow trackball motion, and the keystroke vibration it targeted may
-// have come from a bad Pro Micro pin socket, since replaced with Conthrough.
 #define AML_FORCED_EXIT_COOLDOWN 600
 
 static bool     aml_forced_exit       = false;
@@ -145,34 +134,18 @@ void keyball_escape_mouse_layer(void) {
     aml_reset_total();
 }
 
-// Called from layer_state_set_user on every layer change. Previously lived in
-// the keyball lib; reduced here to a no-op-safe stub (movement counter is local).
+// Called from layer_state_set_user on every layer change; nothing to do here.
 void keyball_handle_auto_mouse_layer_change(layer_state_t state) {
     (void)state;
 }
 #endif
 
-// Tapping term now lives entirely in QS.tapping_term (quantum/qmk_settings.c),
-// the same storage Vial's "QMK Settings" panel reads/writes. This used to be
-// a separate g_tapping_term (Dynamic Tapping Term feature) backed by our own
-// raw EEPROM bytes 4092-4095 — that meant the value MY_DT_UP/MY_DT_DOWN
-// changed and the number shown in Vial's QMK Settings tab were two unrelated
-// storages that could never agree. Routing both through QS.tapping_term
-// (qsid 7, see the DECLARE_STATIC_SETTING(7, tapping_term) entry in
-// quantum/qmk_settings.c) makes them the same value again: adjust it here,
-// see it there, and vice versa.
+// Tapping term lives in QS.tapping_term (quantum/qmk_settings.c, qsid 7), the same
+// storage Vial's "QMK Settings" panel reads/writes, so MY_DT_UP/MY_DT_DOWN and the
+// GUI always agree. quantum/vial.c already provides get_tapping_term(), which
+// returns this value, so this keymap must not define its own.
 #define QS_QSID_TAPPING_TERM 7
 #define DT_ADJUST_STEP        5  // matches stock DYNAMIC_TAPPING_TERM_INCREMENT
-
-// NOTE: we do NOT define get_tapping_term() ourselves — quantum/vial.c already
-// provides one (it's what GET_TAPPING_TERM() in action_tapping.h actually calls,
-// since TAPPING_TERM_PER_KEY is defined by Vial's default build settings), and
-// it already returns qs_get_tapping_term() i.e. QS.tapping_term for any key
-// without a per-key tap-dance override. That means QS.tapping_term was already
-// the real value driving tap/hold decisions even before this change — our own
-// previous g_tapping_term (Dynamic Tapping Term) was dead for that purpose,
-// only ever feeding the OLED display. Adjusting QS.tapping_term below is what
-// actually reaches vial.c's get_tapping_term() and changes real behavior.
 
 // Dedicated tapping term for the AML_TL5/AML_TL2/AML_TL3 tap-vs-hold decision
 // (see aml_tl_keys/aml_tl_state below) — kept separate from QS.tapping_term
@@ -229,10 +202,7 @@ static void ldt_tapping_term_save(void) {
 // MY_LDT_PRNT/MY_LDT_UP/MY_LDT_DOWN: same pattern again, but for
 // ldt_tapping_term (see above) — the dedicated tap-vs-hold window used only
 // by AML_TL5/AML_TL2/AML_TL3, independent of QS.tapping_term.
-// LNG1_TO0/LNG2_TO0: tap LNG1/LNG2 then jump to layer 0 — replaces the Vial
-// dynamic macros M1/M2 ("tap KC_LANG1/2" then "TO(0)") from the Vial-tuned
-// keymap baked in below, so this behavior is compiled in rather than living
-// only in EEPROM-recorded macro slots.
+// LNG1_TO0/LNG2_TO0: tap LNG1/LNG2 then jump to layer 0.
 // MY_TL0..MY_TL6: temporary layer-move keys, one per currently-defined layer
 // (0-6). While held, jump to that key's layer (e.g. MY_TL2 -> layer 2);
 // on release, always return to layer 0 regardless of what was active before
@@ -251,9 +221,8 @@ static void ldt_tapping_term_save(void) {
 // LNG2/LNG1) with the layer never having moved. Release after hold was
 // engaged just returns to layer 0. See aml_tl_keys[]/aml_tl_state[] below.
 //
-// TL5_SPC/TL2_SPC/TL3_MINS/TL4_ENT: right-hand-adjacent thumb keys on layer 0,
-// replacing what used to be plain LT(5,KC_SPC)/LT(2,KC_SPC)/LT(3,KC_MINS)/
-// LT(4,KC_ENT). Same standard-timing tap-hold as AML_TL above (the layer only
+// TL5_SPC/TL2_SPC/TL3_MINS/TL4_ENT: right-hand-adjacent thumb keys on layer 0.
+// Same standard-timing tap-hold as AML_TL above (the layer only
 // moves once the term elapses while still held), but these sit under real
 // typing (SPC/MINS/ENT are tapped constantly at speed) rather than AML_TL's
 // "layer-access only, never overlaps another key" use case, so they resolve
@@ -609,9 +578,6 @@ void housekeeping_task_user(void) {
 
 #if defined(SPLIT_KEYBOARD)
     if (is_keyboard_master()) {
-        // Tapping term no longer needs an auto-save poll here: qmk_settings_set()
-        // in the MY_DT_UP/MY_DT_DOWN handlers above already persists immediately.
-
         // Auto-save CPI to EEPROM whenever it changes.
         // CPI_I100/CPI_D100 keys only update RAM; without this, CPI resets to
         // KEYBALL_CPI_DEFAULT on every power cycle.  We read-modify-write the
@@ -655,8 +621,6 @@ void housekeeping_task_user(void) {
 // ── "Recently typed" log for master OLED (rows 9-10, 2x5 = 10 chars) ───────
 // Push-only ring buffer, read left-to-right / top-to-bottom, oldest→newest.
 // KC_BSPC pops the most recent entry instead of pushing, mirroring an edit.
-// Trimmed from 3 rows (15 chars) to 2 rows (10 chars) to make room for the
-// AML threshold row below (see oledkit_render_info_user).
 static char oled_typed_buf[10] = "          ";
 
 static void typed_log_push(char c) {
@@ -1034,14 +998,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Override weak function from keyball.c to preserve division remainder across
 // report cycles. The original discards the remainder each cycle, causing a
 // dead zone at the start of every scroll gesture.
-//
-// (Also tried: HID Resolution Multiplier / hi-res scroll here, and a
-// report-rate throttle before that, both aimed at the Obsidian scroll issue
-// documented below. Neither helped — hi-res scroll in particular made
-// scrolling wildly oversensitive, most likely because macOS doesn't honor
-// the Resolution Multiplier feature report, so it read the inflated raw
-// values as whole clicks instead of fractional ones. Reverted back to the
-// plain version; see config.h for the revert note.)
 void keyball_on_apply_motion_to_mouse_scroll(report_mouse_t *report, report_mouse_t *output, bool is_left) {
     static int16_t rem_h = 0;
     static int16_t rem_v = 0;
@@ -1064,11 +1020,8 @@ void keyball_on_apply_motion_to_mouse_scroll(report_mouse_t *report, report_mous
         output->v = -output->v;
     }
 
-    // Scroll-axis snap (SSNP_VRT/SSNP_HOR/SSNP_FRE), lost when this function
-    // fully replaced keyball.c's original (which had this block after its
-    // own h/v computation). Without it, scrollsnap_mode changes correctly
-    // but scrolling always stays free/both-axis, and some apps (Electron
-    // among others) mishandle simultaneous h+v wheel input.
+    // Scroll-axis snap (SSNP_VRT/SSNP_HOR/SSNP_FRE). Some apps (Electron among
+    // others) mishandle simultaneous h+v wheel input.
 #if KEYBALL_SCROLLSNAP_ENABLE == 2
     switch (keyball_get_scrollsnap_mode()) {
         case KEYBALL_SCROLLSNAP_MODE_VERTICAL:
@@ -1083,12 +1036,8 @@ void keyball_on_apply_motion_to_mouse_scroll(report_mouse_t *report, report_mous
 #endif
 }
 
-// Pointer movement dead zone + axis snap.
-//
-// EXPERIMENT: the software velocity scale (MOVE_SCALE_NUM/DEN, was 11/7) is
-// removed, so output is 1:1 with the sensor and cursor speed is set by CPI alone.
-// It existed to keep physical CPI low against keystroke vibration; see the AML
-// notes at the top of this file and in config.h.
+// Pointer movement dead zone + axis snap. Output is 1:1 with the sensor, so cursor
+// speed is set by CPI alone.
 //
 // Tune TRACKBALL_DEADZONE  : counts below which a report is treated as vibration noise.
 // Tune AXIS_SNAP_RATIO      : when one axis >= N × the other, zero the weaker axis.
@@ -1137,7 +1086,7 @@ void keyboard_post_init_user(void) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
-    keyball_handle_auto_mouse_layer_change(state); // ← これを追加
+    keyball_handle_auto_mouse_layer_change(state);
   #endif
     // Layer 3 のときスクロールモード ON
     keyball_set_scroll_mode(get_highest_layer(state) == 3);
@@ -1253,12 +1202,6 @@ void oledkit_render_info_user(void) {
     oled_write_P(PSTR("  "), false);
 
     // Rows 2-3: ball x, y  "x NNN" / "y NNN"
-    // (formerly Row 2 also held keyball.pressing_keys here — 5 chars of the
-    // library's own "currently held keys" indicator, which shows as a row of
-    // its blank-indicator glyph "-----" when idle. Dropped: it read as a
-    // stray hyphen separator between the keycode row above and the x/y rows
-    // below, and wasn't otherwise useful here. Freed the row for the
-    // layer-move tapping term below instead.)
 #define WB(label, val) do { \
     int8_t _v = (val); \
     oled_write_char((label), false); \
